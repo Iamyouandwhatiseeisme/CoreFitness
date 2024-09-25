@@ -6,7 +6,7 @@ import EndophyteAudio from './assets/audio/Endophyte.mp3';
 
 const Content = () => {
     return ( 
-        <div className="content">
+        <main className="content">
             <ul className="photos">
                 <li>
                     <img src={Myco} alt="Mycorrhiza Mushroom" className="photo" ></img>
@@ -53,7 +53,7 @@ const Content = () => {
                     </p>
                 </li>
             </ul>
-        </div>
+        </main>
      );
 }
  
