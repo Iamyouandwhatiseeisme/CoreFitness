@@ -1,6 +1,6 @@
 
 .content{
-    border: 4px solid white;
+    border: 1px solid white;
     height: 75vh;
     width: 90.5vw;    
     margin:auto;
@@ -11,33 +11,9 @@
     gap:30px;
     padding:20px;
 }
-.content ul {
-    display:flex;
-    flex-direction: column;
-    list-style-type: none;
-    padding:0;
-    margin:0px;
-    padding-right: 50px;
-    gap:40px;
-
-}
-.content ul:not(.information) {
-    border-right: 2px solid gray; 
-    
-}
-.photo{
-    width: 300px;
-    height:200px;
-    object-fit: cover;
-}
-
-.audio-file{
-    margin-bottom:145px;
-}
-
-
-
-p{
-    text-align: start;
-    display:flex;
+.content-grid{
+    display:grid;
+    grid-template-columns: repeat(3, minmax(30vw, 1fr));
+    gap:10px;
+    margin: 0 auto;
 }
