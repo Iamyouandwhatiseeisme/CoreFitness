@@ -3,7 +3,7 @@ import './App.css';
 
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import About from "./components/pages/About/About.js";
-import Contact from './components/pages/Contact.js';
+import Contact from './components/pages/Contact/Contact.js';
 import Welcome  from './components/pages/Welcome.js';
 
 
