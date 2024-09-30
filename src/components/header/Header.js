@@ -1,13 +1,14 @@
 import "./Header.css";
 
+
 const Header = () => {
     return ( 
         <header className="header">
             <nav>
                 <ul className="navigation-links">
-                    <li>Photo Content</li>
-                    <li>Audio Content</li>
-                    <li>Information</li>
+                    <li>Profile</li>
+                    <li>Settings</li>
+                    <li>Cart</li>
                 </ul>
 
             </nav>
