@@ -10,6 +10,16 @@ body{
   background: linear-gradient(to bottom, #000000, #333333);
   color: white;
 }
+a{
+  color:inherit;
+  text-decoration: none;
+}
+a:hover{
+  text-decoration: underline;
+}
+a:visited{
+  color:inherit;
+}
 
 
 
