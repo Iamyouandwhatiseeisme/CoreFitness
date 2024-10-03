@@ -3,6 +3,7 @@ import "../BlogDescription/BlogDescription"
 import BlogDesription from "../BlogDescription/BlogDescription";
 
 export default function BlogPost({image, name, description, heading}) {
+    
     const postItem = {img: image, name: name, description: description, heading:heading}
     return (
         <div className="post-item">
