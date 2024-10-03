@@ -1,11 +1,10 @@
-import logo from './logo.svg';
 import './App.css';
 
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes,  } from 'react-router-dom';
 import About from "./components/pages/About/About.js";
 import Contact from './components/pages/Contact/Contact.js';
 import Welcome  from './components/pages/Welcome.js';
-import Assignment3 from './components/pages/assignment-3/Assignment3.js';
+import Blog from './components/pages/Blog/Blog.js';
 
 
 function App() {
@@ -16,7 +15,7 @@ function App() {
             <Route exact path="/" element=<Welcome /> />
             <Route path="/about" element=<About /> />
             <Route path="/contact" element=<Contact /> />
-            <Route path="/assignment3" element=<Assignment3 /> />
+            <Route path="/blog" element=<Blog /> />
           </Routes>
         </div>
      

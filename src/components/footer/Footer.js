@@ -10,7 +10,7 @@ const Footer = () => {
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/about">About</Link></li>
                     <li><Link to="/contact">Contact</Link></li>
-                    <li><Link to="/assignment3">Assignment3</Link></li>
+                    <li><Link to="/blog">Blog</Link></li>
                     <li>All rights reserved {new Date().getFullYear()}</li>
                 </ul>
             </nav>   
