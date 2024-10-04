@@ -1,6 +1,7 @@
 function List (props) {
     const formattedTable = props.product;
-    
+
+
     return (
         <div>
             <table className="styled-table">
