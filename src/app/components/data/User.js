@@ -1,4 +1,4 @@
-import userImage from "../../../assets/images/Sandro.jpeg"
+import userImage from '../../../../public/images/Sandro.jpeg'
 const User = {
     name: "Sandro",
     lastName: "Abashidze",

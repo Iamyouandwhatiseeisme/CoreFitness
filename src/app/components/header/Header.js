@@ -1,4 +1,5 @@
 import "./Header.css"; 
+import Link from 'next/link'
 
 
 const Header = () => {
@@ -6,7 +7,7 @@ const Header = () => {
         <header className="header">
             <nav>
                 <ul className="navigation-links">
-                    <li>Profile</li>
+                    <Link href="/profile"><li>Profile</li></Link>
                     <li>Settings</li>
                     <li>Cart</li>
                 </ul>
