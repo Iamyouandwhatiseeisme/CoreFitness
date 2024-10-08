@@ -1,4 +1,4 @@
-
+import './styles/global.css'
 export const metadata = {
     title: 'Medical Mushroom Market app',
     description: 'Web site created with Next.js.',

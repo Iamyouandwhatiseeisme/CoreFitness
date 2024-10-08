@@ -7,7 +7,7 @@
     
   }
   body{
-    background: linear-gradient(135deg, #f0f4f8, #d9e2ec);
+    background: linear-gradient(135deg, #f0f4f8, #9CD3D8);
     color: black;
   }
   a{
@@ -16,6 +16,7 @@
   }
   a:hover{
     text-decoration: underline;
+    background-color: #9CD3D8;
   }
   a:visited{
     color:inherit;
