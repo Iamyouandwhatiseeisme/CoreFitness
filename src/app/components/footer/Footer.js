@@ -1,6 +1,6 @@
 import "./Footer.css";
 import React from "react";
-
+import Link from "next/link"
 const Footer = () => {
     return ( 
         <footer className="footer">
@@ -9,7 +9,7 @@ const Footer = () => {
                     <li>Home</li>
                     <li>About</li>
                     <li>Contact</li>
-                    <li>Blog</li>
+                    <Link href="/blog"><li>Blog</li></Link>
                     <li>All rights reserved {new Date().getFullYear()}</li>
                 </ul>
             </nav>   

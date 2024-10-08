@@ -1,4 +1,4 @@
-import '../../index.css'
+import "../styles/global.css";
 import { ClientOnly } from './client'
  
 export function generateStaticParams() {
