@@ -64,8 +64,23 @@ function Posts () {
 
                         <div className="posts-card">
                             <div className="posts-info"><strong>{product.title}</strong></div>
-                            <div className="posts-info">{product.description}</div>
-                            <div className="posts-info">Price: {product.price}$</div>
+                            <div className="posts-info">{product.body}</div>
+                           
+                            <div>
+                                <span className="posts-info">Views: {product.views}</span>
+                                <span className="posts-info">Likes: {product.reactions.likes}</span>
+                                <span className="posts-info">Dislikes: {product.reactions.dislikes}</span>
+
+                            </div>
+                            <div className="posts-info">Post Id: {product.id}</div>
+                            <div className="posts-info">Tags: {product.tags.map((tag)=>{
+                                return (
+                                    <span className="post-tag">#{tag}   </span>
+                                )
+                                
+                            })}</div>
+
+
                         </div>
 
 
