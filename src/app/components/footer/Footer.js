@@ -8,7 +8,7 @@ const Footer = () => {
                 <ul className="footer-list">
                     <Link href="/"><li>Home</li></Link>
                     <Link href="/about"><li>About</li></Link>
-                    <li>Contact</li>
+                    <Link href="/contact"><li>Contact</li></Link>
                     <Link href="/blog"><li>Blog</li></Link>
                     <li>All rights reserved {new Date().getFullYear()}</li>
                 </ul>

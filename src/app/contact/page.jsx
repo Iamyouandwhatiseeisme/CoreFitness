@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import Footer from "../../footer/Footer.js"
-import Header from "../../header/Header.js"
-import "./Contact.css"
+import Footer from "../components/footer/Footer.js"
+import Header from "../components/header/Header.js"
+import "./index.css"
 
 
 

@@ -2,7 +2,7 @@ import BlogPost from "../components/BlogPost/BlogPost.js"
 import * as Mushrooms from "../components/data/Mushrooms.js"
 import Header from "../components/header/Header.js"
 import Footer from "../components/footer/Footer.js"
-
+import "./index.css"
 const MushroomsList = [Mushrooms.AmanitaMuscaria, Mushrooms.AmanitaPanterina, Mushrooms.Cordyceps, Mushrooms.LionsMane,Mushrooms.Maitake];
 
 
