@@ -7,18 +7,18 @@ import "./index.css"
 
 
 
-function Products () {
-    const [products, setProducts]  = useState([]);
+function Posts () {
+    const [posts, setProducts]  = useState([]);
     const [isLoading, setLoading]  = useState(true);
 
     useEffect(()=> {
-        async function fetchProducts() {
+        async function fetchPosts() {
             try {
-              const response = await fetch("https://dummyjson.com/products"); 
+              const response = await fetch("https://dummyjson.com/posts"); 
             //   console.log(response);
               const data = await response.json()
-              const productsList = data.products;
-              setProducts(productsList)
+              const postsList = data.posts;
+              setProducts(postsList)
               setLoading(false);
               
 
@@ -31,7 +31,7 @@ function Products () {
         
 
           
-          fetchProducts();  
+          fetchPosts();  
           
     },[])
     if (isLoading) {
@@ -44,7 +44,7 @@ function Products () {
         ) 
       }
 
-      if (products.length === 0) {
+      if (posts.length === 0) {
         return (
             <div>
                 <Header />
@@ -56,17 +56,16 @@ function Products () {
     return (
 
         
-        <div className="products-page">
+        <div className="posts-page">
             <Header />
-            <div className="products-list">
-                {products.map((product)=>{
+            <div className="posts-list">
+                {posts.map((product)=>{
                     return (
 
-                        <div className="product-card">
-                            <img className="product-image" src={product.images[0]} alt={product.title}></img>
-                            <div className="product-info"><strong>{product.title}</strong></div>
-                            <div className="product-info">{product.description}</div>
-                            <div className="product-info">Price: {product.price}$</div>
+                        <div className="posts-card">
+                            <div className="posts-info"><strong>{product.title}</strong></div>
+                            <div className="posts-info">{product.description}</div>
+                            <div className="posts-info">Price: {product.price}$</div>
                         </div>
 
 
@@ -78,4 +77,4 @@ function Products () {
     )
 }
 
-export default Products;
+export default Posts;
