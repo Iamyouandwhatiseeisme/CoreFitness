@@ -75,7 +75,7 @@ function Posts () {
                             <div className="posts-info">Post Id: {product.id}</div>
                             <div className="posts-info">Tags: {product.tags.map((tag)=>{
                                 return (
-                                    <span className="post-tag">#{tag}   </span>
+                                    <span className="post-tag">#{tag}</span>
                                 )
                                 
                             })}</div>
