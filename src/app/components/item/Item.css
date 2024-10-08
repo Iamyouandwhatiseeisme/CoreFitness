@@ -23,8 +23,9 @@
     border-radius: 5px;
     font-size:14px;
     text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    background-color: rgba(0, 0, 0, 0.8);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);    
+    background-color: rgba(222, 222, 222, 0.8);
+    padding:5px;    
 }
 .add-to-cart-button{
     position:absolute;
