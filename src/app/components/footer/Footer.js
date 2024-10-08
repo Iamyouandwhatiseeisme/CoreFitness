@@ -6,8 +6,8 @@ const Footer = () => {
         <footer className="footer">
             <nav>
                 <ul className="footer-list">
-                    <li>Home</li>
-                    <li>About</li>
+                    <Link href="/"><li>Home</li></Link>
+                    <Link href="/about"><li>About</li></Link>
                     <li>Contact</li>
                     <Link href="/blog"><li>Blog</li></Link>
                     <li>All rights reserved {new Date().getFullYear()}</li>
