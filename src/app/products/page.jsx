@@ -63,9 +63,10 @@ function Products () {
                     return (
 
                         <div className="product-card">
-                            <div className="product-info">{product.title}</div>
                             <img className="product-image" src={product.images[0]} alt={product.title}></img>
-                            <div className="product-info">Rating: {product.rating} Stars. Category: {product.category}</div>
+                            <div className="product-info"><strong>{product.title}</strong></div>
+                            <div className="product-info">{product.description}</div>
+                            <div className="product-info">Price: {product.price}$</div>
                         </div>
 
 
