@@ -1,7 +1,7 @@
 import "./Content.css"
 import * as assets from "../../../public/images/assets.js";
 import Item from "../../components/item/Item.js";
-import * as descriptions from "../../assets/description.js";
+import * as descriptions from "./data/description.js"
 
 const Content = () => {
     return ( 

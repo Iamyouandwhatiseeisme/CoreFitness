@@ -8,7 +8,7 @@ import YamabushitakePhoto from "../../../../public/images/Yamabushitake.jpeg"
 import ReishiPhoto from "../../../../public/images/Reishi.jpeg"
 import TurkeyTailPhoto from "../../../../public/images/Turkey Tail.webp"
  
-import * as Posts from "../../../assets/Posts.js"
+import * as Posts from "./Posts.js"
 
 
 
