@@ -1,4 +1,4 @@
-import BlogPost from "../../content/BlogPost/BlogPost.js"
+import BlogPost from "../../../app/components/BlogPost/BlogPost.js"
 import { Link } from 'react-router-dom';
 import * as Mushrooms from "../../data/Mushrooms.js"
 
