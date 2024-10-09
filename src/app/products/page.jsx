@@ -3,6 +3,8 @@ import {useEffect, useState} from "react"
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer"
 import "./index.css"
+import Gear from "../../../public/images/Gear.gif"
+import Link from "next/link";
 
 
 
@@ -36,9 +38,10 @@ function Products () {
     },[])
     if (isLoading) {
         return (
-                <div>
+                <div className="loading-screen">
                     <Header />
                         <h2>Loading...</h2>
+                        <img src={Gear.src} alt="loading-animation"></img>
                     <Footer />
                 </div> 
         ) 
@@ -46,11 +49,12 @@ function Products () {
 
       if (products.length === 0) {
         return (
-            <div>
-                <Header />
-                    <h2>Loading...</h2>
-                <Footer />
-            </div> 
+            <div className="loading-screen">
+                    <Header />
+                        <h2>Loading...</h2>
+                        <img src={Gear.src} alt="loading-animation"></img>
+                    <Footer />
+                </div> 
     ) 
       }
     return (
@@ -61,13 +65,14 @@ function Products () {
             <div className="products-list">
                 {products.map((product)=>{
                     return (
-
-                        <div className="product-card">
-                            <img className="product-image" src={product.images[0]} alt={product.title}></img>
-                            <div className="product-info"><strong>{product.title}</strong></div>
-                            <div className="product-info">{product.description}</div>
-                            <div className="product-info">Price: {product.price}$</div>
-                        </div>
+                        <Link key={product.id} href={`/products/${product.id}`}>
+                            <div className="product-card">
+                                <img className="product-image" src={product.images[0]} alt={product.title}></img>
+                                <div className="product-info"><strong>{product.title}</strong></div>
+                                <div className="product-info">{product.description}</div>
+                                <div className="product-info">Price: {product.price}$</div>
+                            </div>
+                        </ Link>
 
 
                     )
