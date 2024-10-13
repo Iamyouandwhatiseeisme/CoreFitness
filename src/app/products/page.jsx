@@ -17,20 +17,41 @@ function Products () {
     const sortOptions = [
         {   label: 'Price: Low to High',
             value: 'price-low-to-high',
-            sortFunction: (a, b) => a.price - b.price, },
+            option: "price",
+            order: "asc"
+            },
         {   label: 'Price: High to Low', 
             value: 'price-high-to-low',
-            sortFunction: (a, b) => b.price - a.price,
+            option: "price",
+            order: "desc"
+            
              },
         {   label: 'Name: A-Z',  
             value: 'name-ascending',
-            sortFunction: (a, b) => a.title.localeCompare(b.title),},
+            option: "title",
+            order: "asc"
+            },
+        {   label: 'Name: Z-A',  
+            value: 'name-descending',
+            option: "title",
+            order: "desc"
+            },
       ];
 
-    const handleSort = (option) => {
-        setSortOption(option);
-        const sortedProducts = [...products].sort(option.sortFunction);
-        setProducts(sortedProducts)
+    const handleSort = async (sortOption) => {
+        setSortOption(sortOption);
+        try {
+            const response = await fetch(`https://dummyjson.com/products?sortBy=${sortOption.option}&order=${sortOption.order}`)
+            const data = await response.json();
+            const sortedProcuts = data.products;
+            setProducts(sortedProcuts)
+
+            
+        } catch (error) {
+            
+        }
+
+        // setProducts(sortedProducts)
         
 
     }
@@ -43,7 +64,6 @@ function Products () {
         async function fetchProducts() {
             try {
               const response = await fetch("https://dummyjson.com/products"); 
-            //   console.log(response);
               const data = await response.json()
               const productsList = data.products;
               setProducts(productsList)
