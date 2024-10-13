@@ -40,18 +40,25 @@ function Products () {
 
     const handleSort = async (sortOption) => {
         setSortOption(sortOption);
+        setLoading(true);
+
         try {
             const response = await fetch(`https://dummyjson.com/products?sortBy=${sortOption.option}&order=${sortOption.order}`)
             const data = await response.json();
             const sortedProcuts = data.products;
             setProducts(sortedProcuts)
 
+
             
         } catch (error) {
+            console.log('Error', error)
             
+        }finally{
+            setLoading(false);
+
+
         }
 
-        // setProducts(sortedProducts)
         
 
     }
