@@ -5,13 +5,29 @@ import Footer from "../components/footer/Footer"
 import "./index.css"
 import Gear from "../../../public/images/Gear.gif"
 import Link from "next/link";
-
+import SortDropDown from "../components/SortDropDownMenu/SortDropDownMenu"
+import DropDown from "../components/DropDown/DropDown";
+import DropDownItem from "../components/DropDownItem/DropDownItem";
 
 
 
 function Products () {
     const [products, setProducts]  = useState([]);
     const [isLoading, setLoading]  = useState(true);
+
+    const sortOptions = [
+        { label: 'Price: Low to High', value: 'price-low-to-high' },
+        { label: 'Price: High to Low', value: 'price-high-to-low' },
+        { label: 'Name: A-Z', value: 'name-ascending' },
+      ];
+
+    const handleSort = (option) => {
+
+    }
+
+    
+
+
 
     useEffect(()=> {
         async function fetchProducts() {
@@ -62,7 +78,15 @@ function Products () {
         
         <div className="products-page">
             <Header />
+            <div className="dropdown-menu"><DropDown buttonText="Dropdown Button"content={<>
+                {sortOptions.map(sortOptions=><DropDownItem key={sortOptions.value}>{sortOptions.label}</DropDownItem>)}
+            </>}></DropDown></div>
+            
+           
+
             <div className="products-list">
+                      
+
                 {products.map((product)=>{
                     return (
                         <Link key={product.id} href={`/products/${product.id}`}>
