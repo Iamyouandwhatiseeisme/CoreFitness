@@ -5,13 +5,18 @@
     align-items: center;
     position: relative;
 }
+.app-bar{
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
 
 .posts-card{
     display:flex;
     flex-direction: column;
     border:1px solid gray;
     border-radius: 10px;
-    height:350px;
+    height:400px;
     width:60vw;
     align-items: center;
     overflow: hidden;
@@ -43,8 +48,9 @@
 
 .dropdown-menu{
     margin-left:20px;
-    left:0px;
-    top:0px;
-    position:fixed;
+    left:150px;
+    margin-top: 75px;
+    position: fixed;
     z-index:1;
+    
 }
