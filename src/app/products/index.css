@@ -44,7 +44,7 @@
  
 }
 .dropdown-menu{
-    position: absolute;
+    position: fixed;
     left:150px;
     margin-top: 75px;
     
