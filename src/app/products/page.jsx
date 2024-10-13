@@ -28,9 +28,8 @@ function Products () {
       ];
 
     const handleSort = (option) => {
-        // setSortOption(option);
+        setSortOption(option);
         const sortedProducts = [...products].sort(option.sortFunction);
-
         setProducts(sortedProducts)
         
 

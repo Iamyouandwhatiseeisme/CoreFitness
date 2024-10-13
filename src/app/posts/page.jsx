@@ -5,6 +5,7 @@ import Footer from "../components/footer/Footer"
 import Link from "next/link";
 import Gear from "../../../public/images/Gear.gif"
 import "./index.css"
+import DropDown from "../components/DropDown/DropDown";
 
 
 
@@ -12,6 +13,43 @@ import "./index.css"
 function Posts () {
     const [posts, setposts]  = useState([]);
     const [isLoading, setLoading]  = useState(true);
+    const [sortOption, setSortOption ] = useState(null)
+
+
+    const sortOptions = [
+        {
+            label: 'Title: A-Z',
+            value: 'title-ascending',
+            sortFunction: (a, b) => a.title.localeCompare(b.title),
+        },
+        {
+            label: 'Title: Z-A',
+            value: 'title-descending',
+            sortFunction: (a, b) => b.title.localeCompare(a.title),
+        },
+        {
+            label: 'Views: High-To-Low',
+            value: 'views-high-to-low',
+            sortFunction: (a, b) => b.views - a.views,
+        },
+        {
+            label: 'Likes: High-To-Low',
+            value: 'likes-high-to-low',
+            sortFunction: (a, b) => b.reactions.likes - a.reactions.likes,
+        },
+        
+       
+       
+    ];
+
+    const handleSort = (option) => {
+        setSortOption(option);
+        const sortedProducts = [...posts].sort(option.sortFunction);
+        setposts(sortedProducts)
+        
+
+
+    }
 
     useEffect(()=> {
         async function fetchPosts() {
@@ -64,6 +102,8 @@ function Posts () {
         
         <div className="posts-page">
             <Header />
+            <div className="dropdown-menu"><DropDown onSelect={handleSort} buttonText="Sort Products By:"content={sortOptions}></DropDown></div>
+
             <div className="posts-list">
                 {posts.map((post)=>{
                     return (

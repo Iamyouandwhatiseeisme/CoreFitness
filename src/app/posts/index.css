@@ -43,3 +43,7 @@
     flex-direction: column;
     align-items: center;
 }
+
+.dropdown-menu{
+    margin-left:20px;
+}
