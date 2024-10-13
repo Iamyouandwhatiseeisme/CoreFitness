@@ -54,3 +54,15 @@
     z-index:1;
     
 }
+@media (max-width: 100rem){
+    .dropdown-menu{
+        left:0px;
+        margin-top: 10px;
+    }
+}
+@media (max-width: 80rem){
+    .dropdown-menu{
+        position:initial
+
+    }
+}
