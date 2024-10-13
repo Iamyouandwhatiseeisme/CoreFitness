@@ -4,10 +4,17 @@ import DropDownContent from "../DropDownContent/DropDownContent";
 import "./DropDown.css"
  
 
-const DropDown = ({buttonText, content}) => {
+const DropDown = ({buttonText, content, onSelect}) => {
     const [open, setOpen] = useState(false);
     const toggleDropDown = () =>{
         setOpen((open)=> !open);
+    }
+
+    const onSelectHandler = (option) => {
+        console.log('Selected option:', option);
+        toggleDropDown();
+        onSelect(option);
+        
     }
 
    
@@ -18,7 +25,7 @@ const DropDown = ({buttonText, content}) => {
             {buttonText}
 
             </DropDownButton>
-            <DropDownContent open={open}>
+            <DropDownContent onSelect={onSelectHandler}open={open}>
             {content}
                 
             </DropDownContent>

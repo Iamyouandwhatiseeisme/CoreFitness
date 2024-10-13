@@ -3,7 +3,9 @@ import "./DropDownItem.css"
 
 const DropDownItem = ({children, onClick}) => {
   return (
-    <div className='dropdown-item' onClick={onClick}>{children}</div>
+    <div className='dropdown-item' onClick={()=>{
+        onClick(children)
+    }}>{children.label}</div>
   )
 }
 
