@@ -1,55 +1,48 @@
-"use client"
-import { useEffect, useState } from "react";
-import { notFound } from "next/navigation";
-import Gear from "../../../../public/images/Gear.gif"
+
 import "./index.css"
 import NotFound from "../../notfound/NotFound";
 import { ReturnBackButton } from "../../notfound/NotFound";
 
-function PostPage (params) {
-    const [posts, setPosts] = useState()
-    const [isLoading, setIsLoading] = useState(true);
+export default async function PostPage (params) {
+    
     const { id } = params.params;
-   
+    var post;
+
     
 
-
-    useEffect(()=>{
-
-        async function fetchPost (){
-            try {
-                const response = await fetch(`https://dummyjson.com/posts/${id}`);
-            if(!response.ok){
-                return notFound();
-            
-            }
-            const data = await response.json();
-            setPosts(data);
-            
-                
-            } catch (error) {
-                console.error("Failed to find product:", error);
-                notFound();
-            } finally {
-                setIsLoading(false);
-            }
+    try {
+        let url = `https://dummyjson.com/posts/${id}`
+        const response = await fetch(url);
+        if(!response.ok){
+            return (
+                <NotFound page="posts"></NotFound>
+            )
         }
-        fetchPost()
-    },[id])
+        const fetchedPost = await response.json();
+        post = fetchedPost
+        
+    } catch (error) {
+        console.error("Failed to find product:", error);
+        return (
+            <NotFound page="posts"></NotFound>
 
-    if(isLoading) return <div className="loading-screen"><img className="loading-spinner"src={Gear.src} alt="loading-spinner"></img></div>
-    if(!posts) return <NotFound page="posts"/>
+        )
+
+        
+    }
+    
+    if(!post) return <NotFound page="posts"/>
     return(
         <div className="post">
-            <h1>{posts.title}</h1>
-            <p>{posts.body}</p>
+            <h1>{post.title}</h1>
+            <p>{post.body}</p>
             <p>
                 Tags:{" "}
-                {posts.tags.map((tag, index) => (
+                {post.tags.map((tag, index) => (
                 <span className="post-tag"key={index}>#{tag}</span>
                 ))}{" "}
             </p>
-            <div>Views: {posts.views}</div>
+            <div>Views: {post.views}</div>
             <ReturnBackButton destination={"posts"} />
 
             
@@ -58,4 +51,3 @@ function PostPage (params) {
 
 }
 
-export default PostPage

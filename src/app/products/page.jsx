@@ -5,6 +5,7 @@ import "./index.css"
 import Link from "next/link";
 import DropDown from "../components/DropDown/DropDown";
 import SearchBar from "../components/SearchBar/SearchBar";
+import NotFound from "../notfound/NotFound";
 
 
 
@@ -37,16 +38,21 @@ export default async function Products ({searchParams}) {
             },
       ];
 
-    let url = "https://dummyjson.com/products";
-    if(debouncedSearch){
-        url = `https://dummyjson.com/products/search?q=${debouncedSearch}`;
+    try {
+        let url = "https://dummyjson.com/products";
+        if(debouncedSearch){
+            url = `https://dummyjson.com/products/search?q=${debouncedSearch}`;
+        }
+        if(sortOption && sortOrder){
+            url = `https://dummyjson.com/products?sortBy=${sortOption}&order=${sortOrder}`
+        }
+        const response = await fetch(url);
+        const data = await response.json();
+        var products = data.products || [];
+    } catch (error) {
+        console.log("Error fetching data: ", error)
+        return <NotFound page="products"></NotFound>
     }
-    if(sortOption && sortOrder){
-        url = `https://dummyjson.com/products?sortBy=${sortOption}&order=${sortOrder}`
-    }
-    const response = await fetch(url);
-    const data = await response.json();
-    var products = data.products || [];
 
     
     
