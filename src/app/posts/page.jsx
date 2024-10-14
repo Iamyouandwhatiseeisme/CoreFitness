@@ -5,6 +5,7 @@ import Link from "next/link";
 import "./index.css"
 import SearchBar from "../components/SearchBar/SearchBar";
 import DropDown from "../components/DropDown/DropDown";
+import NotFound from "../notfound/NotFound";
 
 
 
@@ -39,17 +40,24 @@ async function Posts ({searchParams}) {
             order: "desc"
             },
       ];
-    let url = `https://dummyjson.com/posts`;
-    if(debouncedSearch){
-        url = `https://dummyjson.com/posts/search?q=${debouncedSearch}`;
+    try {
+        let url = `https://dummyjson.com/posts`;
+        if(debouncedSearch){
+            url = `https://dummyjson.com/posts/search?q=${debouncedSearch}`;
+        }
+        if(sortOption!== null){
+            url = `https://dummyjson.com/posts?sortBy=${sortOption}&order=${sortOrder}`
+            console.log(2)
+        }
+        const response = await fetch(url);
+        const data = await response.json();
+        var posts = data.posts || [];
+    } catch (error) {
+        console.log("Error fetching posts: ", error)
+        
+        return <NotFound page="posts"></NotFound>
+        
     }
-    if(sortOption!== null){
-        url = `https://dummyjson.com/posts?sortBy=${sortOption}&order=${sortOrder}`
-        console.log(2)
-    }
-    const response = await fetch(url);
-    const data = await response.json();
-    var posts = data.posts || [];
 
     
 
