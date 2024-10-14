@@ -1,18 +1,17 @@
-"use client"
-import {useEffect, useState} from "react"
+
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer"
 import "./index.css"
-import Gear from "../../../public/images/Gear.gif"
 import Link from "next/link";
 import DropDown from "../components/DropDown/DropDown";
+import SearchBar from "../components/SearchBar/SearchBar";
 
 
 
-function Products () {
-    const [products, setProducts]  = useState([]);
-    const [isLoading, setLoading]  = useState(true);
-    const [sortOption, setSortOption ] = useState(null)
+export default async function Products ({searchParams}) {
+    const debouncedSearch = searchParams.search || "";
+    const sortOption = searchParams.option || ""
+    const sortOrder = searchParams.order || ""
 
     const sortOptions = [
         {   label: 'Price: Low to High',
@@ -38,75 +37,27 @@ function Products () {
             },
       ];
 
-    const handleSort = async (sortOption) => {
-        setSortOption(sortOption);
-        setLoading(true);
-
-        try {
-            const response = await fetch(`https://dummyjson.com/products?sortBy=${sortOption.option}&order=${sortOption.order}`)
-            const data = await response.json();
-            const sortedProcuts = data.products;
-            setProducts(sortedProcuts)
-
-
-            
-        } catch (error) {
-            console.log('Error', error)
-            
-        }finally{
-            setLoading(false);
-
-
-        }
-
-        
-
+    let url = "https://dummyjson.com/products";
+    if(debouncedSearch){
+        url = `https://dummyjson.com/products/search?q=${debouncedSearch}`;
     }
+    if(sortOption && sortOrder){
+        url = `https://dummyjson.com/products?sortBy=${sortOption}&order=${sortOrder}`
+    }
+    const response = await fetch(url);
+    const data = await response.json();
+    var products = data.products || [];
 
     
-
-
-
-    useEffect(()=> {
-        async function fetchProducts() {
-            try {
-              const response = await fetch("https://dummyjson.com/products"); 
-              const data = await response.json()
-              const productsList = data.products;
-              setProducts(productsList)
-              setLoading(false);
-              
-
-                
-            } catch (error) {
-              console.error('Error fetching data:', error);  
-            }
-          }
-
-        
-
-          
-          fetchProducts();  
-          
-    },[])
-    if (isLoading) {
-        return (
-                <div className="loading-screen">
-                    <Header />
-                        <h2>Loading...</h2>
-                        <img src={Gear.src} alt="loading-animation"></img>
-                    <Footer />
-                </div> 
-        ) 
-      }
+    
 
       if (products.length === 0) {
         return (
             <div className="loading-screen">
-                    <Header />
-                        <h2>Loading...</h2>
-                        <img src={Gear.src} alt="loading-animation"></img>
-                    <Footer />
+                    <div className="app-bar">
+                     <Header />
+                    <SearchBar searchItemType="Search Products" />
+                </div>
                 </div> 
     ) 
       }
@@ -114,8 +65,12 @@ function Products () {
 
         
         <div className="products-page">
-            <Header />
-            <div className="dropdown-menu"><DropDown onSelect={handleSort} buttonText="Sort Products By:"content={sortOptions}></DropDown></div>
+            <div className="app-bar">
+                <Header />
+                <SearchBar searchItemType="Search Posts" />
+            </div>
+            
+            <div className="dropdown-menu"><DropDown buttonText="Sort Products By:"content={sortOptions}></DropDown></div>
             <div className="products-list">
                 {products.map((product)=>{
                     return (
@@ -137,4 +92,3 @@ function Products () {
     )
 }
 
-export default Products;
