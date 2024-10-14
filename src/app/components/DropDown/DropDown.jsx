@@ -1,19 +1,19 @@
+"use client"
 import React, { useState} from "react"
 import DropDownButton from "../DropDownButton/DropDownButton";
 import DropDownContent from "../DropDownContent/DropDownContent";
 import "./DropDown.css"
  
 
-const DropDown = ({buttonText, content, onSelect}) => {
+const DropDown = ({buttonText, content}) => {
     const [open, setOpen] = useState(false);
     const toggleDropDown = () =>{
         setOpen((open)=> !open);
     }
 
     const onSelectHandler = (option) => {
-        console.log('Selected option:', option);
         toggleDropDown();
-        onSelect(option);
+        
         
     }
 
@@ -25,7 +25,7 @@ const DropDown = ({buttonText, content, onSelect}) => {
             {buttonText}
 
             </DropDownButton>
-            <DropDownContent onSelect={onSelectHandler}open={open}>
+            <DropDownContent onSelect={onSelectHandler} open={open}>
             {content}
                 
             </DropDownContent>

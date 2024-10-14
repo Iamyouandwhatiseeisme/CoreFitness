@@ -1,22 +1,21 @@
-"use client"
-import {useEffect, useState} from "react"
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer"
 import Link from "next/link";
-import Gear from "../../../public/images/Gear.gif"
+// import Gear from "../../../public/images/Gear.gif"
 import "./index.css"
+import SearchBar from "../components/SearchBar/SearchBar";
 import DropDown from "../components/DropDown/DropDown";
-import useDebounce from "../hooks/useDebounce";
 
 
 
 
-function Posts () {
-    const [posts, setPosts]  = useState([]);
-    const [isLoading, setLoading]  = useState(true);
-    const [sortOption, setSortOption ] = useState(null)
-    const [search, setSearch] = useState("");
-    const debouncedSearch = useDebounce(search, 250);
+async function Posts ({searchParams}) {
+   
+    const debouncedSearch = searchParams.search || "";
+    const sortOption = searchParams.option || ""
+    const sortOrder = searchParams.order || ""
+
+    
 
     const sortOptions = [
         {   label: 'Views: Low to High',
@@ -29,16 +28,6 @@ function Posts () {
             option: "views",
             order: "desc"
              },   
-        {   label: 'Likes: High to Low', 
-            value: 'likes-high-to-low',
-            option: "likes",
-            order: "desc" 
-             },
-        {   label: 'Likes: Low to High', 
-            value: 'likes-low-to-high',
-            option: "likes",
-            order: "asc"
-             },
         {   label: 'Title: A-Z',  
             value: 'title-ascending',
             option: "title",
@@ -50,81 +39,31 @@ function Posts () {
             order: "desc"
             },
       ];
-
-    const handleSearch = async (event) =>{
-        console.log("User input:", event.target.value);
-        setSearch(event.target.value);
+    let url = `https://dummyjson.com/posts`;
+    if(debouncedSearch){
+        url = `https://dummyjson.com/posts/search?q=${debouncedSearch}`;
     }
-
-    const handleSort = async (sortOption) => {
-        setSortOption(sortOption);
-        setLoading(true);
-        if(sortOption.option === "likes"){
-            // decided to sort the fetched posts with js logic because api endpoint didn't support sorting by nested object parameters"
-            console.log('sorting');
-            const sortedPosts = [...posts].sort((a,b)=> sortOption.order === "desc" ? b.reactions.likes - a.reactions.likes : a.reactions.likes - b.reactions.likes,
-            )
-            console.log(sortedPosts);
-            setPosts(sortedPosts);
-            setLoading(false) 
-        }else{
-            try {
-                const response = await fetch(`https://dummyjson.com/posts?sortBy=${sortOption.option}&order=${sortOption.order}`)
-                const data = await response.json();
-                const sortedPosts = data.posts;
-                setPosts(sortedPosts)  
-            } catch (error) {
-                console.log('Error', error)
-            }finally{
-                setLoading(false);
-
-            }
-        }
+    if(sortOption!== null){
+        url = `https://dummyjson.com/posts?sortBy=${sortOption}&order=${sortOrder}`
+        console.log(2)
     }
+    const response = await fetch(url);
+    const data = await response.json();
+    var posts = data.posts || [];
 
-    useEffect(()=> {
-        console.log("Debounced value:", debouncedSearch)
-        async function fetchPosts() {
-            try {
-              let url = "https://dummyjson.com/posts"
-              if(debouncedSearch){
-                url = `https://dummyjson.com/posts/search?q=${debouncedSearch}`
-              }
-                
-              const response = await fetch(url); 
-              const data = await response.json()
-              const postsList = data.posts;
-              console.log(postsList)
-              setPosts(postsList)
-              setLoading(false);
-            } catch (error) {
-              console.error('Error fetching data:', error);  
-            }
-          }
-          fetchPosts();  
-          
-    },[debouncedSearch])
-    if (isLoading) {
-        return (
-                <div className="loading-page">
-                    <Header />
-                    <div className="loading-animation">
-                        <h2>Loading...</h2>
-                        <img src={Gear.src} alt="loading animation"></img>
-                    </div>
-                    <div className="app-bar"><Header /><div>Search: <input onChange={handleSearch}title="search"></input></div>
-                </div>
-                    <Footer />
-                </div> 
-        ) 
-      }
+    
 
+    
       if (posts.length === 0) {
         return (
             <div className="posts-page">
 
                     
-                    <div className="app-bar"><Header /><div>Search: <input value={search}onChange={handleSearch}title="search"></input></div>
+                    <div className="app-bar">
+                    <Header />
+                    <SearchBar searchItemType="Search Posts" />
+
+                    
             </div>
             <h2>Search query empty...</h2>
 
@@ -134,15 +73,15 @@ function Posts () {
       }
     return (
         <div className="posts-page">
-        <div className="app-bar"><Header /><div>Search: <input onChange={handleSearch}title="search"></input></div>
-</div>
+        <div className="app-bar">
+            <Header />
+            <SearchBar searchItemType="Search Posts" />
+        </div>
             
-            <div className="dropdown-menu"><DropDown onSelect={handleSort} buttonText="Sort Products By:"content={sortOptions}></DropDown></div>
+            <div className="dropdown-menu"><DropDown buttonText="Sort Products By:"content={sortOptions}></DropDown></div>
             <div className="posts-list">
                 {posts.map((post)=>{
                     return (
-                        
-
                         <Link key={post.id} href={`/posts/${post.id}`}>
                         <div className="posts-card">
                             <div className="posts-info"><strong>{post.title}</strong></div>
