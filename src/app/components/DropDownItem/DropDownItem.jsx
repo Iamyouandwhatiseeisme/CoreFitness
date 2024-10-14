@@ -7,7 +7,7 @@ const DropDownItem = ({children, onClick}) => {
   const router = useRouter();
   const handleSortOption = () =>{
     onClick(children);
-    router.push(`?option=${children.option}&order=${children.order}`)
+    router.push(`?option=${children.option}&order=${children.order}`  )
     console.log(children);
 
 
