@@ -1,7 +1,4 @@
-// "use client"
-// import { useEffect, useState } from "react";
-import { notFound } from "next/navigation";
-// import Gear from "../../../../public/images/Gear.gif"
+
 import "./index.css"
 import NotFound from "../../notfound/NotFound";
 import { ReturnBackButton } from "../../notfound/NotFound";
@@ -9,7 +6,7 @@ import { ReturnBackButton } from "../../notfound/NotFound";
 export default async function PostPage (params) {
     
     const { id } = params.params;
-    var post = [];
+    var post;
 
     
 
@@ -26,7 +23,10 @@ export default async function PostPage (params) {
         
     } catch (error) {
         console.error("Failed to find product:", error);
-        notFound();
+        return (
+            <NotFound page="posts"></NotFound>
+
+        )
 
         
     }
