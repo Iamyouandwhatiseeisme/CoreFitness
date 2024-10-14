@@ -6,15 +6,17 @@ import Link from "next/link";
 import Gear from "../../../public/images/Gear.gif"
 import "./index.css"
 import DropDown from "../components/DropDown/DropDown";
+import useDebounce from "../hooks/useDebounce";
 
 
 
 
 function Posts () {
-    const [posts, setposts]  = useState([]);
+    const [posts, setPosts]  = useState([]);
     const [isLoading, setLoading]  = useState(true);
     const [sortOption, setSortOption ] = useState(null)
-
+    const [search, setSearch] = useState("");
+    const debouncedSearch = useDebounce(search, 250);
 
     const sortOptions = [
         {   label: 'Views: Low to High',
@@ -26,23 +28,17 @@ function Posts () {
             value: 'views-high-to-low',
             option: "views",
             order: "desc"
-            
-             },
-             
-             
+             },   
         {   label: 'Likes: High to Low', 
             value: 'likes-high-to-low',
             option: "likes",
-            order: "desc"
-            
+            order: "desc" 
              },
         {   label: 'Likes: Low to High', 
             value: 'likes-low-to-high',
             option: "likes",
             order: "asc"
              },
-        
-        
         {   label: 'Title: A-Z',  
             value: 'title-ascending',
             option: "title",
@@ -54,76 +50,60 @@ function Posts () {
             order: "desc"
             },
       ];
-        
-       
-       
-    
+
+    const handleSearch = async (event) =>{
+        console.log("User input:", event.target.value);
+        setSearch(event.target.value);
+    }
 
     const handleSort = async (sortOption) => {
         setSortOption(sortOption);
         setLoading(true);
-
-
         if(sortOption.option === "likes"){
-
             // decided to sort the fetched posts with js logic because api endpoint didn't support sorting by nested object parameters"
-
             console.log('sorting');
             const sortedPosts = [...posts].sort((a,b)=> sortOption.order === "desc" ? b.reactions.likes - a.reactions.likes : a.reactions.likes - b.reactions.likes,
             )
             console.log(sortedPosts);
-            setposts(sortedPosts);
-            setLoading(false)
-            
+            setPosts(sortedPosts);
+            setLoading(false) 
         }else{
             try {
                 const response = await fetch(`https://dummyjson.com/posts?sortBy=${sortOption.option}&order=${sortOption.order}`)
                 const data = await response.json();
                 const sortedPosts = data.posts;
-                setposts(sortedPosts)
-    
-    
-                
+                setPosts(sortedPosts)  
             } catch (error) {
                 console.log('Error', error)
-                
             }finally{
                 setLoading(false);
-    
-    
+
             }
-
         }
-
-        
-
-        
-
     }
 
     useEffect(()=> {
+        console.log("Debounced value:", debouncedSearch)
         async function fetchPosts() {
             try {
-              const response = await fetch("https://dummyjson.com/posts"); 
-            //   console.log(response);
+              let url = "https://dummyjson.com/posts"
+              if(debouncedSearch){
+                url = `https://dummyjson.com/posts/search?q=${debouncedSearch}`
+              }
+                
+              const response = await fetch(url); 
               const data = await response.json()
               const postsList = data.posts;
-              setposts(postsList)
+              console.log(postsList)
+              setPosts(postsList)
               setLoading(false);
-              
-
-                
             } catch (error) {
               console.error('Error fetching data:', error);  
             }
           }
-
-        
-
-          
           fetchPosts();  
           
-    },[])
+    },[debouncedSearch])
     if (isLoading) {
         return (
                 <div className="loading-page">
@@ -132,6 +112,8 @@ function Posts () {
                         <h2>Loading...</h2>
                         <img src={Gear.src} alt="loading animation"></img>
                     </div>
+                    <div className="app-bar"><Header /><div>Search: <input onChange={handleSearch}title="search"></input></div>
+                </div>
                     <Footer />
                 </div> 
         ) 
@@ -139,20 +121,22 @@ function Posts () {
 
       if (posts.length === 0) {
         return (
-            <div>
-                <Header />
-                    <h2>Loading...</h2>
+            <div className="posts-page">
+
+                    
+                    <div className="app-bar"><Header /><div>Search: <input value={search}onChange={handleSearch}title="search"></input></div>
+            </div>
+            <h2>Search query empty...</h2>
 
                 <Footer />
             </div> 
     ) 
       }
     return (
-
-        
         <div className="posts-page">
-        
-            <Header />
+        <div className="app-bar"><Header /><div>Search: <input onChange={handleSearch}title="search"></input></div>
+</div>
+            
             <div className="dropdown-menu"><DropDown onSelect={handleSort} buttonText="Sort Products By:"content={sortOptions}></DropDown></div>
             <div className="posts-list">
                 {posts.map((post)=>{
@@ -187,6 +171,7 @@ function Posts () {
                     )
                 })}
             </div>
+
             <Footer />
         </div>
     )
