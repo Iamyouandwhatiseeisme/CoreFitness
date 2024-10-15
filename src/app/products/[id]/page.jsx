@@ -2,31 +2,15 @@
 import "./index.css"
 import NotFound from "../../notfound/NotFound";
 import { ReturnBackButton } from "../../notfound/NotFound";
+import fetchSingleProduct from "../../fetcher/fetchSingleProduct";
 
 export default async function ProductPage (params) {
    
     const { id } = params.params;
+    const fetchItemType = "products"
     var product;
 
-    try {
-        let url = `https://dummyjson.com/products/${id}`
-        const response = await fetch(url);
-        if(!response.ok){
-            return (
-                <NotFound page="products"></NotFound>
-            )
-        }
-        const fetchedProduct = await response.json();
-        product = fetchedProduct;
-        
-    } catch (error) {
-        console.error("Failed to find product:", error);
-        return (
-            <NotFound page="products"></NotFound>
-
-        )
-        
-    }
+    product = await fetchSingleProduct({fetchItemType, id})
    
     
 

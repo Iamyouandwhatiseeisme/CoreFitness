@@ -16,7 +16,7 @@ export default async function fetchProducts ({fetchItemType, debouncedSearch, so
     } catch (error) {
         console.log("Error fetching posts: ", error)
         
-        return <NotFound page="posts"></NotFound>
+        return <NotFound page={fetchItemType}></NotFound>
         
     }
 }
