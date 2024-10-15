@@ -11,11 +11,7 @@ const DropDown = ({buttonText, content}) => {
         setOpen((open)=> !open);
     }
 
-    const onSelectHandler = (option) => {
-        toggleDropDown();
-        
-        
-    }
+    
 
    
 
@@ -25,7 +21,7 @@ const DropDown = ({buttonText, content}) => {
             {buttonText}
 
             </DropDownButton>
-            <DropDownContent onSelect={onSelectHandler} open={open}>
+            <DropDownContent onSelect={toggleDropDown} open={open}>
             {content}
                 
             </DropDownContent>

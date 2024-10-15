@@ -6,12 +6,8 @@ import "./DropDownItem.css"
 const DropDownItem = ({children, onClick}) => {
   const router = useRouter();
   const handleSortOption = () =>{
-    onClick(children);
+    onClick();
     router.push(`?option=${children.option}&order=${children.order}`  )
-    console.log(children);
-
-
-
   }
 
   return (
