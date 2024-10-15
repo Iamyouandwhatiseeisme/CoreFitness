@@ -5,7 +5,7 @@ import "./index.css"
 import Link from "next/link";
 import DropDown from "../components/DropDown/DropDown";
 import SearchBar from "../components/SearchBar/SearchBar";
-import NotFound from "../notfound/NotFound";
+import fetchProducts from "../fetcher/fetchProducts";
 
 
 
@@ -13,6 +13,8 @@ export default async function Products ({searchParams}) {
     const debouncedSearch = searchParams.search || "";
     const sortOption = searchParams.option || ""
     const sortOrder = searchParams.order || ""
+    const fetchItemType = "products"
+
 
     const sortOptions = [
         {   label: 'Price: Low to High',
@@ -37,23 +39,9 @@ export default async function Products ({searchParams}) {
             order: "desc"
             },
       ];
-
-    try {
-        let url = "https://dummyjson.com/products";
-        if(debouncedSearch){
-            url = `https://dummyjson.com/products/search?q=${debouncedSearch}`;
-        }
-        if(sortOption && sortOrder){
-            url = `https://dummyjson.com/products?sortBy=${sortOption}&order=${sortOrder}`
-        }
-        const response = await fetch(url);
-        const data = await response.json();
-        var products = data.products || [];
-    } catch (error) {
-        console.log("Error fetching data: ", error)
-        return <NotFound page="products"></NotFound>
-    }
-
+    
+    
+    var products = await  fetchProducts({fetchItemType, debouncedSearch, sortOption, sortOrder})
     
     
 
@@ -82,7 +70,7 @@ export default async function Products ({searchParams}) {
                     return (
                         <Link key={product.id} href={`/products/${product.id}`}>
                             <div className="product-card">
-                                <img className="product-image" src={product.images[0]} alt={product.title}></img>
+                                <img className="product-image" src={product.thumbnail} alt={product.title}></img>
                                 <div className="product-info"><strong>{product.title}</strong></div>
                                 <div className="product-info">{product.description}</div>
                                 <div className="product-info">Price: {product.price}$</div>

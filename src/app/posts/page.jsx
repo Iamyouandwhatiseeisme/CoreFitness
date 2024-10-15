@@ -1,12 +1,10 @@
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer"
 import Link from "next/link";
-// import Gear from "../../../public/images/Gear.gif"
 import "./index.css"
 import SearchBar from "../components/SearchBar/SearchBar";
 import DropDown from "../components/DropDown/DropDown";
-import NotFound from "../notfound/NotFound";
-
+import fetchProducts from "../fetcher/fetchProducts";
 
 
 
@@ -15,6 +13,8 @@ async function Posts ({searchParams}) {
     const debouncedSearch = searchParams.search || "";
     const sortOption = searchParams.option || ""
     const sortOrder = searchParams.order || ""
+    const fetchItemType = "posts"
+
 
     
 
@@ -40,25 +40,8 @@ async function Posts ({searchParams}) {
             order: "desc"
             },
       ];
-    try {
-        let url = `https://dummyjson.com/posts`;
-        if(debouncedSearch){
-            url = `https://dummyjson.com/posts/search?q=${debouncedSearch}`;
-        }
-        if(sortOption!== null){
-            url = `https://dummyjson.com/posts?sortBy=${sortOption}&order=${sortOrder}`
-            console.log(2)
-        }
-        const response = await fetch(url);
-        const data = await response.json();
-        var posts = data.posts || [];
-    } catch (error) {
-        console.log("Error fetching posts: ", error)
-        
-        return <NotFound page="posts"></NotFound>
-        
-    }
-
+    
+      var posts = await fetchProducts({fetchItemType, debouncedSearch, sortOption, sortOrder})
     
 
     
