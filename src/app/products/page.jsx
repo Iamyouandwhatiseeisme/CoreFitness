@@ -42,7 +42,6 @@ export default async function Products ({searchParams}) {
     
     
     var products = await  fetchProducts({fetchItemType, debouncedSearch, sortOption, sortOrder})
-    console.log(products)
     
     
 
