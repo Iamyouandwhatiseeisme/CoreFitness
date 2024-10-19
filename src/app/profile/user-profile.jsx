@@ -3,7 +3,7 @@ import {fetchUser} from "../fetcher/fetchUser"
 export async function UserProfile() {
   const user = await fetchUser();
   return (
-    <div className="profile-card">
+    <div key={user.id} className="profile-card">
         <img className="userImg" src={user.image} alt="User-image"></img>
         <div className="userName">
           <h1 style={{marginLeft: "-30px"}}>{user.firstName}</h1>
