@@ -4,10 +4,42 @@ export async function UserProfile() {
   const user = await fetchUser();
   return (
     <div className="profile-card">
-        <h1>Name: {user.firstName}</h1>
-        <h1>Last Name: {user.lastName}</h1>
-        <p>Email: {user.email}</p>
-        <img src={user.image} style={{width:"250px"}} alt="User-image"></img>
+        <img className="userImg" src={user.image} alt="User-image"></img>
+        <div className="userName">
+          <h1 style={{marginLeft: "-30px"}}>{user.firstName}</h1>
+          <h1 
+          style={{
+            marginLeft: "10px",
+            paddingTop: "0px"
+            }}>{user.lastName}</h1>
+        </div>
+        <div className="userBackground">
+          <button className="editBtn"> Edit Profile</button>
+          <div style={{
+            width: "70%",
+            height: "50%",
+            background: "yellow",
+            display: "flex",
+            flexDirection: "column"
+          }}>
+            <div style={{
+            width: "100%",
+            height: "50%",
+            background: "black",
+            display: "flex",
+            flexDirection: "column"
+          }}></div>
+            <div style={{
+            width: "100%",
+            height: "50%",
+            background: "red",
+            display: "flex",
+            flexDirection: "column"
+          }}></div>
+
+          </div>
+
+        </div>
         
     </div>
   )
