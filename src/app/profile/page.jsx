@@ -7,10 +7,13 @@ import "./index.css"
 
 export default function Profile (){
     return (
-        <>
-        <Header />
-        <UserProfile />
-        <Footer />
-        </>
+        <div className="page-wrapper">
+            <Header />
+            <div className="default-layout">
+                <UserProfile />
+                <Footer />
+            </div>
+        </div>
+
     )
 }
