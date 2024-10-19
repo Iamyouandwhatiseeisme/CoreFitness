@@ -6,6 +6,7 @@ import Link from "next/link";
 import DropDown from "../components/DropDown/DropDown";
 import SearchBar from "../components/SearchBar/SearchBar";
 import fetchProducts from "../fetcher/fetchProducts";
+import LocalProductsList from "../components/LocalProductsList/LocalProductsList";
 
 
 
@@ -65,7 +66,7 @@ export default async function Products ({searchParams}) {
             </div>
             
             <div className="dropdown-menu"><DropDown buttonText="Sort Products By:"content={sortOptions}></DropDown></div>
-            <div className="products-list">
+            {/* <div className="products-list">
                 {products.map((product)=>{
                     return (
                         <Link key={product.id} href={`/products/${product.id}`}>
@@ -80,7 +81,8 @@ export default async function Products ({searchParams}) {
 
                     )
                 })}
-            </div>
+            </div> */}
+            <LocalProductsList initialProducts={products}/>
             <Footer />
         </div>
     )
