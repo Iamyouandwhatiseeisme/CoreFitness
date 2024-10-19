@@ -3,7 +3,6 @@ import { NextResponse } from 'next/server';
 
 export async function POST(request) {
     const { username, password } = await request.json();
-    console.log('sending request', 1)
 
     const response = await fetch('https://dummyjson.com/auth/login', {
         method: 'POST',

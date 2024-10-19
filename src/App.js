@@ -9,7 +9,7 @@ function App() {
   return (
     <>
     {/* TODO FIX HOMEPAGE BEING DISPLAYED WHEN NON-EXISTENT PATH IS TYPED */}
-    <Login />
+    <Welcome />
     </>
     
   );
