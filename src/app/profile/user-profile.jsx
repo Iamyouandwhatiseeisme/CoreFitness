@@ -1,18 +1,12 @@
 import {fetchUser} from "../fetcher/fetchUser"
+import { AvatarName} from "./user-avatar-name"
 
 export async function UserProfile() {
   const user = await fetchUser();
   return (
     <div key={user.id} className="profile-card">
-        <img className="userImg" src={user.image} alt="User-image"></img>
-        <div className="userName">
-          <h1 style={{marginLeft: "-30px"}}>{user.firstName}</h1>
-          <h1 
-          style={{
-            marginLeft: "10px",
-            paddingTop: "0px"
-            }}>{user.lastName}</h1>
-        </div>
+        
+        <AvatarName src={user}/>
         <div className="userBackground">
           <button className="editBtn"> Edit Profile</button>
           <div style={{
