@@ -16,7 +16,7 @@ export async function UserProfile() {
         <div className="userBackground">
           <button className="editBtn"> Edit Profile</button>
           <div style={{
-            width: "70%",
+            width: "80%",
             height: "50%",
             // background: "yellow",
             display: "flex",
@@ -25,10 +25,11 @@ export async function UserProfile() {
             <div style={{
             width: "100%",
             height: "50%",
-            // background: "black",
+            // background: "white",
             display: "flex",
             // flexDirection: "column"
             justifyContent: "space-between"
+            
           }}>
             <div style={{
             width: "30%",
@@ -36,10 +37,10 @@ export async function UserProfile() {
             // background: "aqua",
             display: "flex",
             flexDirection: "column",
-            justifyContent: "center",
+            justifyContent: "end",
             alignItems: "center"
           }}>
-              <b style={{fontSize: "24px"}}>{user.company.title}</b> 
+              <b style={{fontSize: "24px", textAlign: "center"}}>{user.company.title}</b> 
               <div style={{paddingTop: "10px"}}>Title</div> 
             </div>
             <div style={{ background: "gray", width: "2px"}}></div>
@@ -49,10 +50,10 @@ export async function UserProfile() {
               // background: "blue",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
+              justifyContent: "end",
               alignItems: "center"
             }}>
-            <b style={{fontSize: "24px"}}>{user.company.name}</b> 
+            <b style={{fontSize: "24px", textAlign: "center"}}>{user.company.name}</b> 
             <div style={{paddingTop: "10px"}}>Company name</div>
           </div>
           <div style={{ background: "gray", width: "2px"}}></div>
@@ -62,10 +63,10 @@ export async function UserProfile() {
               // background: "yellow",
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
+              justifyContent: "end",
               alignItems: "center"
             }}>
-            <b style={{fontSize: "24px"}}>{user.company.department}</b> 
+            <b style={{fontSize: "20px", textAlign: "center"}}>{user.company.department}</b> 
             <div style={{paddingTop: "10px"}}>Department</div>
           </div>
           </div>
