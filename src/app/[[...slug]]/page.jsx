@@ -24,7 +24,6 @@ export default function Page(params) {
   
   const validPaths = ['', 'blog', 'profile', 'about', 'contact', 'settings', 'products', 'posts', 'login'];
   var currentPath = params.params.slug;
-  console.log(currentPath, 321)
   
   
 

@@ -1,5 +1,5 @@
 "use client";
-
+import './index.css'
 import React from 'react';
 export default function LoginPage() {
     const handleSubmit = async (event) => {
@@ -28,10 +28,17 @@ export default function LoginPage() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="name" name="userName" placeholder="emilys" required />
-            <input type="password" name="password" placeholder="emilyspass" required />
-            <button type="submit">Login</button>
-        </form>
+        <div className='login-page'>
+            <h1>Welcome to Mushroom Kingdom</h1>
+            <form onSubmit={handleSubmit} className='login-form'>
+                <input className='login-input' type="name" name="userName" placeholder="Username" required />
+                <input className='login-input' type="password" name="password" placeholder="Password" required />
+                <button className='login-button' type="submit">Log in</button>
+                <div className='forgotten-password'>Forgotten password?</div>
+                <div className='horizontal-divider'></div>
+                <button type='button' className='create-account-button'>Create New Account</button>
+            </form>
+
+        </div>
     );
 }
