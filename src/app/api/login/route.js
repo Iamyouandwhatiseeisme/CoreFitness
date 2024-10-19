@@ -13,9 +13,9 @@ export async function POST(request) {
 
     const data = await response.json();
 
-    if (data.refreshToken) {
+    if (data.accessToken) {
         const res = NextResponse.json(data);
-        res.headers.set('Set-Cookie', `refreshToken=${data.refreshToken}; Path=/; HttpOnly; SameSite=Strict`);
+        res.headers.set('Set-Cookie', `accessToken=${data.accessToken}; Path=/; HttpOnly; SameSite=Strict`);
         return res; 
     }
 

@@ -1,13 +1,15 @@
 import './App.css';
+import Welcome from "./app/welcome/page"
+import Login from "./app/login/page"
 
 
-import Welcome  from './app/welcome/page.jsx';
 
 
 function App() {
   return (
     <>
-      <Welcome />
+    {/* TODO FIX HOMEPAGE BEING DISPLAYED WHEN NON-EXISTENT PATH IS TYPED */}
+    <Login />
     </>
     
   );
