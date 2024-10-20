@@ -11,6 +11,7 @@ export async function POST(request) {
     });
 
     const data = await response.json();
+            console.log(data);
 
     if (data.accessToken) {
         const res = NextResponse.json(data);

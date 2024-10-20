@@ -1,16 +1,16 @@
 import './App.css';
 import Welcome from "./app/welcome/page"
-import Login from "./app/login/page"
+import { UserProvider } from './app/components/UserProvider/UserProvider';
 
 
 
 
 function App() {
   return (
-    <>
-    {/* TODO FIX HOMEPAGE BEING DISPLAYED WHEN NON-EXISTENT PATH IS TYPED */}
+    <UserProvider>
     <Welcome />
-    </>
+    </UserProvider>
+
     
   );
 }

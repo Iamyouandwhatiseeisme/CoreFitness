@@ -1,8 +1,7 @@
 import "../styles/global.css";
 import { ClientOnly } from './client'
-import Welcome from "../welcome/page"
-import NotFound from "../notfound/NotFound";
 import Custom404 from "../404";
+import { UserProvider } from "../components/UserProvider/UserProvider";
 
  
 export function generateStaticParams() {

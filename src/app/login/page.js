@@ -1,7 +1,8 @@
 "use client";
+import {  useUser } from '../components/UserProvider/UserProvider';
 import './index.css'
-import React from 'react';
 export default function LoginPage() {
+    const { user, setUser } = useUser();
     const handleSubmit = async (event) => {
         event.preventDefault(); 
 
@@ -21,7 +22,18 @@ export default function LoginPage() {
         });
 
         if (response.ok) {
-          window.location.href = '/' 
+            const body = await response.json();
+            
+           var authedUser = {
+                userName: body.username,
+                email: body.email,
+                lastName: body.lastName,
+                gender: body.gender,
+                image: body.image,
+            }
+            await setUser(authedUser);
+            
+            window.location.href = '/' 
         } else {
             console.error('Login failed');
         }
