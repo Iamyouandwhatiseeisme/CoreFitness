@@ -1,7 +1,7 @@
 import {ButtonEditProfile} from "./edit-profile-button"
 
 export function UserBackground(props) {
-  const user = props.src;
+  const user = props.user;
   return (
     <div className="userBackground">
       <ButtonEditProfile /> 

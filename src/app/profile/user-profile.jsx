@@ -7,8 +7,8 @@ export async function UserProfile() {
   return (
     <div key={user.id} className="profile-card">
         
-        <AvatarName src={user}/>
-        <UserBackground src={user}/>
+        <AvatarName user={user}/>
+        <UserBackground user={user}/>
         
         
     </div>

@@ -1,5 +1,5 @@
 export function AvatarName(props) {
-  const user = props.src;
+  const user = props.user;
   return (
     <>
     <img className="userImg" src={user.image} alt="User-image"></img>
