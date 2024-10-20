@@ -1,13 +1,7 @@
 export function UserBio(props) {
   const user = props.user;
   return (
-    <div style={{
-      width: "80%",
-      height: "50%",
-      background: "yellow",
-      display: "flex",
-      flexDirection: "column"
-    }}>
+    <div className="userbio" >
       <div style={{
       width: "100%",
       height: "50%",
