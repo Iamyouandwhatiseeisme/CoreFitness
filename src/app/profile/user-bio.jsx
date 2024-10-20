@@ -1,3 +1,5 @@
+import { UserContact } from "./user-contact"
+
 export function UserBio(props) {
   const user = props.user;
   return (
@@ -50,18 +52,8 @@ export function UserBio(props) {
       <div style={{paddingTop: "10px"}}>Department</div>
     </div>
     </div>
-      <div style={{
-      width: "100%",
-      height: "50%",
-      // background: "red",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      alignItems: "end"
-    }}>
-      <div style={{paddingRight: "10px"}}>Phone: {user.phone}</div> 
-      <div style={{paddingRight: "10px"}}>Email: {user.email}</div> 
-    </div>
+    <UserContact user={user}/>  
+    
 
     </div>
   )
