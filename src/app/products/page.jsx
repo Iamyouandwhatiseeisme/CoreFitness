@@ -82,7 +82,7 @@ export default async function Products ({searchParams}) {
                     )
                 })}
             </div> */}
-            <LocalProductsList initialProducts={products}/>
+            <LocalProductsList initialProducts={products} type={"products"}/>
             <Footer />
         </div>
     )
