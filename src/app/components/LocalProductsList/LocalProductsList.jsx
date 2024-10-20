@@ -38,12 +38,20 @@ export default function LocalProductsList({ initialProducts, type}) {
   
   const enableEdit = (item) => {
     setIsEditing(item.id);
-    setEditData({
-      title: item.title,
-      description: item.description || '',
-      price: item.price || '',
-      image: item.thumbnail || '',
-    });
+    
+    if (type === 'products') {
+      setEditData({
+        title: item.title,
+        description: item.description || '',
+        price: item.price || '',
+        image: item.thumbnail || '',
+      });
+    } else if (type === 'posts') {
+      setEditData({
+        title: item.title,
+        body: item.body || '',
+      });
+    }
   };
 
   
@@ -80,7 +88,7 @@ export default function LocalProductsList({ initialProducts, type}) {
           items.map((item) => (
             <div key={item.id}>
               {isEditing === item.id ? (
-                <div className="item-card">
+                <div className={`${type}-card`}>
                   <input
                     type="text"
                     name="title"
@@ -114,7 +122,7 @@ export default function LocalProductsList({ initialProducts, type}) {
                       />
                     </>
                   ) : (
-                    <textarea
+                    <input
                       name="body"
                       value={editData.body}
                       onChange={handleChange}
