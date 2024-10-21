@@ -12,11 +12,6 @@ export default async function ProductPage (params) {
 
     product = await fetchSingleProduct({fetchItemType, id})
    
-    
-
-
-   
-
     if(!product) return <NotFound page="products"/>
     return(
         <div className="product">
@@ -30,10 +25,7 @@ export default async function ProductPage (params) {
             </p>
             <div>
             <span>Price: {product.price}$</span> </div>
-            
             <ReturnBackButton destination={"products"} />
-
-            
         </div>
     )
 
