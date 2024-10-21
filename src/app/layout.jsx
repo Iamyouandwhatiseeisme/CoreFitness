@@ -1,4 +1,3 @@
-import { UserProvider } from './components/UserProvider/UserProvider'
 import './styles/global.css'
 export const metadata = {
     title: 'Medical Mushroom Market app',
@@ -14,9 +13,7 @@ export default function RootLayout({ children }) {
           </head>
           <body> 
             <noscript>You need to enable JavaScript to run this app.</noscript>
-            <UserProvider>
             <div id="root">{children}</div>
-            </UserProvider>
           </body>
           </html>
     )
