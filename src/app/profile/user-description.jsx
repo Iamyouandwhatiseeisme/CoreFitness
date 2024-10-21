@@ -6,11 +6,11 @@ export function UserDescription(props) {
 
   return (
     <div className="userDescription">
-      <UserDescriptionComponent descProp="Title" descValue={user.company.title}/>
+      <UserDescriptionComponent descProp="Gender" descValue={user.gender}/>
       <BorderDiv />
-      <UserDescriptionComponent descProp="Company name" descValue={user.company.name}/>
+      {/* <UserDescriptionComponent descProp="User name" descValue={user.company.depart}/> */}
       <BorderDiv />
-      <UserDescriptionComponent descProp="Department" descValue={user.company.department}/>
+      {/* <UserDescriptionComponent descProp="Department" descValue={user.company.department}/> */}
     </div>
   )
 }

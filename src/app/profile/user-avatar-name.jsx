@@ -4,7 +4,7 @@ export function AvatarName(props) {
     <>
     <img className="userImg" src={user.image} alt="User-image"></img>
         <div className="userName">
-          <h1 style={{marginLeft: "-30px"}}>{user.firstName}</h1>
+          <h1 style={{marginLeft: "-30px"}}>{user.name}</h1>
           <h1 
           style={{
             marginLeft: "10px",

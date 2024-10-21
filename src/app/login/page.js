@@ -41,6 +41,7 @@ export default function LoginPage() {
                 lastName: body.lastName,
                 gender: body.gender,
                 image: body.image,
+                id: body.id
             }
 
             console.log(isLoggedIn, 'isloggedin');

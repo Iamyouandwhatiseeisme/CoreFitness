@@ -1,11 +1,13 @@
-import {fetchUser} from "../fetcher/fetchUser"
+// import {fetchUser} from "../fetcher/fetchUser"
 import { AvatarName} from "./user-avatar-name"
 import { UserBackground } from "./user-background"
 
-export async function UserProfile() {
-  const user = await fetchUser();
+
+export function UserProfile({user}) {
+  // const user = await fetchUser(currentUser.id);
+  console.log("user", user);
   return (
-    <div key={user.id} className="profile-card">
+    <div className="profile-card">
         
         <AvatarName user={user}/>
         <UserBackground user={user}/>
