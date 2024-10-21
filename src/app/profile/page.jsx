@@ -2,7 +2,7 @@
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import Gear from "../../../public/images/Gear.gif"
-import {UserProfile} from './user-profile'
+import {UserProfile} from '../components/profile/user-profile'
 import "./index.css"
 import { useState, useEffect } from "react";
 
