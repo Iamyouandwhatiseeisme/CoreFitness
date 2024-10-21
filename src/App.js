@@ -1,14 +1,16 @@
 import './App.css';
+import Welcome from "./app/welcome/page"
+import { UserProvider } from './app/components/UserProvider/UserProvider';
 
 
-import Welcome  from './app/welcome/page.jsx';
 
 
 function App() {
   return (
-    <>
-      <Welcome />
-    </>
+    <UserProvider>
+    <Welcome />
+    </UserProvider>
+
     
   );
 }
