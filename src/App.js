@@ -1,17 +1,9 @@
 import './App.css';
 import Welcome from "./app/welcome/page"
-import { UserProvider } from './app/components/UserProvider/UserProvider';
-
-
-
-
-function App() {
+function App({children, path}) {
+  console.log('app running', path)
   return (
-    <UserProvider>
     <Welcome />
-    </UserProvider>
-
-    
   );
 }
 

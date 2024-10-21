@@ -1,10 +1,15 @@
+"use client"
 import Footer from "../components/footer/Footer.js"
 import Header from "../components/header/Header.js"
+import { useAuth } from "../components/UserProvider/UserProvider.js";
 import "./index.css"
 
 
 
 function Contact() {
+  const  [ authUser, setUathUser, isLoggedIn, setIsLoggedIn ] = useAuth();
+
+  console.log(isLoggedIn);
   
   
   return (

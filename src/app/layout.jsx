@@ -12,9 +12,11 @@ export default function RootLayout({ children }) {
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
             <title>React App</title>
           </head>
-          <body>
+          <body> 
             <noscript>You need to enable JavaScript to run this app.</noscript>
-            <div id="root"><UserProvider>{children}</UserProvider></div>
+            <UserProvider>
+            <div id="root">{children}</div>
+            </UserProvider>
           </body>
           </html>
     )

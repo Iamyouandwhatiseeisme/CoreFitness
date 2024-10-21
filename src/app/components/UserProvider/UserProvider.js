@@ -1,20 +1,41 @@
 "use client"
-import React, { createContext, useContext, useState } from 'react'
-const UserContext = createContext(null);
+import React, {  useContext, useEffect, useState } from 'react'
+    const AuthContext = React.createContext(null);
 export  function  UserProvider ({children}) {
-    const [ user, setUser] = useState(null);
+    const [ authUser, setAuthUser] = useState(()=>{
+        const storedUser = localStorage.getItem('userData');
+        return storedUser ? JSON.parse(storedUser) : null;
+    });
+    const [ isLoggedIn, setIsLoggedIn] = useState(()=>{
+        return localStorage.getItem('isLoggedIn') === 'true';
+    });
+
+    const value = [
+        authUser,
+        setAuthUser,
+        isLoggedIn,
+        setIsLoggedIn
+    ]
+    useEffect(() => {
+        console.log('setting local')
+        localStorage.setItem('userData', JSON.stringify(authUser));
+        localStorage.setItem('isLoggedIn', isLoggedIn);
+        console.log('local set')
+
+    }, [authUser, isLoggedIn]);
+     
     return (
-        <UserContext.Provider value={{ user, setUser}}>
+        <AuthContext.Provider value={value}>
             {children}
-        </UserContext.Provider>
+        </AuthContext.Provider>
         
     )
 }
-export function useUser (){
-    const context = useContext(UserContext);
-    if (context === null) {
-        throw new Error('useUser must be used within a UserProvider');
+export function useAuth (){
+    const context = useContext(AuthContext);
+    if(!context){
+        throw Error('No context')
     }
-    return context;
+    return context
 }
 
