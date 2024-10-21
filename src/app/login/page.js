@@ -1,8 +1,19 @@
 "use client";
-import {  useUser } from '../components/UserProvider/UserProvider';
+import {  useAuth } from '../components/UserProvider/UserProvider';
 import './index.css'
+import { useRouter } from 'next/navigation';
+
 export default function LoginPage() {
-    const { user, setUser } = useUser();
+    const router = useRouter();
+
+    const [ authUser,
+            setAuthUser,
+            isLoggedIn,
+            setIsLoggedIn
+    ]
+     = useAuth();
+
+     console.log(setIsLoggedIn, setAuthUser, 5)
     const handleSubmit = async (event) => {
         event.preventDefault(); 
 
@@ -23,23 +34,32 @@ export default function LoginPage() {
 
         if (response.ok) {
             const body = await response.json();
-            
            var authedUser = {
+                name: body.firstName,
                 userName: body.username,
                 email: body.email,
                 lastName: body.lastName,
                 gender: body.gender,
                 image: body.image,
             }
-            await setUser(authedUser);
+
+            console.log(isLoggedIn, 'isloggedin');
+            setIsLoggedIn(true)
+            setAuthUser(authedUser);
+
+            router.push('/')
+
             
-            window.location.href = '/' 
+            
+            
+            // window.location.href = '/' 
         } else {
             console.error('Login failed');
         }
     };
 
     return (
+        // <UserProvider>
         <div className='login-page'>
             <h1>Welcome to Mushroom Kingdom</h1>
             <form onSubmit={handleSubmit} className='login-form'>
@@ -52,5 +72,6 @@ export default function LoginPage() {
             </form>
 
         </div>
+        // </UserProvider>
     );
 }

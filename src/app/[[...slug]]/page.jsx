@@ -1,7 +1,6 @@
 import "../styles/global.css";
 import { ClientOnly } from './client'
 import Custom404 from "../404";
-import { UserProvider } from "../components/UserProvider/UserProvider";
 
  
 export function generateStaticParams() {
@@ -24,10 +23,14 @@ export default function Page(params) {
   const validPaths = ['', 'blog', 'profile', 'about', 'contact', 'settings', 'products', 'posts', 'login'];
   var currentPath = params.params.slug;
   
+  currentPath = !currentPath ? "" : currentPath;
+  console.log('new path', currentPath)
+  
   
 
-  if(!currentPath || validPaths.includes(currentPath)){
-    return <ClientOnly />
+  if(!currentPath && validPaths.includes(currentPath)){
+    console.log(1);
+    return <ClientOnly path={currentPath}/>
   }else{
     return <Custom404 />
   }
