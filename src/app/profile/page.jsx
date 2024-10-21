@@ -2,6 +2,7 @@
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import Gear from "../../../public/images/Gear.gif"
+import {UserProfile} from './user-profile'
 
 import "./index.css"
 import { useState, useEffect } from "react";
@@ -51,14 +52,16 @@ export default  function Profile (){
     }, [] )
     
     
-    console.log("authUser", authUser);
-    
     return (
         <div className="page-wrapper">
         <Header />
             <div className="profile-card">
             {user ? <>
-                <div>{user.firstName}</div>
+            <div className="default-layout">
+                <UserProfile user={user}/>
+                <Footer />    
+            </div>
+                {/* <div>{user.firstName}</div> */}
             </>: 
             <div>Loading<img src={Gear.src} alt='loading icon'></img></div>}
             </div>
