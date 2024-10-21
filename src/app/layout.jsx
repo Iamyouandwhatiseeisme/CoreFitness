@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
       content="Web site created using create-react-app"
     />
   
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    {/* <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> */}
     
     <title>React App</title>
   </head>
