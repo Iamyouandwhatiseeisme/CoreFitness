@@ -1,9 +1,9 @@
 "use client"
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
-import Gear from "../../../public/images/Gear.gif"
-import {UserProfile} from '../components/profile/user-profile'
-import "./index.css"
+import {LoadingGear} from '../components/profile/loading-gear';
+import {UserProfile} from '../components/profile/user-profile';
+import "./index.css";
 import { useState, useEffect } from "react";
 
 export default  function Profile (){
@@ -38,13 +38,14 @@ export default  function Profile (){
     
     return (
         <div className="page-wrapper">
-        <Header />
+            <Header />
             <div className="default-layout">
-            {user ? <>
-                <UserProfile user={user}/>
-                <Footer />    
-            </>: 
-            <div>Loading<img src={Gear.src} alt='loading icon'></img></div>}
+                {user ? <>
+                    <UserProfile user={user}/>
+                    <Footer />    
+                </>: 
+                    <LoadingGear />
+                }
             </div>
         </div>
     )
