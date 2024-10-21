@@ -1,27 +1,65 @@
 "use client"
-// import User from "../components/data/User"
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
-import { useAuth} from "../components/UserProvider/UserProvider"
+import Gear from "../../../public/images/Gear.gif"
 
 import "./index.css"
+import { useState, useEffect } from "react";
 
 
 
-export default function Profile (){
-    const  [ authUser, setUathUser, isLoggedIn, setIsLoggedIn ] = useAuth();
-    console.log(authUser.Image);
+export default  function Profile (){
+    const [ user, setUser ] = useState(null)
+    const retrieveAccessToken = () =>{
+        const cookieStore = document.cookie;
+        const retrievedCookie = cookieStore.match(/refreshToken=([^;]*)/)
+        return retrievedCookie[1];
+
+
+    }
+    
+    
+
+    useEffect  (()=>{
+        const token = retrieveAccessToken();
+        console.log(token);
+        async function fetchUser (){
+            try {
+                const response = await fetch    ("https://dummyjson.com/user/me", {
+                    method: "GET",
+                    headers: {
+                      "Content-Type": "application/json",
+                      "Authorization": `Bearer ${token}`,
+                    },
+                    
+                  });
+
+                // console.log(response);
+                if(response.ok){
+                    const data = await response.json();
+                    console.log(data);
+                    setUser(data);
+
+
+                }
+            } catch (error) {
+                console.error('Something went wrong: ', error)  
+            }
+        }
+
+        fetchUser();
+    }, [] )
+    
     
     
     return (
         <>
         <Header />
             <div className="profile-card">
-                <h1>Name: {authUser.userName}</h1>
-                <h1>Last Name: {authUser.lastName}</h1>
-                <p>Email: {authUser.email}</p>
-                <img src={authUser.Image} style={{width:"250px"}} alt="User-image"></img>
-                
+            {user ? <>
+                <div>{user.firstName}</div>
+            </>: 
+            <div>Loading<img src={Gear.src} alt='loading icon'></img></div>}
             </div>
         <Footer />
         </>
