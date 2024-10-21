@@ -5,7 +5,7 @@ import { UserBackground } from "./user-background"
 
 export function UserProfile({user}) {
   // const user = await fetchUser(currentUser.id);
-  console.log("user", user);
+  // console.log("user", user);
   return (
     <div className="profile-card">
         
