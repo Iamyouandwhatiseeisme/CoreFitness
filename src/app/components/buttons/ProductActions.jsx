@@ -1,12 +1,13 @@
-"use client"; // Ensure this component is client-side
+"use client"; 
 
 import React, { useState } from 'react';
 
 const ProductActions = ({ product}) => {
   const [editing, setEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(product.title);
+  const [productList, setProductList] = useState([])
 
-  // Handle product edit (PUT request)
+
   const handleEdit = () => {
     fetch(`https://dummyjson.com/products/${product.id}`, {
       method: 'PUT',
@@ -16,11 +17,12 @@ const ProductActions = ({ product}) => {
       .then((res) => res.json())
       .then((updatedProduct) => {
         console.log('Updated product:', updatedProduct);
-        // Update the local product state directly
-        // setProductList((prevList) =>
-        //   prevList.map((p) => (p.id === updatedProduct.id ? updatedProduct : p))
-        // );
-        setEditing(false); // Exit edit mode
+        setProductList((prevList) => {
+          return prevList.map((p) => 
+            p.id === updatedProduct.id ? updatedProduct : p
+          );
+        });
+        setEditing(false);
       })
       .catch((error) => {
         console.error('Error updating product:', error);
@@ -28,17 +30,15 @@ const ProductActions = ({ product}) => {
   };
 
 
-  
-
-
-  // Handle product delete (DELETE request)
   const handleDelete = () => {
     fetch(`https://dummyjson.com/products/${product.id}`, {
       method: 'DELETE',
     })
       .then(() => {
         console.log('Deleted product with ID:', product.id);
-        
+        setProductList((prevList) =>
+          prevList.filter((p) => p.id !== product.id)
+        );
       })
       .catch((error) => {
         console.error('Error deleting product:', error);
