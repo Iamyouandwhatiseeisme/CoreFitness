@@ -1,4 +1,3 @@
-import { UserProvider } from './components/UserProvider/UserProvider'
 import './styles/global.css'
 export const metadata = {
     title: 'Medical Mushroom Market app',
@@ -12,9 +11,9 @@ export default function RootLayout({ children }) {
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
             <title>React App</title>
           </head>
-          <body>
+          <body> 
             <noscript>You need to enable JavaScript to run this app.</noscript>
-            <div id="root"><UserProvider>{children}</UserProvider></div>
+            <div id="root">{children}</div>
           </body>
           </html>
     )

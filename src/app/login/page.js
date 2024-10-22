@@ -1,48 +1,49 @@
 "use client";
-import {  useUser } from '../components/UserProvider/UserProvider';
 import './index.css'
+import { useRouter } from 'next/navigation';
+
 export default function LoginPage() {
-    const { user, setUser } = useUser();
-    const handleSubmit = async (event) => {
-        event.preventDefault(); 
+    const router = useRouter();
 
-        const formData = new FormData(event.target);
-        const username = formData.get('userName');
-        const password = formData.get('password');
+    
+     
+        const handleSubmit = async (event) => {
+            event.preventDefault(); 
 
-        const response = await fetch('/api/login', { 
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-              username, 
-              password,
-              expiresInMins: 2
-              }),
-            credentials: 'include', 
-        });
+            const formData = new FormData(event.target);
+            const username = formData.get('userName');
+            const password = formData.get('password');
 
-        if (response.ok) {
-            const body = await response.json();
+            try {
+                const response = await fetch("https://dummyjson.com/auth/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      username: username,
+                      password: password,
+                      expiresInMins: 30,
+                    }),
+                  });
+        
+                if (response.ok) {
+                    const body = await response.json();
+                    document.cookie = `refreshToken=${body.refreshToken}; path=/`
+                    document.cookie = `accessToken=${body.accessToken}; path=/`
+                    router.push('/')   
+                    } else {
+                        console.error('Login failed');
+                    }
             
-           var authedUser = {
-                userName: body.username,
-                email: body.email,
-                lastName: body.lastName,
-                gender: body.gender,
-                image: body.image,
+            } catch (error) {
+                console.error('Unsuccessfull login', error)
             }
-            await setUser(authedUser);
-            
-            window.location.href = '/' 
-        } else {
-            console.error('Login failed');
         }
-    };
+    
 
     return (
         <div className='login-page'>
             <h1>Welcome to Mushroom Kingdom</h1>
-            <form onSubmit={handleSubmit} className='login-form'>
+            <form  className='login-form' onSubmit={handleSubmit}>
                 <input className='login-input' type="name" name="userName" placeholder="Username" required />
                 <input className='login-input' type="password" name="password" placeholder="Password" required />
                 <button className='login-button' type="submit">Log in</button>
@@ -53,4 +54,5 @@ export default function LoginPage() {
 
         </div>
     );
-}
+    
+}   
