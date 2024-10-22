@@ -29,9 +29,10 @@ export default function Page(params) {
   
 
   if(!currentPath && validPaths.includes(currentPath)){
-    console.log(1);
+    
     return <ClientOnly path={currentPath}/>
   }else{
+    
     return <Custom404 />
   }
 
