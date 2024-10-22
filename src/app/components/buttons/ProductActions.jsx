@@ -1,13 +1,11 @@
-"use client"; 
-
-import React, { useState } from 'react';
-
-const ProductActions = ({ product}) => {
+"use client";
+ 
+import React, { useEffect, useState } from 'react';
+ 
+const ProductActions = ({ product, setProductCallBack, onEditingChange }) => {
   const [editing, setEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(product.title);
-  const [productList, setProductList] = useState([])
-
-
+ 
   const handleEdit = () => {
     fetch(`https://dummyjson.com/products/${product.id}`, {
       method: 'PUT',
@@ -16,35 +14,36 @@ const ProductActions = ({ product}) => {
     })
       .then((res) => res.json())
       .then((updatedProduct) => {
-        console.log('Updated product:', updatedProduct);
-        setProductList((prevList) => {
-          return prevList.map((p) => 
-            p.id === updatedProduct.id ? updatedProduct : p
-          );
-        });
+        setProductCallBack(updatedProduct);
         setEditing(false);
       })
       .catch((error) => {
         console.error('Error updating product:', error);
       });
   };
-
-
+  useEffect(()=>{
+    onEditingChange(editing);
+ 
+  },[editing])  
+ 
+ 
+ 
+ 
+ 
+  
   const handleDelete = () => {
     fetch(`https://dummyjson.com/products/${product.id}`, {
       method: 'DELETE',
     })
       .then(() => {
         console.log('Deleted product with ID:', product.id);
-        setProductList((prevList) =>
-          prevList.filter((p) => p.id !== product.id)
-        );
+       
       })
       .catch((error) => {
         console.error('Error deleting product:', error);
       });
   };
-
+ 
   return (
     <div>
       {editing ? (
@@ -66,5 +65,5 @@ const ProductActions = ({ product}) => {
     </div>
   );
 };
-
+ 
 export default ProductActions;

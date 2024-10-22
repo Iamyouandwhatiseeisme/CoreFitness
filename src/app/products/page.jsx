@@ -1,3 +1,6 @@
+"use client"
+
+
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import "./index.css";
@@ -6,14 +9,16 @@ import DropDown from "../components/DropDown/DropDown";
 import SearchBar from "../components/SearchBar/SearchBar";
 import fetchProducts from "../fetcher/fetchProducts";
 import ProductActions from "../components/buttons/ProductActions";
-// import LocalProductsList from "../components/LocalProductsList/LocalProductsList";
-
-export default async function Products({ searchParams }) {
+import { useEffect, useState } from "react";
+ 
+export default  function Products({ searchParams }) {
   const debouncedSearch = searchParams.search || "";
   const sortOption = searchParams.option || "";
   const sortOrder = searchParams.order || "";
   const fetchItemType = "products";
-
+  const [ products, setProducts ] = useState([]);
+  const [ editing, setEditing ] = useState();
+ 
   const sortOptions = [
     {
       label: "Price: Low to High",
@@ -40,19 +45,57 @@ export default async function Products({ searchParams }) {
       order: "desc",
     },
   ];
-  
-  var products = await fetchProducts({
-    fetchItemType,
+ 
+  function editProducts ({products, setProducts}) {
+   
+      return function changeProductproducts (product) {
+        products.forEach((item)=> {
+        if(item.id === product.id){
+          const index = products.indexOf(item);
+          const newArray = products;
+          newArray[index] = product;
+ 
+ 
+          console.log(newArray, 'benew');
+          setProducts(newArray);
+          console.log(products, 'state');
+         
+        }
+      }
+    )
+ 
+    }
+  }
+ 
+ 
+  useEffect(()=>{
+ 
+      async function fetch(){
+        var productArray = await fetchProducts({fetchItemType, debouncedSearch, sortOption, sortOrder})
+        setProducts(productArray)
+ 
+       
+    }
+    fetch();
+  },[fetchItemType,
     debouncedSearch,
     sortOption,
-    sortOrder,
-  });
+    sortOrder])
+  var callBack = editProducts({products, setProducts});
+ 
+  function onEditingChange(editing) {
+    setEditing(editing);
+  }
+ 
+ 
+ 
 
-  console.log(products[0], "products");
-  
-  
+ 
+ 
+ 
+ 
   if (products.length === 0) {
-    
+   
     return (
       <div className="loading-screen">
         <div className="app-bar">
@@ -62,15 +105,17 @@ export default async function Products({ searchParams }) {
       </div>
     );
   }
-  
+ 
   return (
-    
+   
+   
+   
     <div className="products-page">
       <div className="app-bar">
         <Header />
         <SearchBar searchItemType="Search Posts" />
       </div>
-
+ 
       <div className="dropdown-menu">
         <DropDown
           buttonText="Sort Products By:"
@@ -78,7 +123,7 @@ export default async function Products({ searchParams }) {
         ></DropDown>
       </div>
       <div className="products-list">
-        
+       
         {products.map((product) => {
           return (
             <div key={product.id} className="product-card">
@@ -95,16 +140,18 @@ export default async function Products({ searchParams }) {
               <div className="product-info">{product.description}</div>
               <div className="product-info">Price: {product.price}$</div>
               <ProductActions
-                product={product}
-                
-                
+                product={product} setProductCallBack={callBack} onEditingChange={onEditingChange}
+               
+               
               />
             </div>
           );
         })}
       </div>
-      {/* <LocalProductsList initialProducts={products} type={"products"}/> */}
+      
       <Footer />
     </div>
   );
 }
+ 
+ 

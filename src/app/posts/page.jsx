@@ -5,7 +5,6 @@ import "./index.css"
 import SearchBar from "../components/SearchBar/SearchBar";
 import DropDown from "../components/DropDown/DropDown";
 import fetchProducts from "../fetcher/fetchProducts";
-import LocalProductsList from "../components/LocalProductsList/LocalProductsList";
 
 
 
@@ -71,7 +70,7 @@ async function Posts ({searchParams}) {
         </div>
             
             <div className="dropdown-menu"><DropDown buttonText="Sort Products By:"content={sortOptions}></DropDown></div>
-            {/* <div className="posts-list">
+            <div className="posts-list">
                 {posts.map((post)=>{
                     return (
                         <Link key={post.id} href={`/posts/${post.id}`}>
@@ -101,8 +100,8 @@ async function Posts ({searchParams}) {
 
                     )
                 })}
-            </div> */}
-            <LocalProductsList initialProducts={posts} type={"posts"}/>
+            </div>
+           
             <Footer />
         </div>
     )
