@@ -17,7 +17,7 @@ export default async function PostPage (params) {
 
     
     
-    if(!post) return <NotFound page="posts"/>
+    if(!post.id) return <NotFound page="posts"/>
     return(
         <div className="post">
             <h1>{post.title}</h1>
