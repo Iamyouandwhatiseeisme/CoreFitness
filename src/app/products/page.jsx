@@ -1,4 +1,4 @@
-
+'use client'
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer"
 import "./index.css"
@@ -6,67 +6,65 @@ import Link from "next/link";
 import DropDown from "../components/DropDown/DropDown";
 import SearchBar from "../components/SearchBar/SearchBar";
 import fetchProducts from "../fetcher/fetchProducts";
+import AddButton from '../components/AddButton/AddButton'
 
-
-
-export default async function Products ({searchParams}) {
+export default async function Products({ searchParams }) {
     const debouncedSearch = searchParams.search || "";
     const sortOption = searchParams.option || ""
     const sortOrder = searchParams.order || ""
     const fetchItemType = "products"
 
-
+    const handleProductClick = () => {
+        alert('Product action triggered!');
+    };
     const sortOptions = [
-        {   label: 'Price: Low to High',
+        {
+            label: 'Price: Low to High',
             value: 'price-low-to-high',
             option: "price",
             order: "asc"
-            },
-        {   label: 'Price: High to Low', 
+        },
+        {
+            label: 'Price: High to Low',
             value: 'price-high-to-low',
             option: "price",
             order: "desc"
-            
-             },
-        {   label: 'Name: A-Z',  
+
+        },
+        {
+            label: 'Name: A-Z',
             value: 'name-ascending',
             option: "title",
             order: "asc"
-            },
-        {   label: 'Name: Z-A',  
+        },
+        {
+            label: 'Name: Z-A',
             value: 'name-descending',
             option: "title",
             order: "desc"
-            },
-      ];
-    
-    
-    var products = await  fetchProducts({fetchItemType, debouncedSearch, sortOption, sortOrder})
-    
-    
-
-      if (products.length === 0) {
+        },
+    ];
+    var products = await fetchProducts({ fetchItemType, debouncedSearch, sortOption, sortOrder })
+    if (products.length === 0) {
         return (
             <div className="loading-screen">
-                    <div className="app-bar">
-                     <Header />
+                <div className="app-bar">
+                    <Header />
                     <SearchBar searchItemType="Search Products" />
                 </div>
-                </div> 
-    ) 
-      }
+            </div>
+        )
+    }
     return (
-
-        
         <div className="products-page">
             <div className="app-bar">
                 <Header />
                 <SearchBar searchItemType="Search Posts" />
+                <AddButton item="Products" onClick={handleProductClick} />
             </div>
-            
-            <div className="dropdown-menu"><DropDown buttonText="Sort Products By:"content={sortOptions}></DropDown></div>
+            <div className="dropdown-menu"><DropDown buttonText="Sort Products By:" content={sortOptions}></DropDown></div>
             <div className="products-list">
-                {products.map((product)=>{
+                {products.map((product) => {
                     return (
                         <Link key={product.id} href={`/products/${product.id}`}>
                             <div className="product-card">
@@ -76,8 +74,6 @@ export default async function Products ({searchParams}) {
                                 <div className="product-info">Price: {product.price}$</div>
                             </div>
                         </Link>
-
-
                     )
                 })}
             </div>
