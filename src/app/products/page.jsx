@@ -1,4 +1,4 @@
-
+'use client'
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer"
 import "./index.css"
@@ -6,7 +6,9 @@ import Link from "next/link";
 import DropDown from "../components/DropDown/DropDown";
 import SearchBar from "../components/SearchBar/SearchBar";
 import fetchProducts from "../fetcher/fetchProducts";
+
 import AddProductButton from "../components/AddProductButton/AddProductButton";
+
 
 
 
@@ -16,7 +18,9 @@ export default async function Products({ searchParams }) {
     const sortOrder = searchParams.order || ""
     const fetchItemType = "products"
 
-
+    const handleProductClick = () => {
+        alert('Product action triggered!');
+    };
     const sortOptions = [
         {
             label: 'Price: Low to High',
@@ -45,6 +49,7 @@ export default async function Products({ searchParams }) {
         },
     ];
 
+
     var products = await fetchProducts({ fetchItemType, debouncedSearch, sortOption, sortOrder })
 
     if (products.length === 0) {
@@ -62,6 +67,7 @@ export default async function Products({ searchParams }) {
             <div className="app-bar">
                 <Header />
                 <SearchBar searchItemType="Search Posts" />
+
                 <AddProductButton />
             </div>
             <div className="dropdown-menu"><DropDown buttonText="Sort Products By:" content={sortOptions}></DropDown></div>
