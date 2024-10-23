@@ -1,6 +1,5 @@
 "use client"
 
-
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
 import "./index.css";
@@ -67,15 +66,10 @@ export default  function Products({ searchParams }) {
  
     }
   }
- 
- 
   useEffect(()=>{
- 
       async function fetch(){
         var productArray = await fetchProducts({fetchItemType, debouncedSearch, sortOption, sortOrder})
         setProducts(productArray)
- 
-       
     }
     fetch();
   },[fetchItemType,
@@ -83,25 +77,19 @@ export default  function Products({ searchParams }) {
     sortOption,
     sortOrder])
   var callBack = editProducts({products, setProducts});
- 
   function onEditingChange(editing) {
     setEditing(editing);
   }
- 
- 
- 
 
- 
- 
- 
- 
   if (products.length === 0) {
    
     return (
+
       <div className="loading-screen">
         <div className="app-bar">
           <Header />
           <SearchBar searchItemType="Search Products" />
+
         </div>
       </div>
     );
