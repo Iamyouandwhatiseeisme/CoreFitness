@@ -1,8 +1,7 @@
 'use client';
 import { useRouter } from "next/navigation";
-import { logout } from "../../(unauth)/login/page";
-
-
+import { logout } from '../../util/logout'
+import './logout.css'
 import React from 'react'
 
 export default function LoggoutButton() {
