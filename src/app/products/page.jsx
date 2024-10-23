@@ -7,6 +7,7 @@ import Link from "next/link";
 import DropDown from "../components/DropDown/DropDown";
 import SearchBar from "../components/SearchBar/SearchBar";
 import fetchProducts from "../fetcher/fetchProducts";
+
 import ProductActions from "../components/buttons/ProductActions";
 import { useEffect, useState } from "react";
 
@@ -86,12 +87,15 @@ export default function Products({ searchParams }) {
     setEditing(editing);
   }
 
+
   if (products.length === 0) {
     return (
+
       <div className="loading-screen">
         <div className="app-bar">
           <Header />
           <SearchBar searchItemType="Search Products" />
+
         </div>
       </div>
     );
