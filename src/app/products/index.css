@@ -23,7 +23,7 @@
     border:1px solid gray;
     border-radius: 10px;
     width:350px;
-    height:350px;
+    /* height:500px; */
     align-items: center;
     overflow: hidden;
     background-color: #b2d8db;
