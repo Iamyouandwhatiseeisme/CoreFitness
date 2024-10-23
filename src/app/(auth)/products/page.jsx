@@ -1,14 +1,14 @@
 "use client";
 
-import Header from "../components/header/Header";
-import Footer from "../components/footer/Footer";
+import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
 import "./index.css";
 import Link from "next/link";
-import DropDown from "../components/DropDown/DropDown";
-import SearchBar from "../components/SearchBar/SearchBar";
-import fetchProducts from "../fetcher/fetchProducts";
+import DropDown from "../../components/DropDown/DropDown";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import fetchProducts from "../../fetcher/fetchProducts";
 
-import ProductActions from "../components/buttons/ProductActions";
+import ProductActions from "../../components/buttons/ProductActions";
 import { useEffect, useState } from "react";
 
 export default function Products({ searchParams }) {
@@ -62,12 +62,12 @@ export default function Products({ searchParams }) {
     };
   }
 
-
   const deleteProduct = (productId) => {
-    setProducts((prevProducts) => prevProducts.filter((product) => product.id !== productId));
-    console.log(products)
+    setProducts((prevProducts) =>
+      prevProducts.filter((product) => product.id !== productId)
+    );
+    console.log(products);
   };
-
 
   useEffect(() => {
     async function fetch() {
@@ -87,15 +87,12 @@ export default function Products({ searchParams }) {
     setEditing(editing);
   }
 
-
   if (products.length === 0) {
     return (
-
       <div className="loading-screen">
         <div className="app-bar">
           <Header />
           <SearchBar searchItemType="Search Products" />
-
         </div>
       </div>
     );
@@ -114,6 +111,7 @@ export default function Products({ searchParams }) {
           content={sortOptions}
         ></DropDown>
       </div>
+
       <div className="products-list">
         {products.map((product) => {
           return (
@@ -141,7 +139,6 @@ export default function Products({ searchParams }) {
           );
         })}
       </div>
-
       <Footer />
     </div>
   );
