@@ -6,7 +6,11 @@ import Link from "next/link";
 import DropDown from "../components/DropDown/DropDown";
 import SearchBar from "../components/SearchBar/SearchBar";
 import fetchProducts from "../fetcher/fetchProducts";
-import AddButton from '../components/AddButton/AddButton'
+
+import AddProductButton from "../components/AddProductButton/AddProductButton";
+
+
+
 
 export default async function Products({ searchParams }) {
     const debouncedSearch = searchParams.search || "";
@@ -44,7 +48,10 @@ export default async function Products({ searchParams }) {
             order: "desc"
         },
     ];
+
+
     var products = await fetchProducts({ fetchItemType, debouncedSearch, sortOption, sortOrder })
+
     if (products.length === 0) {
         return (
             <div className="loading-screen">
@@ -60,7 +67,8 @@ export default async function Products({ searchParams }) {
             <div className="app-bar">
                 <Header />
                 <SearchBar searchItemType="Search Posts" />
-                <AddButton item="Products" onClick={handleProductClick} />
+
+                <AddProductButton />
             </div>
             <div className="dropdown-menu"><DropDown buttonText="Sort Products By:" content={sortOptions}></DropDown></div>
             <div className="products-list">

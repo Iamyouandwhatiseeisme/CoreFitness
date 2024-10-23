@@ -1,22 +1,52 @@
-import User from "../components/data/User"
+"use client"
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
+import {LoadingGear} from '../components/profile/loading-gear';
+import {UserProfile} from '../components/profile/user-profile';
+import "./index.css";
+import { useState, useEffect } from "react";
 
-import "./index.css"
+export default  function Profile (){
+    const [ user, setUser ] = useState(null)
+    const retrieveAccessToken = () =>{
+        const cookieStore = document.cookie;
+        const retrievedCookie = cookieStore.match(/refreshToken=([^;]*)/)
+        return retrievedCookie[1];
+    }
 
-
-export default function Profile (){
+    useEffect  (()=>{
+        const token = retrieveAccessToken();
+        async function fetchUser (){
+            try {
+                const response = await fetch ("https://dummyjson.com/user/me", {
+                    method: "GET",
+                    headers: {
+                      "Content-Type": "application/json",
+                      "Authorization": `Bearer ${token}`,
+                    },
+                  });
+                if(response.ok){
+                    const data = await response.json();
+                    setUser(data);
+                }
+            } catch (error) {
+                console.error('Something went wrong: ', error)  
+            }
+        }
+        fetchUser();
+    }, [] )
+    
     return (
-        <>
-        <Header />
-            <div className="profile-card">
-                <h1>Name: {User.name}</h1>
-                <h1>Last Name: {User.lastName}</h1>
-                <p>Email: {User.email}</p>
-                <img src={User.Image.src} style={{width:"250px"}} alt="User-image"></img>
-                
+        <div className="page-wrapper">
+            <Header />
+            <div className="default-layout">
+                {user ? <>
+                    <UserProfile user={user}/>
+                    <Footer />    
+                </>: 
+                    <LoadingGear />
+                }
             </div>
-        <Footer />
-        </>
+        </div>
     )
 }

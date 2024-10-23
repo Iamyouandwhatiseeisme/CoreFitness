@@ -9,12 +9,10 @@ export default async function fetchProducts ({fetchItemType, debouncedSearch, so
         if(sortOption && sortOrder){
             url = `https://dummyjson.com/${fetchItemType}?sortBy=${sortOption}&order=${sortOrder}`
         }
-        console.log(url);
         const response = await fetch(url);
         const data = await response.json();
         return fetchItemType === "posts" ? (data.posts || []) : (data.products || [])
     } catch (error) {
-        console.log("Error fetching posts: ", error)
         
         return <NotFound page={fetchItemType}></NotFound>
         
