@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 export default function LoginPage() {
   const router = useRouter();
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -26,6 +27,8 @@ export default function LoginPage() {
       if (response.ok) {
         const body = await response.json();
         document.cookie = `refreshToken=${body.refreshToken}; path=/`;
+
+
         document.cookie = `accessToken=${body.accessToken}; path=/`;
         router.replace("/");
       } else {
@@ -35,6 +38,8 @@ export default function LoginPage() {
       console.error("Unsuccessfull login", error);
     }
   };
+
+
 
   return (
     <div className="login-page">
@@ -65,4 +70,22 @@ export default function LoginPage() {
       </form>
     </div>
   );
+}
+
+export async function logout() {
+  try {
+
+    document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; 
+    document.cookie = 'refreshToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+
+
+
+    const result = { success: true, message: "Logout successful!" };
+
+    console.log("Logout result:", result);
+    return result;
+  } catch (error) {
+    console.error("Error during logout:", error);
+    return { success: false, message: "Something went wrong during logout." };
+  }
 }
