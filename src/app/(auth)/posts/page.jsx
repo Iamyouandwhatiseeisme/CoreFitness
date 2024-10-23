@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import Header from "../components/header/Header";
-import Footer from "../components/footer/Footer";
+import Header from "../../components/header/Header";
+import Footer from "../../components/footer/Footer";
 import Link from "next/link";
 import "./index.css";
-import SearchBar from "../components/SearchBar/SearchBar";
-import DropDown from "../components/DropDown/DropDown";
-import fetchProducts from "../fetcher/fetchProducts";
+import SearchBar from "../../components/SearchBar/SearchBar";
+import DropDown from "../../components/DropDown/DropDown";
+import fetchProducts from "../../fetcher/fetchProducts";
 import { useEffect, useState } from "react";
-import ProductActions from "../components/buttons/ProductActions";
+import ProductActions from "../../components/buttons/ProductActions";
 
 export default function Posts({ searchParams }) {
   const debouncedSearch = searchParams.search || "";
@@ -45,12 +45,6 @@ export default function Posts({ searchParams }) {
     },
   ];
 
-
-
-
-
-
-
   function editProducts({ posts, setPosts }) {
     return function changeProductproducts(post) {
       posts.forEach((item) => {
@@ -61,17 +55,14 @@ export default function Posts({ searchParams }) {
 
           console.log(newArray, "benew");
           setPosts(newArray);
-          
         }
       });
     };
   }
 
-
   const deleteProduct = (postId) => {
     setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
   };
-
 
   useEffect(() => {
     async function fetch() {
@@ -90,9 +81,6 @@ export default function Posts({ searchParams }) {
   function onEditingChange(editing) {
     setEditing(editing);
   }
-
-
-
 
   if (posts.length === 0) {
     return (
@@ -124,7 +112,7 @@ export default function Posts({ searchParams }) {
         {posts.map((post) => {
           return (
             <div key={post.id} className="posts-card">
-              <Link  href={`/posts/${post.id}`}>
+              <Link href={`/posts/${post.id}`}>
                 <div className="posts-info">
                   <strong>{post.title}</strong>
                 </div>
@@ -144,7 +132,14 @@ export default function Posts({ searchParams }) {
               <div className="posts-info">
                 Tags:{" "}
                 {post.tags.map((tag, index) => {
-                  return <span key={`${post.id}-${tag}-${index}`} className="post-tag">#{tag}</span>;
+                  return (
+                    <span
+                      key={`${post.id}-${tag}-${index}`}
+                      className="post-tag"
+                    >
+                      #{tag}
+                    </span>
+                  );
                 })}
               </div>
               <ProductActions
@@ -163,5 +158,3 @@ export default function Posts({ searchParams }) {
     </div>
   );
 }
-
-
