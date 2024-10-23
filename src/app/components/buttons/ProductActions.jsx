@@ -2,12 +2,12 @@
  
 import React, { useEffect, useState } from 'react';
  
-const ProductActions = ({ product, setProductCallBack, onEditingChange }) => {
+const ProductActions = ({ product, type, setProductCallBack, deleteProductCallback, onEditingChange }) => {
   const [editing, setEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(product.title);
  
   const handleEdit = () => {
-    fetch(`https://dummyjson.com/products/${product.id}`, {
+    fetch(`https://dummyjson.com/${type}/${product.id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ title: newTitle }),
@@ -32,12 +32,12 @@ const ProductActions = ({ product, setProductCallBack, onEditingChange }) => {
  
   
   const handleDelete = () => {
-    fetch(`https://dummyjson.com/products/${product.id}`, {
+    fetch(`https://dummyjson.com/${type}/${product.id}`, {
       method: 'DELETE',
     })
       .then(() => {
         console.log('Deleted product with ID:', product.id);
-       
+        deleteProductCallback(product.id); 
       })
       .catch((error) => {
         console.error('Error deleting product:', error);
