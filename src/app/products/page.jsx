@@ -8,6 +8,7 @@ import Link from "next/link";
 import DropDown from "../components/DropDown/DropDown";
 import SearchBar from "../components/SearchBar/SearchBar";
 import fetchProducts from "../fetcher/fetchProducts";
+
 import ProductActions from "../components/buttons/ProductActions";
 import { useEffect, useState } from "react";
  

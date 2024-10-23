@@ -5,19 +5,17 @@ import { ReturnBackButton } from "../../notfound/NotFound";
 import fetchSingleProduct from "../../fetcher/fetchSingleProduct";
 
 export default async function ProductPage (params) {
+    console.log('page loading')
    
     const { id } = params.params;
     const fetchItemType = "products"
     var product;
 
     product = await fetchSingleProduct({fetchItemType, id})
-   
-    
 
 
    
-
-    if(!product) return <NotFound page="products"/>
+    if(!product.id) return <NotFound page="products"/>
     return(
         <div className="product">
             <h1>{product.title}</h1>
@@ -30,10 +28,7 @@ export default async function ProductPage (params) {
             </p>
             <div>
             <span>Price: {product.price}$</span> </div>
-            
             <ReturnBackButton destination={"products"} />
-
-            
         </div>
     )
 
