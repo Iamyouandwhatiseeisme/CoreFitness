@@ -4,8 +4,6 @@ import { ReturnBackButton } from "../../notfound/NotFound";
 import fetchSingleProduct from "../../../fetcher/fetchSingleProduct";
 
 export default async function ProductPage(params) {
-  console.log("page loading");
-
   const { id } = params.params;
   const fetchItemType = "products";
   var product;

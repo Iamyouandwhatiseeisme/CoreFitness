@@ -10,12 +10,10 @@ import { useTokens } from "../../hooks/useTokens";
 export default function Profile() {
   const [user, setUser] = useState(null);
   const { accessToken, refreshtoken } = useTokens();
-  console.log(accessToken, "token");
 
   useEffect(() => {
     const token = accessToken;
     async function fetchUser() {
-      console.log(token, "token");
       try {
         const response = await fetch("https://dummyjson.com/user/me", {
           method: "GET",
