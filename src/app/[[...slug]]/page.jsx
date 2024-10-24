@@ -33,7 +33,6 @@ export default function Page(params) {
   var currentPath = params.params.slug;
 
   currentPath = !currentPath ? "" : currentPath;
-  console.log("new path", currentPath);
 
   checkAuth();
 
