@@ -102,7 +102,7 @@ export default function Products({ searchParams }) {
     <div className="products-page">
       <div className="app-bar">
         <Header />
-        <SearchBar searchItemType="Search Posts" />
+        <SearchBar searchItemType="Search Products" />
       </div>
 
       <div className="dropdown-menu">
