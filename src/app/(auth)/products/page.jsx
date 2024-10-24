@@ -150,7 +150,7 @@ export default function Products({ searchParams }) {
           );
         })}
       </div>
-        {/* <AddProductButton addProduct={addProduct}/> */}
+        
         <AddButton item="Products" addProduct={addProduct}/> 
       <Footer />
     </div>
