@@ -7,9 +7,10 @@ import Link from "next/link";
 import DropDown from "../../components/DropDown/DropDown";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import fetchProducts from "../../fetcher/fetchProducts";
-
 import ProductActions from "../../components/buttons/ProductActions";
 import { useEffect, useState } from "react";
+import AddButton from "../../components/AddButton/AddButton";
+
 
 export default function Products({ searchParams }) {
   const debouncedSearch = searchParams.search || "";
@@ -19,6 +20,7 @@ export default function Products({ searchParams }) {
   const [products, setProducts] = useState([]);
   const [editing, setEditing] = useState();
 
+  
   const sortOptions = [
     {
       label: "Price: Low to High",
@@ -62,12 +64,19 @@ export default function Products({ searchParams }) {
     };
   }
 
+
   const deleteProduct = (productId) => {
-    setProducts((prevProducts) =>
-      prevProducts.filter((product) => product.id !== productId)
-    );
-    console.log(products);
+    setProducts((prevProducts) => prevProducts.filter((product) => product.id !== productId));
+    console.log(products)
   };
+
+
+
+  const addProduct = (item) =>{
+    const newId = Date.now()
+    const itemWithId = {...item, id: newId}
+    setProducts((prevProducts) => [...prevProducts, itemWithId])
+  }
 
   useEffect(() => {
     async function fetch() {
@@ -87,12 +96,15 @@ export default function Products({ searchParams }) {
     setEditing(editing);
   }
 
+
   if (products.length === 0) {
     return (
+
       <div className="loading-screen">
         <div className="app-bar">
           <Header />
           <SearchBar searchItemType="Search Products" />
+
         </div>
       </div>
     );
@@ -111,7 +123,6 @@ export default function Products({ searchParams }) {
           content={sortOptions}
         ></DropDown>
       </div>
-
       <div className="products-list">
         {products.map((product) => {
           return (
@@ -139,7 +150,10 @@ export default function Products({ searchParams }) {
           );
         })}
       </div>
+        
+        <AddButton item="Products" addProduct={addProduct}/> 
       <Footer />
     </div>
   );
 }
+

@@ -3,7 +3,7 @@ import React from 'react';
 import { useState } from 'react'
 import './Addbutton.css'
 
-const AddButton = ({ item }) => {
+const AddButton = ({ item, addProduct }) => {
   const [isProductModalOpen, setProductModalOpen] = useState(false)
   const [productName, setProductName] = useState('')
   const [productDescription, setProductDescription] = useState('');
@@ -29,32 +29,35 @@ const AddButton = ({ item }) => {
 
   const handleProductSubmit = (e) => {
     e.preventDefault()
-    console.log('Product Added: ', {
-      name: productName,
-      description: productDescription,
-      price: `${productPrice}$`,
-      image: productImage ? productImage.name : 'No Image Uploaded',
-    })
+        const newProduct = {
+            title: productName, 
+            description: productDescription, 
+            price: productPrice,
+            thumbnail: productImage 
+        };
+        addProduct(newProduct)
 
-    setProductName('')
-    setProductDescription('')
-    setProductPrice('')
-    setProductImage(null)
-    setProductModalOpen(false)
-  }
+        setProductName('')
+        setProductDescription('')
+        setProductPrice("")
+        setProductImage("")
+
+        setProductModalOpen(false)
+      }
 
   const handlePostSubmit = (e) => {
     e.preventDefault()
-    console.log('Post Added: ', {
-      title: postTitle,
-      description: postDescription,
-      tags: postTags,
-    })
+        const newPost = {
+        title: postTitle, 
+        body: postDescription, 
+        tags: postTags,
+    };
+    addProduct(newPost)
 
-    setPostTitle('')
-    setPostDescription('')
+    setPostTitle(" ")
+    setPostDescription(" ")
     setPostTags([]);
-    setTagInput('');
+    setTagInput(" ");
     setPostModalOpen(false)
   }
 
@@ -66,11 +69,12 @@ const AddButton = ({ item }) => {
   const handlePostDescriptionChange = (e) => setPostDescription(e.target.value);
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files[0];
     if (file) {
-      setProductImage(file)
+        const imageUrl = URL.createObjectURL(file);
+        setProductImage(imageUrl); 
     }
-  }
+};
 
   const handleTagInputChange = (e) => {
     setTagInput(e.target.value);
