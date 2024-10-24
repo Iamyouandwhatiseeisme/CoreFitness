@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import './AddProductButton.css'
 
-export default function AddProductButton() {
+export default function AddProductButton({addProduct }) {
     const [isModalOpen, setModalOpen] = useState(false)
     const [productName, setProductName] = useState('')
     const [productDescription, setProductDescription] = useState('');
@@ -15,17 +15,18 @@ export default function AddProductButton() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log('product Added: ', {
-            name: productName,
-            description: productDescription,
-            price: productPrice +"$",
-            image: productImage ? productImage.name : 'No Image Uploaded',
-        })
+        const newProduct = {
+            title: productName, 
+            description: productDescription, 
+            price: productPrice,
+            thumbnail: productImage 
+        };
+        addProduct(newProduct)
 
-        setProductName('')
-        setProductDescription('')
-        setProductPrice('')
-        setProductImage(null)
+        setProductName(productName)
+        setProductDescription(productDescription)
+        setProductPrice(productPrice)
+        setProductImage(productImage)
 
         setModalOpen(false)
     }
@@ -35,11 +36,12 @@ export default function AddProductButton() {
     const handleProductPriceChange = (e) => setProductPrice(e.target.value);
 
     const handleImageChange = (e) => {
-        const file = e.target.files[0]
+        const file = e.target.files[0];
         if (file) {
-            setProductImage(file)
+            const imageUrl = URL.createObjectURL(file);
+            setProductImage(imageUrl); 
         }
-    }
+    };
 
     return (
         <div className="add-product-button-container">

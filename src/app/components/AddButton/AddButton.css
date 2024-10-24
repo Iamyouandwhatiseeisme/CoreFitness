@@ -90,3 +90,8 @@
 .close-modal:hover {
     background-color: #e53935;
 }
+
+
+.tags-container{
+    border: red solid 2px;
+}

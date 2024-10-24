@@ -9,6 +9,7 @@ import DropDown from "../../components/DropDown/DropDown";
 import fetchProducts from "../../fetcher/fetchProducts";
 import { useEffect, useState } from "react";
 import ProductActions from "../../components/buttons/ProductActions";
+import AddButton from "../../components/AddButton/AddButton";
 
 export default function Posts({ searchParams }) {
   const debouncedSearch = searchParams.search || "";
@@ -62,7 +63,18 @@ export default function Posts({ searchParams }) {
 
   const deleteProduct = (postId) => {
     setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+    
   };
+  console.log(posts)
+
+
+  const addPost = (item) =>{
+    const newId = Date.now()
+    const itemWithId = {...item, id: newId}
+    setPosts((prevPosts) => [...prevPosts, itemWithId])
+    
+  }
+
 
   useEffect(() => {
     async function fetch() {
@@ -119,7 +131,7 @@ export default function Posts({ searchParams }) {
               </Link>
               <div className="posts-info">{post.body}</div>
 
-              <div>
+              {/* <div>
                 <span className="posts-info">Views: {post.views}</span>
                 <span className="posts-info">
                   Likes: {post.reactions.likes}
@@ -127,7 +139,7 @@ export default function Posts({ searchParams }) {
                 <span className="posts-info">
                   Dislikes: {post.reactions.dislikes}
                 </span>
-              </div>
+              </div> */}
               <div className="posts-info">Post Id: {post.id}</div>
               <div className="posts-info">
                 Tags:{" "}
@@ -153,6 +165,7 @@ export default function Posts({ searchParams }) {
           );
         })}
       </div>
+      <AddButton item="Posts" addProduct ={addPost}/>
 
       <Footer />
     </div>
