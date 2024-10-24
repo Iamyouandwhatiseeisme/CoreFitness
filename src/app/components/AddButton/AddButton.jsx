@@ -1,86 +1,94 @@
-'use client'
-import React from 'react';
-import { useState } from 'react'
-import './Addbutton.css'
+"use client";
+import React from "react";
+import { useState } from "react";
+import "./AddButton.css";
 
-const AddButton = ({ item }) => {
-  const [isProductModalOpen, setProductModalOpen] = useState(false)
-  const [productName, setProductName] = useState('')
-  const [productDescription, setProductDescription] = useState('');
-  const [productPrice, setProductPrice] = useState('');
+const AddButton = ({ item, addProduct }) => {
+  const [isProductModalOpen, setProductModalOpen] = useState(false);
+  const [productName, setProductName] = useState("");
+  const [productDescription, setProductDescription] = useState("");
+  const [productPrice, setProductPrice] = useState("");
   const [productImage, setProductImage] = useState(null);
 
-  const [isPostModalOpen, setPostModalOpen] = useState(false)
-  const [postTitle, setPostTitle] = useState('')
-  const [postDescription, setPostDescription] = useState('');
+  const [isPostModalOpen, setPostModalOpen] = useState(false);
+  const [postTitle, setPostTitle] = useState("");
+  const [postDescription, setPostDescription] = useState("");
   const [postTags, setPostTags] = useState([]);
-  const [tagInput, setTagInput] = useState('');
+  const [tagInput, setTagInput] = useState("");
 
   const handleClick = () => {
-    console.log(`I am in ${item} page`);
-    if (item === 'Posts') {
-      setPostModalOpen(true)
-    } else if (item === 'Products') {
-      setProductModalOpen(true)
+    if (item === "Posts") {
+      setPostModalOpen(true);
+    } else if (item === "Products") {
+      setProductModalOpen(true);
     } else {
-      console.log('Error: Item not found');
+      console.error("Error: Item not found");
     }
   };
 
   const handleProductSubmit = (e) => {
-    e.preventDefault()
-    console.log('Product Added: ', {
-      name: productName,
+    e.preventDefault();
+    const newProduct = {
+      title: productName,
       description: productDescription,
-      price: `${productPrice}$`,
-      image: productImage ? productImage.name : 'No Image Uploaded',
-    })
+      price: productPrice,
+      thumbnail: productImage,
+    };
+    addProduct(newProduct);
 
-    setProductName('')
-    setProductDescription('')
-    setProductPrice('')
-    setProductImage(null)
-    setProductModalOpen(false)
-  }
+    setProductName("");
+    setProductDescription("");
+    setProductPrice("");
+    setProductImage("");
+
+    setProductModalOpen(false);
+  };
 
   const handlePostSubmit = (e) => {
-    e.preventDefault()
-    console.log('Post Added: ', {
+    e.preventDefault();
+    const newPost = {
       title: postTitle,
-      description: postDescription,
+      body: postDescription,
       tags: postTags,
-    })
+      reactions: {
+        likes: 0,
+        dislikes: 0,
+      },
+    };
+    addProduct(newPost);
 
-    setPostTitle('')
-    setPostDescription('')
+    setPostTitle(" ");
+    setPostDescription(" ");
     setPostTags([]);
-    setTagInput('');
-    setPostModalOpen(false)
-  }
+    setTagInput(" ");
+    setPostModalOpen(false);
+  };
 
-  const handleProductNameChange = (e) => setProductName(e.target.value)
-  const handleProductDescriptionChange = (e) => setProductDescription(e.target.value);
+  const handleProductNameChange = (e) => setProductName(e.target.value);
+  const handleProductDescriptionChange = (e) =>
+    setProductDescription(e.target.value);
   const handleProductPriceChange = (e) => setProductPrice(e.target.value);
 
-  const handlePostTitleChange = (e) => setPostTitle(e.target.value)
+  const handlePostTitleChange = (e) => setPostTitle(e.target.value);
   const handlePostDescriptionChange = (e) => setPostDescription(e.target.value);
 
   const handleImageChange = (e) => {
-    const file = e.target.files[0]
+    const file = e.target.files[0];
     if (file) {
-      setProductImage(file)
+      const imageUrl = URL.createObjectURL(file);
+      setProductImage(imageUrl);
     }
-  }
+  };
 
   const handleTagInputChange = (e) => {
     setTagInput(e.target.value);
   };
 
   const handleAddTag = (e) => {
-    if (e.key === 'Enter' && tagInput.trim() !== '') {
+    if (e.key === "Enter" && tagInput.trim() !== "") {
       e.preventDefault();
       setPostTags([...postTags, tagInput.trim()]);
-      setTagInput('');
+      setTagInput("");
     }
   };
 
@@ -90,16 +98,18 @@ const AddButton = ({ item }) => {
 
   return (
     <div className="add-product-button-container">
-      <button className="add-product-btn" onClick={handleClick}>Add {item}</button>
+      <button className="add-product-btn" onClick={handleClick}>
+        +
+      </button>
       {isProductModalOpen && (
-        <div className='modal-overlay'>
-          <div className='modal-content'>
+        <div className="modal-overlay">
+          <div className="modal-content">
             <h2>Add New Product</h2>
-            <form onSubmit={handleProductSubmit} className='form'>
+            <form onSubmit={handleProductSubmit} className="form">
               <label htmlFor="product-name">Product Name:</label>
               <input
                 type="text"
-                id='product-name'
+                id="product-name"
                 value={productName}
                 onChange={handleProductNameChange}
                 required
@@ -123,26 +133,31 @@ const AddButton = ({ item }) => {
               <input
                 type="file"
                 id="product-image"
-                accept='image/*'
+                accept="image/*"
                 onChange={handleImageChange}
               />
-              <button type='submit'>Add Product</button>
+              <button className="submit-btn" type="submit">
+                Add Product
+              </button>
             </form>
-            <button className='close-modal' onClick={() => setProductModalOpen(false)}>
+            <button
+              className="close-modal"
+              onClick={() => setProductModalOpen(false)}
+            >
               Close
             </button>
           </div>
         </div>
       )}
       {isPostModalOpen && (
-        <div className='modal-overlay'>
-          <div className='modal-content'>
+        <div className="modal-overlay">
+          <div className="modal-content">
             <h2>Add New Post</h2>
-            <form onSubmit={handlePostSubmit} className='form'>
+            <form onSubmit={handlePostSubmit} className="form">
               <label htmlFor="post-title">Post Title:</label>
               <input
                 type="text"
-                id='post-title'
+                id="post-title"
                 value={postTitle}
                 onChange={handlePostTitleChange}
                 required
@@ -167,15 +182,24 @@ const AddButton = ({ item }) => {
                 {postTags.map((tag, index) => (
                   <span key={index} className="tag">
                     {tag}
-                    <button type="button" className="remove-tag-btn" onClick={() => removeTag(index)}>
-                      &times;
+                    <button
+                      className="tag-remove-btn"
+                      type="button"
+                      onClick={() => removeTag(index)}
+                    >
+                      X
                     </button>
                   </span>
                 ))}
               </div>
-              <button type='submit'>Add Post</button>
+              <button className="submit-button" type="submit">
+                Add Post
+              </button>
             </form>
-            <button className='close-modal' onClick={() => setPostModalOpen(false)}>
+            <button
+              className="close-modal"
+              onClick={() => setPostModalOpen(false)}
+            >
               Close
             </button>
           </div>

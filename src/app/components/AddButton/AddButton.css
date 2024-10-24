@@ -5,20 +5,20 @@
 }
 
 .add-product-btn {
-    padding: 12px 24px;
+    padding: 20px 25px;
     font-size: 16px;
     font-weight: 600;
-    background-color: #4CAF50;
+    background-color: #9CD3D8;
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 50px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: all 0.3s ease-in-out;
 }
 
 .add-product-btn:hover {
-    background-color: #45a049;
+    background-color: #79cbd3;
     transform: scale(1.05);
 }
 
@@ -64,17 +64,18 @@
     border-radius: 5px;
 }
 
-.form button {
+.submit-button {
     padding: 10px;
-    background-color: #4CAF50;
+    background-color: #9CD3D8;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.form button:hover {
-    background-color: #45a049;
+.submit-button:hover {
+   background-color: #79cbd3;
+
 }
 
 .close-modal {
@@ -90,3 +91,36 @@
 .close-modal:hover {
     background-color: #e53935;
 }
+
+
+.tag {
+    display: inline-flex;           
+    align-items: center;            
+    background-color: #f0f0f0;      
+    padding: 5px 10px;             
+    border-radius: 20px;           
+    margin-right: 10px;             
+    font-family: Arial, sans-serif; 
+    font-size: 14px;                
+}
+
+.tag-remove-btn {
+    all: unset;                    
+    display: inline-flex;            
+    align-items: center;            
+    justify-content: center;
+    width: 18px;                   
+    height: 18px;
+    margin-left: 8px;              
+    border: 1px solid black;        
+    border-radius: 50%;             
+    background-color: #ff6961;     
+    color: white;                   
+    cursor: pointer;                
+    font-size: 12px;                
+}
+
+.tag-remove-btn:hover {
+    background-color: #ff4c4c;     
+}
+

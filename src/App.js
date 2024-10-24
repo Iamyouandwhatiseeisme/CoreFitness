@@ -1,10 +1,7 @@
-import './App.css';
-import Welcome from "./app/welcome/page"
-function App({children, path}) {
-  console.log('app running', path)
-  return (
-    <Welcome />
-  );
+import "./App.css";
+import Welcome from "./app/(auth)/welcome/page";
+function App() {
+  return <Welcome />;
 }
 
 export default App;

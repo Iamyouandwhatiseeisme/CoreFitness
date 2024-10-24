@@ -1,5 +1,6 @@
 import "./Header.css"; 
 import Link from 'next/link'
+import LoggoutButton from "../logoutButton/LoggoutButton";
 
 
 const Header = () => {
@@ -13,6 +14,7 @@ const Header = () => {
                     <Link href="/blog"><li>Blog</li></Link>
                     <Link href="/products"><li>Products</li></Link>
                     <Link href="/posts"><li>Posts</li></Link>
+                    <LoggoutButton />
                 </ul>
 
             </nav>
