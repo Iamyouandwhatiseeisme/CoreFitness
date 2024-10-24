@@ -1,7 +1,7 @@
 'use client'
 import React from 'react';
 import { useState } from 'react'
-import './Addbutton.css'
+import './AddButton.css'
 
 const AddButton = ({ item, addProduct }) => {
   const [isProductModalOpen, setProductModalOpen] = useState(false)
@@ -51,7 +51,12 @@ const AddButton = ({ item, addProduct }) => {
         title: postTitle, 
         body: postDescription, 
         tags: postTags,
+        reactions:{
+          likes: 0,
+          dislikes:0,
+        }
     };
+    console.log(postTags)
     addProduct(newPost)
 
     setPostTitle(" ")
@@ -64,7 +69,7 @@ const AddButton = ({ item, addProduct }) => {
   const handleProductNameChange = (e) => setProductName(e.target.value)
   const handleProductDescriptionChange = (e) => setProductDescription(e.target.value);
   const handleProductPriceChange = (e) => setProductPrice(e.target.value);
-
+ 
   const handlePostTitleChange = (e) => setPostTitle(e.target.value)
   const handlePostDescriptionChange = (e) => setPostDescription(e.target.value);
 
@@ -94,7 +99,7 @@ const AddButton = ({ item, addProduct }) => {
 
   return (
     <div className="add-product-button-container">
-      <button className="add-product-btn" onClick={handleClick}>Add {item}</button>
+      <button className="add-product-btn" onClick={handleClick}>+</button>
       {isProductModalOpen && (
         <div className='modal-overlay'>
           <div className='modal-content'>
@@ -130,7 +135,7 @@ const AddButton = ({ item, addProduct }) => {
                 accept='image/*'
                 onChange={handleImageChange}
               />
-              <button type='submit'>Add Product</button>
+              <button className='submit-btn' type='submit'>Add Product</button>
             </form>
             <button className='close-modal' onClick={() => setProductModalOpen(false)}>
               Close
@@ -171,13 +176,13 @@ const AddButton = ({ item, addProduct }) => {
                 {postTags.map((tag, index) => (
                   <span key={index} className="tag">
                     {tag}
-                    <button type="button" className="remove-tag-btn" onClick={() => removeTag(index)}>
-                      &times;
+                    <button className='tag-remove-btn' type="button"  onClick={() => removeTag(index)}>
+                      X
                     </button>
                   </span>
                 ))}
               </div>
-              <button type='submit'>Add Post</button>
+              <button className='submit-button' type='submit'>Add Post</button>
             </form>
             <button className='close-modal' onClick={() => setPostModalOpen(false)}>
               Close

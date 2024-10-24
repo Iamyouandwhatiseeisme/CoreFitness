@@ -54,7 +54,6 @@ export default function Posts({ searchParams }) {
           const newArray = posts;
           newArray[index] = post;
 
-          console.log(newArray, "benew");
           setPosts(newArray);
         }
       });
@@ -65,7 +64,7 @@ export default function Posts({ searchParams }) {
     setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
     
   };
-  console.log(posts)
+ 
 
 
   const addPost = (item) =>{
@@ -131,7 +130,7 @@ export default function Posts({ searchParams }) {
               </Link>
               <div className="posts-info">{post.body}</div>
 
-              {/* <div>
+              <div>
                 <span className="posts-info">Views: {post.views}</span>
                 <span className="posts-info">
                   Likes: {post.reactions.likes}
@@ -139,7 +138,7 @@ export default function Posts({ searchParams }) {
                 <span className="posts-info">
                   Dislikes: {post.reactions.dislikes}
                 </span>
-              </div> */}
+              </div>
               <div className="posts-info">Post Id: {post.id}</div>
               <div className="posts-info">
                 Tags:{" "}
