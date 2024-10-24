@@ -22,7 +22,8 @@ export default function SearchBar({ searchItemType }) {
         onChange={(e) => {
           setSearchValue(e.target.value);
           if (e.target.value === "") {
-            router.push("/posts");
+            if (searchItemType === "Search Posts") router.push("/posts");
+            if (searchItemType === "Search Products") router.push("/products");
           }
         }}
         placeholder={searchItemType}

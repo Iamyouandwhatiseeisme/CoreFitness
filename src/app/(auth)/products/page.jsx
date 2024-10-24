@@ -96,6 +96,7 @@ export default function Products({ searchParams }) {
           <Header />
           <SearchBar searchItemType="Search Products" />
         </div>
+        <h2>Could not find anything...</h2>
       </div>
     );
   }

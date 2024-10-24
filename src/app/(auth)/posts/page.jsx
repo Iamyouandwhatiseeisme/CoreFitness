@@ -62,18 +62,13 @@ export default function Posts({ searchParams }) {
 
   const deleteProduct = (postId) => {
     setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
-    
   };
- 
 
-
-  const addPost = (item) =>{
-    const newId = Date.now()
-    const itemWithId = {...item, id: newId}
-    setPosts((prevPosts) => [...prevPosts, itemWithId])
-    
-  }
-
+  const addPost = (item) => {
+    const newId = Date.now();
+    const itemWithId = { ...item, id: newId };
+    setPosts((prevPosts) => [...prevPosts, itemWithId]);
+  };
 
   useEffect(() => {
     async function fetch() {
@@ -100,7 +95,7 @@ export default function Posts({ searchParams }) {
           <Header />
           <SearchBar searchItemType="Search Posts" />
         </div>
-        <h2>Search query empty...</h2>
+        <h2>Couldn not find anything...</h2>
 
         <Footer />
       </div>
@@ -164,7 +159,7 @@ export default function Posts({ searchParams }) {
           );
         })}
       </div>
-      <AddButton item="Posts" addProduct ={addPost}/>
+      <AddButton item="Posts" addProduct={addPost} />
 
       <Footer />
     </div>
