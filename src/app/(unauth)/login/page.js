@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 export default function LoginPage() {
   const router = useRouter();
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -28,18 +27,16 @@ export default function LoginPage() {
         const body = await response.json();
         document.cookie = `refreshToken=${body.refreshToken}; path=/`;
 
-
         document.cookie = `accessToken=${body.accessToken}; path=/`;
         router.replace("/");
       } else {
+        alert("Invalid login credentials");
         console.error("Login failed");
       }
     } catch (error) {
       console.error("Unsuccessfull login", error);
     }
   };
-
-
 
   return (
     <div className="login-page">
@@ -71,4 +68,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
