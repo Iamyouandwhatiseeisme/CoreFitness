@@ -31,8 +31,6 @@ export default function RootLayout({ children, params }) {
         />
 
         {/* <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> */}
-
-        <title>React App</title>
       </head>
       <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
