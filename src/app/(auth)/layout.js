@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import "../../app/styles/global.css";
 import { redirect } from "next/navigation";
 // export const metadata = {
@@ -7,13 +8,19 @@ import { redirect } from "next/navigation";
 // };
 
 export default function RootLayout({ children, params }) {
-  const accessToken = localStorage.getItem("accessToken") || null;
-  const refreshToken = localStorage.getItem("refreshToken") || null;
-  const isAuthenicated = !(accessToken === null || refreshToken === null);
-  console.log(isAuthenicated, accessToken, refreshToken);
-  if (!isAuthenicated) {
-    redirect("/login");
-  }
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    const refreshToken = localStorage.getItem("refreshToken");
+    const authenticated = !(accessToken === null || refreshToken === null);
+
+    if (!authenticated) {
+      redirect("/login");
+    } else {
+      setIsAuthenticated(authenticated);
+    }
+  }, [isAuthenticated]);
 
   return (
     <html lang="en">
@@ -27,12 +34,12 @@ export default function RootLayout({ children, params }) {
           name="description"
           content="Web site created using create-react-app"
         />
-
-        {/* <link rel="manifest" href="%PUBLIC_URL%/manifest.json" /> */}
       </head>
       <body>
         <noscript>You need to enable JavaScript to run this app.</noscript>
-        <div id="root">{children}</div>
+        <div id="root" className="background">
+          {children}
+        </div>
       </body>
     </html>
   );
