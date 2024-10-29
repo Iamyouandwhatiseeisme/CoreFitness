@@ -2,10 +2,9 @@
 
 import React from "react";
 import dynamic from "next/dynamic";
-// import App from '../../App'
 
 const App = dynamic(() => import(".."), { ssr: false });
 
-export function ClientOnly({ path }) {
-  return <App path={path}></App>;
+export function ClientOnly({}) {
+  return <App></App>;
 }
