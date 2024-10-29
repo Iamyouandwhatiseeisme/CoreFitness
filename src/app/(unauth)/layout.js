@@ -1,18 +1,18 @@
-import { cookies } from "next/headers";
+"use client";
 import "../../app/styles/global.css";
 import { redirect } from "next/navigation";
-export const metadata = {
-  title: "Medical Mushroom Market app",
-  description: "Web site created with Next.js.",
-};
+// export const metadata = {
+//   title: "Medical Mushroom Market app",
+//   description: "Web site created with Next.js.",
+// };
 export default function RootLayout({ children }) {
-  const cookieStore = cookies();
-  const accessToken = cookieStore.get("accessToken")?.value || null;
-  const refreshToken = cookieStore.get("refreshToken")?.value || null;
+  const accessToken = localStorage.getItem("accessToken")?.value || null;
+  const refreshToken = localStorage.getItem("refreshToken")?.value || null;
   const isAuthenicated = !(accessToken === null || refreshToken === null);
   if (isAuthenicated) {
     redirect("/");
   }
+  console.log(localStorage);
 
   return (
     <html lang="en">

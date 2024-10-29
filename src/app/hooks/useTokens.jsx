@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 
 export const useTokens = () => {
@@ -5,12 +6,8 @@ export const useTokens = () => {
   const [refreshToken, setRefreshToken] = useState(null);
 
   const retrieveTokens = () => {
-    const cookieStore = document.cookie;
-
-    const accessTokenMatch = cookieStore.match(/refreshToken=([^;]*)/);
-    const refreshTokenMatch = cookieStore.match(/accessToken([^;]*)/);
-    const accessToken = accessTokenMatch ? accessTokenMatch[1] : null;
-    const refreshToken = refreshTokenMatch ? refreshTokenMatch[1] : null;
+    const accessToken = localStorage.getItem("refreshToken");
+    const refreshToken = localStorage.getItem("accessTOken");
 
     setAccessToken(accessToken);
     setRefreshToken(refreshToken);
