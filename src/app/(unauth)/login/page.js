@@ -24,9 +24,9 @@ export default function LoginPage() {
 
       if (response.ok) {
         const body = await response.json();
-        document.cookie = `refreshToken=${body.refreshToken}; path=/`;
+        localStorage.setItem("accessToken", body.accessToken);
+        localStorage.setItem("refreshToken", body.refreshToken);
 
-        document.cookie = `accessToken=${body.accessToken}; path=/`;
         router.replace("/");
       } else {
         alert("Invalid login credentials");
