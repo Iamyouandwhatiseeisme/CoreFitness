@@ -7,7 +7,6 @@ export default function LoginPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const formData = new FormData(event.target);
     const username = formData.get("userName");
     const password = formData.get("password");
