@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import "../../app/styles/global.css";
 import { redirect } from "next/navigation";
+import "../styles/global.css";
 // export const metadata = {
 //   title: "Medical Mushroom Market app",
 //   description: "Web site created with Next.js.",

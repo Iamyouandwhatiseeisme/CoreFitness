@@ -1,4 +1,5 @@
 "use client";
+import { useEffect, useState } from "react";
 import "../../app/styles/global.css";
 import { redirect } from "next/navigation";
 // export const metadata = {
@@ -6,13 +7,20 @@ import { redirect } from "next/navigation";
 //   description: "Web site created with Next.js.",
 // };
 export default function RootLayout({ children }) {
-  const accessToken = localStorage.getItem("accessToken")?.value || null;
-  const refreshToken = localStorage.getItem("refreshToken")?.value || null;
-  const isAuthenicated = !(accessToken === null || refreshToken === null);
-  if (isAuthenicated) {
-    redirect("/");
-  }
-  console.log(localStorage);
+  const [isAuthenticated, setIsAuthenticated] = useState(null);
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken");
+    const refreshToken = localStorage.getItem("refreshToken");
+    const authenticated = !(accessToken === null || refreshToken === null);
+
+    if (!authenticated) {
+      return;
+    } else {
+      setIsAuthenticated(authenticated);
+      redirect("/");
+    }
+  }, [isAuthenticated]);
 
   return (
     <html lang="en">

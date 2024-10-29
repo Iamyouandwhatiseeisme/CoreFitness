@@ -2,6 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
+import "../styles/global.css";
 
 // export const metadata = {
 //   title: "Medical Mushrooms market",

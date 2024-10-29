@@ -19,7 +19,7 @@ const Header = () => {
       ></img>
       <nav>
         <ul className="navigation-links">
-          <li>Equipment</li>
+          <li className="text-yellow-500">Equipment</li>
           <li>Trainers</li>
           <li>Certificates</li>
           <li>Schedules</li>

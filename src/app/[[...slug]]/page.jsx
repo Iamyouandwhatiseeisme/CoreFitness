@@ -1,7 +1,6 @@
 import "../styles/global.css";
 import { ClientOnly } from "./client";
 import Custom404 from "../404";
-import { checkAuth } from "../util/checkAuth";
 
 export function generateStaticParams() {
   return [
