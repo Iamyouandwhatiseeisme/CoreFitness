@@ -14,8 +14,13 @@ export default function RootLayout({ children }) {
 
   useEffect(() => {
     const theme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.classList.toggle(
+      "dark",
+      localStorage.theme === "dark" || (!("theme" in localStorage) && theme)
+    );
     if (!localStorage.getItem("theme")) {
       localStorage.setItem("theme", theme ? "dark" : "light");
+      localStorage.setItem("system", true);
     }
   }, []);
 

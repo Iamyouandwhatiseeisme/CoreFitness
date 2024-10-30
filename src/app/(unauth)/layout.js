@@ -21,24 +21,22 @@ export default function RootLayout({ children }) {
       redirect("/");
     }
   }, [isAuthenticated]);
+  useEffect(() => {
+    const theme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.classList.toggle(
+      "dark",
+      localStorage.theme === "dark" || (!("theme" in localStorage) && theme)
+    );
+    if (!localStorage.getItem("theme")) {
+      localStorage.setItem("theme", theme ? "dark" : "light");
+      localStorage.setItem("system", true);
+    }
+  }, []);
 
   return (
-    <html lang="en">
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-        />
-        <meta name="theme-color" content="#000000" />
-        <meta
-          name="description"
-          content="Web site created using create-react-app"
-        />
-      </head>
-      <body>
-        <noscript>You need to enable JavaScript to run this app.</noscript>
-        <div id="root">{children}</div>
-      </body>
-    </html>
+    <body>
+      <noscript>You need to enable JavaScript to run this app.</noscript>
+      <div id="root">{children}</div>
+    </body>
   );
 }

@@ -8,8 +8,20 @@ import "../styles/global.css";
 //   description: "Web site created with Next.js.",
 // };
 
-export default function RootLayout({ children, params }) {
+export default function RootLayout({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
+  useEffect(() => {
+    const theme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.classList.toggle(
+      "dark",
+      localStorage.theme === "dark" || (!("theme" in localStorage) && theme)
+    );
+    console.log(localStorage.getItem("system"));
+    if (!localStorage.getItem("theme")) {
+      localStorage.setItem("theme", theme ? "dark" : "light");
+      localStorage.setItem("system", true);
+    }
+  }, []);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -24,24 +36,9 @@ export default function RootLayout({ children, params }) {
   }, [isAuthenticated]);
 
   return (
-    <html lang="en">
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-        />
-        <meta name="theme-color" content="#000000" />
-        <meta
-          name="description"
-          content="Web site created using create-react-app"
-        />
-      </head>
-      <body>
-        <noscript>You need to enable JavaScript to run this app.</noscript>
-        <div id="root" className="background">
-          {children}
-        </div>
-      </body>
-    </html>
+    <body>
+      <noscript>You need to enable JavaScript to run this app.</noscript>
+      <div id="root">{children}</div>
+    </body>
   );
 }
