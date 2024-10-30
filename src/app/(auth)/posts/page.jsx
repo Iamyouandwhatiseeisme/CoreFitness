@@ -10,6 +10,7 @@ import fetchProducts from "../../fetcher/fetchProducts";
 import { useEffect, useState } from "react";
 import ProductActions from "../../components/buttons/ProductActions";
 import AddButton from "../../components/AddButton/AddButton";
+import { useRouter } from "next/navigation";
 
 export default function Posts({ searchParams }) {
   const debouncedSearch = searchParams.search || "";
@@ -18,6 +19,7 @@ export default function Posts({ searchParams }) {
   const fetchItemType = "posts";
   const [posts, setPosts] = useState([]);
   const [editing, setEditing] = useState();
+  const router = useRouter();
 
   const sortOptions = [
     {
@@ -70,6 +72,10 @@ export default function Posts({ searchParams }) {
     setPosts((prevPosts) => [...prevPosts, itemWithId]);
   };
 
+  const toggleHandler = (option, order) => {
+    router.push(`?option=${option}&order=${order}`);
+  };
+
   useEffect(() => {
     async function fetch() {
       var postsArray = await fetchProducts({
@@ -90,78 +96,85 @@ export default function Posts({ searchParams }) {
 
   if (posts.length === 0) {
     return (
-      <div className="posts-page">
-        <div className="app-bar">
-          <Header />
-          <SearchBar searchItemType="Search Posts" />
-        </div>
-        <h2>Couldn not find anything...</h2>
+      <div>
+        <Header />
 
-        <Footer />
+        <div className="posts-page">
+          <div className="app-bar">
+            <SearchBar searchItemType="Search Posts" />
+          </div>
+          <h2>Couldn not find anything...</h2>
+
+          <Footer />
+        </div>
       </div>
     );
   }
   return (
-    <div className="posts-page">
-      <div className="app-bar">
-        <Header />
-        <SearchBar searchItemType="Search Posts" />
-      </div>
+    <div>
+      <Header></Header>
 
-      <div className="dropdown-menu">
-        <DropDown
-          buttonText="Sort Products By:"
-          content={sortOptions}
-        ></DropDown>
-      </div>
-      <div className="posts-list">
-        {posts.map((post) => {
-          return (
-            <div key={post.id} className="posts-card">
-              <Link href={`/posts/${post.id}`}>
-                <div className="posts-info">
-                  <strong>{post.title}</strong>
+      <div className="posts-page">
+        <div className="app-bar">
+          <SearchBar searchItemType="Search Posts" />
+        </div>
+        <div className="dropdown-sort">
+          <DropDown
+            buttonText="Sort Products By:"
+            content={sortOptions}
+            toggleHandler={toggleHandler}
+            type="Sorter"
+          ></DropDown>
+        </div>
+        <div className="posts-list">
+          {posts.map((post) => {
+            return (
+              <div key={post.id} className="posts-card">
+                <Link href={`/posts/${post.id}`}>
+                  <div className="posts-info">
+                    <strong>{post.title}</strong>
+                  </div>
+                </Link>
+                <div className="posts-info">{post.body}</div>
+
+                <div>
+                  <span className="posts-info">Views: {post.views}</span>
+                  <span className="posts-info">
+                    Likes: {post.reactions.likes}
+                  </span>
+                  <span className="posts-info">
+                    Dislikes: {post.reactions.dislikes}
+                  </span>
                 </div>
-              </Link>
-              <div className="posts-info">{post.body}</div>
+                <div className="posts-info">Post Id: {post.id}</div>
+                <div className="posts-info">
+                  Tags:{" "}
+                  {post.tags.map((tag, index) => {
+                    return (
+                      <span
+                        key={`${post.id}-${tag}-${index}`}
+                        className="post-tag"
+                      >
+                        #{tag}
+                      </span>
+                    );
+                  })}
+                </div>
+                <ProductActions
+                  type={"posts"}
+                  product={post}
+                  setProductCallBack={callBack}
+                  onEditingChange={onEditingChange}
+                  deleteProductCallback={deleteProduct}
+                />
+              </div>
+            );
+          })}
+        </div>
+        <AddButton item="Posts" addProduct={addPost} />
 
-              <div>
-                <span className="posts-info">Views: {post.views}</span>
-                <span className="posts-info">
-                  Likes: {post.reactions.likes}
-                </span>
-                <span className="posts-info">
-                  Dislikes: {post.reactions.dislikes}
-                </span>
-              </div>
-              <div className="posts-info">Post Id: {post.id}</div>
-              <div className="posts-info">
-                Tags:{" "}
-                {post.tags.map((tag, index) => {
-                  return (
-                    <span
-                      key={`${post.id}-${tag}-${index}`}
-                      className="post-tag"
-                    >
-                      #{tag}
-                    </span>
-                  );
-                })}
-              </div>
-              <ProductActions
-                type={"posts"}
-                product={post}
-                setProductCallBack={callBack}
-                onEditingChange={onEditingChange}
-                deleteProductCallback={deleteProduct}
-              />
-            </div>
-          );
-        })}
+        <Footer />
       </div>
-      <AddButton item="Posts" addProduct={addPost} />
-
-      <Footer />
     </div>
   );
 }

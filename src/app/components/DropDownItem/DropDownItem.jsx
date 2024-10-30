@@ -1,20 +1,32 @@
-"use client"
-import { useRouter } from 'next/navigation'
-import React from 'react'
-import "./DropDownItem.css"
+"use client";
+import React from "react";
+import "./DropDownItem.css";
+import { click } from "@testing-library/user-event/dist/click";
 
-const DropDownItem = ({children, onClick}) => {
-  const router = useRouter();
-  const handleSortOption = () =>{
+const DropDownItem = ({ children, onClick, toggleHandler, type }) => {
+  const handleSortOption = () => {
     onClick();
-    router.push(`?option=${children.option}&order=${children.order}`  )
-  }
+  };
+  const clickHandler = () => {
+    if (type === "Sorter") {
+      toggleHandler(children.option, children.order);
+    }
+    if (type === "Theme") {
+      console.log(children.label);
+    }
+  };
 
   return (
-    <div className='dropdown-item' onClick={()=>{
+    <div
+      className="dropdown-item"
+      onClick={() => {
         handleSortOption();
-    }}>{children.label}</div>
-  )
-}
+        clickHandler();
+      }}
+    >
+      {children.label}
+    </div>
+  );
+};
 
-export default DropDownItem
+export default DropDownItem;
