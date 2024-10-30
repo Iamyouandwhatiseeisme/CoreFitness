@@ -2,19 +2,33 @@ import "./Header.css";
 import Link from "next/link";
 import LoggoutButton from "../logoutButton/LoggoutButton";
 import Logo from "../../../../public/images/Header Logo.webp";
-import ThemeSelector from "../ThemeSelector/ThemeSelector";
 import DropDown from "../DropDown/DropDown";
+import { cilSun, cilMoon, cilScreenDesktop } from "@coreui/icons";
+import CIcon from "@coreui/icons-react";
 
 const Header = () => {
-  const theme = [
+  const themeOptions = [
     {
       label: "light",
+      icon: cilSun,
+      changeTheme: () => {
+        localStorage.setItem("theme", "light");
+      },
     },
     {
       label: "dark",
+      icon: cilMoon,
+      changeTheme: () => {
+        localStorage.setItem("theme", "dark");
+      },
     },
     {
       label: "system",
+      icon: cilScreenDesktop,
+      changeTheme: () => {
+        const theme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        localStorage.setItem("theme", theme === true ? "dark" : "light");
+      },
     },
   ];
   return (
@@ -61,8 +75,8 @@ const Header = () => {
       </div>
       <div className="pr-20 flex flex-row items-center gap-10">
         <DropDown
-          content={theme}
-          buttonText="System"
+          content={themeOptions}
+          buttonText={cilScreenDesktop}
           toggleHandler={() => {}}
           type="Theme"
         ></DropDown>

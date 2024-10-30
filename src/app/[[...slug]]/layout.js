@@ -13,6 +13,13 @@ export default function RootLayout({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
 
   useEffect(() => {
+    const theme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (!localStorage.getItem("theme")) {
+      localStorage.setItem("theme", theme ? "dark" : "light");
+    }
+  }, []);
+
+  useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     const refreshToken = localStorage.getItem("refreshToken");
     const authenticated = !(accessToken === null || refreshToken === null);

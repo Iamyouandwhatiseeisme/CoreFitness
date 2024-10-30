@@ -1,7 +1,7 @@
 .dropdown-cnt {
   position: absolute;
   display: flex;
-  /* min-width: 100%; */
+  min-width: 50px;
   flex-direction: column;
   align-items: center;
   margin-top: 1rem;
@@ -15,6 +15,7 @@
   pointer-events: none;
   transition: transform 150ms ease-in-out, visibility 100ms ease-in-out;
   transform: translateY(-5%);
+  z-index: 100;
 }
 
 .content-open {
