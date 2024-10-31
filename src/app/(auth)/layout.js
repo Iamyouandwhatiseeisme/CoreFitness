@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "../../app/styles/global.css";
 import { redirect } from "next/navigation";
 import "../styles/global.css";
+import Footer from "../components/footer/Footer";
 // export const metadata = {
 //   title: "Medical Mushroom Market app",
 //   description: "Web site created with Next.js.",
@@ -12,15 +13,16 @@ export default function RootLayout({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   useEffect(() => {
     const theme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    document.documentElement.classList.toggle(
-      "dark",
-      localStorage.theme === "dark" || (!("theme" in localStorage) && theme)
-    );
-    console.log(localStorage.getItem("system"));
     if (!localStorage.getItem("theme")) {
       localStorage.setItem("theme", theme ? "dark" : "light");
       localStorage.setItem("system", true);
     }
+    document.documentElement.classList.toggle(
+      "dark",
+      localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+    );
   }, []);
 
   useEffect(() => {
@@ -36,9 +38,15 @@ export default function RootLayout({ children }) {
   }, [isAuthenticated]);
 
   return (
-    <body>
-      <noscript>You need to enable JavaScript to run this app.</noscript>
-      <div id="root">{children}</div>
-    </body>
+    <html lang="en">
+      <head>
+        <script></script>
+      </head>
+      <body className="bg-neutral-200 dark:bg-neutral-900">
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <div id="root">{children}</div>
+        <Footer></Footer>
+      </body>
+    </html>
   );
 }
