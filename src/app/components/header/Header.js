@@ -80,7 +80,7 @@ const Header = () => {
     "text-black hover:bg-gray-400 dark:hover:bg-header-hover-dark font-serif font-normal dark:text-yellow-500 p-4 text-center transition-header-hover-transition cursor-pointer";
 
   return (
-    <header className="header flex-row justify-between bg-neutral-300 dark:bg-dark-header   ">
+    <header className="flex flex-row justify-between bg-neutral-300 dark:bg-dark-header  w-auto  ">
       <div className="flex gap-38">
         <Link
           href="/"
@@ -116,14 +116,14 @@ const Header = () => {
           </ul>
         </nav>
       </div>
-      <div className="pr-20 flex flex-row items-center gap-10">
+      <div className="pr-20 flex flex-row items-center gap-6">
         <DropDown
           content={themeOptions}
           buttonText={currentTheme}
           toggleHandler={themeHandler}
           type="Theme"
         ></DropDown>
-        <div className="mb-2">
+        <div className="mb-2  ">
           <LoggoutButton />
         </div>
       </div>

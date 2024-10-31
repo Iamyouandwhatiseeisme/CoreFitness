@@ -20,6 +20,8 @@ export default function Posts({ searchParams }) {
   const [posts, setPosts] = useState([]);
   const [editing, setEditing] = useState();
   const router = useRouter();
+  const postInfo =
+    "bg-gray-400 dark:bg-gray-200 font-sans p-2 rounded-xl text-xl m-2";
 
   const sortOptions = [
     {
@@ -97,28 +99,24 @@ export default function Posts({ searchParams }) {
   if (posts.length === 0) {
     return (
       <div>
-        <Header />
-
-        <div className="posts-page">
-          <div className="app-bar">
+        <div className="flex flex-col items-center relative">
+          <div className="mt-5 flex flex-row items-center">
             <SearchBar searchItemType="Search Posts" />
           </div>
-          <h2>Couldn not find anything...</h2>
-
-          <Footer />
+          <h2 className="text-black dark:text-gray-200 font-sans font-bold text-2xl">
+            Couldn not find anything...
+          </h2>
         </div>
       </div>
     );
   }
   return (
     <div>
-      <Header></Header>
-
-      <div className="posts-page">
-        <div className="app-bar">
+      <div className="flex flex-col items-center relative">
+        <div className="mt-5 flex flex-row items-center">
           <SearchBar searchItemType="Search Posts" />
         </div>
-        <div className="dropdown-sort">
+        <div className="fixed left-2 top-28 flex flex-col z-10">
           <DropDown
             buttonText="Sort Products By:"
             content={sortOptions}
@@ -126,34 +124,37 @@ export default function Posts({ searchParams }) {
             type="Sorter"
           ></DropDown>
         </div>
-        <div className="posts-list">
+        <div>
           {posts.map((post) => {
             return (
-              <div key={post.id} className="posts-card">
+              <div
+                key={post.id}
+                className="flex flex-col border border-solid border-gray-400 rounded-xl w-60wv items-center overflow-hidden bg-gray-400 dark:bg-gray-200 m-5 gap-2 hover:scale-1.02"
+              >
                 <Link href={`/posts/${post.id}`}>
-                  <div className="posts-info">
+                  <div className={postInfo}>
                     <strong>{post.title}</strong>
                   </div>
                 </Link>
-                <div className="posts-info">{post.body}</div>
+                <div className={postInfo}>{post.body}</div>
 
                 <div>
-                  <span className="posts-info">Views: {post.views}</span>
-                  <span className="posts-info">
+                  <span className={postInfo}>Views: {post.views}</span>
+                  <span className={postInfo}>
                     Likes: {post.reactions.likes}
                   </span>
-                  <span className="posts-info">
+                  <span className={postInfo}>
                     Dislikes: {post.reactions.dislikes}
                   </span>
                 </div>
-                <div className="posts-info">Post Id: {post.id}</div>
-                <div className="posts-info">
+                <div className={postInfo}>Post Id: {post.id}</div>
+                <div className={postInfo}>
                   Tags:{" "}
                   {post.tags.map((tag, index) => {
                     return (
                       <span
                         key={`${post.id}-${tag}-${index}`}
-                        className="post-tag"
+                        className="bg-gray-200 dark:bg-gray-400 p-2 rounded-sm m-2"
                       >
                         #{tag}
                       </span>
@@ -172,8 +173,6 @@ export default function Posts({ searchParams }) {
           })}
         </div>
         <AddButton item="Posts" addProduct={addPost} />
-
-        <Footer />
       </div>
     </div>
   );

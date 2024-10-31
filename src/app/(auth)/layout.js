@@ -4,6 +4,7 @@ import "../../app/styles/global.css";
 import { redirect } from "next/navigation";
 import "../styles/global.css";
 import Footer from "../components/footer/Footer";
+import Header from "../components/header/Header";
 // export const metadata = {
 //   title: "Medical Mushroom Market app",
 //   description: "Web site created with Next.js.",
@@ -44,6 +45,7 @@ export default function RootLayout({ children }) {
       </head>
       <body className="bg-neutral-200 dark:bg-neutral-900">
         <noscript>You need to enable JavaScript to run this app.</noscript>
+        <Header></Header>
         <div id="root">{children}</div>
         <Footer></Footer>
       </body>

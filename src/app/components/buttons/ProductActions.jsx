@@ -66,17 +66,38 @@ const ProductActions = ({
       {editing ? (
         <div>
           <input
+            className="rounded m-5"
             type="text"
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
           />
-          <button onClick={handleEdit}>Save</button>
-          <button onClick={() => setEditing(false)}>Cancel</button>
+          <button
+            className="bg-white border border-gray-800 dark:bg-gray-200 w-20  rounded-sm"
+            onClick={handleEdit}
+          >
+            Save
+          </button>
+          <button
+            className="bg-white border border-gray-800 dark:bg-gray-200 w-20  rounded-sm"
+            onClick={() => setEditing(false)}
+          >
+            Cancel
+          </button>
         </div>
       ) : (
-        <div className="btns-div">
-          <button onClick={() => setEditing(true)}>Edit</button>
-          <button onClick={handleDelete}>Delete</button>
+        <div className="flex gap-3 p-3">
+          <button
+            className="bg-white border border-gray-800 dark:bg-gray-200 w-20  rounded-sm"
+            onClick={() => setEditing(true)}
+          >
+            Edit
+          </button>
+          <button
+            className="bg-white border border-gray-800 dark:bg-gray-200 w-20  rounded-sm"
+            onClick={handleDelete}
+          >
+            Delete
+          </button>
         </div>
       )}
     </div>

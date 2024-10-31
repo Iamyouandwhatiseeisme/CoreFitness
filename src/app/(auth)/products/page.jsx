@@ -1,7 +1,6 @@
 "use client";
 
 import Header from "../../components/header/Header";
-import Footer from "../../components/footer/Footer";
 import "./index.css";
 import Link from "next/link";
 import DropDown from "../../components/DropDown/DropDown";
@@ -97,25 +96,25 @@ export default function Products({ searchParams }) {
   if (products.length === 0) {
     return (
       <div>
-        <Header></Header>
-        <div className="loading-screen">
-          <div className="app-bar">
+        <div className="flex flex-col items-center">
+          <div className="mt-5 flex flex-row items-center">
             <SearchBar searchItemType="Search Products" />
           </div>
-          <h2>Could not find anything...</h2>
+          <h2 className="text-black dark:text-gray-200 font-sans font-bold text-2xl">
+            Could not find anything...
+          </h2>
         </div>
       </div>
     );
   }
 
   return (
-    <div>
-      <Header />
-      <div className="products-page">
-        <div className="app-bar">
+    <div className="w-full">
+      <div className="relative flex flex-col items-center">
+        <div className="mt-5 flex flex-row items-center">
           <SearchBar searchItemType="Search Products" />
         </div>
-        <div className="dropdown-sort">
+        <div className="fixed left-2 top-16 flex flex-col">
           <DropDown
             buttonText="Sort Products By:"
             content={sortOptions}
@@ -123,22 +122,29 @@ export default function Products({ searchParams }) {
             type="Sorter"
           ></DropDown>
         </div>
-        <div className="products-list">
+        <div className="p-5 grid grid-cols-3 gap-7 m-0">
           {products.map((product) => {
             return (
-              <div key={product.id} className="product-card">
+              <div
+                key={product.id}
+                className="items-center flex flex-col border-2 border-solid border-gray-50 rounded-xl w-80 h-auto overflow-hidden bg-neutral-400 dark:bg-neutral-200"
+              >
                 <img
-                  className="product-image"
+                  className="object-scale-down w-6/12 h-3/6 m-2"
                   src={product.thumbnail}
                   alt={product.title}
                 ></img>
                 <Link key={product.id} href={`/products/${product.id}`}>
-                  <div className="product-info">
+                  <div className="p-2 font-serif size text-xs m-1 ">
                     <strong>{product.title}</strong>
                   </div>
                 </Link>
-                <div className="product-info">{product.description}</div>
-                <div className="product-info">Price: {product.price}$</div>
+                <div className="p-2 font-serif size text-xs m-1 ">
+                  {product.description}
+                </div>
+                <div className="p-2 font-serif size text-xs m-1 ">
+                  Price: {product.price}$
+                </div>
                 <ProductActions
                   type={"products"}
                   product={product}
