@@ -7,14 +7,14 @@ const DropDownContent = ({ children, open, onSelect, toggleHandler, type }) => {
     <div className={open ? "dropdown-cnt content-open" : "dropdown-cnt"}>
       {
         <>
-          {children.map((sortOptions) => (
+          {children.map((options) => (
             <DropDownItem
               onClick={onSelect}
-              key={sortOptions.value}
+              key={options.label}
               toggleHandler={toggleHandler}
               type={type}
             >
-              {sortOptions}
+              {options}
             </DropDownItem>
           ))}
         </>

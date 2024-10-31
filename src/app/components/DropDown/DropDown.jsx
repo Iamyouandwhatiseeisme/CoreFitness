@@ -11,7 +11,7 @@ const DropDown = ({ buttonText, content, toggleHandler, type }) => {
   };
 
   return (
-    <div className="dropdown">
+    <div>
       <DropDownButton toggle={toggleDropDown} open={open} type={type}>
         {buttonText}
       </DropDownButton>
