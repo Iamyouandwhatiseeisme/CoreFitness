@@ -33,8 +33,6 @@ export default function Page(params) {
 
   currentPath = !currentPath ? "" : currentPath;
 
-  // checkAuth();
-
   if (!currentPath && validPaths.includes(currentPath)) {
     return <ClientOnly path={currentPath} />;
   } else {
