@@ -1,20 +1,35 @@
-"use client"
-import { useRouter } from 'next/navigation'
-import React from 'react'
-import "./DropDownItem.css"
+"use client";
+import React from "react";
+import "./DropDownItem.css";
+import { CIcon } from "@coreui/icons-react";
 
-const DropDownItem = ({children, onClick}) => {
-  const router = useRouter();
-  const handleSortOption = () =>{
+const DropDownItem = ({ children, onClick, toggleHandler, type }) => {
+  const clickHandler = () => {
     onClick();
-    router.push(`?option=${children.option}&order=${children.order}`  )
-  }
+    if (type === "Sorter") {
+      toggleHandler(children.option, children.order);
+    }
+    if (type === "Theme") {
+      children.changeTheme();
+      toggleHandler();
+      console.log(localStorage.getItem("theme"));
+    }
+  };
 
   return (
-    <div className='dropdown-item' onClick={()=>{
-        handleSortOption();
-    }}>{children.label}</div>
-  )
-}
+    <div
+      className="dropdown-item"
+      onClick={() => {
+        clickHandler();
+      }}
+    >
+      {type === "Sorter" ? (
+        children.label
+      ) : (
+        <CIcon icon={children.icon}></CIcon>
+      )}
+    </div>
+  );
+};
 
-export default DropDownItem
+export default DropDownItem;

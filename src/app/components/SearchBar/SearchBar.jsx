@@ -14,9 +14,10 @@ export default function SearchBar({ searchItemType }) {
   }, [debouncedValue, router]);
 
   return (
-    <div>
-      Search:{" "}
+    <div className="text-gray-200 border border-solid border-gray-400 rounded-xl p-3 dark:border-gray-200 bg-gray-800 ">
+      Search:{"  "}
       <input
+        className="rounded-xl placeholder:p-2"
         type="text"
         value={searchValue}
         onChange={(e) => {

@@ -1,7 +1,6 @@
 import "../styles/global.css";
 import { ClientOnly } from "./client";
 import Custom404 from "../404";
-import { checkAuth } from "../util/checkAuth";
 
 export function generateStaticParams() {
   return [
@@ -33,8 +32,6 @@ export default function Page(params) {
   var currentPath = params.params.slug;
 
   currentPath = !currentPath ? "" : currentPath;
-
-  // checkAuth();
 
   if (!currentPath && validPaths.includes(currentPath)) {
     return <ClientOnly path={currentPath} />;

@@ -2,13 +2,29 @@
 import { useEffect, useState } from "react";
 import "../../app/styles/global.css";
 import { redirect } from "next/navigation";
+import "../styles/global.css";
+import Footer from "../components/footer/Footer";
+import Header from "../components/header/Header";
 // export const metadata = {
 //   title: "Medical Mushroom Market app",
 //   description: "Web site created with Next.js.",
 // };
 
-export default function RootLayout({ children, params }) {
+export default function RootLayout({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
+  useEffect(() => {
+    const theme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (!localStorage.getItem("theme")) {
+      localStorage.setItem("theme", theme ? "dark" : "light");
+      localStorage.setItem("system", true);
+    }
+    document.documentElement.classList.toggle(
+      "dark",
+      localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+    );
+  }, []);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -25,21 +41,13 @@ export default function RootLayout({ children, params }) {
   return (
     <html lang="en">
       <head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-        />
-        <meta name="theme-color" content="#000000" />
-        <meta
-          name="description"
-          content="Web site created using create-react-app"
-        />
+        <script></script>
       </head>
-      <body>
+      <body className="bg-neutral-200 dark:bg-neutral-900">
         <noscript>You need to enable JavaScript to run this app.</noscript>
-        <div id="root" className="background">
-          {children}
-        </div>
+        <Header></Header>
+        <div id="root">{children}</div>
+        <Footer></Footer>
       </body>
     </html>
   );

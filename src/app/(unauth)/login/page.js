@@ -42,14 +42,14 @@ export default function LoginPage() {
       <h1>Welcome to Mushroom Kingdom</h1>
       <form className="login-form" onSubmit={handleSubmit}>
         <input
-          className="login-input"
+          className="login-input text-black dark:text-white"
           type="name"
           name="userName"
           placeholder="Username"
           required
         />
         <input
-          className="login-input"
+          className="login-input text-black dark:text-white"
           type="password"
           name="password"
           placeholder="Password"
