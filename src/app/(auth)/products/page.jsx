@@ -111,12 +111,10 @@ export default function Products({ searchParams }) {
   return (
     <div>
       <Header />
-
       <div className="products-page">
         <div className="app-bar">
           <SearchBar searchItemType="Search Products" />
         </div>
-
         <div className="dropdown-sort">
           <DropDown
             buttonText="Sort Products By:"
@@ -152,9 +150,7 @@ export default function Products({ searchParams }) {
             );
           })}
         </div>
-
         <AddButton item="Products" addProduct={addProduct} />
-        <Footer />
       </div>
     </div>
   );
