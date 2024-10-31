@@ -1,3 +1,4 @@
+"use client";
 import "./Header.css";
 import Link from "next/link";
 import LoggoutButton from "../logoutButton/LoggoutButton";
@@ -21,7 +22,6 @@ const Header = () => {
       }
     }
 
-    // Only execute the checkTheme function after the component has mounted
     checkTheme();
   }, []);
 
@@ -49,9 +49,8 @@ const Header = () => {
       label: "system",
       icon: cilScreenDesktop,
       changeTheme: () => {
-        const theme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-        localStorage.setItem("theme", theme === true ? "dark" : "light");
         localStorage.setItem("system", true);
+        localStorage.removeItem("theme");
 
         setCurrentTheme(cilScreenDesktop);
       },
@@ -77,44 +76,42 @@ const Header = () => {
       themeQuery.removeEventListener("change", handleSystemThemeChange);
   }, [currentTheme]);
 
+  const listItemStyle =
+    "text-black hover:bg-gray-400 dark:hover:bg-header-hover-dark font-serif font-normal dark:text-yellow-500 p-4 text-center transition-header-hover-transition cursor-pointer";
+
   return (
-    <header className="header flex-row justify-between bg-white dark:bg-dark-header  ">
+    <header className="header flex-row justify-between bg-neutral-300 dark:bg-dark-header   ">
       <div className="flex gap-38">
-        <img
-          src={Logo.src}
-          alt="logo"
-          style={{
-            paddingTop: "15px",
-            fill: "white",
-            width: "50px",
-            height: "50px",
-            backgroundColor: "transparent",
-          }}
-        ></img>
+        <Link
+          href="/"
+          className="mt-1 pr-2 w-14 h-14 bg-transparent hover:bg-gray-400 cursor-pointer  rounded-full dark:hover:bg-header-hover-dark  items-center"
+        >
+          <img src={Logo.src} alt="logo"></img>
+        </Link>
         <nav>
-          <ul className="navigation-links gap-5">
-            <li className="text-yellow-500">Equipment</li>
-            <li className="text-yellow-500">Trainers</li>
-            <li className="text-yellow-500">Certificates</li>
-            <li className="text-yellow-500">Schedules</li>
-            <li className="text-yellow-500">Locations </li>
+          <ul className="gap-5 flex mr-12  list-none">
+            <li className={listItemStyle}>Equipment</li>
+            <li className={listItemStyle}>Trainers</li>
+            <li className={listItemStyle}>Certificates</li>
+            <li className={listItemStyle}>Schedules</li>
+            <li className={listItemStyle}>Locations </li>
             <Link href="/profile">
-              <li className="text-yellow-500">Profile</li>
+              <li className={listItemStyle}>Profile</li>
             </Link>
             <Link href="/settings">
-              <li className="text-yellow-500">Settings</li>
+              <li className={listItemStyle}>Settings</li>
             </Link>
             <Link href="/cart">
-              <li className="text-yellow-500">Cart</li>
+              <li className={listItemStyle}>Cart</li>
             </Link>
             <Link href="/blog">
-              <li className="text-yellow-500">Blog</li>
+              <li className={listItemStyle}>Blog</li>
             </Link>
             <Link href="/products">
-              <li className="text-yellow-500">Products</li>
+              <li className={listItemStyle}>Products</li>
             </Link>
             <Link href="/posts">
-              <li className="text-yellow-500">Posts</li>
+              <li className={listItemStyle}>Posts</li>
             </Link>
           </ul>
         </nav>
@@ -126,24 +123,10 @@ const Header = () => {
           toggleHandler={themeHandler}
           type="Theme"
         ></DropDown>
-        <LoggoutButton />
+        <div className="mb-2">
+          <LoggoutButton />
+        </div>
       </div>
-
-      {/* <i
-        className="fa fa-google network-element"
-        aria-hidden="true"
-        style={{ fontSize: "32px", color: "white" }}
-      ></i>
-      <i
-        className="fa fa-facebook network-element"
-        aria-hidden="true"
-        style={{ fontSize: "32px" }}
-      ></i>
-      <i
-        className="fa fa-instagram network-element"
-        aria-hidden="true"
-        style={{ fontSize: "32px" }}
-      ></i> */}
     </header>
   );
 };
