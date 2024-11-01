@@ -1,12 +1,11 @@
 import React from "react";
-import Header from "../../components/header/Header.js";
-import Footer from "../../components/footer/Footer.js";
+import Header from "../components/header/Header.js";
+import Footer from "../components/footer/Footer.js";
 import "./index.css";
 
 function About() {
   return (
     <div className="about-page">
-      <Header />
       <div className="about-content">
         <p>
           This project is a test project for TbcXUsaid React course assignments.
@@ -27,7 +26,6 @@ function About() {
         </p>
         <p>About page is a page that consists of explanation of the project.</p>
       </div>
-      <Footer />
     </div>
   );
 }

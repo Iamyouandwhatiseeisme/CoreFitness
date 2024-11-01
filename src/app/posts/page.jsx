@@ -1,15 +1,15 @@
 "use client";
 
-import Header from "../../components/header/Header";
-import Footer from "../../components/footer/Footer";
+import Header from "../components/header/Header";
+import Footer from "../components/footer/Footer";
 import Link from "next/link";
 import "./index.css";
-import SearchBar from "../../components/SearchBar/SearchBar";
-import DropDown from "../../components/DropDown/DropDown";
-import fetchProducts from "../../fetcher/fetchProducts";
+import SearchBar from "../components/SearchBar/SearchBar";
+import DropDown from "../components/DropDown/DropDown";
+import fetchProducts from "../fetcher/fetchProducts";
 import { useEffect, useState } from "react";
-import ProductActions from "../../components/buttons/ProductActions";
-import AddButton from "../../components/AddButton/AddButton";
+import ProductActions from "../components/buttons/ProductActions";
+import AddButton from "../components/AddButton/AddButton";
 import { useRouter } from "next/navigation";
 
 export default function Posts({ searchParams }) {

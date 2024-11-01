@@ -1,4 +1,4 @@
-import NotFound from "../(auth)/notfound/NotFound";
+import NotFound from "../notfound/NotFound";
 
 export default async function fetchSingleProduct({ id, fetchItemType }) {
   try {

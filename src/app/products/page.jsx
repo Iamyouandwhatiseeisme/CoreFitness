@@ -1,14 +1,14 @@
 "use client";
 
-import Header from "../../components/header/Header";
+import Header from "../components/header/Header";
 import "./index.css";
 import Link from "next/link";
-import DropDown from "../../components/DropDown/DropDown";
-import SearchBar from "../../components/SearchBar/SearchBar";
-import fetchProducts from "../../fetcher/fetchProducts";
-import ProductActions from "../../components/buttons/ProductActions";
+import DropDown from "../components/DropDown/DropDown";
+import SearchBar from "../components/SearchBar/SearchBar";
+import fetchProducts from "../fetcher/fetchProducts";
+import ProductActions from "../components/buttons/ProductActions";
 import { useEffect, useState } from "react";
-import AddButton from "../../components/AddButton/AddButton";
+import AddButton from "../components/AddButton/AddButton";
 import { useRouter } from "next/navigation";
 
 export default function Products({ searchParams }) {
