@@ -1,12 +1,11 @@
 "use client";
-
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
+// import { redirect } from "next/dist/server/api-utils";
 import "../styles/global.css";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 
 export default function RootLayout({ children }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(null);
-
   useEffect(() => {
     const theme = window.matchMedia("(prefers-color-scheme: dark)").matches;
     document.documentElement.classList.toggle(
@@ -21,23 +20,14 @@ export default function RootLayout({ children }) {
     }
   }, []);
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken");
-    const refreshToken = localStorage.getItem("refreshToken");
-    const authenticated = !(accessToken === null || refreshToken === null);
-
-    if (!authenticated) {
-      redirect("/login");
-    } else {
-      setIsAuthenticated(authenticated);
-    }
-  }, [isAuthenticated]);
   return (
     <html lang="en">
       <head>
         <script></script>
       </head>
-      <body className="bg-neutral-200 dark:bg-neutral-900">{children}</body>
+      <UserProvider>
+        <body className="bg-neutral-200 dark:bg-neutral-900">{children}</body>
+      </UserProvider>
     </html>
   );
 }

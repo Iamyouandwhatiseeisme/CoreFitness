@@ -6,8 +6,13 @@ import Logo from "../../../../public/images/Header Logo.webp";
 import DropDown from "../DropDown/DropDown";
 import { cilSun, cilMoon, cilScreenDesktop, cilSync } from "@coreui/icons";
 import { useEffect, useState } from "react";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { CSpinner } from "@coreui/react";
+import AuthenticationButton from "../logoutButton/LoggoutButton";
 
 const Header = () => {
+  const { user, error, isLoading } = useUser();
+
   const [currentTheme, setCurrentTheme] = useState(cilSync);
 
   useEffect(() => {
@@ -124,7 +129,20 @@ const Header = () => {
           type="Theme"
         ></DropDown>
         <div className="mb-2  ">
-          <LoggoutButton />
+          {isLoading ? (
+            <CSpinner variant="grow" />
+          ) : user ? (
+            <AuthenticationButton
+              href="/api/auth/logout"
+              type="logout"
+            ></AuthenticationButton>
+          ) : (
+            <AuthenticationButton
+              href="/api/auth/login"
+              type="login"
+            ></AuthenticationButton>
+          )}
+          {/* <LoggoutButton /> */}
         </div>
       </div>
     </header>
