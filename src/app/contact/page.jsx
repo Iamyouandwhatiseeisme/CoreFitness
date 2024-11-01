@@ -1,6 +1,6 @@
 "use client";
-import Footer from "../../components/footer/Footer.js";
-import Header from "../../components/header/Header.js";
+import Footer from "../components/footer/Footer.js";
+import Header from "../components/header/Header.js";
 import "./index.css";
 
 function Contact() {

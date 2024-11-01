@@ -1,7 +1,7 @@
 import "./index.css";
 import NotFound from "../../notfound/NotFound";
 import { ReturnBackButton } from "../../notfound/NotFound";
-import fetchSingleProduct from "../../../fetcher/fetchSingleProduct";
+import fetchSingleProduct from "../../fetcher/fetchSingleProduct";
 
 export default async function PostPage(params) {
   const { id } = params.params;
