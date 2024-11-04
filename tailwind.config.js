@@ -11,6 +11,10 @@ module.exports = {
       transitionProperty: {
         "header-hover-transition": "background-color 0.5s",
       },
+      height: {
+        "80vh": "80vh",
+      },
+
       width: {
         "60wv": "60vw",
       },

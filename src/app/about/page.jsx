@@ -3,28 +3,31 @@ import Header from "../components/header/Header.js";
 import Footer from "../components/footer/Footer.js";
 import "./index.css";
 
+const paragraphStyle = "p-2 text-2xl";
 function About() {
   return (
-    <div className="about-page">
-      <div className="about-content">
-        <p>
+    <div className="flex flex-col justify-between">
+      <div className="border border-white flex flex-col text-start h-80vh">
+        <p className={paragraphStyle}>
           This project is a test project for TbcXUsaid React course assignments.
         </p>
-        <p>
+        <p className={paragraphStyle}>
           The application consists of several pages. Mainly - Content (Welcone)
           page, About page and contact page. All three pages represent a single
           React page.
         </p>
-        <p>
+        <p className={paragraphStyle}>
           The welcome page showcases medicinal mushroom species that "can" be
           bought from the web-site, photos, info and "Add-to-cart" button for
           each of them.
         </p>
-        <p>
+        <p className={paragraphStyle}>
           Contact page is a page that consists of a text area for contacting the
           vendor for futher questions and advises.
         </p>
-        <p>About page is a page that consists of explanation of the project.</p>
+        <p className={paragraphStyle}>
+          About page is a page that consists of explanation of the project.
+        </p>
       </div>
     </div>
   );
