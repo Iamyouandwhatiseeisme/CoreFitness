@@ -89,7 +89,7 @@ const Header = () => {
       <div className="flex gap-38  pt-5 pb-5 pr-5">
         <Link
           href="/"
-          className="mt-4 pr-2 w-14 h-14 bg-transparent  cursor-pointer   items-center"
+          className="mt-4 pr-2 w-14 h-14 bg-transparent  cursor-pointer items-center"
         >
           <img src={Logo.src} alt="logo"></img>
         </Link>

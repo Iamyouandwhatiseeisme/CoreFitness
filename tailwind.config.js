@@ -20,9 +20,11 @@ module.exports = {
       },
       height: {
         "80vh": "80vh",
+        "90vh": "90vh",
       },
 
       width: {
+        "info-board-hover-width": "550px",
         "60wv": "60vw",
       },
       scale: {
