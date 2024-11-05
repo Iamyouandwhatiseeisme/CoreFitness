@@ -82,19 +82,19 @@ const Header = () => {
   }, [currentTheme]);
 
   const listItemStyle =
-    "text-black hover:bg-gray-400 dark:hover:bg-header-hover-dark font-serif font-normal dark:text-yellow-500 p-4 text-center transition-header-hover-transition cursor-pointer";
+    "text-black hover:bg-gray-400 dark:hover:bg-header-hover-dark hover:rounded-3xl font-serif font-normal dark:text-yellow-500 p-5 text-center transition-header-hover-transition cursor-pointer";
 
   return (
     <header className="flex flex-row justify-between bg-neutral-300 dark:bg-dark-header  w-auto  ">
-      <div className="flex gap-38">
+      <div className="flex gap-38  pt-5 pb-5 pr-5">
         <Link
           href="/"
-          className="mt-1 pr-2 w-14 h-14 bg-transparent hover:bg-gray-400 cursor-pointer  rounded-full dark:hover:bg-header-hover-dark  items-center"
+          className="mt-4 pr-2 w-14 h-14 bg-transparent  cursor-pointer   items-center"
         >
           <img src={Logo.src} alt="logo"></img>
         </Link>
-        <nav>
-          <ul className="gap-5 flex mr-12  list-none">
+        <nav className="rounded-3xl flex- flex-row  border border-solid dark:border-header-hover-dark h-20 items-center p-2">
+          <ul className="gap-5 flex  list-none flex-row">
             <li className={listItemStyle}>Equipment</li>
             <li className={listItemStyle}>Trainers</li>
             <li className={listItemStyle}>Certificates</li>
