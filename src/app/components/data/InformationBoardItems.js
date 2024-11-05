@@ -40,7 +40,7 @@ const informationBoardItems = [
     key: 4,
     logo: "/images/Branches Logo.jpg",
     titles: [
-      "Branches on each side of the city</div>",
+      "Branches on each side of the city",
       "Subscription system for every branch",
     ],
     hoverColor: "bg-green-400 ",
