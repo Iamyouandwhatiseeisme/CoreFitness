@@ -15,6 +15,7 @@ module.exports = {
       },
       backgroundImage: {
         "gym-background": "url('/images/Gym Background.jpg')",
+        gemini: "url('/images/Gemini.jpg')",
       },
       colors: {
         "dark-header": "rgb(17, 14, 14)",
@@ -28,6 +29,7 @@ module.exports = {
         wrapper: "calc(100vh - 110px)",
       },
       height: {
+        "60vh": "60vh",
         "80vh": "80vh",
         "90vh": "90vh",
       },

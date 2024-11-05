@@ -14,7 +14,7 @@ const informationBoardItems = [
     logo: "/images/Equipment Logo.jpg",
     titles: [
       "Modern equipment covering every aspect of desired workout",
-      "Electronic system for queuing for workout in case of big traffic",
+      "Electronic system for queuing",
     ],
     hoverColor: "bg-blue-400 ",
     hoverImage: "/images/Equipment Image.jpeg",

@@ -1,9 +1,17 @@
 "use client";
 import React, { useState } from "react";
 import { informationBoardItems } from "../data/InformationBoardItems";
+import { hover } from "@testing-library/user-event/dist/hover";
 
 export default function InformationBoard() {
   const [hovered, setHovered] = useState("0");
+  const hoverColors = [
+    "#FBBF24",
+    "#60A5FA ",
+    "#A78BFA",
+    "#2DD4BF ",
+    "#4ADE80 ",
+  ];
 
   return (
     <div className="flex flex-row h-90vh gap-20 justify-center mt-5 mb-5">
@@ -13,7 +21,11 @@ export default function InformationBoard() {
             <div
               key={item.key}
               onMouseEnter={() => setHovered(item.key)}
-              className={`hover:${item.hoverColor} hover:w-info-board-hover-width rounded-3xl  hover:z-10 hover:h-96  transition-transform transform hover:scale-105 cursor-pointer`}
+              style={{
+                backgroundColor:
+                  hovered === item.key ? hoverColors[item.key] : "transparent",
+              }}
+              className={` hover:w-info-board-hover-width rounded-3xl  hover:z-10 hover:h-96  transition-transform transform hover:scale-105 cursor-pointer`}
             >
               <div className="flex justify-start gap-10 m-8 flex-row h-14  ">
                 <div className="w-16 flex flex-col justify-center">
@@ -25,7 +37,7 @@ export default function InformationBoard() {
                 </div>
                 <div className="flex flex-col max-w-80">
                   {item.titles.map((title) => (
-                    <div key={item}>{title}</div>
+                    <div key={title}>{title}</div>
                   ))}
                 </div>
               </div>
