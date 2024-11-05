@@ -10,7 +10,7 @@ function Welcome() {
       <div className="bg-neutral-200 dark:bg-neutral-900 text-white">
         <div className="min-h-wrapper flex flex-col bg-gym-background bg-contain">
           <div className="flex flex-row h-90vh gap-20 justify-center mt-5">
-            <div className="flex  flex-col rounded-2xl w-1/3 border border-header-hover-dark border-solid bg-black bg-opacity-85">
+            <div className="hidden  flex-col rounded-2xl w-1/3 border border-header-hover-dark border-solid bg-black bg-opacity-85  xl:flex ">
               <div className="hover:bg-yellow-400  hover:w-info-board-hover-width rounded-3xl  hover:z-10 hover:h-96  transition-transform transform hover:scale-105 cursor-pointer ">
                 <div className="flex justify-start gap-10 m-8 flex-row h-14  ">
                   <div className="w-16 flex flex-col justify-center">

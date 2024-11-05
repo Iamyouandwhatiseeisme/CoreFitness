@@ -85,7 +85,7 @@ const Header = () => {
     "text-black hover:bg-gray-400 dark:hover:bg-header-hover-dark hover:rounded-3xl font-serif font-normal dark:text-yellow-500 p-5 text-center transition-header-hover-transition cursor-pointer";
 
   return (
-    <header className="flex flex-row justify-between bg-neutral-300 dark:bg-dark-header  w-auto  ">
+    <header className="flex flex-row justify-between bg-neutral-300 dark:bg-dark-header  w-full overflow-hidden  ">
       <div className="flex gap-38  pt-5 pb-5 pr-5">
         <Link
           href="/"
@@ -93,30 +93,30 @@ const Header = () => {
         >
           <img src={Logo.src} alt="logo"></img>
         </Link>
-        <nav className="rounded-3xl flex- flex-row  border border-solid dark:border-header-hover-dark h-20 items-center p-2">
+        <nav className="rounded-3xl flex- flex-row  border border-solid dark:border-header-hover-dark h-20 items-center p-2  hidden sm:block">
           <ul className="gap-5 flex  list-none flex-row">
             <li className={listItemStyle}>Equipment</li>
             <li className={listItemStyle}>Trainers</li>
             <li className={listItemStyle}>Certificates</li>
             <li className={listItemStyle}>Schedules</li>
-            <li className={listItemStyle}>Locations </li>
+            <li className={`${listItemStyle} hidden l:block`}>Locations </li>
             <Link href="/profile">
-              <li className={listItemStyle}>Profile</li>
+              <li className={`${listItemStyle} hidden xl:block`}>Profile</li>
             </Link>
             <Link href="/settings">
-              <li className={listItemStyle}>Settings</li>
+              <li className={`${listItemStyle} hidden xl:block`}>Settings</li>
             </Link>
             <Link href="/cart">
-              <li className={listItemStyle}>Cart</li>
+              <li className={`${listItemStyle} hidden xl:block`}>Cart</li>
             </Link>
             <Link href="/blog">
-              <li className={listItemStyle}>Blog</li>
+              <li className={`${listItemStyle} hidden xl:block`}>Blog</li>
             </Link>
             <Link href="/products">
-              <li className={listItemStyle}>Products</li>
+              <li className={`${listItemStyle} hidden xl:block`}>Products</li>
             </Link>
             <Link href="/posts">
-              <li className={listItemStyle}>Posts</li>
+              <li className={`${listItemStyle} hidden xl:block`}>Posts</li>
             </Link>
           </ul>
         </nav>
