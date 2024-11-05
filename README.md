@@ -10,13 +10,6 @@ A brief description of your Next.js application, its purpose, and any key featur
 
 - [Installation](#installation)
 - [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
-- [Features](#features)
-- [Usage](#usage)
-- [Deployment](#deployment)
-- [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
-- [License](#license)
 
 ---
 
