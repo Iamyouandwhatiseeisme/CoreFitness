@@ -31,7 +31,7 @@ export default function InformationBoard() {
                 width: isHovered ? "550px" : "",
                 transform: isHovered ? "scale(1.05)" : "scale(1.0)",
                 height: isHovered ? "384px" : "",
-                transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1);",
+                transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
               }}
               className={` rounded-3xl  hover:z-10 cursor-pointer`}
             >
