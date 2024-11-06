@@ -1,4 +1,4 @@
-import NotFound from "../notfound/NotFound";
+import NotFound from "../[lang]/notfound/NotFound";
 
 export default async function fetchSingleProduct({ id, fetchItemType }) {
   try {

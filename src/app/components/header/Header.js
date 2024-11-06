@@ -8,10 +8,13 @@ import { useEffect, useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { CSpinner } from "@coreui/react";
 import AuthenticationButton from "../logoutButton/LoggoutButton";
-import LanguageChange from "../languageChange/LanguageChange";
+import { useLocale } from "../providers/LanguageContext";
+
+import LocaleChange from "../LanguageChange/LanguageChange";
 
 const Header = (dict) => {
   const { user, error, isLoading } = useUser();
+  const { locale, setLocale } = useLocale();
   const [currentTheme, setCurrentTheme] = useState(cilSync);
 
   useEffect(() => {
@@ -100,7 +103,7 @@ const Header = (dict) => {
     <header className="flex flex-row justify-between bg-neutral-300 dark:bg-dark-header  w-full overflow-hidden  ">
       <div className="flex gap-38  pt-5 pb-5 pr-5">
         <Link
-          href="/"
+          href={`/${locale}`}
           className="mt-4 pr-2 w-14 h-14 bg-transparent  cursor-pointer items-center"
         >
           <img src={Logo.src} alt="logo"></img>
@@ -114,23 +117,23 @@ const Header = (dict) => {
             <li className={`${listItemStyle} hidden l:block`}>
               {dict.dict.Locations}
             </li>
-            <Link href="/profile">
+            <Link href={`/${locale}/profile`}>
               <li className={`${listItemStyle} hidden xl:block`}>
                 {dict.dict.Profile}
               </li>
             </Link>
 
-            <Link href="/blog">
+            <Link href={`/${locale}/blog`}>
               <li className={`${listItemStyle} hidden xl:block`}>
                 {dict.dict.Blog}
               </li>
             </Link>
-            <Link href="/products">
+            <Link href={`/${locale}/products`}>
               <li className={`${listItemStyle} hidden xl:block`}>
                 {dict.dict.Products}
               </li>
             </Link>
-            <Link href="/posts">
+            <Link href={`/${locale}/posts`}>
               <li className={`${listItemStyle} hidden xl:block`}>
                 {dict.dict.Posts}
               </li>
@@ -138,27 +141,31 @@ const Header = (dict) => {
           </ul>
         </nav>
       </div>
-      <LanguageChange></LanguageChange>
-
-      <div className="pr-20 flex flex-row items-center gap-6">
-        <DropDown
-          content={themeOptions}
-          buttonText={currentTheme}
-          toggleHandler={themeHandler}
-          type="Theme"
-        ></DropDown>
-        <div className="mb-2  ">
+      <div className="flex flex-row gap-2 items-center fixed right-10 justify-center mt-8">
+        <LocaleChange></LocaleChange>
+        <div>
+          <DropDown
+            content={themeOptions}
+            buttonText={currentTheme}
+            toggleHandler={themeHandler}
+            type="Theme"
+          ></DropDown>
+        </div>
+        <div className="">
           {isLoading ? (
-            <CSpinner variant="grow" />
+            <AuthenticationButton
+              type="Loading"
+              buttonText={"Loading"}
+            ></AuthenticationButton>
           ) : user ? (
             <AuthenticationButton
-              href="/api/auth/logout"
+              href={`/${locale}/api/auth/logout`}
               type="logout"
-              buttonText={dict.dict.Logout}
+              buttonText={"Log Out"}
             ></AuthenticationButton>
           ) : (
             <AuthenticationButton
-              href="/api/auth/login"
+              href={`/${locale}/api/auth/login`}
               type="login"
               buttonText={dict.dict.Login}
             ></AuthenticationButton>
