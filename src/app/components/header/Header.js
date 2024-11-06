@@ -1,7 +1,6 @@
 "use client";
 import "./Header.css";
 import Link from "next/link";
-import LoggoutButton from "../logoutButton/LoggoutButton";
 import Logo from "../../../../public/images/Header Logo.webp";
 import DropDown from "../DropDown/DropDown";
 import { cilSun, cilMoon, cilScreenDesktop, cilSync } from "@coreui/icons";
@@ -9,12 +8,14 @@ import { useEffect, useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { CSpinner } from "@coreui/react";
 import AuthenticationButton from "../logoutButton/LoggoutButton";
+import { useTranslation } from "react-i18next";
+import i18next from "../../../i18n";
 
 const Header = () => {
+  const { t, i18n } = useTranslation();
   const { user, error, isLoading } = useUser();
-
   const [currentTheme, setCurrentTheme] = useState(cilSync);
-
+  const lngs = ["en", "ka"];
   useEffect(() => {
     function checkTheme() {
       const systemSetting = localStorage.getItem("system");
@@ -29,6 +30,7 @@ const Header = () => {
 
     checkTheme();
   }, []);
+  console.log("render");
 
   const themeOptions = [
     {
@@ -95,33 +97,46 @@ const Header = () => {
         </Link>
         <nav className="rounded-3xl flex- flex-row  border border-solid dark:border-header-hover-dark h-20 items-center p-2  hidden sm:block">
           <ul className="gap-5 flex  list-none flex-row">
-            <li className={listItemStyle}>Equipment</li>
-            <li className={listItemStyle}>Trainers</li>
-            <li className={listItemStyle}>Certificates</li>
-            <li className={listItemStyle}>Schedules</li>
-            <li className={`${listItemStyle} hidden l:block`}>Locations </li>
+            <li className={listItemStyle}>{t("Equipment")}</li>
+            <li className={listItemStyle}>{t("Trainers")}</li>
+            <li className={listItemStyle}>{t("Certificates")}</li>
+            <li className={listItemStyle}>{t("Schedules")}</li>
+            <li className={`${listItemStyle} hidden l:block`}>
+              {t.Locations}{" "}
+            </li>
             <Link href="/profile">
-              <li className={`${listItemStyle} hidden xl:block`}>Profile</li>
+              <li className={`${listItemStyle} hidden xl:block`}>
+                {t("Profile")}
+              </li>
             </Link>
-            <Link href="/settings">
-              <li className={`${listItemStyle} hidden xl:block`}>Settings</li>
-            </Link>
-            <Link href="/cart">
-              <li className={`${listItemStyle} hidden xl:block`}>Cart</li>
-            </Link>
+
             <Link href="/blog">
-              <li className={`${listItemStyle} hidden xl:block`}>Blog</li>
+              <li className={`${listItemStyle} hidden xl:block`}>
+                {t("Blog")}
+              </li>
             </Link>
             <Link href="/products">
-              <li className={`${listItemStyle} hidden xl:block`}>Products</li>
+              <li className={`${listItemStyle} hidden xl:block`}>
+                {t("Products")}
+              </li>
             </Link>
             <Link href="/posts">
-              <li className={`${listItemStyle} hidden xl:block`}>Posts</li>
+              <li className={`${listItemStyle} hidden xl:block`}>
+                {t("Posts")}
+              </li>
             </Link>
           </ul>
         </nav>
       </div>
+
       <div className="pr-20 flex flex-row items-center gap-6">
+        {lngs.map((lng) => {
+          return (
+            <button key={lng} onClick={() => i18next.changeLanguage(lng)}>
+              {lng}
+            </button>
+          );
+        })}
         <DropDown
           content={themeOptions}
           buttonText={currentTheme}
@@ -135,14 +150,15 @@ const Header = () => {
             <AuthenticationButton
               href="/api/auth/logout"
               type="logout"
+              buttonText={t("Logout")}
             ></AuthenticationButton>
           ) : (
             <AuthenticationButton
               href="/api/auth/login"
               type="login"
+              buttonText={t("Login")}
             ></AuthenticationButton>
           )}
-          {/* <LoggoutButton /> */}
         </div>
       </div>
     </header>

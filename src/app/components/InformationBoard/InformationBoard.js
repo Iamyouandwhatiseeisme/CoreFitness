@@ -5,7 +5,6 @@ import { hover } from "@testing-library/user-event/dist/hover";
 
 export default function InformationBoard() {
   const [hovered, setHovered] = useState(0);
-  console.log(hovered);
   const hoverColors = [
     "#FBBF24",
     "#60A5FA ",

@@ -12,7 +12,6 @@ const DropDownItem = ({ children, onClick, toggleHandler, type }) => {
     if (type === "Theme") {
       children.changeTheme();
       toggleHandler();
-      console.log(localStorage.getItem("theme"));
     }
   };
 
