@@ -100,7 +100,7 @@ const Header = (dict) => {
     "text-black hover:bg-gray-400 dark:hover:bg-header-hover-dark hover:rounded-3xl font-serif font-normal dark:text-yellow-500 p-5 text-center transition-header-hover-transition cursor-pointer";
 
   return (
-    <header className="flex flex-row justify-between bg-neutral-300 dark:bg-dark-header  w-full overflow-hidden  ">
+    <header className="flex flex-row justify-between bg-neutral-300 dark:bg-dark-header  w-full overflow-hidden  relative ">
       <div className="flex gap-38  pt-5 pb-5 pr-5">
         <Link
           href={`/${locale}`}
@@ -141,7 +141,7 @@ const Header = (dict) => {
           </ul>
         </nav>
       </div>
-      <div className="flex flex-row gap-2 items-center fixed right-10 justify-center mt-8">
+      <div className="flex flex-row gap-2 items-center absolute right-10 justify-center mt-8">
         <LocaleChange></LocaleChange>
         <div>
           <DropDown

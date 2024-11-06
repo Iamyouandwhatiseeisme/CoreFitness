@@ -16,6 +16,8 @@ module.exports = {
       backgroundImage: {
         "gym-background": "url('/images/Gym Background.jpg')",
         gemini: "url('/images/Gemini.jpg')",
+        aurora: "url('/images/Aurora.webp')",
+        "chatbot-background": "url('/images/Chatbot Background.jpg')",
       },
       colors: {
         "dark-header": "rgb(17, 14, 14)",
@@ -37,6 +39,7 @@ module.exports = {
       width: {
         "info-board-hover-width": "550px",
         "60wv": "60vw",
+        "95%": "95%",
       },
       scale: {
         1.02: "1.02",
