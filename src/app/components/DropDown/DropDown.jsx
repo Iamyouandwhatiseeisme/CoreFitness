@@ -16,6 +16,7 @@ const DropDown = ({ buttonText, content, toggleHandler, type }) => {
         {buttonText}
       </DropDownButton>
       <DropDownContent
+        className="z-10"
         onSelect={toggleDropDown}
         open={open}
         toggleHandler={toggleHandler}
