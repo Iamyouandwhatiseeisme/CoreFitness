@@ -1,19 +1,27 @@
-import React from "react";
-// import Header from "../../components/header/Header.js";
-// import Footer from "../../components/footer/Footer.js";
-// import Content from "../../components/Content.js";
+"use client";
+import React, { useEffect } from "react";
 
-// import { CIcon } from "@coreui/icons-react";
-// import { cilFingerprint } from "@coreui/icons";
-// import "./index.css";
-import InformationBoard from "./components/InformationBoard/InformationBoard";
+import InformationBoard from "../components/InformationBoard/InformationBoard";
 
-function Welcome() {
+function Welcome({ params: { lang } }) {
+  useEffect(() => {
+    const theme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (!localStorage.getItem("theme")) {
+      localStorage.setItem("theme", theme ? "dark" : "light");
+      localStorage.setItem("system", true);
+    }
+    document.documentElement.classList.toggle(
+      "dark",
+      localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+    );
+  }, []);
   return (
     <main className="max-w-full overflow-x-hidden m-0">
       <div className="bg-neutral-200 dark:bg-neutral-900 text-white">
         <div>
-          <div className="min-h-wrapper flex flex-col bg-gemini ">
+          <div className="min-h-wrapper flex flex-col bg-gemini">
             <div className="flex flex-row h-90vh gap-3 justify-center mt-5 mb-5">
               <div className="flex flex-col gap-2 items-center mt-5 m-5 text-white  w-1/2">
                 <h1 className="font-serif text-3xl font-bold text-gray-300">

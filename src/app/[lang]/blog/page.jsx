@@ -1,7 +1,6 @@
-import BlogPost from "../components/BlogPost/BlogPost.js";
-import * as Mushrooms from "../components/data/Mushrooms.js";
-import Header from "../components/header/Header.js";
-import Footer from "../components/footer/Footer.js";
+import BlogPost from "../../components/BlogPost/BlogPost.js";
+import * as Mushrooms from "../../components/data/Mushrooms.js";
+
 import "./index.css";
 const MushroomsList = [
   Mushrooms.AmanitaMuscaria,
@@ -18,6 +17,7 @@ export default function Blog() {
         {MushroomsList.map((mushroom) => {
           return (
             <BlogPost
+              key={mushroom.key}
               image={mushroom.img}
               name={mushroom.name}
               description={mushroom.posts}

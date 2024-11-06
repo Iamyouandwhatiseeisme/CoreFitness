@@ -1,6 +1,5 @@
 import React from "react";
-import Header from "../components/header/Header.js";
-import Footer from "../components/footer/Footer.js";
+
 import "./index.css";
 
 const paragraphStyle = "p-2 text-2xl";
