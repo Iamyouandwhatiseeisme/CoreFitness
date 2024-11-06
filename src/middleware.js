@@ -5,29 +5,26 @@ import Negotiator from "negotiator";
 let locales = ["en-US", "ka"];
 
 function getLocale(request) {
-  let headers = { "accept-language": "en-US,en;q=0.5" };
-  let languages = new Negotiator({ headers }).languages();
-  let locales = ["en-US", "ka"];
-  let defaultLocale = "en-US";
+  const requestHeaders = new Headers(request.headers);
+  const accepted = requestHeaders.get("accept-language");
 
+  let headers = { "accept-language": `${accepted};q=0.5` };
+  let languages = new Negotiator({ headers }).languages();
+  console.log(languages, "languages");
+  let locales = ["en-US", "ka"];
+  let defaultLocale = "ka";
   return match(languages, locales, defaultLocale);
 }
 
 export function middleware(request) {
-  console.log("running");
-  // Check if there is any supported locale in the pathname
   const { pathname } = request.nextUrl;
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
-
   if (pathnameHasLocale) return;
-
-  // Redirect if there is no locale
   const locale = getLocale(request);
   request.nextUrl.pathname = `/${locale}${pathname}`;
-  // e.g. incoming request is /products
-  // The new URL is now /en-US/products
+
   return NextResponse.redirect(request.nextUrl);
 }
 

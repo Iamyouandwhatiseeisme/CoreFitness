@@ -4,19 +4,6 @@ import React, { useEffect } from "react";
 import InformationBoard from "../components/InformationBoard/InformationBoard";
 
 function Welcome({ params: { lang } }) {
-  useEffect(() => {
-    const theme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (!localStorage.getItem("theme")) {
-      localStorage.setItem("theme", theme ? "dark" : "light");
-      localStorage.setItem("system", true);
-    }
-    document.documentElement.classList.toggle(
-      "dark",
-      localStorage.theme === "dark" ||
-        (!("theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-    );
-  }, []);
   return (
     <main className="max-w-full overflow-x-hidden m-0">
       <div className="bg-neutral-200 dark:bg-neutral-900 text-white">

@@ -8,12 +8,11 @@ import { useEffect, useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { CSpinner } from "@coreui/react";
 import AuthenticationButton from "../logoutButton/LoggoutButton";
+import LanguageChange from "../languageChange/LanguageChange";
 
 const Header = (dict) => {
   const { user, error, isLoading } = useUser();
   const [currentTheme, setCurrentTheme] = useState(cilSync);
-  const dictionary = dict.dict;
-  console.log(dictionary);
 
   useEffect(() => {
     function checkTheme() {
@@ -61,6 +60,19 @@ const Header = (dict) => {
       },
     },
   ];
+  useEffect(() => {
+    const theme = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (!localStorage.getItem("theme")) {
+      localStorage.setItem("theme", theme ? "dark" : "light");
+      localStorage.setItem("system", true);
+    }
+    document.documentElement.classList.toggle(
+      "dark",
+      localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches)
+    );
+  }, []);
   const themeHandler = () => {
     document.documentElement.classList.toggle(
       "dark",
@@ -95,46 +107,40 @@ const Header = (dict) => {
         </Link>
         <nav className="rounded-3xl flex- flex-row  border border-solid dark:border-header-hover-dark h-20 items-center p-2  hidden sm:block">
           <ul className="gap-5 flex  list-none flex-row">
-            <li className={listItemStyle}>{dictionary.Equipment}</li>
-            <li className={listItemStyle}>{dictionary.Trainers}</li>
-            <li className={listItemStyle}>{dictionary.Certificates}</li>
-            <li className={listItemStyle}>{dictionary.Schedules}</li>
+            <li className={listItemStyle}>{dict.dict.Equipment}</li>
+            <li className={listItemStyle}>{dict.dict.Trainers}</li>
+            <li className={listItemStyle}>{dict.dict.Certificates}</li>
+            <li className={listItemStyle}>{dict.dict.Schedules}</li>
             <li className={`${listItemStyle} hidden l:block`}>
-              {dictionary.Locations}
+              {dict.dict.Locations}
             </li>
             <Link href="/profile">
               <li className={`${listItemStyle} hidden xl:block`}>
-                {dictionary.Profile}
+                {dict.dict.Profile}
               </li>
             </Link>
 
             <Link href="/blog">
               <li className={`${listItemStyle} hidden xl:block`}>
-                {dictionary.Blog}
+                {dict.dict.Blog}
               </li>
             </Link>
             <Link href="/products">
               <li className={`${listItemStyle} hidden xl:block`}>
-                {dictionary.Products}
+                {dict.dict.Products}
               </li>
             </Link>
             <Link href="/posts">
               <li className={`${listItemStyle} hidden xl:block`}>
-                {dictionary.Posts}
+                {dict.dict.Posts}
               </li>
             </Link>
           </ul>
         </nav>
       </div>
+      <LanguageChange></LanguageChange>
 
       <div className="pr-20 flex flex-row items-center gap-6">
-        {/* {lngs.map((lng) => {
-          return (
-            <button key={lng} onClick={() => i18next.changeLanguage(lng)}>
-              {lng}
-            </button>
-          );
-        })} */}
         <DropDown
           content={themeOptions}
           buttonText={currentTheme}
@@ -148,13 +154,13 @@ const Header = (dict) => {
             <AuthenticationButton
               href="/api/auth/logout"
               type="logout"
-              buttonText={dictionary.Logout}
+              buttonText={dict.dict.Logout}
             ></AuthenticationButton>
           ) : (
             <AuthenticationButton
               href="/api/auth/login"
               type="login"
-              buttonText={dictionary.Login}
+              buttonText={dict.dict.Login}
             ></AuthenticationButton>
           )}
         </div>

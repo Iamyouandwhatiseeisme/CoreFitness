@@ -1,7 +1,5 @@
 "use client";
 
-import Header from "../../components/header/Header";
-import Footer from "../../components/footer/Footer";
 import Link from "next/link";
 import "./index.css";
 import SearchBar from "../../components/SearchBar/SearchBar";
