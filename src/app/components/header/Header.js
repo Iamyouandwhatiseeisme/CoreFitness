@@ -8,14 +8,13 @@ import { useEffect, useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
 import { CSpinner } from "@coreui/react";
 import AuthenticationButton from "../logoutButton/LoggoutButton";
-import { useTranslation } from "react-i18next";
-import i18next from "../../../i18n";
 
-const Header = () => {
-  const { t, i18n } = useTranslation();
+const Header = (dict) => {
   const { user, error, isLoading } = useUser();
   const [currentTheme, setCurrentTheme] = useState(cilSync);
-  const lngs = ["en", "ka"];
+  const dictionary = dict.dict;
+  console.log(dictionary);
+
   useEffect(() => {
     function checkTheme() {
       const systemSetting = localStorage.getItem("system");
@@ -30,7 +29,6 @@ const Header = () => {
 
     checkTheme();
   }, []);
-  console.log("render");
 
   const themeOptions = [
     {
@@ -97,32 +95,32 @@ const Header = () => {
         </Link>
         <nav className="rounded-3xl flex- flex-row  border border-solid dark:border-header-hover-dark h-20 items-center p-2  hidden sm:block">
           <ul className="gap-5 flex  list-none flex-row">
-            <li className={listItemStyle}>{t("Equipment")}</li>
-            <li className={listItemStyle}>{t("Trainers")}</li>
-            <li className={listItemStyle}>{t("Certificates")}</li>
-            <li className={listItemStyle}>{t("Schedules")}</li>
+            <li className={listItemStyle}>{dictionary.Equipment}</li>
+            <li className={listItemStyle}>{dictionary.Trainers}</li>
+            <li className={listItemStyle}>{dictionary.Certificates}</li>
+            <li className={listItemStyle}>{dictionary.Schedules}</li>
             <li className={`${listItemStyle} hidden l:block`}>
-              {t.Locations}{" "}
+              {dictionary.Locations}
             </li>
             <Link href="/profile">
               <li className={`${listItemStyle} hidden xl:block`}>
-                {t("Profile")}
+                {dictionary.Profile}
               </li>
             </Link>
 
             <Link href="/blog">
               <li className={`${listItemStyle} hidden xl:block`}>
-                {t("Blog")}
+                {dictionary.Blog}
               </li>
             </Link>
             <Link href="/products">
               <li className={`${listItemStyle} hidden xl:block`}>
-                {t("Products")}
+                {dictionary.Products}
               </li>
             </Link>
             <Link href="/posts">
               <li className={`${listItemStyle} hidden xl:block`}>
-                {t("Posts")}
+                {dictionary.Posts}
               </li>
             </Link>
           </ul>
@@ -130,13 +128,13 @@ const Header = () => {
       </div>
 
       <div className="pr-20 flex flex-row items-center gap-6">
-        {lngs.map((lng) => {
+        {/* {lngs.map((lng) => {
           return (
             <button key={lng} onClick={() => i18next.changeLanguage(lng)}>
               {lng}
             </button>
           );
-        })}
+        })} */}
         <DropDown
           content={themeOptions}
           buttonText={currentTheme}
@@ -150,13 +148,13 @@ const Header = () => {
             <AuthenticationButton
               href="/api/auth/logout"
               type="logout"
-              buttonText={t("Logout")}
+              buttonText={dictionary.Logout}
             ></AuthenticationButton>
           ) : (
             <AuthenticationButton
               href="/api/auth/login"
               type="login"
-              buttonText={t("Login")}
+              buttonText={dictionary.Login}
             ></AuthenticationButton>
           )}
         </div>
