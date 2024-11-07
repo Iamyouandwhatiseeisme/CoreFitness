@@ -12,6 +12,10 @@ import {
 } from "@mui/material";
 import { FilterSharp, WidthFull } from "@mui/icons-material";
 import { ClipLoader } from "react-spinners";
+import WeightButtonGroup from "../WeightButtonGroup/WeightButtonGroup";
+import GenderButtonGroup from "../GenderButtonGroup/GenderButtonGroup";
+import AgeButtonGroup from "../AgeButtonGroup/AgeButtonGroup";
+import ActivityGroupButton from "../ActivityGroupButton/ActivityGroupButton";
 
 export default function ChatWindow() {
   const [userInfo, setUserInfo] = useState({
@@ -53,6 +57,13 @@ export default function ChatWindow() {
     const text = response.text();
     setResponse(text);
   }
+  const buttonInputs = {
+    muscleGoalData: ["Lose", "Maintain", "Gain"],
+    genderData: ["Male", "Female"],
+    ageData: [Array.from({ length: 86 }, (_, i) => i + 15)],
+    activityData: ["One", "Two", "Three", "Everyday"],
+    weightData: [Array.from({ length: 150 }, (_, i) => i + 30)],
+  };
 
   return (
     <div>
@@ -67,195 +78,41 @@ export default function ChatWindow() {
               <div className="w-95% h-full  bg-opacity-35 border border-gray-400 rounded-2xl m-5 grid grid-rows-2">
                 <div>
                   <div className="flex flex-row ">
-                    <div className="flex flex-col w-1/2 h-3/5 rounded-2xl m-5 items-center border justify-center bg-gray-400 bg-opacity-20 ">
-                      <label className="font-serif font-semibold">
-                        Your primary goal is to:{" "}
-                      </label>
-
-                      <ToggleButtonGroup
-                        className="bg-blue-400"
-                        size="large"
-                        value={userInfo.muscleGoal}
-                        exclusive
-                        onChange={(e, value) =>
-                          handleChange("muscleGoal", value)
-                        }
-                        aria-label="Platform"
-                      >
-                        <ToggleButton
-                          style={{
-                            background:
-                              userInfo.muscleGoal === "Lose"
-                                ? "white"
-                                : "#60A5FA",
-                          }}
-                          className="text-black hover:bg-gray-400"
-                          value="Lose"
-                        >
-                          Lose
-                        </ToggleButton>
-                        <ToggleButton
-                          style={{
-                            background:
-                              userInfo.muscleGoal === "Maintain"
-                                ? "white"
-                                : "#60A5FA",
-                          }}
-                          className="text-black hover:bg-gray-400"
-                          value="Maintain"
-                        >
-                          Maintain
-                        </ToggleButton>
-                        <ToggleButton
-                          style={{
-                            background:
-                              userInfo.muscleGoal === "Gain"
-                                ? "white"
-                                : "#60A5FA",
-                          }}
-                          className="text-black hover:bg-gray-400"
-                          value="Gain"
-                        >
-                          Gain
-                        </ToggleButton>
-                      </ToggleButtonGroup>
-                      <label className="font-serif font-bold">Weight </label>
-                    </div>
+                    <WeightButtonGroup
+                      muscleGoalData={buttonInputs.muscleGoalData}
+                      handleChange={handleChange}
+                      userInfo={userInfo}
+                    ></WeightButtonGroup>
                     <div className="flex flex-row w-1/2 h-3/5 rounded-2xl m-5 items-center border justify-start mr-5 p-2 bg-gray-400 bg-opacity-20 ">
-                      <label className="font-serif font-bold mr-2">
-                        Gender:{" "}
-                      </label>
-                      <ToggleButtonGroup
-                        orientation="vertical"
-                        className="bg-blue-400"
-                        size="small"
-                        value={userInfo.gender}
-                        exclusive
-                        onChange={(e, value) => handleChange("gender", value)}
-                        aria-label="Platform"
-                      >
-                        <ToggleButton
-                          style={{
-                            background:
-                              userInfo.gender === "Male" ? "white" : "#60A5FA",
-                          }}
-                          className="text-black hover:bg-gray-400"
-                          value="Male"
-                        >
-                          Male
-                        </ToggleButton>
-                        <ToggleButton
-                          style={{
-                            background:
-                              userInfo.gender === "Female"
-                                ? "white"
-                                : "#60A5FA",
-                          }}
-                          className="text-black hover:bg-gray-400"
-                          value="Female"
-                        >
-                          Female
-                        </ToggleButton>
-                      </ToggleButtonGroup>
+                      <GenderButtonGroup
+                        userInfo={userInfo}
+                        genderData={buttonInputs.genderData}
+                        handleChange={handleChange}
+                      ></GenderButtonGroup>
                       <div className="ml-2 w-1/2 ">
-                        <FormControl
-                          color="neutral"
-                          className="bg-white "
-                          fullWidth
-                        >
-                          <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={userInfo.age}
-                            onChange={(e, value) => {
-                              handleChange("age", value.props.value);
-                            }}
-                          >
-                            <MenuItem value="Age">
-                              <em>Age</em>
-                            </MenuItem>
-                            {Array.from({ length: 85 }, (_, i) => {
-                              const value = i + 16;
-                              return (
-                                <MenuItem key={value} value={value}>
-                                  {value}
-                                </MenuItem>
-                              );
-                            })}
-                          </Select>
-                        </FormControl>
+                        <AgeButtonGroup
+                          userInfo={userInfo}
+                          ageData={buttonInputs.ageData}
+                          handleChange={handleChange}
+                        ></AgeButtonGroup>
                       </div>
                     </div>
                   </div>
 
                   <div className="flex flex-row gap-10 ">
                     <div className="flex flex-col ml-10 mb-2 gap-1">
-                      <h1 className="font-serif">
-                        How many days a week do you exercise?
-                      </h1>
-                      <div className="w-1/2">
-                        <FormControl
-                          color="neutral"
-                          className="bg-white "
-                          fullWidth
-                        >
-                          <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={userInfo.activity}
-                            onChange={(e, value) => {
-                              console.log(value.props.value);
-                              handleChange("activity", value.props.value);
-                            }}
-                          >
-                            <MenuItem key="One" value="One">
-                              <em>One</em>
-                            </MenuItem>
-                            <MenuItem key="Two" value="Two">
-                              <em>Two</em>
-                            </MenuItem>
-                            <MenuItem key="Trhee" value="Trhee">
-                              <em>Three</em>
-                            </MenuItem>
-                            <MenuItem key="Everyday" value="Everyday">
-                              <em>Everyday</em>
-                            </MenuItem>
-                          </Select>
-                        </FormControl>
-                      </div>
+                      <ActivityGroupButton
+                        userInfo={userInfo}
+                        handleChange={handleChange}
+                        activityData={buttonInputs.activityData}
+                      ></ActivityGroupButton>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <h1 className="font-serif">
-                        Please specify your weight in KGs
-                      </h1>
-                      <div className=" w-1/2 ">
-                        <FormControl
-                          color="neutral"
-                          className="bg-white "
-                          fullWidth
-                        >
-                          <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={userInfo.weight}
-                            onChange={(e, value) => {
-                              handleChange("weight", value.props.value);
-                            }}
-                          >
-                            <MenuItem value="Weight">
-                              <em>Weight</em>
-                            </MenuItem>
-                            {Array.from({ length: 150 }, (_, i) => {
-                              const value = i + 30;
-                              return (
-                                <MenuItem key={value} value={value}>
-                                  {value}
-                                </MenuItem>
-                              );
-                            })}
-                          </Select>
-                        </FormControl>
-                      </div>
+                      <WeightButtonGroup
+                        handleChange={handleChange}
+                        userInfo={userInfo}
+                        weightData={buttonInputs.weightData}
+                      ></WeightButtonGroup>
                     </div>
                     <div className="w-1/4 flex flex-col items-center justify-center">
                       <Button
