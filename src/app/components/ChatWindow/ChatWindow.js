@@ -1,17 +1,25 @@
 import React, { useState } from "react";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import SendIcon from "@mui/icons-material/Send";
+
 import {
   ToggleButtonGroup,
   ToggleButton,
   FormControl,
-  InputLabel,
   Select,
   MenuItem,
+  Button,
 } from "@mui/material";
 
 export default function ChatWindow() {
   const [muscleGoal, setMuscleGoal] = useState("Lose");
   const [gender, setGender] = useState("Male");
   const [age, setAge] = useState("Age");
+  const [aiResponse, setResponse] = useState("");
+
+  const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GOOGLE_API_KEY);
+  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
   const handleAgeChange = (e) => {
     setAge(e.target.value);
   };
@@ -21,6 +29,13 @@ export default function ChatWindow() {
   const handleGenderChange = (e) => {
     setGender(e.target.value);
   };
+  async function aiRun() {
+    const prompt = `random meals related to  category with images and prices`;
+    const result = await model.generateContent(prompt);
+    const response = result.response;
+    const text = response.text();
+    setResponse(text);
+  }
 
   return (
     <div>
@@ -33,7 +48,7 @@ export default function ChatWindow() {
 
             <div className="flex flex-col w-full h-60vh bg-gray-800 bg-opacity-75 rounded-2xl items-center border border-b-gray-500 ">
               <div className="w-95% h-full  bg-opacity-35 border border-gray-400 rounded-2xl m-5 grid grid-rows-2">
-                <div className="flex flex-row">
+                <div className="flex flex-row ">
                   <div className="flex flex-col w-1/2 h-3/5 rounded-2xl m-5 items-center border justify-center bg-gray-400 bg-opacity-20 ">
                     <label className="font-serif font-semibold">
                       Your primary goal is to:{" "}
@@ -79,7 +94,7 @@ export default function ChatWindow() {
                     </ToggleButtonGroup>
                     <label className="font-serif font-bold">Weight </label>
                   </div>
-                  <div className="flex flex-row w-1/2 h-3/5 rounded-2xl m-5 items-center border justify-start p-5 bg-gray-400 bg-opacity-20 ">
+                  <div className="flex flex-row w-1/2 h-3/5 rounded-2xl m-5 items-center border justify-start mr-5 p-2 bg-gray-400 bg-opacity-20 ">
                     <label className="font-serif font-bold mr-2">
                       Gender:{" "}
                     </label>
@@ -139,8 +154,16 @@ export default function ChatWindow() {
                     </div>
                   </div>
                 </div>
-
-                <div className="bg-green-400 w-1/4 h-1/4 rounded-2xl m-5"></div>
+                <div className="flex flex-row ml-10 mb-2 gap-1">
+                  <div className="flex flex-col w-3/4 border border-solid border-gray-400 bg-gray-800 rounded-xl"></div>
+                  <Button
+                    onClick={aiRun}
+                    variant="contained"
+                    endIcon={<SendIcon />}
+                  >
+                    Send
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
