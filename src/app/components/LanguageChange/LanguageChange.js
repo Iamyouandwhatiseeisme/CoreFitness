@@ -8,7 +8,7 @@ import { Switch } from "@mui/material";
 import ReactCountryFlag from "react-country-flag";
 
 function LocaleChange() {
-  const [checked, setChecked] = useState();
+  const [checked, setChecked] = useState(false);
   const router = useRouter();
   const { locale, setLocale } = useLocale();
   const pathname = usePathname();
