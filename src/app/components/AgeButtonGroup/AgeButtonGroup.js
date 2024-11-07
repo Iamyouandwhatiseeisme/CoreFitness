@@ -19,7 +19,7 @@ export default function AgeButtonGroup({ ageData, userInfo, handleChange }) {
           {ageData.map((item) => {
             return (
               <MenuItem key={item} value={item}>
-                {item}
+                <em>{item}</em>
               </MenuItem>
             );
           })}

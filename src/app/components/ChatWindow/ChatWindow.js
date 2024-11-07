@@ -12,10 +12,11 @@ import {
 } from "@mui/material";
 import { FilterSharp, WidthFull } from "@mui/icons-material";
 import { ClipLoader } from "react-spinners";
-import WeightButtonGroup from "../WeightButtonGroup/WeightButtonGroup";
+import MuscleGoalButtonGroup from "../MuscleGoalButtonGroup/MuscleGoalButtonGroup";
 import GenderButtonGroup from "../GenderButtonGroup/GenderButtonGroup";
 import AgeButtonGroup from "../AgeButtonGroup/AgeButtonGroup";
 import ActivityGroupButton from "../ActivityGroupButton/ActivityGroupButton";
+import WeightGroupButton from "../WeightGroupButton/WeightGroupButton";
 
 export default function ChatWindow() {
   const [userInfo, setUserInfo] = useState({
@@ -60,9 +61,9 @@ export default function ChatWindow() {
   const buttonInputs = {
     muscleGoalData: ["Lose", "Maintain", "Gain"],
     genderData: ["Male", "Female"],
-    ageData: [Array.from({ length: 86 }, (_, i) => i + 15)],
+    ageData: [...Array.from({ length: 86 }, (_, i) => i + 15)],
     activityData: ["One", "Two", "Three", "Everyday"],
-    weightData: [Array.from({ length: 150 }, (_, i) => i + 30)],
+    weightData: [...Array.from({ length: 150 }, (_, i) => i + 30)],
   };
 
   return (
@@ -78,11 +79,12 @@ export default function ChatWindow() {
               <div className="w-95% h-full  bg-opacity-35 border border-gray-400 rounded-2xl m-5 grid grid-rows-2">
                 <div>
                   <div className="flex flex-row ">
-                    <WeightButtonGroup
+                    <MuscleGoalButtonGroup
                       muscleGoalData={buttonInputs.muscleGoalData}
                       handleChange={handleChange}
                       userInfo={userInfo}
-                    ></WeightButtonGroup>
+                    ></MuscleGoalButtonGroup>
+
                     <div className="flex flex-row w-1/2 h-3/5 rounded-2xl m-5 items-center border justify-start mr-5 p-2 bg-gray-400 bg-opacity-20 ">
                       <GenderButtonGroup
                         userInfo={userInfo}
@@ -108,11 +110,11 @@ export default function ChatWindow() {
                       ></ActivityGroupButton>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <WeightButtonGroup
+                      <WeightGroupButton
                         handleChange={handleChange}
                         userInfo={userInfo}
                         weightData={buttonInputs.weightData}
-                      ></WeightButtonGroup>
+                      ></WeightGroupButton>
                     </div>
                     <div className="w-1/4 flex flex-col items-center justify-center">
                       <Button

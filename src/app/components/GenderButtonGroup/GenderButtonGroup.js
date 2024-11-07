@@ -24,6 +24,7 @@ export default function GenderButtonGroup({
               background: userInfo.gender === item ? "White" : "#60A5FA",
             }}
             className="text-black hover:bg-gray-400"
+            value={item}
           >
             {item}
           </ToggleButton>
