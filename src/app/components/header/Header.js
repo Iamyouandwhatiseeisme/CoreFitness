@@ -161,7 +161,7 @@ const Header = (dict) => {
             <AuthenticationButton
               href={`/${locale}/api/auth/logout`}
               type="logout"
-              buttonText={"Log Out"}
+              buttonText={dict.dict.Logout}
             ></AuthenticationButton>
           ) : (
             <AuthenticationButton
