@@ -9,6 +9,7 @@ export default function GenderButtonGroup({
   return (
     <div>
       <label className="font-serif font-bold mr-2">Gender: </label>
+
       <ToggleButtonGroup
         orientation="vertical"
         className="bg-blue-400"

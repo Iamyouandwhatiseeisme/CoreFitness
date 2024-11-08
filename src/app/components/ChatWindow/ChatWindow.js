@@ -70,22 +70,22 @@ export default function ChatWindow({ dictChat }) {
     <div>
       <div className="min-h-wrapper flex flex-col bg-chatbot-background bg-cover">
         <div className="flex flex-row h-90vh gap-3 justify-center mt-5 mb-5 ">
-          <div className="flex flex-col gap-2 items-center mt-5 m-5 text-white  w-1/2">
-            <h1 className="font-serif text-3xl font-semibold text-white">
+          <div className="flex flex-col gap-2 items-center mt-5 m-5 text-white  w-1/2   ">
+            <h1 className="font-serif text-3xl font-semibold text-white ">
               Try our AI assistant to create a diet plan
             </h1>
 
-            <div className="flex flex-col w-full h-80vh bg-gray-800 bg-opacity-75 rounded-2xl items-center border border-b-gray-500 ">
-              <div className="w-95% h-full  bg-opacity-35 border border-gray-400 rounded-2xl m-5 grid grid-rows-2">
+            <div className=" shadow-lg shadow-slate-200 flex flex-col w-full h-80vh bg-gray-800 bg-opacity-75 rounded-2xl items-center border border-b-gray-500 ">
+              <div className="w-95% h-full shadow-lg shadow-slate-800  bg-opacity-35 border border-gray-400 rounded-2xl m-5 grid grid-rows-2">
                 <div>
-                  <div className="flex flex-row ">
+                  <div className="flex flex-row">
                     <MuscleGoalButtonGroup
                       muscleGoalData={buttonInputs.muscleGoalData}
                       handleChange={handleChange}
                       userInfo={userInfo}
                     ></MuscleGoalButtonGroup>
 
-                    <div className="flex flex-row w-1/2 h-3/5 rounded-2xl m-5 items-center border justify-start mr-5 p-2 bg-gray-400 bg-opacity-20 ">
+                    <div className="flex flex-row w-1/2 h-3/5 rounded-2xl m-5 items-center border justify-start mr-5 p-2 bg-gray-400 bg-opacity-20">
                       <GenderButtonGroup
                         userInfo={userInfo}
                         genderData={buttonInputs.genderData}
@@ -128,7 +128,7 @@ export default function ChatWindow({ dictChat }) {
                   </div>
                 </div>
 
-                <div className="flex flex-row m-5 mb-2 gap-1 ">
+                <div className="flex flex-row m-5 mb-2 gap-1 shadow-lg shadow-slate-700 rounded-xl ">
                   <textarea
                     className="flex flex-col w-full border border-solid border-gray-400 bg-gray-800 rounded-xl resize-none font-serif text-sm"
                     readOnly
