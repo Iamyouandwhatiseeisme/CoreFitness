@@ -159,13 +159,13 @@ const Header = (dict) => {
             ></AuthenticationButton>
           ) : user ? (
             <AuthenticationButton
-              href={`/${locale}/api/auth/logout`}
+              href={`/api/auth/logout`}
               type="logout"
               buttonText={dict.dict.Logout}
             ></AuthenticationButton>
           ) : (
             <AuthenticationButton
-              href={`/${locale}/api/auth/login`}
+              href={`/api/auth/login`}
               type="login"
               buttonText={dict.dict.Login}
             ></AuthenticationButton>

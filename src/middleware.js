@@ -21,7 +21,15 @@ export function middleware(request) {
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
+
   if (pathnameHasLocale) return;
+  if (
+    pathname.startsWith(
+      "/api/auth/[auth0]" || pathname.startsWith("api/auth/logout")
+    )
+  ) {
+    return NextResponse.next();
+  }
   const locale = getLocale(request);
   request.nextUrl.pathname = `/${locale}${pathname}`;
 
@@ -30,8 +38,6 @@ export function middleware(request) {
 
 export const config = {
   matcher: [
-    // Skip all internal paths (_next)
-    // "/((?!_next).*)",
     "/",
     "/about",
     "/404",
@@ -40,8 +46,5 @@ export const config = {
     "/products",
     "/products/:id*",
     "/profile",
-
-    // Optional: only run on root (/) URL
-    // '/'
   ],
 };
