@@ -14,10 +14,11 @@ export const metadata = {
 export default async function RootLayout({ children, params: { lang } }) {
   const dict = await getDictionary(lang);
   const dictHeader = dict.header;
+  const dictChat = dict.chatWindow;
 
   return (
     <html lang="en">
-      <LocaleProvider>
+      <LocaleProvider dictChat={dictChat}>
         <UserProvider>
           <body className="bg-neutral-200 dark:bg-neutral-900">
             <Header dict={dictHeader}></Header>

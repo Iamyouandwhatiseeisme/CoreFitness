@@ -5,7 +5,7 @@ import { createContext, useState, useContext, useEffect } from "react";
 const localeContext = createContext();
 let locales = ["en-US", "ka"];
 
-export const LocaleProvider = ({ children }) => {
+export const LocaleProvider = ({ children, dictChat }) => {
   const [locale, setLocale] = useState();
   const pathname = usePathname();
 
@@ -17,7 +17,7 @@ export const LocaleProvider = ({ children }) => {
   }, [locale]);
 
   return (
-    <localeContext.Provider value={{ locale, setLocale }}>
+    <localeContext.Provider value={{ locale, setLocale, chatWindow: dictChat }}>
       {children}
     </localeContext.Provider>
   );

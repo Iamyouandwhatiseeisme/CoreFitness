@@ -2,29 +2,24 @@ import React, { use, useEffect, useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import SendIcon from "@mui/icons-material/Send";
 
-import {
-  ToggleButtonGroup,
-  ToggleButton,
-  FormControl,
-  Select,
-  MenuItem,
-  Button,
-} from "@mui/material";
-import { FilterSharp, WidthFull } from "@mui/icons-material";
+import { Button } from "@mui/material";
 import { ClipLoader } from "react-spinners";
 import MuscleGoalButtonGroup from "../MuscleGoalButtonGroup/MuscleGoalButtonGroup";
 import GenderButtonGroup from "../GenderButtonGroup/GenderButtonGroup";
 import AgeButtonGroup from "../AgeButtonGroup/AgeButtonGroup";
 import ActivityGroupButton from "../ActivityGroupButton/ActivityGroupButton";
 import WeightGroupButton from "../WeightGroupButton/WeightGroupButton";
+import { useLocale } from "../providers/LanguageContext";
 
-export default function ChatWindow() {
+export default function ChatWindow({ dictChat }) {
+  const { chatWindow } = useLocale();
+
   const [userInfo, setUserInfo] = useState({
-    muscleGoal: "Lose",
-    gender: "Male",
-    age: "Age",
-    activity: "One",
-    weight: "Weight",
+    muscleGoal: chatWindow.Lose,
+    gender: chatWindow.Male,
+    age: chatWindow.Age,
+    activity: chatWindow.One,
+    weight: chatWindow.Weight,
   });
   const [aiResponse, setResponse] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -59,10 +54,15 @@ export default function ChatWindow() {
     setResponse(text);
   }
   const buttonInputs = {
-    muscleGoalData: ["Lose", "Maintain", "Gain"],
-    genderData: ["Male", "Female"],
+    muscleGoalData: [chatWindow.Lose, chatWindow.Maintain, chatWindow.Gain],
+    genderData: [chatWindow.Male, chatWindow.Female],
     ageData: [...Array.from({ length: 86 }, (_, i) => i + 15)],
-    activityData: ["One", "Two", "Three", "Everyday"],
+    activityData: [
+      chatWindow.One,
+      chatWindow.Two,
+      chatWindow.Three,
+      chatWindow.Everyday,
+    ],
     weightData: [...Array.from({ length: 150 }, (_, i) => i + 30)],
   };
 
@@ -122,7 +122,7 @@ export default function ChatWindow() {
                         variant="contained"
                         endIcon={<SendIcon />}
                       >
-                        Send
+                        {chatWindow.Send}
                       </Button>
                     </div>
                   </div>

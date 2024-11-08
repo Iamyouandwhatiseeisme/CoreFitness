@@ -1,11 +1,13 @@
 import { FormControl, MenuItem, Select } from "@mui/material";
 import React from "react";
+import { useLocale } from "../providers/LanguageContext";
 
 export default function WeightGroupButton({
   handleChange,
   userInfo,
   weightData,
 }) {
+  const { chatWindow } = useLocale();
   return (
     <div>
       <h1 className="font-serif">Please specify your weight in KGs</h1>
@@ -19,8 +21,8 @@ export default function WeightGroupButton({
               handleChange("weight", value.props.value);
             }}
           >
-            <MenuItem value="Weight">
-              <em>Weight</em>
+            <MenuItem key={chatWindow.Weight} value={chatWindow.Weight}>
+              <em>{chatWindow.Weight}</em>
             </MenuItem>
             {weightData.map((item) => (
               <MenuItem key={item} value={item}>

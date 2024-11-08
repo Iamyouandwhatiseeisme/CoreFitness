@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React from "react";
 
 import InformationBoard from "../components/InformationBoard/InformationBoard";
 import ChatWindow from "../components/ChatWindow/ChatWindow";
