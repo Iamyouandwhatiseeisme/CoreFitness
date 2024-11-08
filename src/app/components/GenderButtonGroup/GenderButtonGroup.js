@@ -20,6 +20,7 @@ export default function GenderButtonGroup({
       >
         {genderData.map((item) => (
           <ToggleButton
+            key={item}
             style={{
               background: userInfo.gender === item ? "White" : "#60A5FA",
             }}

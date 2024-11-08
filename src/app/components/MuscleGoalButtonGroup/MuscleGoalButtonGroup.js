@@ -23,6 +23,7 @@ export default function muscleGoalButtonGroup({
         {muscleGoalData.map((goal) => {
           return (
             <ToggleButton
+              key={goal}
               className="text-black hover:bg-gray-400"
               value={goal}
               style={{

@@ -130,7 +130,7 @@ export default function ChatWindow() {
 
                 <div className="flex flex-row m-5 mb-2 gap-1 ">
                   <textarea
-                    className="flex flex-col w-full border border-solid border-gray-400 bg-gray-800 rounded-xl resize-none"
+                    className="flex flex-col w-full border border-solid border-gray-400 bg-gray-800 rounded-xl resize-none font-serif text-sm"
                     readOnly
                     value={isLoading ? "" : aiResponse}
                   ></textarea>

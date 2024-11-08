@@ -13,7 +13,7 @@ export default function AgeButtonGroup({ ageData, userInfo, handleChange }) {
             handleChange("age", value.props.value);
           }}
         >
-          <MenuItem value="Age">
+          <MenuItem key="Age" value="Age">
             <em>Age</em>
           </MenuItem>
           {ageData.map((item) => {
