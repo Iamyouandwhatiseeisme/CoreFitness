@@ -46,7 +46,7 @@ export default function InformationBoard() {
       key: 3,
       logo: "/images/Professional Logo.avif",
       titles: [
-        informationBoard.CertifiedTrainer,
+        informationBoard.CertifiedTrainers,
         informationBoard.PilatesAndYoga,
       ],
       hoverColor: "bg-teal-400 ",
