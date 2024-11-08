@@ -97,7 +97,7 @@ const AddButton = ({ item, addProduct }) => {
   };
 
   return (
-    <div className="fixed right-6 top-16">
+    <div className="fixed right-6 top-36">
       <button
         className="pl-8 pt-5 pr-8 pb-5 text-2xl shadow-small-black-shadow cursor-pointer items-center font-semibold bg-gray-400 dark:bg-gray-200, text-black dark:text-white border-none rounded-50  delay-0.3 ease-in-out hover:scale-1.02"
         onClick={handleClick}
