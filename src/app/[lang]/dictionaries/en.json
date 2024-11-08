@@ -27,5 +27,17 @@
     "Everyday": "Everyday",
     "PleaseSpecifyYour": "Please specify your weight in KGs",
     "Send": "Send"
+  },
+  "informationBoard": {
+    "AccessToEveryFacility": "Access to every facility with Fitpass",
+    "InCaesOfUsingFacility": "In case of using a facility free parking for up to 2 hours",
+    "ModernEquipment": "Modern equipment covering every aspect of desired workout",
+    "ElectronicSystem": "Electronic system for queuing",
+    "HealthySnacks": "Healthy snacks and protein shakes",
+    "CertifiedTrainers": "Certified trainers for workout",
+    "Kitchen": "Kitchen with high-protein and healthy food",
+    "PilatesAndYoga": "Pilates and yoga circles",
+    "BranchesOnEachSide": "Branches on each side of the city",
+    "SubscriptionSystemForEvery": "Subscription system for every branch"
   }
 }

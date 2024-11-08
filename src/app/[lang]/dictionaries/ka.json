@@ -27,5 +27,17 @@
     "Everyday": "ყოველდღე",
     "PleaseSpecifyYour": "გთხოვთ მიუთითოთ წონა კილოგრამებში",
     "Send": "გაგზავნა"
+  },
+  "informationBoard": {
+    "AccessToEveryFacility": "ყველა სერვისის საშვი Fitpass-ით",
+    "InCaesOfUsingFacility": "სერვისის გამოყენების შემთხვევაში 2 საათიანი უფასო პარკინგი",
+    "ModernEquipment": "თანამედროვე აღჭურვილობა ყველა ტიპის ვარჯიშისთვის",
+    "ElectronicSystem": "რიგის ელექტრონული სისტემა",
+    "HealthySnacks": "ჯანსაღი სნექები და პროტეინის შეიქები",
+    "CertifiedTrainers": "სერტიფიცირებული ტრენერები",
+    "Kitchen": "სამზარეულო მაღალცილოვანი და ჯანსაღი საკვებით",
+    "PilatesAndYoga": "პილატესის და იოგას წრეები",
+    "BranchesOnEachSide": "ფილიალები ქალაქის ყველა მხარეს",
+    "SubscriptionSystemForEvery": "აბონიმენტის სისტემა ყველა ფილიალისთვის"
   }
 }

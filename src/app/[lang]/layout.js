@@ -15,10 +15,11 @@ export default async function RootLayout({ children, params: { lang } }) {
   const dict = await getDictionary(lang);
   const dictHeader = dict.header;
   const dictChat = dict.chatWindow;
+  const informationBoard = dict.informationBoard;
 
   return (
     <html lang="en">
-      <LocaleProvider dictChat={dictChat}>
+      <LocaleProvider dictChat={dictChat} informationBoard={informationBoard}>
         <UserProvider>
           <body className="bg-neutral-200 dark:bg-neutral-900">
             <Header dict={dictHeader}></Header>
