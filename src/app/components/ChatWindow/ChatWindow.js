@@ -109,21 +109,23 @@ export default function ChatWindow({ dictChat }) {
                         activityData={buttonInputs.activityData}
                       ></ActivityGroupButton>
                     </div>
-                    <div className="flex flex-col gap-2">
-                      <WeightGroupButton
-                        handleChange={handleChange}
-                        userInfo={userInfo}
-                        weightData={buttonInputs.weightData}
-                      ></WeightGroupButton>
-                    </div>
-                    <div className="w-1/4 flex flex-col items-center justify-center">
-                      <Button
-                        onClick={aiRun}
-                        variant="contained"
-                        endIcon={<SendIcon />}
-                      >
-                        {chatWindow.Send}
-                      </Button>
+                    <div className="flex flex-row items-end">
+                      <div className="flex flex-col gap-2 justify-end">
+                        <WeightGroupButton
+                          handleChange={handleChange}
+                          userInfo={userInfo}
+                          weightData={buttonInputs.weightData}
+                        ></WeightGroupButton>
+                      </div>
+                      <div className="w-1/4 flex flex-col items-center justify-center">
+                        <Button
+                          onClick={aiRun}
+                          variant="contained"
+                          endIcon={<SendIcon />}
+                        >
+                          {chatWindow.Send}
+                        </Button>
+                      </div>
                     </div>
                   </div>
                 </div>
