@@ -10,6 +10,7 @@ import AgeButtonGroup from "../AgeButtonGroup/AgeButtonGroup";
 import ActivityGroupButton from "../ActivityGroupButton/ActivityGroupButton";
 import WeightGroupButton from "../WeightGroupButton/WeightGroupButton";
 import { useLocale } from "../providers/LanguageContext";
+import TypeWriter from "../TypeWriter/TypeWriter";
 
 export default function ChatWindow({ dictChat }) {
   const { chatWindow } = useLocale();
@@ -131,11 +132,11 @@ export default function ChatWindow({ dictChat }) {
                 </div>
 
                 <div className="flex flex-row m-5 mb-2 gap-1 shadow-lg shadow-slate-700 rounded-xl ">
-                  <textarea
-                    className="flex flex-col w-full border border-solid border-gray-400 bg-gray-800 rounded-xl resize-none font-serif text-sm"
-                    readOnly
-                    value={isLoading ? "" : aiResponse}
-                  ></textarea>
+                  <TypeWriter
+                    aiResponse={aiResponse}
+                    isLoading={isLoading}
+                    delay={20}
+                  ></TypeWriter>
                   {isLoading && (
                     <div className="absolute z-10 rounded-xl">
                       <ClipLoader size="150px" color="green" />
