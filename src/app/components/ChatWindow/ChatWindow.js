@@ -76,8 +76,11 @@ export default function ChatWindow({ dictChat }) {
               Try our AI assistant to create a diet plan
             </h1>
 
-            <div className=" shadow-lg shadow-slate-200 flex flex-col w-full h-80vh bg-gray-800 bg-opacity-75 rounded-2xl items-center border border-b-gray-500 ">
-              <div className="w-95% h-full shadow-lg shadow-slate-800  bg-opacity-35 border border-gray-400 rounded-2xl m-5 grid grid-rows-2">
+            <div className=" shadow-lg shadow-slate-200 flex flex-col w-full h-80vh bg-gray-800 bg-opacity-75 rounded-2xl items-center border border-b-gray-500  ">
+              <div className="2xl:hidden flex flex-col items-center justify-center font-bold font-serif text-2xl mt-36">
+                Please Enter full screen to use chatbot
+              </div>
+              <div className="w-95% h-full shadow-lg shadow-slate-800  bg-opacity-35 border border-gray-400 rounded-2xl m-5 hidden grid-rows-2 2xl:grid ">
                 <div>
                   <div className="flex flex-row">
                     <MuscleGoalButtonGroup
