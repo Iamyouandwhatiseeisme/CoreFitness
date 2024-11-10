@@ -10,6 +10,7 @@ A brief description of your Next.js application, its purpose, and any key featur
 
 - [Installation](#installation)
 - [Getting Started](#getting-started)
+- authentication
 
 ---
 
@@ -25,7 +26,9 @@ A brief description of your Next.js application, its purpose, and any key featur
    # or if using Yarn
    yarn install
 
-## Available Scripts
+## Getting started
+
+### Available scripts
 
 In the project directory, you can run:
 
@@ -36,3 +39,8 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+## Authentication
+
+Project uses auth0 authentication
+
