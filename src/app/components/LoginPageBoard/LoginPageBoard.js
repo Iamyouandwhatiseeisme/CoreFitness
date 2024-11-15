@@ -14,7 +14,7 @@ export default function LoginPageBoard() {
       }}
     >
       <div className=" bg-black inset-0 z-40 absolute bg-opacity-80">
-        <div className="absolute shadow-inner w-96 hover:scale-105 cursor-pointer shadow-white z-50 top-1/4 left-1/4 border gap-4 border-black  h-1/4 rounded-2xl bg-teal-300 flex flex-col justify-center items-center">
+        <div className="absolute shadow-sm w-96  cursor-pointer shadow-white z-50 top-1/4 left-1/4 border gap-4 border-black  h-1/4 rounded-2xl bg-black bg-opacity-40 flex flex-col justify-center items-center">
           <img
             src="/images/Equipment Logo.jpg"
             alt="logo"
@@ -30,12 +30,12 @@ export default function LoginPageBoard() {
           <div
             className={`absolute transition-all duration-1500 ease-in-out transform 
       shadow-inner cursor-pointer shadow-white z-50 top-1/2 left-1/4 border gap-4
-      border-black w-1/2 h-1/4 rounded-2xl bg-green-400 flex flex-col justify-center items-center
+      border-black w-96 h-1/4 rounded-2xl bg-black flex flex-col justify-center items-center
       opacity-0 -translate-y-full group-hover:opacity-100 group-hover:translate-y-2`}
           >
             <div className="borde  rounded-md pr-4 pl-4 flex flex-col  items-center justify-center text-center">
               <h1
-                className={` z-40  font-serif text-2xl font-extrabold   ${
+                className={` z-40  font-serif text-2xl font-extrabold text-white  ${
                   isHovered ? "flex" : "hidden"
                 } `}
               >

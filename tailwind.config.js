@@ -15,6 +15,7 @@ module.exports = {
       },
       backgroundImage: {
         "gym-background": "url('/images/Gym Background.jpg')",
+        "workout-bg": "url('/images/Workout Background.jpg')",
         gemini: "url('/images/Gemini.jpg')",
         aurora: "url('/images/Aurora.webp')",
         "chatbot-background": "url('/images/Chatbot Background.jpg')",

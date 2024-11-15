@@ -33,8 +33,8 @@ export const LogIn = () => {
     <div className="flex fixed z-50 w-full h-full top-0 flex-row">
       <LoginPageBoard></LoginPageBoard>
 
-      <div className="items-center justify-center flex flex-col w-full lg:w-1/2 h-full bg-black">
-        <div className="items-center justify-center flex flex-col w-full h-full bg-yellow-500 bg-opacity-95 pt-10">
+      <div className="items-center justify-center flex flex-col w-full lg:w-1/2 h-full bg-workout-bg">
+        <div className="items-center justify-center flex flex-col w-full h-full bg-gray-800 bg-opacity-50 pt-10">
           <div className=" border  rounded-2xl w-96 h-1/2 flex flex-col items-center justify-center bg-white">
             <form
               className="flex flex-col gap-3 w-80 text-black "
