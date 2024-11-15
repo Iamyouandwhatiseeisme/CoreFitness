@@ -2,13 +2,9 @@
 import { useState } from "react";
 import { login, signup } from "./actions";
 import { useLocale } from "../../components/providers/LanguageContext";
-import InformationBoard from "../../components/InformationBoard/InformationBoard";
-import InformationBoardOptions from "../../components/InformationBoard/InformationBoardOptions";
-// import { useUser } from "../providers/UserContext/UserProvider";
-
+import LoginPageBoard from "../../components/LoginPageBoard/LoginPageBoard";
 export const LogIn = () => {
   const { locale } = useLocale();
-
   const [error, setError] = useState(null);
 
   async function handleSubmit(e) {
@@ -35,26 +31,11 @@ export const LogIn = () => {
   }
   return (
     <div className="flex fixed z-50 w-full h-full top-0 flex-row">
-      <div className="bg-gym-background w-1/2 z-10 relative ">
-        <div className=" bg-black inset-0 z-40 absolute bg-opacity-80">
-          <div className="absolute shadow-inner hover:scale-105 cursor-pointer shadow-white z-50 top-1/4 left-1/4 border gap-4 border-black w-1/2 h-1/4 rounded-2xl bg-teal-300 flex flex-col justify-center items-center">
-            <img
-              src="/images/Equipment Logo.jpg"
-              alt="logo"
-              className="rounded-md w-20 shadow-sm shadow-white"
-            ></img>
-            <div className="border border-black bg-black bg-opacity-80 rounded-md pr-4 pl-4 flex flex-col  shadow-black shadow-sm items-center">
-              <h1 className=" z-40 text-white font-serif text-2xl">
-                Welcome to Core Fitness
-              </h1>
-            </div>
-          </div>
-        </div>
-      </div>
+      <LoginPageBoard></LoginPageBoard>
 
-      <div className="items-center justify-center flex flex-col w-1/2 h-full bg-black">
+      <div className="items-center justify-center flex flex-col w-full lg:w-1/2 h-full bg-black">
         <div className="items-center justify-center flex flex-col w-full h-full bg-yellow-500 bg-opacity-95 pt-10">
-          <div className=" border  rounded-2xl w-1/2 h-1/2 flex flex-col items-center justify-center bg-white">
+          <div className=" border  rounded-2xl w-96 h-1/2 flex flex-col items-center justify-center bg-white">
             <form
               className="flex flex-col gap-3 w-80 text-black "
               onSubmit={(e) => {
