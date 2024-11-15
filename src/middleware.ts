@@ -21,7 +21,11 @@ function getLocale(request: NextRequest): string {
 
 export async function middleware(request: NextRequest) {
   const sessionResponse = await updateSession(request);
+  if (sessionResponse instanceof NextResponse) {
+    console.log(1);
 
+    return sessionResponse;
+  }
   const { pathname } = request.nextUrl;
 
   const pathnameHasLocale = locales.some(
@@ -33,9 +37,7 @@ export async function middleware(request: NextRequest) {
   const locale = getLocale(request);
   request.nextUrl.pathname = `/${locale}${pathname}`;
   // console.log(request.nextUrl);
-  if (sessionResponse instanceof NextResponse) {
-    return sessionResponse;
-  }
+
   return NextResponse.redirect(request.nextUrl);
 }
 

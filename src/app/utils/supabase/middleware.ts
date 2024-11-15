@@ -37,8 +37,9 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log(user, "user");
-  console.log(request.nextUrl.pathname, "path");
+  if (user) {
+    return NextResponse;
+  }
 
   if (
     !user &&
@@ -51,8 +52,6 @@ export async function updateSession(request: NextRequest) {
       url.pathname.startsWith("/en-US") || url.pathname.startsWith("/")
         ? "/en-US/login"
         : "/ka/login";
-
-    console.log(url.pathname, "path");
 
     return NextResponse.redirect(url);
   }
