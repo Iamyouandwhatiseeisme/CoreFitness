@@ -1,5 +1,5 @@
 // "use client";
-import { UserProvider } from "@auth0/nextjs-auth0/client";
+// import { UserProvider } from "@auth0/nextjs-auth0/client";
 import "../styles/global.css";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
@@ -16,17 +16,18 @@ export default async function RootLayout({ children, params: { lang } }) {
   const dictHeader = dict.header;
   const dictChat = dict.chatWindow;
   const informationBoard = dict.informationBoard;
+  console.log(lang, "lang");
 
   return (
     <html lang="en">
       <LocaleProvider dictChat={dictChat} informationBoard={informationBoard}>
-        <UserProvider>
-          <body className="bg-neutral-200 dark:bg-neutral-900">
-            <Header dict={dictHeader}></Header>
-            {children}
-            <Footer></Footer>
-          </body>
-        </UserProvider>
+        {/* <UserProvider> */}
+        <body className="bg-neutral-200 dark:bg-neutral-900">
+          <Header dict={dictHeader}></Header>
+          {children}
+          <Footer></Footer>
+        </body>
+        {/* </UserProvider> */}
       </LocaleProvider>
     </html>
   );

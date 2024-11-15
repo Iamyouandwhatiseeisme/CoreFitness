@@ -5,7 +5,7 @@ import Logo from "../../../../public/images/Header Logo.webp";
 import DropDown from "../DropDown/DropDown";
 import { cilSun, cilMoon, cilScreenDesktop, cilSync } from "@coreui/icons";
 import { useEffect, useState } from "react";
-import { useUser } from "@auth0/nextjs-auth0/client";
+// import { useUser } from "@auth0/nextjs-auth0/client";
 import { CSpinner } from "@coreui/react";
 import AuthenticationButton from "../logoutButton/LoggoutButton";
 import { useLocale } from "../providers/LanguageContext";
@@ -13,7 +13,8 @@ import { useLocale } from "../providers/LanguageContext";
 import LocaleChange from "../LanguageChange/LanguageChange";
 
 const Header = (dict) => {
-  const { user, error, isLoading } = useUser();
+  // const { user, error, isLoading } = useUser();
+  const [isLoading, setIsLoading] = useState(true);
   const { locale, setLocale } = useLocale();
   const [currentTheme, setCurrentTheme] = useState(cilSync);
 
@@ -151,7 +152,7 @@ const Header = (dict) => {
             type="Theme"
           ></DropDown>
         </div>
-        <div className="">
+        {/* <div className="">
           {isLoading ? (
             <AuthenticationButton
               type="Loading"
@@ -170,7 +171,7 @@ const Header = (dict) => {
               buttonText={dict.dict.Login}
             ></AuthenticationButton>
           )}
-        </div>
+        </div> */}
       </div>
     </header>
   );
