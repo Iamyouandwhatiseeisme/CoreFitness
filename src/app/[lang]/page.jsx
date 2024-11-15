@@ -6,10 +6,10 @@ import ChatWindow from "../components/ChatWindow/ChatWindow";
 
 function Welcome({ params: { lang } }) {
   return (
-    <main className="max-w-full overflow-x-hidden m-0">
+    <main className="max-w-full  m-0">
       <div className="bg-neutral-200 dark:bg-neutral-900 text-white">
         <ChatWindow></ChatWindow>
-        <div className="min-h-wrapper flex flex-col bg-gym-background lg:bg-contain">
+        <div className="min-h-wrapper flex flex-col bg-gym-background lg:bg-contain ">
           <InformationBoard></InformationBoard>
         </div>
       </div>

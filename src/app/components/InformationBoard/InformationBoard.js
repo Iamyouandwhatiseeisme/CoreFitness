@@ -2,9 +2,7 @@
 import React, { useState } from "react";
 // import { informationBoardItems } from "../data/InformationBoardItems";
 import { useLocale } from "../providers/LanguageContext";
-import InformationBoardOptions, {
-  informationBoardOptions,
-} from "./InformationBoardOptions";
+import InformationBoardOptions from "./InformationBoardOptions";
 
 export default function InformationBoard() {
   const [hovered, setHovered] = useState(0);
@@ -68,8 +66,8 @@ export default function InformationBoard() {
   ];
 
   return (
-    <div className="flex flex-row h-90vh gap-20 justify-center mt-5 mb-5">
-      <div className="hidden  flex-col rounded-2xl w-1/3 border border-header-hover-dark border-solid bg-black bg-opacity-85  xl:flex ">
+    <div className="flex flex-row h-150 gap-20 justify-center mt-5 mb-5">
+      <div className="hidden   flex-col rounded-2xl w-1/3 border border-header-hover-dark border-solid bg-black bg-opacity-85  xl:flex ">
         {informationBoardItems.map((item) => {
           const isHovered = hovered === item.key;
           return (

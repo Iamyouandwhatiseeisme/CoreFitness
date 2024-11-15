@@ -35,6 +35,7 @@ module.exports = {
         "60vh": "60vh",
         "80vh": "80vh",
         "90vh": "90vh",
+        150: "650px",
       },
 
       width: {
