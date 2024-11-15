@@ -36,10 +36,9 @@ export async function updateSession(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  console.log("looking for user");
-  const url = request.nextUrl.clone();
-  console.log(url.pathname.startsWith("/en-US"));
-  console.log(url.pathname, "path");
+
+  console.log(user, "user");
+  console.log(request.nextUrl.pathname, "path");
 
   if (
     !user &&
@@ -51,13 +50,12 @@ export async function updateSession(request: NextRequest) {
     url.pathname =
       url.pathname.startsWith("/en-US") || url.pathname.startsWith("/")
         ? "/en-US/login"
-        : "ka/login";
+        : "/ka/login";
 
-    console.log("redirecting user");
+    console.log(url.pathname, "path");
 
     return NextResponse.redirect(url);
   }
-  console.log("no user");
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're
   // creating a new response object with NextResponse.next() make sure to:

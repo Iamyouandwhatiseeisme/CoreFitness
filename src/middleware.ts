@@ -32,6 +32,7 @@ export async function middleware(request: NextRequest) {
 
   const locale = getLocale(request);
   request.nextUrl.pathname = `/${locale}${pathname}`;
+  // console.log(request.nextUrl);
   if (sessionResponse instanceof NextResponse) {
     return sessionResponse;
   }

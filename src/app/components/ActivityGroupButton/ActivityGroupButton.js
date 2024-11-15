@@ -16,7 +16,7 @@ export default function ActivityGroupButton({
             id="demo-simple-select"
             value={userInfo.activity}
             onChange={(e, value) => {
-              console.log(value.props.value);
+              // console.log(value.props.value);
               handleChange("activity", value.props.value);
             }}
           >

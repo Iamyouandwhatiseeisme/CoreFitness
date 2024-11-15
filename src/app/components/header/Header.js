@@ -12,11 +12,10 @@ import { useLocale } from "../providers/LanguageContext";
 
 import LocaleChange from "../LanguageChange/LanguageChange";
 
-const Header = (dict) => {
-  // const { user, error, isLoading } = useUser();
-  const [isLoading, setIsLoading] = useState(true);
+const Header = ({ dict, user }) => {
   const { locale, setLocale } = useLocale();
   const [currentTheme, setCurrentTheme] = useState(cilSync);
+  console.log(user);
 
   useEffect(() => {
     function checkTheme() {
@@ -111,32 +110,32 @@ const Header = (dict) => {
         </Link>
         <nav className="rounded-3xl flex- flex-row  border border-solid dark:border-header-hover-dark h-20 items-center p-2  hidden sm:block">
           <ul className="gap-5 flex  list-none flex-row">
-            <li className={listItemStyle}>{dict.dict.Equipment}</li>
-            <li className={listItemStyle}>{dict.dict.Trainers}</li>
-            <li className={listItemStyle}>{dict.dict.Certificates}</li>
-            <li className={listItemStyle}>{dict.dict.Schedules}</li>
+            <li className={listItemStyle}>{dict.Equipment}</li>
+            <li className={listItemStyle}>{dict.Trainers}</li>
+            <li className={listItemStyle}>{dict.Certificates}</li>
+            <li className={listItemStyle}>{dict.Schedules}</li>
             <li className={`${listItemStyle} hidden l:block`}>
-              {dict.dict.Locations}
+              {dict.Locations}
             </li>
             <Link href={`/${locale}/profile`}>
               <li className={`${listItemStyle} hidden xl:block`}>
-                {dict.dict.Profile}
+                {dict.Profile}
               </li>
             </Link>
 
             <Link href={`/${locale}/blog`}>
               <li className={`${listItemStyle} hidden xl:block`}>
-                {dict.dict.Blog}
+                {dict.Blog}
               </li>
             </Link>
             <Link href={`/${locale}/products`}>
               <li className={`${listItemStyle} hidden xl:block`}>
-                {dict.dict.Products}
+                {dict.Products}
               </li>
             </Link>
             <Link href={`/${locale}/posts`}>
               <li className={`${listItemStyle} hidden xl:block`}>
-                {dict.dict.Posts}
+                {dict.Posts}
               </li>
             </Link>
           </ul>
@@ -162,16 +161,39 @@ const Header = (dict) => {
             <AuthenticationButton
               href={`/api/auth/logout`}
               type="logout"
-              buttonText={dict.dict.Logout}
+              buttonText={dict.Logout}
             ></AuthenticationButton>
           ) : (
             <AuthenticationButton
               href={`/api/auth/login`}
               type="login"
-              buttonText={dict.dict.Login}
+              buttonText={dict.Login}
             ></AuthenticationButton>
           )}
         </div> */}
+        <div className="mb-2  ">
+          {/* {isLoading ? (
+            <CSpinner variant="grow" />
+          ) : user ? (
+            <AuthenticationButton
+              href="/api/auth/logout"
+              type="logout"
+            ></AuthenticationButton>
+          ) : ( */}
+          {user === null ? (
+            <AuthenticationButton
+              href={`/${locale}/login`}
+              type="login"
+              buttonText={dict.Login}
+            />
+          ) : (
+            <AuthenticationButton
+              href={`/${locale}/login`}
+              type="logout"
+              buttonText={dict.Logout}
+            />
+          )}
+        </div>
       </div>
     </header>
   );

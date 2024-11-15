@@ -7,7 +7,7 @@ import { cookies } from "next/headers";
 import { createClient } from "../../utils/supabase/server";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 
-export async function login(formData) {
+export async function login(formData, locale) {
   const supabase = await createClient();
 
   const form = {
@@ -20,13 +20,13 @@ export async function login(formData) {
   if (error) {
     return { error: error.code };
   }
-  revalidatePath("/", "layout");
-  redirect("/");
+  revalidatePath(`/${locale}`, "layout");
+  redirect(`/${locale}`);
 
   return { success: true };
 }
 
-export async function signup(formData) {
+export async function signup(formData, locale) {
   const email = formData.get("email");
   const password = formData.get("password");
 
@@ -43,14 +43,15 @@ export async function signup(formData) {
   if (error) {
     return { error: error.code };
   }
-  revalidatePath("/login", "layout");
+  revalidatePath(`/${locale}/login`, "layout");
   return { success: true };
 }
 
-export async function signOut() {
+export async function signOut(locale) {
   const supabase = await createClient();
 
   const { error } = await supabase.auth.signOut();
-  redirect("/login");
+  // console.log(error);
+  redirect(`/${locale}/login`);
   return error;
 }

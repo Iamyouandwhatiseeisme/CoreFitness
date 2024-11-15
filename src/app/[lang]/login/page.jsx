@@ -1,9 +1,12 @@
 "use client";
 import { useState } from "react";
 import { login, signup } from "./actions";
+import { useLocale } from "../../components/providers/LanguageContext";
 // import { useUser } from "../providers/UserContext/UserProvider";
 
 export const LogIn = () => {
+  const { locale } = useLocale();
+
   const [error, setError] = useState(null);
   //   const { setCurrentUser } = useUser();
 
@@ -15,10 +18,10 @@ export const LogIn = () => {
 
     let result;
     if (actionType === "login") {
-      result = await login(formData);
+      result = await login(formData, locale);
       //   setCurrentUser("user");
     } else if (actionType === "signup") {
-      result = await signup(formData);
+      result = await signup(formData, locale);
       alert("confirmation email sent");
     }
 
