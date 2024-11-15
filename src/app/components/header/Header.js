@@ -15,7 +15,6 @@ import LocaleChange from "../LanguageChange/LanguageChange";
 const Header = ({ dict, user }) => {
   const { locale, setLocale } = useLocale();
   const [currentTheme, setCurrentTheme] = useState(cilSync);
-  console.log(user);
 
   useEffect(() => {
     function checkTheme() {
@@ -100,7 +99,7 @@ const Header = ({ dict, user }) => {
     "text-black hover:bg-gray-400 dark:hover:bg-header-hover-dark hover:rounded-3xl font-serif font-normal dark:text-yellow-500 p-5 text-center transition-header-hover-transition cursor-pointer";
 
   return (
-    <header className="flex flex-row justify-between bg-neutral-300 dark:bg-dark-header  w-full overflow-hidden  ">
+    <header className="flex flex-row justify-between bg-neutral-300 dark:bg-dark-header  w-full overflow-hidden  z-20 ">
       <div className="flex gap-38  pt-5 pb-5 pr-5">
         <Link
           href={`/${locale}`}

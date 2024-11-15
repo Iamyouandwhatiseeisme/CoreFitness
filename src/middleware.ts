@@ -22,8 +22,6 @@ function getLocale(request: NextRequest): string {
 export async function middleware(request: NextRequest) {
   const sessionResponse = await updateSession(request);
   if (sessionResponse instanceof NextResponse) {
-    console.log(1);
-
     return sessionResponse;
   }
   const { pathname } = request.nextUrl;

@@ -36,7 +36,6 @@ export default async function RootLayout({ children, params: { lang } }) {
           {children}
           <Footer></Footer>
         </body>
-        {/* </UserProvider> */}
       </LocaleProvider>
     </html>
   );
