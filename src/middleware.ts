@@ -34,7 +34,6 @@ export async function middleware(request: NextRequest) {
 
   const locale = getLocale(request);
   request.nextUrl.pathname = `/${locale}${pathname}`;
-  // console.log(request.nextUrl);
 
   return NextResponse.redirect(request.nextUrl);
 }

@@ -51,7 +51,6 @@ export async function signOut(locale) {
   const supabase = await createClient();
 
   const { error } = await supabase.auth.signOut();
-  // console.log(error);
   redirect(`/${locale}/login`);
   return error;
 }

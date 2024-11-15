@@ -73,6 +73,7 @@ export default function InformationBoard() {
           return (
             <InformationBoardOptions
               item={item}
+              key={item.key}
               setHovered={setHovered}
               isHovered={isHovered}
               hoverColors={hoverColors}

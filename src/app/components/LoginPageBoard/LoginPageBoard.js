@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 export default function LoginPageBoard() {
   const [isHovered, setIsHoverd] = useState(false);
-  console.log(isHovered);
   return (
     <div
       className="bg-gym-background w-1/2 z-10 relative transition-all duration-400 hover:w-60wv group hidden lg:flex "

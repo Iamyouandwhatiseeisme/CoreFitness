@@ -30,7 +30,6 @@ export default function ChatWindow({ dictChat }) {
 
   useEffect(() => {
     setUserInfo(userInfo);
-    // console.log(userInfo);
   }, [userInfo]);
   const handleChange = (key, value) => {
     setUserInfo((prev) => ({
