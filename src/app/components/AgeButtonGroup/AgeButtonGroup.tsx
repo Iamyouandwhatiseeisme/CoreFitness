@@ -1,25 +1,30 @@
 import { FormControl, MenuItem, Select } from "@mui/material";
 import React from "react";
 import { useLocale } from "../providers/LanguageContext";
+import { UserInfo } from "../types";
 
-export default function AgeButtonGroup({ ageData, userInfo, handleChange }) {
+export default function AgeButtonGroup(props: {
+  ageData: number[];
+  userInfo: UserInfo;
+  handleChange: (key: string, value: number) => void;
+}) {
   const { chatWindow } = useLocale();
 
   return (
     <div>
-      <FormControl color="neutral" className="bg-white " fullWidth>
+      <FormControl color="primary" className="bg-white " fullWidth>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={userInfo.age}
-          onChange={(e, value) => {
-            handleChange("age", value.props.value);
+          value={props.userInfo.age}
+          onChange={(e) => {
+            props.handleChange("age", e.target.value as number);
           }}
         >
           <MenuItem key="Age" value={chatWindow.Age}>
             <em>{chatWindow.Age}</em>
           </MenuItem>
-          {ageData.map((item) => {
+          {props.ageData.map((item) => {
             return (
               <MenuItem key={item} value={item}>
                 <em>{item}</em>

@@ -1,10 +1,11 @@
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import React from "react";
+import { UserInfo } from "../types";
 
-export default function GenderButtonGroup({
-  genderData,
-  userInfo,
-  handleChange,
+export default function GenderButtonGroup(props: {
+  genderData: string[];
+  userInfo: UserInfo;
+  handleChange: (key: string, value: string) => void;
 }) {
   return (
     <div>
@@ -14,16 +15,16 @@ export default function GenderButtonGroup({
         orientation="vertical"
         className="bg-blue-400"
         size="small"
-        value={userInfo.gender}
+        value={props.userInfo.gender}
         exclusive
-        onChange={(e, value) => handleChange("gender", value)}
+        onChange={(e, value) => props.handleChange("gender", value)}
         aria-label="Platform"
       >
-        {genderData.map((item) => (
+        {props.genderData.map((item) => (
           <ToggleButton
             key={item}
             style={{
-              background: userInfo.gender === item ? "White" : "#60A5FA",
+              background: props.userInfo.gender === item ? "White" : "#60A5FA",
             }}
             className="text-black hover:bg-gray-400"
             value={item}

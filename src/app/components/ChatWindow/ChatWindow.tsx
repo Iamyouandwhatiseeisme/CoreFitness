@@ -32,7 +32,7 @@ export default function ChatWindow() {
   useEffect(() => {
     setUserInfo(userInfo);
   }, [userInfo]);
-  const handleChange = (key: string, value: string) => {
+  const handleChange = (key: string, value: string | number) => {
     setUserInfo((prev) => ({
       ...prev,
       [key]: value,
@@ -57,7 +57,7 @@ export default function ChatWindow() {
   const buttonInputs = {
     muscleGoalData: [chatWindow.Lose, chatWindow.Maintain, chatWindow.Gain],
     genderData: [chatWindow.Male, chatWindow.Female],
-    ageData: [...Array.from({ length: 86 }, (_, i) => i + 15)],
+    ageData: [...Array.from({ length: 86 }, (_, i) => i + 15)] as number[],
     activityData: [
       chatWindow.One,
       chatWindow.Two,

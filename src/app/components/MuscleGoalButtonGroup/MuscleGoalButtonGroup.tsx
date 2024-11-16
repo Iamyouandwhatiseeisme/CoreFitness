@@ -22,7 +22,7 @@ export default function muscleGoalButtonGroup(props: {
           onChange={(e, value) => props.handleChange("muscleGoal", value)}
           aria-label="Platform"
         >
-          {props.muscleGoalData.map((goal: string) => {
+          {props.muscleGoalData.map((goal) => {
             return (
               <ToggleButton
                 key={goal}
