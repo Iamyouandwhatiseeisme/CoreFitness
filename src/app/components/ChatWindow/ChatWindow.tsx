@@ -150,11 +150,7 @@ export default function ChatWindow() {
                       <GridLoader color="#42A5F5"></GridLoader>
                     </div>
                   ) : (
-                    <TypeWriter
-                      aiResponse={aiResponse}
-                      isLoading={isLoading}
-                      delay={20}
-                    ></TypeWriter>
+                    <TypeWriter aiResponse={aiResponse} delay={20}></TypeWriter>
                   )}
                 </div>
               </div>
