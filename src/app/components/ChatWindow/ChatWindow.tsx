@@ -5,8 +5,6 @@ import SendIcon from "@mui/icons-material/Send";
 import { Button } from "@mui/material";
 import { GridLoader } from "react-spinners";
 import ExtractDailyDietInfo from "../ExtractDailyDietInfo/ExtractDailyDietInfo";
-import { PieChart } from "@mui/x-charts/PieChart";
-import { valueFormatter } from "../valueFormatter";
 
 import MuscleGoalButtonGroup from "../MuscleGoalButtonGroup/MuscleGoalButtonGroup";
 import GenderButtonGroup from "../GenderButtonGroup/GenderButtonGroup";
@@ -16,7 +14,6 @@ import WeightGroupButton from "../WeightGroupButton/WeightGroupButton";
 import { useLocale } from "../providers/LanguageContext";
 import TypeWriter from "../TypeWriter/TypeWriter";
 import { DailyDiet, UserInfo } from "../types";
-import { red } from "@mui/material/colors";
 import DietPieChart from "../PieiChart/DietPieChart";
 
 export default function ChatWindow() {
