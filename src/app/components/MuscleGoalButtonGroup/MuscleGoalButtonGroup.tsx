@@ -1,11 +1,12 @@
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 import React from "react";
+import { UserInfo } from "../types";
 
-export default function muscleGoalButtonGroup({
-  userInfo,
-  handleChange,
-  muscleGoalData,
+export default function muscleGoalButtonGroup(props: {
+  userInfo: UserInfo;
+  handleChange: (key: string, value: string) => void;
+  muscleGoalData: string[];
 }) {
   return (
     <div className="flex flex-col w-1/2 h-3/5 rounded-2xl m-5 items-center border justify-center bg-gray-400 bg-opacity-20 ">
@@ -16,12 +17,12 @@ export default function muscleGoalButtonGroup({
         <ToggleButtonGroup
           className="bg-blue-400"
           size="large"
-          value={userInfo.muscleGoal}
+          value={props.userInfo.muscleGoal}
           exclusive
-          onChange={(e, value) => handleChange("muscleGoal", value)}
+          onChange={(e, value) => props.handleChange("muscleGoal", value)}
           aria-label="Platform"
         >
-          {muscleGoalData.map((goal) => {
+          {props.muscleGoalData.map((goal: string) => {
             return (
               <ToggleButton
                 key={goal}
@@ -29,7 +30,7 @@ export default function muscleGoalButtonGroup({
                 value={goal}
                 style={{
                   background:
-                    userInfo.muscleGoal === goal ? "white" : "#60A5FA",
+                    props.userInfo.muscleGoal === goal ? "white" : "#60A5FA",
                 }}
               >
                 {goal}

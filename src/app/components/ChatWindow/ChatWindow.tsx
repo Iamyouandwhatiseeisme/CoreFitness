@@ -11,11 +11,12 @@ import ActivityGroupButton from "../ActivityGroupButton/ActivityGroupButton";
 import WeightGroupButton from "../WeightGroupButton/WeightGroupButton";
 import { useLocale } from "../providers/LanguageContext";
 import TypeWriter from "../TypeWriter/TypeWriter";
+import { UserInfo } from "../types";
 
 export default function ChatWindow() {
   const { chatWindow } = useLocale();
 
-  const [userInfo, setUserInfo] = useState({
+  const [userInfo, setUserInfo] = useState<UserInfo>({
     muscleGoal: chatWindow.Lose,
     gender: chatWindow.Male,
     age: chatWindow.Age,
@@ -31,7 +32,7 @@ export default function ChatWindow() {
   useEffect(() => {
     setUserInfo(userInfo);
   }, [userInfo]);
-  const handleChange = (key, value) => {
+  const handleChange = (key: string, value: string) => {
     setUserInfo((prev) => ({
       ...prev,
       [key]: value,
