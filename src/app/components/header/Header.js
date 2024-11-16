@@ -150,35 +150,7 @@ const Header = ({ dict, user }) => {
             type="Theme"
           ></DropDown>
         </div>
-        {/* <div className="">
-          {isLoading ? (
-            <AuthenticationButton
-              type="Loading"
-              buttonText={"Loading"}
-            ></AuthenticationButton>
-          ) : user ? (
-            <AuthenticationButton
-              href={`/api/auth/logout`}
-              type="logout"
-              buttonText={dict.Logout}
-            ></AuthenticationButton>
-          ) : (
-            <AuthenticationButton
-              href={`/api/auth/login`}
-              type="login"
-              buttonText={dict.Login}
-            ></AuthenticationButton>
-          )}
-        </div> */}
         <div className="mb-2  ">
-          {/* {isLoading ? (
-            <CSpinner variant="grow" />
-          ) : user ? (
-            <AuthenticationButton
-              href="/api/auth/logout"
-              type="logout"
-            ></AuthenticationButton>
-          ) : ( */}
           {user === null ? (
             <AuthenticationButton
               href={`/${locale}/login`}
