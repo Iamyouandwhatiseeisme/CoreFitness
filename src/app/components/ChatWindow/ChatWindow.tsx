@@ -1,9 +1,10 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import SendIcon from "@mui/icons-material/Send";
 
 import { Button } from "@mui/material";
-import { ClipLoader } from "react-spinners";
+import { GridLoader } from "react-spinners";
+
 import MuscleGoalButtonGroup from "../MuscleGoalButtonGroup/MuscleGoalButtonGroup";
 import GenderButtonGroup from "../GenderButtonGroup/GenderButtonGroup";
 import AgeButtonGroup from "../AgeButtonGroup/AgeButtonGroup";
@@ -23,8 +24,8 @@ export default function ChatWindow() {
     activity: chatWindow.One,
     weight: chatWindow.Weight,
   });
-  const [aiResponse, setResponse] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [aiResponse, setResponse] = useState<string>("");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GOOGLE_API_KEY);
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
@@ -38,6 +39,7 @@ export default function ChatWindow() {
       [key]: value,
     }));
   };
+
   useEffect(() => {
     setResponse(aiResponse);
     setIsLoading(false);
@@ -48,12 +50,16 @@ export default function ChatWindow() {
 
   async function aiRun() {
     const prompt = `Please give me approximate amount of calories, protein, fat and sugar I need to take to reach my goal of ${userInfo.muscleGoal}ing weight, if I am ${userInfo.age} years old ${userInfo.gender} and I work out ${userInfo.activity} days a week and currently weigh ${userInfo.weight}`;
+    setResponse((e) => "");
     setIsLoading(true);
+
     const result = await model.generateContent(prompt);
     const response = result.response;
     const text = response.text();
+
     setResponse(text);
   }
+
   const buttonInputs = {
     muscleGoalData: [chatWindow.Lose, chatWindow.Maintain, chatWindow.Gain],
     genderData: [chatWindow.Male, chatWindow.Female],
@@ -134,16 +140,21 @@ export default function ChatWindow() {
                   </div>
                 </div>
 
-                <div className="flex flex-row m-5 mb-2 gap-1 shadow-lg shadow-slate-700 rounded-xl ">
-                  <TypeWriter
-                    aiResponse={aiResponse}
-                    isLoading={isLoading}
-                    delay={20}
-                  ></TypeWriter>
-                  {isLoading && (
-                    <div className="absolute z-10 rounded-xl">
-                      <ClipLoader size="150px" color="green" />
+                <div
+                  className={`flex flex-row  m-5 mb-2 gap-1 shadow-lg shadow-slate-700 rounded-xl ${
+                    isLoading ? "items-center justify-center" : ""
+                  }`}
+                >
+                  {isLoading ? (
+                    <div className=" z-10 rounded-xl">
+                      <GridLoader color="#42A5F5"></GridLoader>
                     </div>
+                  ) : (
+                    <TypeWriter
+                      aiResponse={aiResponse}
+                      isLoading={isLoading}
+                      delay={20}
+                    ></TypeWriter>
                   )}
                 </div>
               </div>
