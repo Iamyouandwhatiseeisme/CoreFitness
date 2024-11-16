@@ -6,7 +6,6 @@ import Footer from "../components/footer/Footer";
 import { getDictionary } from "./dictionaries";
 import { LocaleProvider } from "../components/providers/LanguageContext";
 import { createClient } from "../utils/supabase/server";
-import { redirect } from "next/navigation";
 
 export const metadata = {
   title: "Core Fitness",
@@ -20,12 +19,8 @@ export default async function RootLayout({ children, params: { lang } }) {
   const dictHeader = dict.header;
   const dictChat = dict.chatWindow;
   const informationBoard = dict.informationBoard;
-  const { data, error } = await supabase.auth.getUser();
-  // if (error || !data?.user) {
-  //   redirect("/login");
-  // }
+  const { data } = await supabase.auth.getUser();
 
-  // var user = !data["user"] === null ? data["user"] : null;
   const { user } = data;
 
   return (

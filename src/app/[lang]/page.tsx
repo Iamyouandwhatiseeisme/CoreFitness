@@ -4,7 +4,7 @@ import React from "react";
 import InformationBoard from "../components/InformationBoard/InformationBoard";
 import ChatWindow from "../components/ChatWindow/ChatWindow";
 
-function Welcome({ params: { lang } }) {
+function Welcome() {
   return (
     <main className="max-w-full  m-0">
       <div className="bg-neutral-200 dark:bg-neutral-900 text-white">

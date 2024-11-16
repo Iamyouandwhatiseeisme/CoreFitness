@@ -12,7 +12,7 @@ import WeightGroupButton from "../WeightGroupButton/WeightGroupButton";
 import { useLocale } from "../providers/LanguageContext";
 import TypeWriter from "../TypeWriter/TypeWriter";
 
-export default function ChatWindow({ dictChat }) {
+export default function ChatWindow() {
   const { chatWindow } = useLocale();
 
   const [userInfo, setUserInfo] = useState({
