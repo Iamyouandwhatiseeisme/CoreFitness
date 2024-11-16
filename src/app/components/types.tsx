@@ -5,3 +5,10 @@ export interface UserInfo {
   activity: string;
   weight: string | number;
 }
+export interface DailyDiet {
+  Protein: number;
+  Fat: number;
+  Sugar: number;
+  Goal: string;
+  Calories: string;
+}
