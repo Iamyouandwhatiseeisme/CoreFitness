@@ -3,9 +3,16 @@ import { useState } from "react";
 import { login, signup } from "./actions";
 import { useLocale } from "../../components/providers/LanguageContext";
 import LoginPageBoard from "../../components/LoginPageBoard/LoginPageBoard";
+import { useUser } from "../../components/providers/UserProvider";
+import { redirect } from "next/navigation";
 export const LogIn = () => {
   const { locale } = useLocale();
   const [error, setError] = useState(null);
+  const { user } = useUser();
+
+  if (user !== null) {
+    redirect(`/${locale}`);
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();

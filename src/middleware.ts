@@ -4,10 +4,8 @@ import Negotiator from "negotiator";
 import type { NextRequest } from "next/server";
 import { updateSession } from "./app/utils/supabase/middleware";
 
-// Supported locales
 const locales = ["en-US", "ka"];
 
-// Function to determine the appropriate locale
 function getLocale(request: NextRequest): string {
   const requestHeaders = new Headers(request.headers);
   const accepted = requestHeaders.get("accept-language") || "";
