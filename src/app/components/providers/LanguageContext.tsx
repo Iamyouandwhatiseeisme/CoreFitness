@@ -13,14 +13,16 @@ interface LocaleContextType {
 }
 
 export const LocaleProvider = (props: {
+  lang: string;
   children: React.ReactNode;
   dictChat: Record<string, string>;
   informationBoard: Record<string, string>;
 }) => {
-  const [locale, setLocale] = useState("en-US");
+  const [locale, setLocale] = useState<string>(props.lang);
   const pathname = usePathname();
 
   useEffect(() => {
+    console.log("changing locale");
     let currentLocale = locales.find((locale) =>
       pathname.includes(`/${locale}`)
     );
