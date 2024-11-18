@@ -9,19 +9,23 @@ import { useEffect, useState } from "react";
 import ProductActions from "../../components/buttons/ProductActions";
 import AddButton from "../../components/AddButton/AddButton";
 import { useRouter } from "next/navigation";
+import { Post, SortOption } from "../../components/types";
 
-export default function Posts({ searchParams }) {
+export default function Posts(props: {
+  searchParams: Record<string, string | undefined>;
+}) {
+  const searchParams = props.searchParams;
   const debouncedSearch = searchParams.search || "";
   const sortOption = searchParams.option || "";
   const sortOrder = searchParams.order || "";
   const fetchItemType = "posts";
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [editing, setEditing] = useState();
   const router = useRouter();
   const postInfo =
     "bg-gray-400 dark:bg-gray-200 font-sans p-2 rounded-xl text-xl m-2";
 
-  const sortOptions = [
+  const sortOptions: SortOption[] = [
     {
       label: "Views: Low to High",
       value: "vews-low-to-high",
@@ -48,31 +52,34 @@ export default function Posts({ searchParams }) {
     },
   ];
 
-  function editProducts({ posts, setPosts }) {
-    return function changeProductproducts(post) {
-      posts.forEach((item) => {
-        if (item.id === post.id) {
-          const index = posts.indexOf(item);
-          const newArray = posts;
-          newArray[index] = post;
+  // function editProducts(props: { posts, setPosts }) {
+  //   return function changeProductproducts(post) {
+  //     posts.forEach((item) => {
+  //       if (item.id === post.id) {
+  //         const index = posts.indexOf(item);
+  //         const newArray = posts;
+  //         newArray[index] = post;
 
-          setPosts(newArray);
-        }
-      });
-    };
-  }
+  //         setPosts(newArray);
+  //       }
+  //     });
+  //   };
+  // }
 
-  const deleteProduct = (postId) => {
-    setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
-  };
+  // const deleteProduct = (postId) => {
+  //   setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
+  // };
 
-  const addPost = (item) => {
-    const newId = Date.now();
-    const itemWithId = { ...item, id: newId };
-    setPosts((prevPosts) => [...prevPosts, itemWithId]);
-  };
+  // const addPost = (item) => {
+  //   const newId = Date.now();
+  //   const itemWithId = { ...item, id: newId };
+  //   setPosts((prevPosts) => [...prevPosts, itemWithId]);
+  // };
 
-  const toggleHandler = (option, order) => {
+  const toggleHandler = (
+    option: string | undefined,
+    order: string | undefined
+  ) => {
     router.push(`?option=${option}&order=${order}`);
   };
 
@@ -88,11 +95,11 @@ export default function Posts({ searchParams }) {
     }
     fetch();
   }, [fetchItemType, debouncedSearch, sortOption, sortOrder]);
-  var callBack = editProducts({ posts, setPosts });
+  // var callBack = editProducts({ posts, setPosts });
 
-  function onEditingChange(editing) {
-    setEditing(editing);
-  }
+  // function onEditingChange(editing) {
+  //   setEditing(editing);
+  // }
 
   if (posts.length === 0) {
     return (
@@ -116,7 +123,7 @@ export default function Posts({ searchParams }) {
         </div>
         <div className="fixed left-2 top-28 flex flex-col z-10">
           <DropDown
-            buttonText="Sort Products By:"
+            buttonText={["Sort Products By:"]}
             content={sortOptions}
             toggleHandler={toggleHandler}
             type="Sorter"
@@ -159,18 +166,18 @@ export default function Posts({ searchParams }) {
                     );
                   })}
                 </div>
-                <ProductActions
+                {/* <ProductActions
                   type={"posts"}
                   product={post}
                   setProductCallBack={callBack}
                   onEditingChange={onEditingChange}
                   deleteProductCallback={deleteProduct}
-                />
+                /> */}
               </div>
             );
           })}
         </div>
-        <AddButton item="Posts" addProduct={addPost} />
+        {/* <AddButton item="Posts" addProduct={addPost} /> */}
       </div>
     </div>
   );

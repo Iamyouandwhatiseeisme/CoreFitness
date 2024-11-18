@@ -20,3 +20,22 @@ export interface InformationBoardItem {
   hoverColor: string;
   hoverImage: string;
 }
+
+export interface SortOption {
+  label: string;
+  value: string;
+  option: string;
+  order: string;
+}
+export interface Post {
+  body: string;
+  id: number;
+  reactions: {
+    likes: string;
+    dislikes: string;
+  };
+  tags: string[];
+  title: string;
+  userId: number;
+  views: number;
+}
