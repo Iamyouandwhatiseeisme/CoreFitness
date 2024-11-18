@@ -1,29 +1,35 @@
 "use client";
-import { useState } from "react";
+import { BaseSyntheticEvent, useState } from "react";
 import { login, signup } from "./actions";
 import { useLocale } from "../../components/providers/LanguageContext";
 import LoginPageBoard from "../../components/LoginPageBoard/LoginPageBoard";
 import { useUser } from "../../components/providers/UserProvider";
 import { redirect } from "next/navigation";
+import { SubmitTarget } from "react-router-dom/dist/dom";
 export const LogIn = () => {
   const { locale } = useLocale();
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
   const { user } = useUser();
 
   if (user !== null) {
     redirect(`/${locale}`);
   }
 
-  async function handleSubmit(e) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    console.log(e.nativeEvent, "typeof event");
+
     e.preventDefault();
 
-    const formData = new FormData(e.target);
-    const actionType = e.nativeEvent.submitter.name;
+    const submitEvent = e.nativeEvent as SubmitEvent;
+    const submitter = submitEvent.submitter as HTMLButtonElement;
+
+    console.log(submitEvent.submitter);
+    const formData = new FormData(e.target as HTMLFormElement);
+    const actionType = submitter.name;
 
     let result;
     if (actionType === "login") {
       result = await login(formData, locale);
-      //   setCurrentUser("user");
     } else if (actionType === "signup") {
       result = await signup(formData, locale);
       alert("confirmation email sent");
