@@ -1,16 +1,16 @@
 import Link from "next/link";
-export function ReturnBackButton({ destination }) {
+export function ReturnBackButton(props: { destination: string }) {
   return (
     <Link
       className="flex flex-col bg-red-700 text-white text-2xl p-3 m-6 items-center border border-solid rounded-50 border-black"
-      href={`/${destination}`}
+      href={`/${props.destination}`}
     >
       <button>Go back </button>
     </Link>
   );
 }
 
-export default function NotFound(props) {
+export default function NotFound(props: { page: string }) {
   return (
     <div className="flex flex-col items-center border border-solid rounded-50 border-black">
       <h1 className="text-black dark:text-gray-200 font-sans font-bold text-2xl">

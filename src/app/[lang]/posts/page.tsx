@@ -6,8 +6,8 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import DropDown from "../../components/DropDown/DropDown";
 import fetchProducts from "../../fetcher/fetchProducts";
 import { useEffect, useState } from "react";
-import ProductActions from "../../components/buttons/ProductActions";
-import AddButton from "../../components/AddButton/AddButton";
+// import ProductActions from "../../components/buttons/ProductActions";
+// import AddButton from "../../components/AddButton/AddButton";
 import { useRouter } from "next/navigation";
 import { Post, SortOption } from "../../components/types";
 
@@ -20,7 +20,7 @@ export default function Posts(props: {
   const sortOrder = searchParams.order || "";
   const fetchItemType = "posts";
   const [posts, setPosts] = useState<Post[]>([]);
-  const [editing, setEditing] = useState();
+  const [editing, setEditing] = useState<boolean>();
   const router = useRouter();
   const postInfo =
     "bg-gray-400 dark:bg-gray-200 font-sans p-2 rounded-xl text-xl m-2";
@@ -134,7 +134,7 @@ export default function Posts(props: {
             return (
               <div
                 key={post.id}
-                className="flex flex-col border border-solid border-gray-400 rounded-xl w-60wv items-center overflow-hidden bg-gray-400 dark:bg-gray-200 m-5 gap-2 hover:scale-1.02"
+                className="flex shadow-md dark:shadow-yellow-400 shadow-blue-400 flex-col border border-solid border-gray-400 rounded-xl w-60wv items-center overflow-hidden bg-gray-400 dark:bg-gray-200 m-5 gap-2 hover:scale-1.02"
               >
                 <Link href={`/posts/${post.id}`}>
                   <div className={postInfo}>

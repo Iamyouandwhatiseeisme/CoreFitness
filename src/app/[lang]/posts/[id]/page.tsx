@@ -1,14 +1,16 @@
-import "./index.css";
 import NotFound from "../../notfound/NotFound";
 import { ReturnBackButton } from "../../notfound/NotFound";
 import fetchSingleProduct from "../../../fetcher/fetchSingleProduct";
+import { Post } from "../../../components/types";
 
-export default async function PostPage(params) {
+export default async function PostPage(
+  params: Record<string, Record<string, string>>
+) {
   const { id } = params.params;
   const fetchItemType = "posts";
-  var post;
+  var post: Post;
 
-  post = await fetchSingleProduct({ fetchItemType, id });
+  post = (await fetchSingleProduct(id, fetchItemType)) as Post;
 
   if (!post.id) return <NotFound page="posts" />;
   return (
