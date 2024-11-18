@@ -12,3 +12,11 @@ export interface DailyDiet {
   Goal: string;
   Calories: string;
 }
+
+export interface InformationBoardItem {
+  key: number;
+  logo: string;
+  titles: string[];
+  hoverColor: string;
+  hoverImage: string;
+}

@@ -2,7 +2,7 @@ import "server-only";
 interface Dictionary {
   [key: string]: DictionaryChapter;
 }
-interface DictionaryChapter {
+export interface DictionaryChapter {
   [key: string]: string;
 }
 
