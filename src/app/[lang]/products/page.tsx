@@ -1,6 +1,5 @@
 "use client";
 
-import "./index.css";
 import Link from "next/link";
 import DropDown from "../../components/DropDown/DropDown";
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -9,17 +8,21 @@ import ProductActions from "../../components/buttons/ProductActions";
 import { useEffect, useState } from "react";
 import AddButton from "../../components/AddButton/AddButton";
 import { useRouter } from "next/navigation";
+import { Product, SortOption } from "../../components/types";
 
-export default function Products({ searchParams }) {
+export default function Products(props: {
+  searchParams: Record<string, string | undefined>;
+}) {
+  const searchParams = props.searchParams;
   const debouncedSearch = searchParams.search || "";
   const sortOption = searchParams.option || "";
   const sortOrder = searchParams.order || "";
   const fetchItemType = "products";
-  const [products, setProducts] = useState([]);
-  const [editing, setEditing] = useState();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [editing, setEditing] = useState<boolean>();
   const router = useRouter();
 
-  const sortOptions = [
+  const sortOptions: SortOption[] = [
     {
       label: "Price: Low to High",
       value: "price-low-to-high",
@@ -46,51 +49,54 @@ export default function Products({ searchParams }) {
     },
   ];
 
-  function editProducts({ products, setProducts }) {
-    return function changeProductproducts(product) {
-      products.forEach((item) => {
-        if (item.id === product.id) {
-          const index = products.indexOf(item);
-          const newArray = products;
-          newArray[index] = product;
-          setProducts(newArray);
-        }
-      });
-    };
-  }
+  // function editProducts({ products, setProducts }) {
+  //   return function changeProductproducts(product) {
+  //     products.forEach((item) => {
+  //       if (item.id === product.id) {
+  //         const index = products.indexOf(item);
+  //         const newArray = products;
+  //         newArray[index] = product;
+  //         setProducts(newArray);
+  //       }
+  //     });
+  //   };
+  // }
 
-  const deleteProduct = (productId) => {
-    setProducts((prevProducts) =>
-      prevProducts.filter((product) => product.id !== productId)
-    );
-  };
+  // const deleteProduct = (productId) => {
+  //   setProducts((prevProducts) =>
+  //     prevProducts.filter((product) => product.id !== productId)
+  //   );
+  // };
 
-  const addProduct = (item) => {
-    const newId = Date.now();
-    const itemWithId = { ...item, id: newId };
-    setProducts((prevProducts) => [...prevProducts, itemWithId]);
-  };
-  const toggleHandler = (option, order) => {
+  // const addProduct = (item) => {
+  //   const newId = Date.now();
+  //   const itemWithId = { ...item, id: newId };
+  //   setProducts((prevProducts) => [...prevProducts, itemWithId]);
+  // };
+  const toggleHandler = (
+    option: string | undefined,
+    order: string | undefined
+  ) => {
     router.push(`?option=${option}&order=${order}`);
   };
 
   useEffect(() => {
     async function fetch() {
-      var productArray = await fetchProducts({
+      var productArray = (await fetchProducts(
         fetchItemType,
         debouncedSearch,
         sortOption,
-        sortOrder,
-      });
+        sortOrder
+      )) as Product[];
       setProducts(productArray);
     }
     fetch();
   }, [fetchItemType, debouncedSearch, sortOption, sortOrder]);
-  var callBack = editProducts({ products, setProducts });
+  // var callBack = editProducts({ products, setProducts });
 
-  function onEditingChange(editing) {
-    setEditing(editing);
-  }
+  // function onEditingChange(editing) {
+  //   setEditing(editing);
+  // }
 
   if (products.length === 0) {
     return (
@@ -115,7 +121,7 @@ export default function Products({ searchParams }) {
         </div>
         <div className="fixed left-2 top-16 flex flex-col">
           <DropDown
-            buttonText="Sort Products By:"
+            buttonText={["Sort Products By:"]}
             content={sortOptions}
             toggleHandler={toggleHandler}
             type="Sorter"
@@ -144,18 +150,18 @@ export default function Products({ searchParams }) {
                 <div className="p-2 font-serif size text-xs m-1 ">
                   Price: {product.price}$
                 </div>
-                <ProductActions
+                {/* <ProductActions
                   type={"products"}
                   product={product}
                   setProductCallBack={callBack}
                   onEditingChange={onEditingChange}
                   deleteProductCallback={deleteProduct}
-                />
+                /> */}
               </div>
             );
           })}
         </div>
-        <AddButton item="Products" addProduct={addProduct} />
+        {/* <AddButton item="Products" addProduct={addProduct} /> */}
       </div>
     </div>
   );

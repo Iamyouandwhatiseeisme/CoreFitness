@@ -85,12 +85,12 @@ export default function Posts(props: {
 
   useEffect(() => {
     async function fetch() {
-      var postsArray = await fetchProducts({
+      var postsArray: Post[] = (await fetchProducts(
         fetchItemType,
         debouncedSearch,
         sortOption,
-        sortOrder,
-      });
+        sortOrder
+      )) as Post[];
       setPosts(postsArray);
     }
     fetch();

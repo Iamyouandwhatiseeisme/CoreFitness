@@ -39,3 +39,14 @@ export interface Post {
   userId: number;
   views: number;
 }
+export interface Product {
+  id: number;
+  brand: string;
+  category: string;
+  description: string;
+  price: number;
+  title: string;
+  thumbnail: string;
+  tags: string[];
+  images: string[];
+}
