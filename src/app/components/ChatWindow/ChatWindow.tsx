@@ -28,10 +28,10 @@ export default function ChatWindow() {
   });
   const [aiResponse, setResponse] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [dailyDiet, setDailyDiet] = useState<DailyDiet>();
-  const [isGraphReady, setIsGraphReady] = useState<boolean>(false);
+  const [dailyDiet, setDailyDiet] = useState<DailyDiet | null>();
+  // const [isGraphReady, setIsGraphReady] = useState<boolean>(false);
 
-  const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GOOGLE_API_KEY);
+  const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GOOGLE_API_KEY!);
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
   useEffect(() => {
@@ -48,7 +48,7 @@ export default function ChatWindow() {
     setResponse(aiResponse);
     setDailyDiet(dailyDiet);
     setIsLoading(false);
-  }, [aiResponse]);
+  }, [aiResponse, dailyDiet]);
   useEffect(() => {
     setIsLoading(isLoading);
   }, [isLoading]);
@@ -58,7 +58,7 @@ export default function ChatWindow() {
     `;
     setResponse((e) => "");
     setDailyDiet((e) => null);
-    setIsGraphReady(false);
+    // setIsGraphReady(false);
     setIsLoading(true);
     const graphPrompt = `Please give me Protein:%, Fat:%, Sugar:% from my daily diet (total should make 100% of the diet) if my goal is to ${userInfo.muscleGoal}ing weight, if I am ${userInfo.weight} kg ${userInfo.age} years old ${userInfo.gender} and I work out ${userInfo.activity} days a week.
     the answer should be in this format **Goal:** 

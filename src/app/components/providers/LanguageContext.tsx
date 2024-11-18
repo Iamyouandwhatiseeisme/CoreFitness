@@ -23,11 +23,10 @@ export const LocaleProvider = (props: {
 
   useEffect(() => {
     console.log("changing locale");
-    let currentLocale = locales.find((locale) =>
-      pathname.includes(`/${locale}`)
-    );
+    let currentLocale =
+      locales.find((locale) => pathname.includes(`/${locale}`)) ?? props.lang;
     setLocale(currentLocale);
-  }, [locale, pathname]);
+  }, [locale, pathname, props.lang]);
 
   const passedLocale: LocaleContextType = {
     locale: locale,
@@ -45,4 +44,10 @@ export const LocaleProvider = (props: {
   );
 };
 
-export const useLocale = () => useContext(localeContext);
+export const useLocale = (): LocaleContextType => {
+  const context = useContext(localeContext);
+  if (!context) {
+    throw new Error("useLocale must be used within a LocaleProvider");
+  }
+  return context;
+};
