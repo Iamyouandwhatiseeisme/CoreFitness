@@ -1,21 +1,24 @@
 import React from "react";
+import { InformationBoardItem } from "../types";
 
-export default function InformationBoardOptions({
-  item,
-  setHovered,
-  isHovered,
-  hoverColors,
+export default function InformationBoardOptions(props: {
+  item: InformationBoardItem;
+  setHovered: (value: number) => void;
+  isHovered: boolean;
+  hoverColor: string;
 }) {
   return (
     <div
-      key={item.key}
-      onMouseEnter={() => setHovered(item.key)}
+      key={props.item.key}
+      onMouseEnter={() => props.setHovered(props.item.key)}
       style={{
-        backgroundColor: isHovered ? hoverColors[item.key] : "transparent",
+        backgroundColor: props.isHovered
+          ? props.item.hoverColor
+          : "transparent",
         transition: "transform 0.15s ease-in-out",
-        width: isHovered ? "550px" : "",
-        transform: isHovered ? "scale(1.05)" : "scale(1.0)",
-        height: isHovered ? "384px" : "",
+        width: props.isHovered ? "550px" : "",
+        transform: props.isHovered ? "scale(1.05)" : "scale(1.0)",
+        height: props.isHovered ? "384px" : "",
         transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
       }}
       className={` rounded-3xl  hover:z-10 cursor-pointer`}
@@ -23,13 +26,13 @@ export default function InformationBoardOptions({
       <div className="flex justify-start gap-10 m-8 flex-row h-14  ">
         <div className="w-16 flex flex-col justify-center">
           <img
-            src={item.logo}
+            src={props.item.logo}
             className="rounded-full w-14  "
             alt="fitpass"
           ></img>
         </div>
         <div className="flex flex-col max-w-80">
-          {item.titles.map((title) => (
+          {props.item.titles.map((title) => (
             <div key={title}>{title}</div>
           ))}
         </div>
