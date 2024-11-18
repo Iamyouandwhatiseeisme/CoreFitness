@@ -35,7 +35,7 @@ export default async function RootLayout(props: {
           informationBoard={informationBoard}
         >
           <body className="bg-neutral-200 dark:bg-neutral-900">
-            <Header user={user} dict={dictHeader}></Header>
+            <Header currentUser={user} dict={dictHeader}></Header>
             {props.children}
             <Footer></Footer>
           </body>

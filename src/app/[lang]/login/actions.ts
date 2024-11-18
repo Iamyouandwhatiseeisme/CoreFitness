@@ -7,12 +7,12 @@ import { cookies } from "next/headers";
 import { createClient } from "../../utils/supabase/server";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 
-export async function login(formData, locale) {
+export async function login(formData: FormData, locale: string) {
   const supabase = await createClient();
 
   const form = {
-    email: formData.get("email"),
-    password: formData.get("password"),
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
   };
 
   const { data, error } = await supabase.auth.signInWithPassword(form);
@@ -26,9 +26,9 @@ export async function login(formData, locale) {
   return { success: true };
 }
 
-export async function signup(formData, locale) {
-  const email = formData.get("email");
-  const password = formData.get("password");
+export async function signup(formData: FormData, locale: string) {
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
 
   const supabase = createServerActionClient({
     cookies,
@@ -37,8 +37,7 @@ export async function signup(formData, locale) {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
-    options: {},
-    emailRedirectTo: `http://localhost:3000/auth/callback`,
+    options: { emailRedirectTo: `http://localhost:3000/auth/callback` },
   });
   if (error) {
     return { error: error.code };
@@ -47,7 +46,7 @@ export async function signup(formData, locale) {
   return { success: true };
 }
 
-export async function signOut(locale) {
+export async function signOut(locale: string) {
   const supabase = await createClient();
 
   const { error } = await supabase.auth.signOut();
