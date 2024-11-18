@@ -1,12 +1,16 @@
 import React from "react";
 import DropDownItem from "../DropDownItem/DropDownItem";
 import { ThemeOption } from "../../hooks/useTheme";
+import { SortOption } from "../types";
 
 const DropDownContent = (props: {
-  children: ThemeOption[];
+  children: ThemeOption[] | SortOption[];
   open: boolean;
   onSelect: () => void;
-  toggleHandler: () => void;
+  toggleHandler: (
+    option: string | undefined,
+    order: string | undefined
+  ) => void;
   type: string;
 }) => {
   return (

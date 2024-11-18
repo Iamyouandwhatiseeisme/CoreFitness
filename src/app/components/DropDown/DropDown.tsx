@@ -3,11 +3,15 @@ import React, { useState } from "react";
 import DropDownButton from "../DropDownButton/DropDownButton";
 import DropDownContent from "../DropDownContent/DropDownContent";
 import { ThemeOption } from "../../hooks/useTheme";
+import { SortOption } from "../types";
 
 const DropDown = (props: {
   buttonText: string[];
-  content: ThemeOption[];
-  toggleHandler: () => void;
+  content: ThemeOption[] | SortOption[];
+  toggleHandler: (
+    option: string | undefined,
+    order: string | undefined
+  ) => void;
   type: string;
 }) => {
   const [open, setOpen] = useState<boolean>(false);
