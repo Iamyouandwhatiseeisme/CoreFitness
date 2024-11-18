@@ -18,7 +18,6 @@ export const UserProvider = ({
   initialUser: User | null;
 }) => {
   const [user, setUser] = useState<User | null>(initialUser);
-  console.log("user updated");
 
   return (
     <UserContext.Provider value={{ user, setUser }}>

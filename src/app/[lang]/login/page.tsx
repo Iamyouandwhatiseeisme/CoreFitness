@@ -16,14 +16,11 @@ export const LogIn = () => {
   }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    console.log(e.nativeEvent, "typeof event");
-
     e.preventDefault();
 
     const submitEvent = e.nativeEvent as SubmitEvent;
     const submitter = submitEvent.submitter as HTMLButtonElement;
 
-    console.log(submitEvent.submitter);
     const formData = new FormData(e.target as HTMLFormElement);
     const actionType = submitter.name;
 

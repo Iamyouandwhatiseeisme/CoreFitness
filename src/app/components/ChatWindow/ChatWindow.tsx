@@ -78,8 +78,7 @@ export default function ChatWindow() {
     const graphResult = await model.generateContent(graphPrompt);
     const dailyDietResult = graphResult.response.text();
     const dailyDietInfo = ExtractDailyDietInfo(dailyDietResult);
-    console.log(dailyDietResult);
-    console.log(dailyDietInfo);
+
     setDailyDiet(dailyDietInfo);
   }
 

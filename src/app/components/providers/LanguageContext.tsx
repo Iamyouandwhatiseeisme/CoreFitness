@@ -22,7 +22,6 @@ export const LocaleProvider = (props: {
   const pathname = usePathname();
 
   useEffect(() => {
-    console.log("changing locale");
     let currentLocale =
       locales.find((locale) => pathname.includes(`/${locale}`)) ?? props.lang;
     setLocale(currentLocale);
