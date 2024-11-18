@@ -1,5 +1,4 @@
 "use client";
-import "./Header.css";
 import Link from "next/link";
 import Logo from "../../../../public/images/Header Logo.webp";
 import DropDown from "../DropDown/DropDown";
@@ -17,88 +16,8 @@ const Header = (props: {
 }) => {
   const { locale, setLocale } = useLocale();
   const { currentTheme, themeOptions, themeHandler } = useTheme();
-  // const [currentTheme, setCurrentTheme] = useState(cilSync);
 
-  // useEffect(() => {
-  //   function checkTheme() {
-  //     const systemSetting = localStorage.getItem("system");
-  //     const theme = localStorage.getItem("theme");
-
-  //     if (systemSetting === "true") {
-  //       setCurrentTheme(cilScreenDesktop);
-  //     } else if (systemSetting === "false") {
-  //       setCurrentTheme(theme === "dark" ? cilMoon : cilSun);
-  //     }
-  //   }
-
-  //   checkTheme();
-  // }, []);
-
-  // const themeOptions = [
-  //   {
-  //     label: "light",
-  //     icon: cilSun,
-  //     changeTheme: () => {
-  //       localStorage.setItem("theme", "light");
-  //       localStorage.setItem("system", "false");
-  //       setCurrentTheme(cilSun);
-  //     },
-  //   },
-  //   {
-  //     label: "dark",
-  //     icon: cilMoon,
-  //     changeTheme: () => {
-  //       localStorage.setItem("theme", "dark");
-  //       localStorage.setItem("system", "false");
-
-  //       setCurrentTheme(cilMoon);
-  //     },
-  //   },
-  //   {
-  //     label: "system",
-  //     icon: cilScreenDesktop,
-  //     changeTheme: () => {
-  //       localStorage.setItem("system", "true");
-  //       localStorage.removeItem("theme");
-
-  //       setCurrentTheme(cilScreenDesktop);
-  //     },
-  //   },
-  // ];
-  // useEffect(() => {
-  //   const theme = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  //   if (!localStorage.getItem("theme")) {
-  //     localStorage.setItem("theme", theme ? "dark" : "light");
-  //     localStorage.setItem("system", "true");
-  //   }
-  //   document.documentElement.classList.toggle(
-  //     "dark",
-  //     localStorage.theme === "dark" ||
-  //       (!("theme" in localStorage) &&
-  //         window.matchMedia("(prefers-color-scheme: dark)").matches)
-  //   );
-  // }, []);
-  // const themeHandler = () => {
-  //   document.documentElement.classList.toggle(
-  //     "dark",
-  //     localStorage.theme === "dark" ||
-  //       (!("theme" in localStorage) &&
-  //         window.matchMedia("(prefers-color-scheme: dark)").matches)
-  //   );
-  // };
-  // useEffect(() => {
-  //   if (currentTheme !== cilScreenDesktop) return;
-  //   const themeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-  //   const handleSystemThemeChange = (e) => {
-  //     const newTheme = e.matches ? "dark" : "light";
-  //     document.documentElement.classList.toggle("dark", newTheme === "dark");
-  //   };
-  //   themeQuery.addEventListener("change", handleSystemThemeChange);
-  //   return () =>
-  //     themeQuery.removeEventListener("change", handleSystemThemeChange);
-  // }, [currentTheme]);
-
-  const listItemStyle =
+  const listItemStyle: string =
     "text-black hover:bg-gray-400 dark:hover:bg-header-hover-dark hover:rounded-3xl font-serif font-normal dark:text-yellow-500 p-5 text-center transition-header-hover-transition cursor-pointer";
 
   return (

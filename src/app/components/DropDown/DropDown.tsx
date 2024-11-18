@@ -2,9 +2,14 @@
 import React, { useState } from "react";
 import DropDownButton from "../DropDownButton/DropDownButton";
 import DropDownContent from "../DropDownContent/DropDownContent";
-import "./DropDown.css";
+import { ThemeOption } from "../../hooks/useTheme";
 
-const DropDown = ({ buttonText, content, toggleHandler, type }) => {
+const DropDown = (props: {
+  buttonText: string[];
+  content: ThemeOption[];
+  toggleHandler: () => void;
+  type: string;
+}) => {
   const [open, setOpen] = useState(false);
   const toggleDropDown = () => {
     setOpen((open) => !open);
@@ -12,17 +17,16 @@ const DropDown = ({ buttonText, content, toggleHandler, type }) => {
 
   return (
     <div>
-      <DropDownButton toggle={toggleDropDown} open={open} type={type}>
-        {buttonText}
+      <DropDownButton toggle={toggleDropDown} open={open} type={props.type}>
+        {props.buttonText}
       </DropDownButton>
       <DropDownContent
-        className="z-10"
         onSelect={toggleDropDown}
         open={open}
-        toggleHandler={toggleHandler}
-        type={type}
+        toggleHandler={props.toggleHandler}
+        type={props.type}
       >
-        {content}
+        {props.content}
       </DropDownContent>
     </div>
   );
