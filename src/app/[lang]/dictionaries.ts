@@ -1,6 +1,12 @@
 import "server-only";
+interface Dictionary {
+  [key: string]: DictionaryChapter;
+}
+interface DictionaryChapter {
+  [key: string]: string;
+}
 
-const dictionaries = {
+const dictionaries: Record<string, () => Promise<Dictionary>> = {
   "en-US": () =>
     import("./dictionaries/en.json").then((module) => module.default),
   ka: () => import("./dictionaries/ka.json").then((module) => module.default),
