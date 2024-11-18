@@ -9,9 +9,20 @@ module.exports = {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-100%)" },
         },
+        slideIn: {
+          "0%": {
+            transform: "translateY(-10%)",
+            opacity: "0",
+          },
+          "100%": {
+            transform: "translateY(0)",
+            opacity: "1",
+          },
+        },
       },
       animation: {
         scroll: "scroll 20s linear infinite",
+        "slide-in": "slideIn 150ms ease-in-out",
       },
       backgroundImage: {
         "gym-background": "url('/images/Gym Background.jpg')",
@@ -30,6 +41,9 @@ module.exports = {
       },
       minHeight: {
         wrapper: "calc(100vh - 110px)",
+      },
+      maxHeight: {
+        "40vh": "40vh",
       },
       height: {
         "60vh": "60vh",

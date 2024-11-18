@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import "./DropDownItem.css";
 import { CIcon } from "@coreui/icons-react";
 
 const DropDownItem = ({ children, onClick, toggleHandler, type }) => {
@@ -17,7 +16,7 @@ const DropDownItem = ({ children, onClick, toggleHandler, type }) => {
 
   return (
     <div
-      className="dropdown-item"
+      className="p-2 m-0.5 w-full rounded-lg  cursor-pointer hover:bg-gray-200"
       onClick={() => {
         clickHandler();
       }}

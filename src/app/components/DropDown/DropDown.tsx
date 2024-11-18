@@ -10,7 +10,7 @@ const DropDown = (props: {
   toggleHandler: () => void;
   type: string;
 }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
   const toggleDropDown = () => {
     setOpen((open) => !open);
   };

@@ -8,14 +8,11 @@ import { Switch } from "@mui/material";
 import ReactCountryFlag from "react-country-flag";
 
 function LocaleChange() {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState<boolean>(false);
   const router = useRouter();
   const { locale, setLocale } = useLocale();
   const pathname = usePathname();
-  const lngs = [
-    { locale: "en-US", name: "EN" },
-    { locale: "ka", name: "GE" },
-  ];
+
   useEffect(() => {
     if (locale === "ka") {
       setChecked(true);
@@ -25,7 +22,7 @@ function LocaleChange() {
   }, [locale]);
 
   const toggleLanguage = () => {
-    var updatedLocale;
+    var updatedLocale: string;
     if (locale === "ka") {
       updatedLocale = "en-US";
       setChecked(false);

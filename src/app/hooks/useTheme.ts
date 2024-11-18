@@ -1,10 +1,16 @@
 import { cilSun, cilMoon, cilScreenDesktop, cilSync } from "@coreui/icons";
 import { useEffect, useState } from "react";
 
+export interface ThemeOption {
+  label: string;
+  icon: string[];
+  changeTheme: () => void;
+}
+
 export default function useTheme() {
   const [currentTheme, setCurrentTheme] = useState(cilSync);
 
-  const themeOptions = [
+  const themeOptions: ThemeOption[] = [
     {
       label: "light",
       icon: cilSun,
