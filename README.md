@@ -10,7 +10,7 @@ A brief description of your Next.js application, its purpose, and any key featur
 
 - [Installation](#installation)
 - [Getting Started](#getting-started)
-- authentication
+- [Authentication](#authentication)
 
 ---
 
