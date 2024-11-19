@@ -37,7 +37,7 @@ function LocaleChange() {
   };
 
   return (
-    <div className="flex flex-row h-7 items-center border border-gray-200 rounded-xl p-3 dark:bg-yellow-500 bg-gray-500">
+    <div className="flex flex-row h-7 w-32 items-center border border-gray-200 rounded-xl p-3 dark:bg-yellow-500 bg-gray-500">
       <ReactCountryFlag
         countryCode="US"
         svg

@@ -21,11 +21,15 @@ const Header = (props: {
     "text-black hover:bg-gray-400 dark:hover:bg-header-hover-dark hover:rounded-3xl font-serif font-normal dark:text-yellow-500 p-5 text-center transition-header-hover-transition cursor-pointer";
 
   return (
-    <header className="flex flex-row justify-between bg-neutral-300 dark:bg-dark-header  w-full overflow-hidden  z-20 ">
-      <div className="flex gap-38  pt-5 pb-5 pr-5">
+    <header className="flex flex-row justify-between items-center bg-neutral-300 dark:bg-dark-header  w-full overflow-hidden  z-20 ">
+      <div className="w-60 ml-5">
+        <LocaleChange></LocaleChange>
+      </div>
+
+      <div className="flex gap-38 items-center  pt-5 pb-5 ml-20 ">
         <Link
           href={`/${locale}`}
-          className="mt-4 pr-2 w-14 h-14 bg-transparent  cursor-pointer items-center"
+          className="mt-4   pr-2 w-14 h-14 bg-transparent  cursor-pointer items-center"
         >
           <img src={Logo.src} alt="logo"></img>
         </Link>
@@ -43,12 +47,6 @@ const Header = (props: {
                 {props.dict.Profile}
               </li>
             </Link>
-
-            <Link href={`/${locale}/blog`}>
-              <li className={`${listItemStyle} hidden xl:block`}>
-                {props.dict.Blog}
-              </li>
-            </Link>
             <Link href={`/${locale}/products`}>
               <li className={`${listItemStyle} hidden xl:block`}>
                 {props.dict.Products}
@@ -62,8 +60,8 @@ const Header = (props: {
           </ul>
         </nav>
       </div>
-      <div className="flex flex-row gap-2 items-center mr-5 justify-center z-10">
-        <LocaleChange></LocaleChange>
+      <div className="flex flex-row gap-2 items-center mr-5 justify-end w-full z-10">
+        {/* <LocaleChange></LocaleChange> */}
         <div>
           <DropDown
             content={themeOptions}
