@@ -1,7 +1,5 @@
 import React from "react";
 
-import "./index.css";
-
 const paragraphStyle = "p-2 text-2xl";
 function About() {
   return (

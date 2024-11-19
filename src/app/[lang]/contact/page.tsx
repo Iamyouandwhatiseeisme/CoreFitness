@@ -1,12 +1,8 @@
 "use client";
-import Footer from "../components/footer/Footer.js";
-import Header from "../components/header/Header.js";
-import "./index.css";
 
 function Contact() {
   return (
     <div className="flex flex-col justify-between">
-      <Header />
       <div className="border border-white border-solid h-80vh flex flex-col text-start">
         <h2 className="flex flef-row p-5">Contact phone: +0100 3049 2933 </h2>
         <h2 className="flex flef-row p-5">
@@ -45,7 +41,6 @@ function Contact() {
             <div className="text-sm flex gap-2 p-2">
               <label htmlFor="message">Message: </label>
               <textarea
-                type="text"
                 id="message"
                 name="message"
                 style={{
@@ -61,7 +56,6 @@ function Contact() {
           </form>
         </h2>
       </div>
-      <Footer />
     </div>
   );
 }
