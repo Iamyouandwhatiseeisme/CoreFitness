@@ -17,7 +17,7 @@ export default function Products(props: {
   const debouncedSearch = searchParams.search || "";
   const sortOption = searchParams.option || "";
   const sortOrder = searchParams.order || "";
-  const fetchItemType = "products";
+  const fetchItemType: string = "products";
   const [products, setProducts] = useState<Product[]>([]);
   const [editing, setEditing] = useState<boolean>();
   const router = useRouter();

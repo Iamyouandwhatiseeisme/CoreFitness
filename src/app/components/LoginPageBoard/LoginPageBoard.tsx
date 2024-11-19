@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function LoginPageBoard() {
-  const [isHovered, setIsHoverd] = useState(false);
+  const [isHovered, setIsHoverd] = useState<boolean>(false);
   return (
     <div
       className="bg-gym-background w-1/2 z-10 relative transition-all duration-400 hover:w-60wv group hidden lg:flex "
@@ -32,7 +32,7 @@ export default function LoginPageBoard() {
       border-black w-96 h-1/4 rounded-2xl bg-black flex flex-col justify-center items-center
       opacity-0 -translate-y-full group-hover:opacity-100 group-hover:translate-y-2`}
           >
-            <div className="borde  rounded-md pr-4 pl-4 flex flex-col  items-center justify-center text-center">
+            <div className="  rounded-md pr-4 pl-4 flex flex-col  items-center justify-center text-center">
               <h1
                 className={` z-40  font-serif text-2xl font-extrabold text-white  ${
                   isHovered ? "flex" : "hidden"

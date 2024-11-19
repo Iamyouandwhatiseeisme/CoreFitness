@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import InformationBoardOptions from "./InformationBoardOptions";
-import useInformationBoardItems from "../data/useInformationBoardItems";
+import useInformationBoardItems from "../../hooks/useUnformationBoardItems";
 
 export default function InformationBoard() {
   const [hovered, setHovered] = useState(0);

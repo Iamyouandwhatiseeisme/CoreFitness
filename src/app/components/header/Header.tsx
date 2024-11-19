@@ -75,12 +75,14 @@ const Header = (props: {
         <div className="mb-2  ">
           {props.currentUser === null ? (
             <AuthenticationButton
+              locale={locale}
               href={`/${locale}/login`}
               type="login"
               buttonText={props.dict.Login}
             />
           ) : (
             <AuthenticationButton
+              locale={locale}
               href={`/${locale}/login`}
               type="logout"
               buttonText={props.dict.Logout}
