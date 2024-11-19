@@ -35,7 +35,9 @@ const Header = (props: {
         </Link>
         <nav className="rounded-3xl flex- flex-row  border border-solid dark:border-header-hover-dark h-20 items-center p-2  hidden sm:block">
           <ul className="gap-5 flex  list-none flex-row">
-            <li className={listItemStyle}>{props.dict.Equipment}</li>
+            <Link href={`/${locale}/equipment`}>
+              <li className={listItemStyle}>{props.dict.Equipment}</li>
+            </Link>
             <li className={listItemStyle}>{props.dict.Trainers}</li>
             <li className={listItemStyle}>{props.dict.Certificates}</li>
             <li className={listItemStyle}>{props.dict.Schedules}</li>
