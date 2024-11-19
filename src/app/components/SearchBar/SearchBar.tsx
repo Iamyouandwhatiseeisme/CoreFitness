@@ -3,7 +3,11 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import useDebounce from "../../hooks/useDebounce";
 
-export default function SearchBar(props: { searchItemType: string }) {
+interface SearchBarProps {
+  searchItemType: string;
+}
+
+export default function SearchBar(props: SearchBarProps) {
   const searchItemType = props.searchItemType;
   const [searchValue, setSearchValue] = useState<string>("");
   const debouncedValue = useDebounce(searchValue, 500);

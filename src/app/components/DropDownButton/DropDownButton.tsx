@@ -1,12 +1,14 @@
 import React from "react";
 import CIcon from "@coreui/icons-react";
 
-const DropDownButton = (props: {
+interface DropDownButtonProps {
   children: string[];
   open: boolean;
   toggle: () => void;
   type: string;
-}) => {
+}
+
+const DropDownButton = (props: DropDownButtonProps) => {
   return (
     <div
       className={

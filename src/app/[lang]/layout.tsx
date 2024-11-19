@@ -6,16 +6,19 @@ import { getDictionary } from "./dictionaries";
 import { LocaleProvider } from "../components/providers/LanguageContext";
 import { createClient } from "../utils/supabase/server";
 import { UserProvider } from "../components/providers/UserProvider";
+import React from "react";
 
 export const metadata = {
   title: "Core Fitness",
   description: "Your Fitness Friend",
 };
 
-export default async function RootLayout(props: {
+interface LayoutProps {
   children: React.ReactNode;
   params: { lang: string };
-}) {
+}
+
+export default async function RootLayout(props: LayoutProps) {
   const dict = await getDictionary(props.params.lang);
   const supabase = await createClient();
 

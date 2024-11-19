@@ -1,12 +1,16 @@
 import React from "react";
 import { InformationBoardItem } from "../types";
 
-export default function InformationBoardOptions(props: {
+interface InformationBoardOptionsProps {
   item: InformationBoardItem;
   setHovered: (value: number) => void;
   isHovered: boolean;
   hoverColor: string;
-}) {
+}
+
+export default function InformationBoardOptions(
+  props: InformationBoardOptionsProps
+) {
   return (
     <div
       key={props.item.key}

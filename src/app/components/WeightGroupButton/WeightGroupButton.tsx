@@ -3,11 +3,13 @@ import React from "react";
 import { useLocale } from "../providers/LanguageContext";
 import { UserInfo } from "../types";
 
-export default function WeightGroupButton(props: {
+interface WeightGroupButtonProps {
   handleChange: (key: string, value: number) => void;
   userInfo: UserInfo;
   weightData: number[];
-}) {
+}
+
+export default function WeightGroupButton(props: WeightGroupButtonProps) {
   const { chatWindow } = useLocale();
   return (
     <div>

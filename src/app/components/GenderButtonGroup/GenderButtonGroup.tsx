@@ -2,11 +2,12 @@ import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import React from "react";
 import { UserInfo } from "../types";
 
-export default function GenderButtonGroup(props: {
+interface GenderButtonGroupProps {
   genderData: string[];
   userInfo: UserInfo;
   handleChange: (key: string, value: string) => void;
-}) {
+}
+export default function GenderButtonGroup(props: GenderButtonGroupProps) {
   return (
     <div>
       <label className="font-serif font-bold mr-2">Gender: </label>

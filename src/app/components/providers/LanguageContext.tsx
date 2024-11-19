@@ -11,13 +11,14 @@ interface LocaleContextType {
   chatWindow: Record<string, string>;
   informationBoard: Record<string, string>;
 }
-
-export const LocaleProvider = (props: {
+interface LocaleProviderProps {
   lang: string;
   children: React.ReactNode;
   dictChat: Record<string, string>;
   informationBoard: Record<string, string>;
-}) => {
+}
+
+export const LocaleProvider = (props: LocaleProviderProps) => {
   const [locale, setLocale] = useState<string>(props.lang);
   const pathname = usePathname();
 

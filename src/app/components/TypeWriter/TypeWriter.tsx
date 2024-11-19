@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-export default function TypeWriter(props: {
+interface TypeWriterProps {
   aiResponse: string;
   delay: number;
-}) {
+}
+
+export default function TypeWriter(props: TypeWriterProps) {
   const [currentText, setCurrentText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   useEffect(() => {

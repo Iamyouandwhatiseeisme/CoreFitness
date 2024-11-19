@@ -11,9 +11,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Post, SortOption } from "../../components/types";
 
-export default function Posts(props: {
+interface PostsProps {
   searchParams: Record<string, string | undefined>;
-}) {
+}
+
+export default function Posts(props: PostsProps) {
   const searchParams = props.searchParams;
   const debouncedSearch = searchParams.search || "";
   const sortOption = searchParams.option || "";

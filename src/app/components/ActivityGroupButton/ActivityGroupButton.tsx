@@ -2,11 +2,13 @@ import { FormControl, MenuItem, Select } from "@mui/material";
 import React from "react";
 import { UserInfo } from "../types";
 
-export default function ActivityGroupButton(props: {
+interface AcitvityGroupButtonProps {
   activityData: string[];
   userInfo: UserInfo;
   handleChange: (key: string, value: string) => void;
-}) {
+}
+
+export default function ActivityGroupButton(props: AcitvityGroupButtonProps) {
   return (
     <div>
       <h1 className="font-serif">How many days a week do you exercise?</h1>

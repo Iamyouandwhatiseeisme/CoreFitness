@@ -10,9 +10,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Product, SortOption } from "../../components/types";
 
-export default function Products(props: {
+interface ProductsProps {
   searchParams: Record<string, string | undefined>;
-}) {
+}
+
+export default function Products(props: ProductsProps) {
   const searchParams = props.searchParams;
   const debouncedSearch = searchParams.search || "";
   const sortOption = searchParams.option || "";

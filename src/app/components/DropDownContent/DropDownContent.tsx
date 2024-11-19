@@ -3,7 +3,7 @@ import DropDownItem from "../DropDownItem/DropDownItem";
 import { ThemeOption } from "../../hooks/useTheme";
 import { SortOption } from "../types";
 
-const DropDownContent = (props: {
+interface DropDownContentProps {
   children: ThemeOption[] | SortOption[];
   open: boolean;
   onSelect: () => void;
@@ -12,7 +12,9 @@ const DropDownContent = (props: {
     order: string | undefined
   ) => void;
   type: string;
-}) => {
+}
+
+const DropDownContent = (props: DropDownContentProps) => {
   return (
     <div
       style={{

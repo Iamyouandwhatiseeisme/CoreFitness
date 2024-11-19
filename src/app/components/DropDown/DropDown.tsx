@@ -5,7 +5,7 @@ import DropDownContent from "../DropDownContent/DropDownContent";
 import { ThemeOption } from "../../hooks/useTheme";
 import { SortOption } from "../types";
 
-const DropDown = (props: {
+interface DropDownProps {
   buttonText: string[];
   content: ThemeOption[] | SortOption[];
   toggleHandler: (
@@ -13,7 +13,9 @@ const DropDown = (props: {
     order: string | undefined
   ) => void;
   type: string;
-}) => {
+}
+
+const DropDown = (props: DropDownProps) => {
   const [open, setOpen] = useState<boolean>(false);
   const toggleDropDown = () => {
     setOpen((open) => !open);

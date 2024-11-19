@@ -10,18 +10,20 @@ import { User } from "@supabase/supabase-js";
 import { DictionaryChapter } from "../../[lang]/dictionaries";
 import useTheme from "../../hooks/useTheme";
 
-const Header = (props: {
+interface HeaderProps {
   dict: DictionaryChapter;
   currentUser: User | null;
-}) => {
+}
+
+const Header = (props: HeaderProps) => {
   const { locale, setLocale } = useLocale();
   const { currentTheme, themeOptions, themeHandler } = useTheme();
 
   const listItemStyle: string =
-    "text-black hover:bg-gray-400 dark:hover:bg-header-hover-dark hover:rounded-3xl font-serif font-normal dark:text-yellow-500 p-5 text-center transition-header-hover-transition cursor-pointer";
+    "text-black hover:bg-gray-400 w-32  dark:hover:bg-header-hover-dark hover:rounded-3xl font-serif font-normal dark:text-yellow-500 p-5 text-center transition-header-hover-transition cursor-pointer";
 
   return (
-    <header className="flex flex-row justify-between items-center bg-neutral-300 dark:bg-dark-header  w-full overflow-hidden  z-20 ">
+    <header className="flex flex-row  justify-between items-center bg-neutral-300 dark:bg-dark-header  w-full overflow-hidden  z-20 ">
       <div className="w-60 ml-5">
         <LocaleChange></LocaleChange>
       </div>

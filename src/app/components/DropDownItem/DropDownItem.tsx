@@ -4,7 +4,7 @@ import { CIcon } from "@coreui/icons-react";
 import { ThemeOption } from "../../hooks/useTheme";
 import { SortOption } from "../types";
 
-const DropDownItem = (props: {
+interface DropDownItemProps {
   children: ThemeOption | SortOption;
   onClick: () => void;
   toggleHandler: (
@@ -12,7 +12,9 @@ const DropDownItem = (props: {
     order: string | undefined
   ) => void;
   type: string;
-}) => {
+}
+
+const DropDownItem = (props: DropDownItemProps) => {
   const clickHandler = () => {
     props.onClick();
     if (props.type === "Sorter") {

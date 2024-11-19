@@ -1,5 +1,11 @@
 import Link from "next/link";
-export function ReturnBackButton(props: { destination: string }) {
+type ReturnBackButtonProps = {
+  destination: string;
+};
+type NotFoudnProps = {
+  page: string;
+};
+export function ReturnBackButton(props: ReturnBackButtonProps) {
   return (
     <Link
       className="flex flex-col bg-red-700 text-white text-2xl p-3 m-6 items-center border border-solid rounded-50 border-black"
@@ -10,7 +16,7 @@ export function ReturnBackButton(props: { destination: string }) {
   );
 }
 
-export default function NotFound(props: { page: string }) {
+export default function NotFound(props: NotFoudnProps) {
   return (
     <div className="flex flex-col items-center border border-solid rounded-50 border-black">
       <h1 className="text-black dark:text-gray-200 font-sans font-bold text-2xl">

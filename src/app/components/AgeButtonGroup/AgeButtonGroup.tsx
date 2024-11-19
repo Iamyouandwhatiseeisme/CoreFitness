@@ -3,11 +3,13 @@ import React from "react";
 import { useLocale } from "../providers/LanguageContext";
 import { UserInfo } from "../types";
 
-export default function AgeButtonGroup(props: {
+interface AgeButtonGroupProps {
   ageData: number[];
   userInfo: UserInfo;
   handleChange: (key: string, value: number) => void;
-}) {
+}
+
+export default function AgeButtonGroup(props: AgeButtonGroupProps) {
   const { chatWindow } = useLocale();
 
   return (
