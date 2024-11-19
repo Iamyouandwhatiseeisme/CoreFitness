@@ -4,9 +4,9 @@ import Link from "next/link";
 import DropDown from "../../components/DropDown/DropDown";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import fetchProducts from "../../fetcher/fetchProducts";
-import ProductActions from "../../components/buttons/ProductActions";
+// import ProductActions from "../../components/buttons/ProductActions";
 import { useEffect, useState } from "react";
-import AddButton from "../../components/AddButton/AddButton";
+// import AddButton from "../../components/AddButton/AddButton";
 import { useRouter } from "next/navigation";
 import { Product, SortOption } from "../../components/types";
 
