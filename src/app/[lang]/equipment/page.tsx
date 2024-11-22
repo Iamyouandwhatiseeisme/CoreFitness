@@ -56,15 +56,17 @@ export default function EquipmentPage() {
         <div className="flex flex-col gap-10 w-full m-10">
           {equipment.map((item) => {
             return (
-              <div className="w-full  h-120  bg-gray-400 flex flex-row items-start justify-between border border-gray-500 rounded-2xl">
+              <div className="w-full  h-120  bg-white flex flex-row items-start justify-between border border-gray-500 rounded-2xl">
                 <img
-                  className="w-1/2 bg-white h-full rounded-tl-2xl rounded-bl-2xl rounded-br-3xl border-2 border-gray-800 object-contain
+                  className="w-1/2 bg-white h-full rounded-tl-2xl rounded-bl-2xl rounded-br-3xl border border-gray-200 object-contain
                   "
                   src={item.img.img}
                   alt={`${item.id}`}
                 ></img>
-                <div className="w-full  flex flex-col items-center mt-10">
-                  <h1 className="font-bold text-2xl underline">{item.title}</h1>
+                <div className="w-full  flex flex-col items-center mt-10 border-b-2 border-gray-200">
+                  <h1 className="font-bold text-2xl underline  border-b-2 border-gray-200">
+                    {item.title}
+                  </h1>
                   <p className="m-10 text-lg">{item.description}</p>
                 </div>
               </div>
