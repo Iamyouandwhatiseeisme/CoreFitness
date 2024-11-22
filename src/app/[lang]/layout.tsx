@@ -37,7 +37,7 @@ export default async function RootLayout(props: LayoutProps) {
           dictChat={dictChat}
           informationBoard={informationBoard}
         >
-          <body className="bg-neutral-200 dark:bg-neutral-900">
+          <body className="bg-neutral-200 dark:bg-neutral-900 font-serif">
             <Header currentUser={user} dict={dictHeader}></Header>
             {props.children}
             <Footer></Footer>
