@@ -43,7 +43,6 @@ export default function useTheme() {
   ];
   useEffect(() => {
     function checkTheme() {
-      console.log(currentTheme, "themecheck");
       const systemSetting = localStorage.getItem("system");
       const theme = localStorage.getItem("theme");
 
