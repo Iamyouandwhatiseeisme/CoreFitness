@@ -16,6 +16,8 @@ function Welcome() {
   const [homePageCharity, setHomePageCharity] = useState<
     HomePageCharityImageScreen[]
   >([]);
+  const [isAnimationTriggered, setIsAnimationTriggered] =
+    useState<boolean>(false);
 
   useEffect(() => {
     const fetchImages = fetch("/api/homePageCharity")
@@ -23,6 +25,26 @@ function Welcome() {
       .then((data) => setHomePageCharity(data))
       .catch((error) => console.error(error));
   }, []);
+  window.addEventListener("scroll", () => {
+    let scrollDirection = "down";
+    const header = document.getElementById("header");
+    if (header) {
+      if (!isAnimationTriggered) {
+        if (window.scrollY > 0 && scrollDirection === "down") {
+          header.classList.remove("animate-first-scroll-header-reverse");
+          header.classList.add("animate-first-scroll-header");
+          scrollDirection = "down";
+
+          setIsAnimationTriggered(true);
+        }
+      }
+      if (window.scrollY === 0) {
+        setIsAnimationTriggered(false);
+        header.classList.remove("animate-first-scroll-header");
+        header.classList.add("animate-first-scroll-header-reverse");
+      }
+    }
+  });
 
   return (
     <main className="max-w-full  m-0">

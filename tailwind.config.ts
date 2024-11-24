@@ -1,3 +1,5 @@
+import { BorderAllRounded } from "@mui/icons-material";
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
@@ -19,10 +21,43 @@ module.exports = {
             opacity: "1",
           },
         },
+        firstScrollHeader: {
+          "0%": {
+            borderBottomLeftRadius: "0",
+            borderBottomRightRadius: "0",
+          },
+          "100%": {
+            borderBottomLeftRadius: "50px",
+            borderBottomRightRadius: "50px",
+          },
+        },
+        scrollHeaderBack: {
+          "100%": {
+            borderBottomLeftRadius: "50px",
+            borderBottomRightRadius: "50px",
+          },
+          "0%": {
+            borderBottomLeftRadius: "0",
+            borderBottomRightRadius: "0",
+          },
+        },
+        firstScrollHeaderReverse: {
+          "0%": {
+            borderBottomLeftRadius: "50px",
+            borderBottomRightRadius: "50px",
+          },
+          "100%": {
+            borderBottomLeftRadius: "0",
+            borderBottomRightRadius: "0",
+          },
+        },
       },
       animation: {
         scroll: "scroll 20s linear infinite",
         "slide-in": "slideIn 150ms ease-in-out",
+        "first-scroll-header": "firstScrollHeader 800ms ease-in-out forwards",
+        "first-scroll-header-reverse":
+          "firstScrollHeaderReverse 800ms ease-in-out forwards",
       },
       backgroundImage: {
         "gym-background": "url('/images/Gym Background.jpg')",
