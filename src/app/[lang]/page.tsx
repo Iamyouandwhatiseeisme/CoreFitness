@@ -27,23 +27,26 @@ function Welcome() {
   return (
     <main className="max-w-full  m-0">
       <div className="bg-neutral-200 dark:bg-neutral-900 text-white">
-        <div className="min-h-wrapper flex flex-col bg-gradient-to-r from-slate-50 to-gray-200 dark:from-slate-50 dark:to-black items-center ">
+        <div className="min-h-wrapper flex flex-col items-center justify-center bg-disabled ">
           {homePageCharity.length !== 0 ? (
-            <div className="grid grid-cols-2 gap-4 w-96 h-96 border border-gray-300 rounded-2xl m-5 p-2 bg-gradient-to-tr from-blue-100 to-blue-400">
-              {homePageCharity[0].img.img.map((item, index) => {
-                return (
-                  <div
-                    key={index}
-                    className="flex justify-center items-center rounded-2xl"
-                  >
-                    <img
-                      src={item}
-                      alt={item}
-                      className="w-full h-full object-cover rounded-2xl"
-                    ></img>
-                  </div>
-                );
-              })}
+            <div className="w-full h-full flex flex-row justify-center ">
+              <div className="grid grid-cols-2 gap-4 w-96 h-96 border border-gray-300 rounded-2xl m-5 p-2 bg-gradient-to-tr from-blue-100 to-blue-400">
+                {homePageCharity[0].img.img.map((item, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="flex justify-center items-center rounded-2xl"
+                    >
+                      <img
+                        src={item}
+                        alt={item}
+                        className="w-full h-full object-cover rounded-2xl"
+                      ></img>
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="w-96 h-96 border border-gray-300 m-5 p-2 bg"></div>
             </div>
           ) : (
             <GridLoader></GridLoader>

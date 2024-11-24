@@ -30,6 +30,7 @@ module.exports = {
         gemini: "url('/images/Gemini.jpg')",
         aurora: "url('/images/Aurora.webp')",
         "chatbot-background": "url('/images/Chatbot Background.jpg')",
+        disabled: "url('/images/Disabled.jpg')",
       },
       colors: {
         "dark-header": "rgb(17, 14, 14)",
