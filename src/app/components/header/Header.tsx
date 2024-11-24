@@ -9,6 +9,7 @@ import LocaleChange from "../LanguageChange/LanguageChange";
 import { User } from "@supabase/supabase-js";
 import { DictionaryChapter } from "../../[lang]/dictionaries";
 import useTheme from "../../hooks/useTheme";
+import { useCallback, useEffect, useState } from "react";
 
 interface HeaderProps {
   dict: DictionaryChapter;
@@ -18,10 +19,36 @@ interface HeaderProps {
 const Header = (props: HeaderProps) => {
   const { locale, setLocale } = useLocale();
   const { currentTheme, themeOptions, themeHandler } = useTheme();
+  const [isAnimationTriggered, setIsAnimationTriggered] =
+    useState<boolean>(false);
 
   const listItemStyle: string =
     "text-black hover:bg-gray-400 w-32   dark:hover:bg-header-hover-dark hover:rounded-3xl font-serif font-normal dark:text-yellow-500 p-5 text-center transition-header-hover-transition cursor-pointer";
 
+  const handleScroll = useCallback(() => {
+    console.log("2");
+    const header = document.getElementById("header");
+    if (header) {
+      if (window.scrollY > 0 && !isAnimationTriggered) {
+        header.classList.remove("animate-first-scroll-header-reverse");
+        header.classList.add("animate-first-scroll-header");
+        setIsAnimationTriggered(true);
+      } else if (window.scrollY === 0 && isAnimationTriggered) {
+        header.classList.remove("animate-first-scroll-header");
+        header.classList.add("animate-first-scroll-header-reverse");
+        setIsAnimationTriggered(false);
+      }
+    }
+  }, []);
+  useEffect(() => {
+    console.log(3);
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [handleScroll]);
   return (
     <header
       id="header"
