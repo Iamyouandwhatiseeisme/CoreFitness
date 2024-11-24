@@ -10,7 +10,7 @@ interface AuthenticationButtonProps {
 }
 export default function AuthenticationButton(props: AuthenticationButtonProps) {
   return props.buttonText === "Loading" ? (
-    <div className="h-10 w-20 items-center justify-center flex flex-col mt-2 text-black dark:text-white bg-gray-400 hover:bg-gray-500 dark:bg-header-hover-dark rounded-md cursor-pointer ">
+    <div className="h-10 w-20 items-center justify-center flex flex-col mt-2 text-black dark:text-white bg-teal-400 hover:bg-gray-500 dark:bg-header-hover-dark rounded-md cursor-pointer ">
       <ClipLoader color="white"></ClipLoader>
     </div>
   ) : (
@@ -21,7 +21,7 @@ export default function AuthenticationButton(props: AuthenticationButtonProps) {
             signOut(props.locale);
           }
         }}
-        className="h-10 w-20  items-center mt-2 text-black dark:text-white bg-gray-400 hover:bg-gray-500 dark:bg-header-hover-dark rounded-br-full cursor-pointer "
+        className="h-10 w-20  items-center mt-2 text-white dark:text-white bg-teal-400 hover:bg-teal-500 dark:bg-header-hover-dark rounded-br-full rounded-tl-full cursor-pointer "
       >
         {props.buttonText}
       </button>

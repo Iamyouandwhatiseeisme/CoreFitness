@@ -9,7 +9,7 @@ import LocaleChange from "../LanguageChange/LanguageChange";
 import { User } from "@supabase/supabase-js";
 import { DictionaryChapter } from "../../[lang]/dictionaries";
 import useTheme from "../../hooks/useTheme";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 interface HeaderProps {
   dict: DictionaryChapter;
@@ -21,19 +21,25 @@ const Header = (props: HeaderProps) => {
   const { currentTheme, themeOptions, themeHandler } = useTheme();
   const [isAnimationTriggered, setIsAnimationTriggered] =
     useState<boolean>(false);
+  const isAnimationTriggeredRef = useRef(isAnimationTriggered);
+  useEffect(() => {
+    isAnimationTriggeredRef.current = isAnimationTriggered;
+  }, [isAnimationTriggered]);
 
   const listItemStyle: string =
     "text-black hover:bg-gray-400 w-32   dark:hover:bg-header-hover-dark hover:rounded-3xl font-serif font-normal dark:text-yellow-500 p-5 text-center transition-header-hover-transition cursor-pointer";
 
   const handleScroll = useCallback(() => {
-    console.log("2");
+    const triggered = isAnimationTriggeredRef.current;
+
     const header = document.getElementById("header");
     if (header) {
-      if (window.scrollY > 0 && !isAnimationTriggered) {
+      if (window.scrollY > 0 && !triggered) {
         header.classList.remove("animate-first-scroll-header-reverse");
         header.classList.add("animate-first-scroll-header");
         setIsAnimationTriggered(true);
-      } else if (window.scrollY === 0 && isAnimationTriggered) {
+      } else if (window.scrollY === 0 && triggered) {
+        console.log("removing");
         header.classList.remove("animate-first-scroll-header");
         header.classList.add("animate-first-scroll-header-reverse");
         setIsAnimationTriggered(false);
@@ -52,7 +58,7 @@ const Header = (props: HeaderProps) => {
   return (
     <header
       id="header"
-      className="flex flex-row fixed  justify-between items-center bg-neutral-300 dark:bg-dark-header   w-full overflow-hidden  z-20 "
+      className={`flex flex-row fixed justify-between items-center bg-neutral-300 dark:bg-dark-header   w-full overflow-hidden  z-20 `}
     >
       <div className="w-60 ml-5">
         <LocaleChange></LocaleChange>

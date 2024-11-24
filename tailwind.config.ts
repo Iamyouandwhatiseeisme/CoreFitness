@@ -25,30 +25,25 @@ module.exports = {
           "0%": {
             borderBottomLeftRadius: "0",
             borderBottomRightRadius: "0",
+            backgroundColor: "#276749",
           },
           "100%": {
             borderBottomLeftRadius: "50px",
             borderBottomRightRadius: "50px",
+            backgroundColor: "#f8fafc",
           },
         },
-        scrollHeaderBack: {
-          "100%": {
-            borderBottomLeftRadius: "50px",
-            borderBottomRightRadius: "50px",
-          },
-          "0%": {
-            borderBottomLeftRadius: "0",
-            borderBottomRightRadius: "0",
-          },
-        },
+
         firstScrollHeaderReverse: {
           "0%": {
             borderBottomLeftRadius: "50px",
             borderBottomRightRadius: "50px",
+            backgroundColor: "#f8fafc",
           },
           "100%": {
             borderBottomLeftRadius: "0",
             borderBottomRightRadius: "0",
+            backgroundColor: "#276749",
           },
         },
       },
