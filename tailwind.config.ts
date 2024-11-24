@@ -26,11 +26,13 @@ module.exports = {
             borderBottomLeftRadius: "0",
             borderBottomRightRadius: "0",
             backgroundColor: "#276749",
+            color: "#f8fafc",
           },
           "100%": {
             borderBottomLeftRadius: "50px",
             borderBottomRightRadius: "50px",
             backgroundColor: "#f8fafc",
+            color: "#276749",
           },
         },
 
@@ -39,11 +41,13 @@ module.exports = {
             borderBottomLeftRadius: "50px",
             borderBottomRightRadius: "50px",
             backgroundColor: "#f8fafc",
+            color: "#276749",
           },
           "100%": {
             borderBottomLeftRadius: "0",
             borderBottomRightRadius: "0",
             backgroundColor: "#276749",
+            color: "#f8fafc",
           },
         },
       },

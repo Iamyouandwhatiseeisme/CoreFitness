@@ -27,7 +27,7 @@ const Header = (props: HeaderProps) => {
   }, [isAnimationTriggered]);
 
   const listItemStyle: string =
-    "text-black hover:bg-gray-400 w-32   dark:hover:bg-header-hover-dark hover:rounded-3xl font-serif font-normal dark:text-yellow-500 p-5 text-center transition-header-hover-transition cursor-pointer";
+    " hover:bg-teal-200 w-32   dark:hover:bg-header-hover-dark hover:rounded-3xl font-serif font-normal dark:text-yellow-500 p-5 text-center transition-header-hover-transition cursor-pointer";
 
   const handleScroll = useCallback(() => {
     const triggered = isAnimationTriggeredRef.current;
@@ -67,11 +67,11 @@ const Header = (props: HeaderProps) => {
       <div className="flex gap-38 items-center  pt-5 pb-5 ml-20 ">
         <Link
           href={`/${locale}`}
-          className="mt-4   pr-2 w-14 h-14 bg-transparent  cursor-pointer items-center"
+          className="mt-4   pr-2 w-14 h-14 bg-transparent  cursor-pointer items-center "
         >
           <img src={Logo.src} alt="logo"></img>
         </Link>
-        <nav className="rounded-3xl flex- flex-row  border border-solid dark:border-header-hover-dark h-20 items-center p-2  hidden sm:block">
+        <nav className="rounded-3xl  flex- flex-row  border border-solid dark:border-header-hover-dark h-20 items-center p-2  hidden sm:block">
           <ul className="gap-5 flex  list-none flex-row">
             <Link href={`/${locale}/equipment`}>
               <li className={listItemStyle}>{props.dict.Equipment}</li>

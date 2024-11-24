@@ -24,8 +24,8 @@ const DropDownContent = (props: DropDownContentProps) => {
       }}
       className={
         props.open
-          ? "fixed rounded-lg animate-slide-in bg-white  min-w-12 flex-col items-center mt-4 max-h-40vh z-50   flex cursor-pointer opacity-100 translate-y-0 pointer-events-auto"
-          : "absolute bg-white min-w-12 flex-col items-center mt-4 max-h-40vh  pointer-events-none z-50 "
+          ? "fixed rounded-lg animate-slide-in min-w-12 bg-gray-200 shadow-lg shadow-teal-300 text-green-950 flex-col items-center mt-4 max-h-40vh z-50 flex cursor-pointer opacity-100 translate-y-0 pointer-events-auto"
+          : "absolute min-w-12 flex-col items-center mt-4 max-h-40vh  pointer-events-none z-50 "
       }
     >
       {
