@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import InformationBoard from "../components/InformationBoard/InformationBoard";
 import ChatWindow from "../components/ChatWindow/ChatWindow";
@@ -25,9 +25,12 @@ function Welcome() {
   }, []);
 
   return (
-    <main className="max-w-full  m-0">
-      <div className="bg-neutral-200 dark:bg-neutral-900 text-white">
-        <div className="min-h-wrapper flex flex-col items-center justify-center bg-disabled ">
+    <main className="max-w-full  m-0 ">
+      <div className="bg-neutral-200 dark:bg-neutral-900 text-white ">
+        <div
+          id="info-charity"
+          className="min-h-wrapper flex flex-col items-center justify-center bg-disabled    "
+        >
           {homePageCharity.length !== 0 ? (
             <div className="w-full h-full flex flex-row justify-center ">
               <div className="grid grid-cols-2 gap-4 w-96 h-96 border border-gray-300 rounded-2xl m-5 p-2 bg-gradient-to-tr from-blue-100 to-blue-400">

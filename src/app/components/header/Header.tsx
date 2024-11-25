@@ -33,7 +33,10 @@ const Header = (props: HeaderProps) => {
     const triggered = isAnimationTriggeredRef.current;
 
     const header = document.getElementById("header");
-    if (header) {
+    const scrollable = document.getElementById("info-charity");
+    const body = document.body;
+
+    if (header && scrollable) {
       if (window.scrollY > 0 && !triggered) {
         header.classList.remove("animate-first-scroll-header-reverse");
         header.classList.add("animate-first-scroll-header");
@@ -44,6 +47,13 @@ const Header = (props: HeaderProps) => {
         header.classList.add("animate-first-scroll-header-reverse");
         setIsAnimationTriggered(false);
       }
+      // if (window.scrollY > 100) {
+      //   scrollable.classList.add("-translate-y-full", "opacity-0");
+      // } else {
+      //   body.classList.remove("overflow-hidden");
+
+      //   scrollable.classList.remove("-translate-y-full", "opacity-0");
+      // }
     }
   }, []);
   useEffect(() => {
