@@ -27,6 +27,10 @@ function Welcome() {
   return (
     <main className="max-w-full  m-0 ">
       <div className="bg-neutral-200 dark:bg-neutral-900 text-white ">
+        <div className="min-h-wrapper flex flex-col bg-gym-background lg:bg-contain ">
+          <InformationBoard></InformationBoard>
+        </div>
+        <ChatWindow></ChatWindow>
         <div
           id="info-charity"
           className="min-h-wrapper flex flex-col items-center justify-center bg-disabled    "
@@ -55,11 +59,6 @@ function Welcome() {
             <GridLoader></GridLoader>
           )}
         </div>
-
-        <div className="min-h-wrapper flex flex-col bg-gym-background lg:bg-contain ">
-          <InformationBoard></InformationBoard>
-        </div>
-        <ChatWindow></ChatWindow>
       </div>
     </main>
   );

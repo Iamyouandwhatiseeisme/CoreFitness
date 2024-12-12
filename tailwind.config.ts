@@ -25,7 +25,6 @@ module.exports = {
           "0%": {
             borderBottomLeftRadius: "0",
             borderBottomRightRadius: "0",
-            backgroundColor: "#276749",
             color: "#f8fafc",
           },
           "100%": {
@@ -46,7 +45,6 @@ module.exports = {
           "100%": {
             borderBottomLeftRadius: "0",
             borderBottomRightRadius: "0",
-            backgroundColor: "#276749",
             color: "#f8fafc",
           },
         },

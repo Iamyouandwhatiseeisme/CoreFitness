@@ -68,7 +68,7 @@ const Header = (props: HeaderProps) => {
   return (
     <header
       id="header"
-      className={`flex flex-row fixed justify-between items-center bg-neutral-300 dark:bg-dark-header   w-full overflow-hidden  z-20 `}
+      className={`flex flex-row fixed justify-between items-center dark:bg-black bg-green-800   w-full overflow-hidden  z-20 `}
     >
       <div className="w-60 ml-5">
         <LocaleChange></LocaleChange>
