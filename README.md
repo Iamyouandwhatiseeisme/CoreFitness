@@ -42,5 +42,6 @@ You may also see any lint errors in the console.
 
 ## Authentication
 
-Project uses auth0 authentication
+Project uses supabase authentication
+User needs to Authenticate before being able to use Website
 
