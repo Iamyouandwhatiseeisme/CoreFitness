@@ -1,5 +1,3 @@
-import { BorderAllRounded } from "@mui/icons-material";
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
@@ -91,6 +89,7 @@ module.exports = {
         "info-board-hover-width": "550px",
         "60wv": "60vw",
         "95%": "95%",
+        "150": "1200px",
       },
       scale: {
         1.02: "1.02",
