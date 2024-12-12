@@ -3,6 +3,7 @@ import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import type { NextRequest } from "next/server";
 import { updateSession } from "./app/utils/supabase/middleware";
+import { isStripeSubscriptionActive } from "./app/utils/stripe/isStripeSubscriptionActive";
 
 const locales = ["en-US", "ka"];
 
@@ -32,6 +33,7 @@ export async function middleware(request: NextRequest) {
 
   const locale = getLocale(request);
   request.nextUrl.pathname = `/${locale}${pathname}`;
+  isStripeSubscriptionActive();
 
   return NextResponse.redirect(request.nextUrl);
 }
