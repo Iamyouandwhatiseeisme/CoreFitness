@@ -7,9 +7,11 @@ import { headers } from "next/headers";
 import { CURRENCY } from "../../config";
 import { formatAmountForStripe } from "../utils/stripe/stripe-helpers";
 import { stripe } from "../../lib/stripe";
+import { Plan } from "../components/types";
 
 export async function createCheckoutSession(
-  data: FormData
+  data: FormData,
+  plan: Plan
 ): Promise<{ client_secret: string | null; url: string | null }> {
   const ui_mode = data.get(
     "uiMode"
@@ -24,18 +26,7 @@ export async function createCheckoutSession(
       line_items: [
         {
           quantity: 1,
-          price_data: {
-            currency: CURRENCY,
-            product_data: {
-              name: "Custom amount donation",
-            },
-
-            recurring: {
-              interval_count: 12,
-              interval: "month",
-            },
-            unit_amount: formatAmountForStripe(100, CURRENCY),
-          },
+          price: plan.priceId,
         },
       ],
       ...(ui_mode === "hosted" && {
