@@ -31,16 +31,29 @@ export async function middleware(request: NextRequest) {
   if (sessionResponse instanceof NextResponse) {
     const data = await sessionResponse.json();
     user = data.user;
-    if (pathname === `/${locale}/pricing`) {
+    if (
+      pathname === `/${locale}/pricing` ||
+      pathname === `/${locale}/pricing/active`
+    ) {
       console.log("120");
       const status: SubscriptionStatus = await isStripeSubscriptionActive(
         user?.email!
       );
-      if (status === SubscriptionStatus.Active) {
-        console.log("active");
+      if (
+        status === SubscriptionStatus.Active &&
+        pathname === `/${locale}/pricing`
+      ) {
+        request.nextUrl.pathname = `/pricing/active`;
+
+        return NextResponse.redirect(request.nextUrl);
       }
-      if (status === SubscriptionStatus.Inactive) {
-        console.log("inactive");
+      if (
+        status === SubscriptionStatus.Inactive &&
+        pathname === `/${locale}/pricing/active`
+      ) {
+        request.nextUrl.pathname = `/pricing  `;
+
+        return NextResponse.redirect(request.nextUrl);
       }
     }
   }
