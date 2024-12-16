@@ -19,14 +19,7 @@ export default function DonatePage(): JSX.Element {
       payementFrequency: "Every Year",
     },
   ];
-  // const handleCheckout = async (plan: Plan): Promise<void> => {
-  //   const data = new FormData();
-  //   data.append("uiMode", "hosted");
-  //   data.append("priceId", plan.priceId);
-  //   const { url } = await createCheckoutSession(data, plan);
 
-  //   window.location.assign(url as string);
-  // };
   return (
     <div className="min-h-wrapper flex flex-row items-center justify-center">
       {plans.map((plan) => {
@@ -34,7 +27,6 @@ export default function DonatePage(): JSX.Element {
         return (
           <div
             key={plan.price}
-            // onClick={() => handleCheckout(plan)}
             className=" p-10 mt-20 mr-10 ml-10 w-64 h-96 flex flex-col items-center justify-start rounded-2xl border bg-gray-300"
           >
             <div className="border-b w-48 h-24 items-center flex flex-row justify-center border-gray-800 border-opacity-25 rounded-2xl bg-gray-200 shadow-inner shadow-white">
