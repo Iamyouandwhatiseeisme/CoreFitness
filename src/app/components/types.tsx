@@ -12,6 +12,12 @@ export interface DailyDiet {
   Goal: string;
   Calories: string;
 }
+export interface Plan {
+  reccurence: string;
+  price: number;
+  priceId: string;
+  payementFrequency: string;
+}
 
 export interface InformationBoardItem {
   key: number;
