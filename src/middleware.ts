@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
-import type { NextRequest } from "next/server";
+import { NextRequest } from "next/server";
 import { updateSession } from "./app/utils/supabase/middleware";
 import {
   isStripeSubscriptionActive,
@@ -23,38 +23,76 @@ function getLocale(request: NextRequest): string {
 }
 
 export async function middleware(request: NextRequest) {
-  let user: User | null = null;
+  // let user: User | null = null;
   const { pathname } = request.nextUrl;
   const locale = getLocale(request);
 
   const sessionResponse = await updateSession(request);
-  if (sessionResponse instanceof NextResponse) {
-    const data = await sessionResponse.json();
-    user = data.user;
+  // if (sessionResponse instanceof NextResponse) {
+
+  //   return sessionResponse;
+  //   // if (sessionResponse.body) {
+  //   //   const data = await sessionResponse.json();
+  //   //   user = data.user;
+  //   //   if (user) {
+  //   //     return sessionResponse
+  //   //   pathname === `/${locale}/pricing` ||
+  //   //   pathname === `/${locale}/pricing/active`
+  //   // ) {
+  //   //   const status: SubscriptionStatus = await isStripeSubscriptionActive(
+  //   //     user?.email!
+  //   //   );
+  //   //   if (
+  //   //     status === SubscriptionStatus.Active &&
+  //   //     pathname === `/${locale}/pricing`
+  //   //   ) {
+  //   //     request.nextUrl.pathname = `/${locale}/pricing/active`;
+  //   //     return NextResponse.redirect(request.nextUrl);
+  //   //   }
+  //   //   if (
+  //   //     status === SubscriptionStatus.Inactive &&
+  //   //     pathname === `/${locale}/pricing/active`
+  //   //   ) {
+  //   //     request.nextUrl.pathname = `/pricing  `;
+  //   //     console.log("inactive2");
+  //   //     return NextResponse.redirect(request.nextUrl);
+  //   //   }
+  //   //   return NextResponse.next({ request });
+  //   // } else {
+  //   //   return NextResponse.next({ request });
+  //   // }
+  //   //   }
+  //   //   return sessionResponse;
+  //   // }
+  // }
+  const userHeader = sessionResponse.headers.get("user");
+  const user = userHeader ? JSON.parse(userHeader) : null;
+  if (!user && pathname !== `/${locale}/login`) {
+    const url = request.nextUrl.clone();
+    url.pathname = `/${locale}/login`;
+    return NextResponse.redirect(url);
+  }
+  if (
+    user &&
+    (pathname === `/${locale}/pricing` ||
+      pathname === `/${locale}/pricing/active`)
+  ) {
+    const status: SubscriptionStatus = await isStripeSubscriptionActive(
+      user?.email!
+    );
     if (
-      pathname === `/${locale}/pricing` ||
+      status === SubscriptionStatus.Active &&
+      pathname === `/${locale}/pricing`
+    ) {
+      request.nextUrl.pathname = `/${locale}/pricing/active`;
+      return NextResponse.redirect(request.nextUrl);
+    } else if (
+      status === SubscriptionStatus.Inactive &&
       pathname === `/${locale}/pricing/active`
     ) {
-      console.log("120");
-      const status: SubscriptionStatus = await isStripeSubscriptionActive(
-        user?.email!
-      );
-      if (
-        status === SubscriptionStatus.Active &&
-        pathname === `/${locale}/pricing`
-      ) {
-        request.nextUrl.pathname = `/pricing/active`;
-
-        return NextResponse.redirect(request.nextUrl);
-      }
-      if (
-        status === SubscriptionStatus.Inactive &&
-        pathname === `/${locale}/pricing/active`
-      ) {
-        request.nextUrl.pathname = `/pricing  `;
-
-        return NextResponse.redirect(request.nextUrl);
-      }
+      console.log("inactive status");
+      request.nextUrl.pathname = `/${locale}/pricing`;
+      return NextResponse.redirect(request.nextUrl);
     }
   }
 
@@ -65,6 +103,7 @@ export async function middleware(request: NextRequest) {
   if (pathnameHasLocale) return NextResponse.next();
 
   request.nextUrl.pathname = `/${locale}${pathname}`;
+  console.log(request.nextUrl.pathname);
 
   return NextResponse.redirect(request.nextUrl);
 }
@@ -79,6 +118,8 @@ export const config = {
     "/products",
     "/products/:id*",
     "/profile",
+    "/pricing",
+    "/pricing/active",
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };
