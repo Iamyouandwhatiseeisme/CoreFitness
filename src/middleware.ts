@@ -8,6 +8,7 @@ import {
   SubscriptionStatus,
 } from "./app/utils/stripe/isStripeSubscriptionActive";
 import { User } from "@supabase/supabase-js";
+import path from "path";
 
 const locales = ["en-US", "ka"];
 
@@ -31,19 +32,20 @@ export async function middleware(request: NextRequest) {
   const userHeader = sessionResponse.headers.get("user");
   const user = userHeader ? JSON.parse(userHeader) : null;
   if (
-    pathname.startsWith(`/${locale}/api/auth/callback`) ||
+    pathname.startsWith(`/auth/callback`) ||
     pathname.startsWith("/auth/auth-code-error")
   ) {
-    console.log("sending 2");
+    console.log("sending 2", pathname);
     return NextResponse.next();
   }
-
   if (!user && pathname !== `/${locale}/login`) {
-    console.log("sending 3");
+    console.log("sending 3", pathname);
+
     const url = request.nextUrl.clone();
     url.pathname = `/${locale}/login`;
     return NextResponse.redirect(url);
   }
+
   if (
     user &&
     (pathname === `/${locale}/pricing` ||
@@ -92,7 +94,6 @@ export const config = {
     "/profile",
     "/pricing",
     "/pricing/active",
-    "/api/auth/callback/",
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };

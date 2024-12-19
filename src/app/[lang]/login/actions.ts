@@ -45,21 +45,21 @@ export async function signup(formData: FormData, locale: string) {
   revalidatePath(`/${locale}/login`, "layout");
   return { success: true };
 }
-export async function signInWithGithub() {
+export async function signInWithGithub(locale: string) {
   const supabase = await createClient();
   console.log("2");
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "github",
     options: {
-      redirectTo: "http://localhost:3000/api/auth/callback",
+      redirectTo: "http://localhost:3000/auth/callback",
     },
   });
   console.log(data.url);
   if (error) {
     return { error: error.code };
   }
-  if (data) {
+  if (data.url) {
     console.log(data.url);
     redirect(data.url);
   }
