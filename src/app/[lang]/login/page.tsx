@@ -1,11 +1,10 @@
 "use client";
-import { BaseSyntheticEvent, useState } from "react";
-import { login, signup } from "./actions";
+import { useState } from "react";
+import { login, signup, signInWithGithub } from "./actions";
 import { useLocale } from "../../components/providers/LanguageContext";
 import LoginPageBoard from "../../components/LoginPageBoard/LoginPageBoard";
 import { useUser } from "../../components/providers/UserProvider";
 import { redirect } from "next/navigation";
-import { SubmitTarget } from "react-router-dom/dist/dom";
 export const LogIn = () => {
   const { locale } = useLocale();
   const [error, setError] = useState<string | null>(null);
@@ -31,7 +30,6 @@ export const LogIn = () => {
       result = await signup(formData, locale);
       alert("confirmation email sent");
     }
-
     if (result?.error) {
       setError(result.error);
       alert(result.error);
@@ -75,18 +73,26 @@ export const LogIn = () => {
               <button
                 name="login"
                 type="submit"
-                className="bg-blue-700 rounded-sm h-10 font-bold text-white"
+                className="bg-blue-700 rounded-2xl h-10 font-bold text-white"
               >
                 Log In
               </button>
+
               <button
                 name="signup"
                 type="submit"
-                className="bg-green-700 rounded-sm h-10 font-bold text-white"
+                className="bg-green-700 rounded-2xl h-10 font-bold text-white"
               >
                 Sign up
               </button>
             </form>
+            <button
+              className="flex flex-row h-10 w-80 rounded-2xl bg-gray-200 items-center justify-center  cursor-pointer mt-4"
+              onClick={() => signInWithGithub()}
+            >
+              <img className="h-10 w-10" src="/images/github-mark.svg"></img>
+              <div>Sign in with GitHub</div>
+            </button>
           </div>
         </div>
       </div>

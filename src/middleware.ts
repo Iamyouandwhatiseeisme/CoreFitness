@@ -23,51 +23,28 @@ function getLocale(request: NextRequest): string {
 }
 
 export async function middleware(request: NextRequest) {
-  // let user: User | null = null;
   const { pathname } = request.nextUrl;
   const locale = getLocale(request);
+  console.log("caught", pathname);
+
+  if (pathname.startsWith(`/${locale}/api/auth/callback`)) {
+    console.log("sending");
+    return NextResponse.next();
+  }
 
   const sessionResponse = await updateSession(request);
-  // if (sessionResponse instanceof NextResponse) {
-
-  //   return sessionResponse;
-  //   // if (sessionResponse.body) {
-  //   //   const data = await sessionResponse.json();
-  //   //   user = data.user;
-  //   //   if (user) {
-  //   //     return sessionResponse
-  //   //   pathname === `/${locale}/pricing` ||
-  //   //   pathname === `/${locale}/pricing/active`
-  //   // ) {
-  //   //   const status: SubscriptionStatus = await isStripeSubscriptionActive(
-  //   //     user?.email!
-  //   //   );
-  //   //   if (
-  //   //     status === SubscriptionStatus.Active &&
-  //   //     pathname === `/${locale}/pricing`
-  //   //   ) {
-  //   //     request.nextUrl.pathname = `/${locale}/pricing/active`;
-  //   //     return NextResponse.redirect(request.nextUrl);
-  //   //   }
-  //   //   if (
-  //   //     status === SubscriptionStatus.Inactive &&
-  //   //     pathname === `/${locale}/pricing/active`
-  //   //   ) {
-  //   //     request.nextUrl.pathname = `/pricing  `;
-  //   //     console.log("inactive2");
-  //   //     return NextResponse.redirect(request.nextUrl);
-  //   //   }
-  //   //   return NextResponse.next({ request });
-  //   // } else {
-  //   //   return NextResponse.next({ request });
-  //   // }
-  //   //   }
-  //   //   return sessionResponse;
-  //   // }
-  // }
   const userHeader = sessionResponse.headers.get("user");
   const user = userHeader ? JSON.parse(userHeader) : null;
-  if (!user && pathname !== `/${locale}/login`) {
+
+  if (
+    !user &&
+    pathname !== `/${locale}/login` &&
+    pathname.startsWith(`/${locale}/api/auth/callback`)
+  ) {
+    console.log(
+      "redirecting",
+      pathname.startsWith(`/${locale}/api/auth/callback`)
+    );
     const url = request.nextUrl.clone();
     url.pathname = `/${locale}/login`;
     return NextResponse.redirect(url);
@@ -120,6 +97,7 @@ export const config = {
     "/profile",
     "/pricing",
     "/pricing/active",
+    "/api/auth/callback/",
     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };

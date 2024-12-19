@@ -45,7 +45,25 @@ export async function signup(formData: FormData, locale: string) {
   revalidatePath(`/${locale}/login`, "layout");
   return { success: true };
 }
+export async function signInWithGithub() {
+  const supabase = await createClient();
+  console.log("2");
 
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "github",
+    options: {
+      redirectTo: "http://localhost:3000/api/auth/callback",
+    },
+  });
+  console.log(data.url);
+  if (error) {
+    return { error: error.code };
+  }
+  if (data) {
+    console.log(data.url);
+    redirect(data.url);
+  }
+}
 export async function signOut(locale: string) {
   const supabase = await createClient();
 
