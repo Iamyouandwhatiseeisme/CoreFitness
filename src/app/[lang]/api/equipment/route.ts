@@ -4,8 +4,6 @@ import { createClient } from "../../../utils/supabase/server";
 export async function GET() {
   const supabase = await createClient();
 
-  console.log("fetching");
-
   try {
     const { data, error } = await supabase.from("gymEquipment").select();
     return NextResponse.json(data, { status: 200 });

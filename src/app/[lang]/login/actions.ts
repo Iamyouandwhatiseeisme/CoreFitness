@@ -47,7 +47,6 @@ export async function signup(formData: FormData, locale: string) {
 }
 export async function signInWithGithub(locale: string) {
   const supabase = await createClient();
-  console.log("2");
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "github",
@@ -55,12 +54,10 @@ export async function signInWithGithub(locale: string) {
       redirectTo: "http://localhost:3000/auth/callback",
     },
   });
-  console.log(data.url);
   if (error) {
     return { error: error.code };
   }
   if (data.url) {
-    console.log(data.url);
     redirect(data.url);
   }
 }

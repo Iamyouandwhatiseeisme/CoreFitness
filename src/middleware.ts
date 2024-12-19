@@ -26,7 +26,6 @@ function getLocale(request: NextRequest): string {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const locale = getLocale(request);
-  console.log("caught", pathname);
 
   const sessionResponse = await updateSession(request);
   const userHeader = sessionResponse.headers.get("user");
@@ -35,12 +34,9 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith(`/auth/callback`) ||
     pathname.startsWith("/auth/auth-code-error")
   ) {
-    console.log("sending 2", pathname);
     return NextResponse.next();
   }
   if (!user && pathname !== `/${locale}/login`) {
-    console.log("sending 3", pathname);
-
     const url = request.nextUrl.clone();
     url.pathname = `/${locale}/login`;
     return NextResponse.redirect(url);
@@ -64,7 +60,6 @@ export async function middleware(request: NextRequest) {
       status === SubscriptionStatus.Inactive &&
       pathname === `/${locale}/pricing/active`
     ) {
-      console.log("inactive status");
       request.nextUrl.pathname = `/${locale}/pricing`;
       return NextResponse.redirect(request.nextUrl);
     }
@@ -77,7 +72,6 @@ export async function middleware(request: NextRequest) {
   if (pathnameHasLocale) return NextResponse.next();
 
   request.nextUrl.pathname = `/${locale}${pathname}`;
-  console.log(request.nextUrl.pathname);
 
   return NextResponse.redirect(request.nextUrl);
 }

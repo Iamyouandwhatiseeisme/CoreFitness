@@ -34,7 +34,6 @@ const Header = (props: HeaderProps) => {
 
     const header = document.getElementById("header");
     const scrollable = document.getElementById("info-charity");
-    const body = document.body;
 
     if (header && scrollable) {
       if (window.scrollY > 0 && !triggered) {
@@ -42,23 +41,13 @@ const Header = (props: HeaderProps) => {
         header.classList.add("animate-first-scroll-header");
         setIsAnimationTriggered(true);
       } else if (window.scrollY === 0 && triggered) {
-        console.log("removing");
         header.classList.remove("animate-first-scroll-header");
         header.classList.add("animate-first-scroll-header-reverse");
         setIsAnimationTriggered(false);
       }
-      // if (window.scrollY > 100) {
-      //   scrollable.classList.add("-translate-y-full", "opacity-0");
-      // } else {
-      //   body.classList.remove("overflow-hidden");
-
-      //   scrollable.classList.remove("-translate-y-full", "opacity-0");
-      // }
     }
   }, []);
   useEffect(() => {
-    console.log(3);
-
     window.addEventListener("scroll", handleScroll);
 
     return () => {

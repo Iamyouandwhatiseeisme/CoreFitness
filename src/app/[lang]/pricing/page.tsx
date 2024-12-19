@@ -23,7 +23,6 @@ export default function DonatePage(): JSX.Element {
   return (
     <div className="min-h-wrapper flex flex-row items-center justify-center">
       {plans.map((plan) => {
-        console.log(plan.priceId);
         return (
           <div
             key={plan.price}

@@ -3,9 +3,6 @@
 import type Stripe from "stripe";
 
 import React, { useState } from "react";
-
-import { formatAmountForDisplay } from "../../utils/stripe/stripe-helpers";
-import * as config from "../../../config";
 import { createCheckoutSession } from "../../actions/stripe";
 import { Plan } from "../types";
 
@@ -16,7 +13,6 @@ interface CheckoutFormProps {
 
 export default function CheckoutForm(props: CheckoutFormProps): JSX.Element {
   const [loading] = useState<boolean>(false);
-  console.log(props.plan.priceId);
 
   const formAction = async (data: FormData): Promise<void> => {
     const { url } = await createCheckoutSession(data, props.plan);

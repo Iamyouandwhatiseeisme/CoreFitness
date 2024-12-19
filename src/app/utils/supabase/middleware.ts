@@ -36,7 +36,6 @@ export async function updateSession(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  console.log(user, "from update");
   if (user) {
     const response = NextResponse.json({ user });
     response.headers.set("user", JSON.stringify(user));
@@ -47,29 +46,6 @@ export async function updateSession(request: NextRequest) {
     response.headers.delete("user");
     return response;
   }
-
-  // if (user) {
-  //   return NextResponse.json({ user });
-  // }
-  // if (!user) {
-  //   return NextResponse.json({ user });
-  // }
-
-  // if (
-  //   !user &&
-  //   !request.nextUrl.pathname.startsWith("/en-US/login") &&
-  //   !request.nextUrl.pathname.startsWith("/auth") &&
-  //   !request.nextUrl.pathname.startsWith("/ka/login")
-  // ) {
-  //   console.log("no user");
-  //   const url = request.nextUrl.clone();
-  //   url.pathname =
-  //     url.pathname.startsWith("/en-US") || url.pathname.startsWith("/")
-  //       ? "/en-US/login"
-  //       : "/ka/login";
-  //   console.log(url.pathname);
-  //   return NextResponse.redirect(url);
-  // }
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're
   // creating a new response object with NextResponse.next() make sure to:
