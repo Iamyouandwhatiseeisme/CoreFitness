@@ -27,24 +27,19 @@ export async function middleware(request: NextRequest) {
   const locale = getLocale(request);
   console.log("caught", pathname);
 
-  if (pathname.startsWith(`/${locale}/api/auth/callback`)) {
-    console.log("sending");
-    return NextResponse.next();
-  }
-
   const sessionResponse = await updateSession(request);
   const userHeader = sessionResponse.headers.get("user");
   const user = userHeader ? JSON.parse(userHeader) : null;
-
   if (
-    !user &&
-    pathname !== `/${locale}/login` &&
-    pathname.startsWith(`/${locale}/api/auth/callback`)
+    pathname.startsWith(`/${locale}/api/auth/callback`) ||
+    pathname.startsWith("/auth/auth-code-error")
   ) {
-    console.log(
-      "redirecting",
-      pathname.startsWith(`/${locale}/api/auth/callback`)
-    );
+    console.log("sending 2");
+    return NextResponse.next();
+  }
+
+  if (!user && pathname !== `/${locale}/login`) {
+    console.log("sending 3");
     const url = request.nextUrl.clone();
     url.pathname = `/${locale}/login`;
     return NextResponse.redirect(url);
