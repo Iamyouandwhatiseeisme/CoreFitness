@@ -1,18 +1,28 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { login, signup, signInWithGithub } from "./actions";
 import { useLocale } from "../../components/providers/LanguageContext";
 import LoginPageBoard from "../../components/LoginPageBoard/LoginPageBoard";
-import { useUser } from "../../components/providers/UserProvider";
+import { createClient } from "../../utils/supabase/client";
 import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 export const LogIn = () => {
   const { locale } = useLocale();
   const [error, setError] = useState<string | null>(null);
-  const { user } = useUser();
-
-  if (user !== null) {
-    redirect(`/${locale}`);
-  }
+  const supabase = createClient();
+  const router = useRouter();
+  // useEffect(() => {
+  //   async function fetchUser() {
+  //     const {
+  //       data: { user },
+  //     } = await supabase.auth.getUser();
+  //     if (user) {
+  //       console.log(user);
+  //       router.push("/");
+  //     }
+  //   }
+  //   fetchUser();
+  // }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

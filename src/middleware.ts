@@ -37,9 +37,14 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
   if (!user && pathname !== `/${locale}/login`) {
+    console.log("redirecting");
     const url = request.nextUrl.clone();
     url.pathname = `/${locale}/login`;
     return NextResponse.redirect(url);
+  }
+  if (user && pathname === `/${locale}/login`) {
+    request.nextUrl.pathname = `/${locale}`;
+    return NextResponse.redirect(request.nextUrl);
   }
 
   if (

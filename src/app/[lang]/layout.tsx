@@ -5,7 +5,6 @@ import Footer from "../components/footer/Footer";
 import { getDictionary } from "./dictionaries";
 import { LocaleProvider } from "../components/providers/LanguageContext";
 import { createClient } from "../utils/supabase/server";
-import { UserProvider } from "../components/providers/UserProvider";
 import React from "react";
 
 export const metadata = {
@@ -31,19 +30,17 @@ export default async function RootLayout(props: LayoutProps) {
 
   return (
     <html lang="en">
-      <UserProvider initialUser={user}>
-        <LocaleProvider
-          lang={props.params.lang}
-          dictChat={dictChat}
-          informationBoard={informationBoard}
-        >
-          <body className="bg-neutral-200 dark:bg-neutral-900 font-serif">
-            <Header currentUser={user} dict={dictHeader}></Header>
-            {props.children}
-            <Footer></Footer>
-          </body>
-        </LocaleProvider>
-      </UserProvider>
+      <LocaleProvider
+        lang={props.params.lang}
+        dictChat={dictChat}
+        informationBoard={informationBoard}
+      >
+        <body className="bg-neutral-200 dark:bg-neutral-900 font-serif">
+          <Header currentUser={user} dict={dictHeader}></Header>
+          {props.children}
+          <Footer></Footer>
+        </body>
+      </LocaleProvider>
     </html>
   );
 }

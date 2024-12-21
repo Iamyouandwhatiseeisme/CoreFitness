@@ -45,7 +45,7 @@ export async function signup(formData: FormData, locale: string) {
   revalidatePath(`/${locale}/login`, "layout");
   return { success: true };
 }
-export async function signInWithGithub(locale: string) {
+export async function signInWithGithub() {
   const supabase = await createClient();
 
   const { data, error } = await supabase.auth.signInWithOAuth({
@@ -65,6 +65,5 @@ export async function signOut(locale: string) {
   const supabase = await createClient();
 
   const { error } = await supabase.auth.signOut();
-  redirect(`/${locale}/login`);
   return error;
 }

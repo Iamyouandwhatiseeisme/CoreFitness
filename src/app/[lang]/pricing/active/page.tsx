@@ -1,11 +1,23 @@
 "use client";
-import React from "react";
-import { useUser } from "../../../components/providers/UserProvider";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { User } from "@supabase/supabase-js";
+import { createClient } from "../../../utils/supabase/client";
 
 export default function ActivePage() {
+  const [user, setUser] = useState<User | null>();
+
   const router = useRouter();
-  const { user } = useUser();
+  useEffect(() => {
+    async function fetchUser() {
+      const supabase = createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setUser(user);
+    }
+    fetchUser();
+  }, []);
   async function handleCancel() {
     if (user?.email) {
       const response = await fetch("/api/subscription/", {

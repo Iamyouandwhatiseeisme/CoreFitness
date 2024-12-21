@@ -86,21 +86,12 @@ const Header = (props: HeaderProps) => {
                 {props.dict.Profile}
               </li>
             </Link>
-            {/* <Link href={`/${locale}/products`}>
-              <li className={`${listItemStyle} hidden xl:block`}>
-                {props.dict.Products}
-              </li>
-            </Link> */}
+
             <Link href={`/${locale}/pricing`}>
               <li className={`${listItemStyle} hidden xl:block`}>
                 {props.dict.Subscribe}
               </li>
             </Link>
-            {/* <Link href={`/${locale}/posts`}>
-              <li className={`${listItemStyle} hidden xl:block`}>
-                {props.dict.Posts}
-              </li>
-            </Link> */}
           </ul>
         </nav>
       </div>
