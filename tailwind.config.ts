@@ -23,13 +23,13 @@ module.exports = {
           "0%": {
             borderBottomLeftRadius: "0",
             borderBottomRightRadius: "0",
-            color: "#f8fafc",
+            // color: "#f8fafc",
           },
           "100%": {
             borderBottomLeftRadius: "50px",
             borderBottomRightRadius: "50px",
-            backgroundColor: "#f8fafc",
-            color: "#276749",
+            // backgroundColor: "#f8fafc",
+            // color: "#276749",
           },
         },
 
@@ -37,13 +37,13 @@ module.exports = {
           "0%": {
             borderBottomLeftRadius: "50px",
             borderBottomRightRadius: "50px",
-            backgroundColor: "#f8fafc",
-            color: "#276749",
+            // backgroundColor: "#f8fafc",
+            // color: "#276749",
           },
           "100%": {
             borderBottomLeftRadius: "0",
             borderBottomRightRadius: "0",
-            color: "#f8fafc",
+            // color: "#f8fafc",
           },
         },
       },
@@ -66,6 +66,7 @@ module.exports = {
         "dark-header": "rgb(17, 14, 14)",
         // "header-hover-dark": "rgba(255, 255, 255, 0.2)",
         "header-hover-dark": "#232323",
+        "header-green": "#276749",
       },
       transitionProperty: {
         "header-hover-transition": "background-color 0.5s",
