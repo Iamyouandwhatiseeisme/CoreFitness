@@ -1,9 +1,6 @@
 "use client";
-import { redirect, useRouter } from "next/navigation";
-// import type { Stripe } from "stripe";
+import { useRouter } from "next/navigation";
 
-import PrintObject from "../../../components/PrintObject/PrintObject";
-// import { stripe } from "../../../../lib/stripe";
 import { useEffect } from "react";
 
 export default function ResultPage({

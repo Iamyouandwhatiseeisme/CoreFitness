@@ -11,18 +11,6 @@ export const LogIn = () => {
   const [error, setError] = useState<string | null>(null);
   const supabase = createClient();
   const router = useRouter();
-  // useEffect(() => {
-  //   async function fetchUser() {
-  //     const {
-  //       data: { user },
-  //     } = await supabase.auth.getUser();
-  //     if (user) {
-  //       console.log(user);
-  //       router.push("/");
-  //     }
-  //   }
-  //   fetchUser();
-  // }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();

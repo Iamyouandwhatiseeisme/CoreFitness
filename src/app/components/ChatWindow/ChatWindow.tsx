@@ -29,7 +29,6 @@ export default function ChatWindow() {
   const [aiResponse, setResponse] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [dailyDiet, setDailyDiet] = useState<DailyDiet | null>();
-  // const [isGraphReady, setIsGraphReady] = useState<boolean>(false);
 
   const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GOOGLE_API_KEY!);
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
