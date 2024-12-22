@@ -1,5 +1,6 @@
 import NotFound from "../[lang]/notfound/NotFound";
 import { Post, Product } from "../components/types";
+import { createClient } from "../utils/supabase/client";
 
 interface PostsResponse {
   posts: Post[];
@@ -14,32 +15,13 @@ interface ProductsResponse {
   limit: number;
 }
 
-export default async function fetchProducts(
-  fetchItemType: string,
-  debouncedSearch: string,
-  sortOption: string,
-  sortOrder: string
-) {
+export default async function fetchProducts() {
   try {
-    let url = `https://dummyjson.com/${fetchItemType}`;
-    if (debouncedSearch) {
-      url = `https://dummyjson.com/${fetchItemType}/search?q=${debouncedSearch}`;
-    }
-    if (sortOption && sortOrder) {
-      url = `https://dummyjson.com/${fetchItemType}?sortBy=${sortOption}&order=${sortOrder}`;
-    }
-    const response = await fetch(url);
+    const supabase = await createClient();
+    const { data } = await supabase.from("products").select();
 
-    if (fetchItemType === "posts") {
-      const data: PostsResponse = await response.json();
-      return data.posts;
-    }
-    if (fetchItemType === "products") {
-      const data: ProductsResponse = await response.json();
-      return data.products;
-    }
-    return [];
+    return data;
   } catch (error) {
-    return <NotFound page={fetchItemType}></NotFound>;
+    return <NotFound page={"products"}></NotFound>;
   }
 }
