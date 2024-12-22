@@ -47,12 +47,11 @@ export interface Post {
 }
 export interface Product {
   id: number;
-  brand: string;
-  category: string;
-  description: string;
-  price: number;
+  created_at: string;
+  user_id: string;
   title: string;
-  thumbnail: string;
-  tags: string[];
-  images: string[];
+  price: number;
+  stripe_price_id: string;
+  stripe_product_id: string[];
+  img_url: string;
 }
