@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { Product, SortOption } from "../../components/types";
 import { Button } from "@components/components/ui/button";
 import AddProductDialog from "src/app/components/AddProductDialog/AddProductDialog";
+import { Toaster } from "sonner";
 
 interface ProductsProps {
   searchParams: Record<string, string | undefined>;
@@ -18,15 +19,16 @@ interface ProductsProps {
 
 export default function Products(props: ProductsProps) {
   const [products, setProducts] = useState<Product[]>([]);
+  const [isUpdating, setIsUpdating] = useState<boolean>(false);
 
   useEffect(() => {
     async function fetch() {
       var productsArray = (await fetchProducts()) as Product[];
-      console.log(productsArray, "fetching");
       setProducts(productsArray);
     }
+
     fetch();
-  }, []);
+  }, [isUpdating]);
 
   if (products.length === 0) {
     return (
@@ -38,22 +40,22 @@ export default function Products(props: ProductsProps) {
           <h2 className="text-black dark:text-gray-200 font-sans font-bold text-2xl">
             Could not find anything...
           </h2>
-          <AddProductDialog></AddProductDialog>
+          <AddProductDialog retriggerFetch={setIsUpdating}></AddProductDialog>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="w-full  min-h-wrapper ">
+    <div className="w-full  min-h-wrapper pt-32 ">
       <div className="relative flex flex-col items-center">
         <div className="mt-5 flex flex-row items-center">
-          <SearchBar searchItemType="Search Products" />
+          <AddProductDialog retriggerFetch={setIsUpdating}></AddProductDialog>
+          <Toaster />
         </div>
         <div className="fixed left-2 top-16 flex flex-col"></div>
-        <div className="p-5 grid grid-cols-3 gap-7  mt-10">
+        <div className="p-5 grid grid-cols-3 gap-7  ">
           {products.map((product) => {
-            console.log(product.img_url);
             return (
               <div
                 key={product.id}
