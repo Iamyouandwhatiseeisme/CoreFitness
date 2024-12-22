@@ -11,7 +11,6 @@ export async function GET(request: NextRequest) {
         email,
         limit: 1,
       });
-
       const customerId = customers.data[0].id;
 
       const subscriptions = await stripe.subscriptions.list({

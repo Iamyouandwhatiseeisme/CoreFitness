@@ -6,6 +6,10 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
+    "baseUrl": "./",
+    "paths": {
+      "@components/*": ["components/*"]
+    },
     "incremental": true,
     "module": "esnext",
     "esModuleInterop": true,
