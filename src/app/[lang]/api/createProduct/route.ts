@@ -3,8 +3,6 @@ import { createClient } from "src/app/utils/supabase/server";
 import Stripe from "stripe";
 
 export async function POST(request: NextRequest) {
-  console.log(2);
-
   try {
     const formData = await request.formData();
     const name = formData.get("name") as string;
@@ -33,7 +31,6 @@ export async function POST(request: NextRequest) {
           });
           if (stripePrice) {
             const fileName = `${Date.now()}-${file.name}`;
-            console.log(`public/${fileName}`, file);
             try {
               const { data, error } = await supabase.storage
                 .from("product-images")
