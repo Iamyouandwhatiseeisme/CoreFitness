@@ -12,6 +12,7 @@ import { Product, SortOption } from "../../components/types";
 import { Button } from "@components/components/ui/button";
 import AddProductDialog from "src/app/components/AddProductDialog/AddProductDialog";
 import { Toaster } from "sonner";
+import { useCart } from "src/app/components/providers/CartProvider";
 
 interface ProductsProps {
   searchParams: Record<string, string | undefined>;
@@ -20,6 +21,7 @@ interface ProductsProps {
 export default function Products(props: ProductsProps) {
   const [products, setProducts] = useState<Product[]>([]);
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
+  const { addItemToCart } = useCart();
 
   useEffect(() => {
     async function fetch() {
@@ -71,9 +73,16 @@ export default function Products(props: ProductsProps) {
                     <strong>{product.title}</strong>
                   </div>
                 </Link>
-
                 <div className="p-2 font-serif size text-xs m-1 ">
                   Price: {product.price}$
+                </div>
+                <div
+                  className="cursor-pointer"
+                  onClick={() =>
+                    addItemToCart({ product: product, quantity: 2 })
+                  }
+                >
+                  Add To cart
                 </div>
               </div>
             );

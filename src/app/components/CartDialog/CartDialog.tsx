@@ -6,9 +6,13 @@ import {
   DialogDescription,
   DialogClose,
 } from "@components/components/ui/dialog";
-import { X } from "lucide-react";
+import { Minus, Plus, X } from "lucide-react";
+import { CartItem, useCart } from "../providers/CartProvider";
 
 const CartDialog = () => {
+  const { cartItems, removeItemFromCart, clearCart, updateItemQuantity } =
+    useCart();
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -35,11 +39,63 @@ const CartDialog = () => {
             <X className="h-4 w-4" />
           </DialogClose>
 
-          <DialogDescription>
+          <DialogDescription className="w-full ">
             <ul>
-              <li>Item 1</li>
-              <li>Item 2</li>
-              <li>Item 3</li>
+              {cartItems.length === 0 ? (
+                <li>Your cart is empty...</li>
+              ) : (
+                cartItems.map((item: CartItem) => {
+                  return (
+                    <li
+                      className="flex flex-row items-center justify-between h-16 border border-gray-200 p-2 m-2 rounded-2xl"
+                      key={item.product.id}
+                    >
+                      <div className="flex flex-row">
+                        <img
+                          className="border mr-2 "
+                          style={{ width: "30px", height: "30px" }}
+                          src={item.product.img_url}
+                        ></img>
+                        <div className=" mr-2 "> {item.product.title} </div>
+                      </div>
+                      <div className="flex flex-row gap-2">
+                        <div> Price: {item.product.price / 100}$</div>
+                        <div className="flex flex-row gap-2">
+                          {" "}
+                          Quantity:{" "}
+                          <div className="flex flex-row gap-2">
+                            <Minus
+                              className="cursor-pointer border rounded-2xl hover:bg-slate-200"
+                              onClick={() =>
+                                updateItemQuantity(
+                                  item.product.id,
+                                  item.quantity - 1
+                                )
+                              }
+                            ></Minus>
+                            {item.quantity}
+                            <Plus
+                              onClick={() =>
+                                updateItemQuantity(
+                                  item.product.id,
+                                  item.quantity + 1
+                                )
+                              }
+                              className="cursor-pointer border rounded-2xl hover:bg-slate-200"
+                            ></Plus>
+                            <X
+                              className="cursor-pointer"
+                              onClick={() => {
+                                removeItemFromCart(item.product.id);
+                              }}
+                            ></X>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  );
+                })
+              )}
             </ul>
           </DialogDescription>
         </DialogContent>

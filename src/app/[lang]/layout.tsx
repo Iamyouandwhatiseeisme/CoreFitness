@@ -5,6 +5,7 @@ import { getDictionary } from "./dictionaries";
 import { LocaleProvider } from "../components/providers/LanguageContext";
 import { createClient } from "../utils/supabase/server";
 import React from "react";
+import { CartProvider } from "../components/providers/CartProvider";
 
 export const metadata = {
   title: "Core Fitness",
@@ -34,11 +35,13 @@ export default async function RootLayout(props: LayoutProps) {
         dictChat={dictChat}
         informationBoard={informationBoard}
       >
-        <body className="bg-neutral-200 dark:bg-neutral-900 font-serif">
-          <Header currentUser={user} dict={dictHeader}></Header>
-          {props.children}
-          <Footer></Footer>
-        </body>
+        <CartProvider>
+          <body className="bg-neutral-200 dark:bg-neutral-900 font-serif">
+            <Header currentUser={user} dict={dictHeader}></Header>
+            {props.children}
+            <Footer></Footer>
+          </body>
+        </CartProvider>
       </LocaleProvider>
     </html>
   );
