@@ -10,6 +10,7 @@ import { User } from "@supabase/supabase-js";
 import { DictionaryChapter } from "../../[lang]/dictionaries";
 import useTheme from "../../hooks/useTheme";
 import { useCallback, useEffect, useRef, useState } from "react";
+import CartDialog from "../CartDialog/CartDialog";
 
 interface HeaderProps {
   dict: DictionaryChapter;
@@ -17,7 +18,7 @@ interface HeaderProps {
 }
 
 const Header = (props: HeaderProps) => {
-  const { locale, setLocale } = useLocale();
+  const { locale } = useLocale();
   const { currentTheme, themeOptions, themeHandler } = useTheme();
   const [isAnimationTriggered, setIsAnimationTriggered] =
     useState<boolean>(false);
@@ -103,6 +104,9 @@ const Header = (props: HeaderProps) => {
             toggleHandler={themeHandler}
             type="Theme"
           ></DropDown>
+        </div>
+        <div>
+          <CartDialog></CartDialog>
         </div>
         <div className="mb-2  ">
           {props.currentUser === null ? (
