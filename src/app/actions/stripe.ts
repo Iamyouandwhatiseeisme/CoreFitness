@@ -8,8 +8,38 @@ import { CURRENCY } from "../../config";
 import { formatAmountForStripe } from "../utils/stripe/stripe-helpers";
 import { stripe } from "../../lib/stripe";
 import { Plan } from "../components/types";
+import { CartItem } from "../components/providers/CartProvider";
 
-export async function createCheckoutSession(
+export async function createCheckoutSessionForCart(cartItems: CartItem[]) {
+  const session: Stripe.Checkout.Session =
+    await stripe.checkout.sessions.create({
+      success_url:
+        "http://localhost:3000/orders/result?session_id={CHECKOUT_SESSION_ID}",
+      line_items: cartItems.map((item) => {
+        return {
+          quantity: item.quantity,
+          price: item.product.stripe_price_id,
+        };
+      }),
+      mode: "payment",
+      metadata: {
+        cart_items: JSON.stringify(
+          cartItems.map((item) => ({
+            product_id: item.product.id,
+            quantity: item.quantity,
+          }))
+        ),
+      },
+    });
+
+  console.log(session);
+  return {
+    client_secret: session.client_secret,
+    url: session.url,
+  };
+}
+
+export async function createCheckoutSessionForSubscription(
   data: FormData,
   plan: Plan
 ): Promise<{ client_secret: string | null; url: string | null }> {

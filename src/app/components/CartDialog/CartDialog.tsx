@@ -10,6 +10,7 @@ import {
 import { Minus, Plus, X } from "lucide-react";
 import { CartItem, useCart } from "../providers/CartProvider";
 import { Button } from "@components/components/ui/button";
+import { createCheckoutSessionForCart } from "src/app/actions/stripe";
 
 const CartDialog = () => {
   const { cartItems, removeItemFromCart, clearCart, updateItemQuantity } =
@@ -17,6 +18,11 @@ const CartDialog = () => {
   const totalPrice = cartItems.reduce((total, item) => {
     return total + (item.product.price * item.quantity) / 100;
   }, 0);
+  async function handleChekout() {
+    const { url } = await createCheckoutSessionForCart(cartItems);
+
+    window.location.assign(url as string);
+  }
 
   return (
     <Dialog>
@@ -114,6 +120,7 @@ const CartDialog = () => {
             >
               Clear Cart
             </Button>
+            <Button onClick={() => handleChekout()}>Buy</Button>
           </DialogFooter>
         </DialogContent>
       </DialogContent>

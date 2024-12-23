@@ -74,7 +74,7 @@ export default function Products(props: ProductsProps) {
                 <div
                   className="cursor-pointer"
                   onClick={() =>
-                    addItemToCart({ product: product, quantity: 2 })
+                    addItemToCart({ product: product, quantity: 1 })
                   }
                 >
                   Add To cart

@@ -52,6 +52,6 @@ export interface Product {
   title: string;
   price: number;
   stripe_price_id: string;
-  stripe_product_id: string[];
+  stripe_product_id: string;
   img_url: string;
 }
