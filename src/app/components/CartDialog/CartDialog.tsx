@@ -5,6 +5,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogClose,
+  DialogFooter,
 } from "@components/components/ui/dialog";
 import { Minus, Plus, X } from "lucide-react";
 import { CartItem, useCart } from "../providers/CartProvider";
@@ -12,6 +13,9 @@ import { CartItem, useCart } from "../providers/CartProvider";
 const CartDialog = () => {
   const { cartItems, removeItemFromCart, clearCart, updateItemQuantity } =
     useCart();
+  const totalPrice = cartItems.reduce((total, item) => {
+    return total + (item.product.price * item.quantity) / 100;
+  }, 0);
 
   return (
     <Dialog>
@@ -23,7 +27,7 @@ const CartDialog = () => {
           style={{
             boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
           }}
-          className="w-3/4 h-3/4 z-50 top-[12.5%] left-[12.5%] fixed pl-10 pr-10 bg-white rounded-xl  flex flex-col items-center justify-start  "
+          className="w-3/4 h-3/4 z-50 top-[12.5%] left-[12.5%] fixed pl-10 pr-10 bg-white rounded-xl  flex flex-col items-center justify-between  "
         >
           <DialogTitle className="w-full h-16 border-b-2 border-gray-400 flex flex-row items-center justify-center ">
             Your Cart
@@ -34,12 +38,12 @@ const CartDialog = () => {
               top: "16px",
               right: "16px",
             }}
-            className="    justify-end rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+            className=" justify-end rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
           >
             <X className="h-4 w-4" />
           </DialogClose>
 
-          <DialogDescription className="w-full ">
+          <DialogDescription className="w-full h-full ">
             <ul>
               {cartItems.length === 0 ? (
                 <li>Your cart is empty...</li>
@@ -98,6 +102,9 @@ const CartDialog = () => {
               )}
             </ul>
           </DialogDescription>
+          <DialogFooter className="flex flex-row w-full justify-start p-5">
+            Total Price:{totalPrice} $
+          </DialogFooter>
         </DialogContent>
       </DialogContent>
     </Dialog>
