@@ -1,15 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import DropDown from "../../components/DropDown/DropDown";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import fetchProducts from "../../fetcher/fetchProducts";
-// import ProductActions from "../../components/buttons/ProductActions";
 import { useEffect, useState } from "react";
-import { ChevronRight, LucidePlus, LucidePlusCircle, Plus } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { Product, SortOption } from "../../components/types";
-import { Button } from "@components/components/ui/button";
+import { Product } from "../../components/types";
 import AddProductDialog from "src/app/components/AddProductDialog/AddProductDialog";
 import { Toaster } from "sonner";
 import { useCart } from "src/app/components/providers/CartProvider";

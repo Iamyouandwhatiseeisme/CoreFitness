@@ -9,6 +9,7 @@ import {
 } from "@components/components/ui/dialog";
 import { Minus, Plus, X } from "lucide-react";
 import { CartItem, useCart } from "../providers/CartProvider";
+import { Button } from "@components/components/ui/button";
 
 const CartDialog = () => {
   const { cartItems, removeItemFromCart, clearCart, updateItemQuantity } =
@@ -59,6 +60,7 @@ const CartDialog = () => {
                           className="border mr-2 "
                           style={{ width: "30px", height: "30px" }}
                           src={item.product.img_url}
+                          alt={item.product.title}
                         ></img>
                         <div className=" mr-2 "> {item.product.title} </div>
                       </div>
@@ -102,8 +104,16 @@ const CartDialog = () => {
               )}
             </ul>
           </DialogDescription>
-          <DialogFooter className="flex flex-row w-full justify-start p-5">
-            Total Price:{totalPrice} $
+          <DialogFooter className="flex flex-row w-full justify-between p-5 ">
+            <div> Total Price:{totalPrice} $</div>
+
+            <Button
+              className="flex flex-row items-center justify-center bg-red-800 text-white w-20"
+              variant="destructive"
+              onClick={() => clearCart()}
+            >
+              Clear Cart
+            </Button>
           </DialogFooter>
         </DialogContent>
       </DialogContent>
