@@ -23,13 +23,17 @@ export default async function ResultPage({
         );
         lineItems.data.forEach(async (item) => {
           const index = lineItems.data.indexOf(item);
+          console.log(cartItems[index]);
           const { data, error } = await supabase.from("orders").insert({
             stripe_product_id: item.price?.product,
             stripe_price_id: item.price?.id,
             user_id: user?.id,
+            price: item.price?.unit_amount_decimal,
+            title: cartItems[index].title,
             product_id: cartItems[index].product_id,
             stripe_purchase_id: session.payment_intent,
           });
+          console.log(data, error, index);
         });
       }
     }

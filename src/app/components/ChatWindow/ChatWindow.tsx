@@ -104,10 +104,10 @@ export default function ChatWindow() {
             </h1>
             <div className="flex flex-row gap-10 w-full">
               <div className=" shadow-lg shadow-slate-200 flex flex-col w-full h-80vh bg-gray-800 bg-opacity-75 rounded-2xl items-center border border-b-gray-500  ">
-                <div className="2xl:hidden flex flex-col items-center justify-center font-bold font-serif text-2xl mt-36  ">
+                <div className="xl:hidden flex flex-col items-center justify-center font-bold font-serif text-2xl mt-36  ">
                   Please Enter full screen to use chatbot
                 </div>
-                <div className="w-95% h-full shadow-lg shadow-slate-800  bg-opacity-35 border border-gray-400 rounded-2xl m-5 hidden grid-rows-2 2xl:grid ">
+                <div className="w-95% h-40 shadow-lg shadow-slate-800  bg-opacity-35 border border-gray-400 rounded-2xl m-5 hidden grid-rows-2 xl:grid ">
                   <div>
                     <div className="flex flex-row">
                       <MuscleGoalButtonGroup

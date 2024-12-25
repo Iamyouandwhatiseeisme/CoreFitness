@@ -25,6 +25,7 @@ export async function createCheckoutSessionForCart(cartItems: CartItem[]) {
       metadata: {
         cart_items: JSON.stringify(
           cartItems.map((item) => ({
+            title: item.product.title,
             product_id: item.product.id,
             quantity: item.quantity,
           }))
