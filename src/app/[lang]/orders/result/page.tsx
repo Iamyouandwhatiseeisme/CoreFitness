@@ -1,4 +1,5 @@
 import { redirect } from "next/navigation";
+import { OrderProducts } from "src/app/components/types";
 import { createClient } from "src/app/utils/supabase/server";
 import { stripe } from "src/lib/stripe";
 
@@ -21,11 +22,10 @@ export default async function ResultPage({
         const { data: lineItems } =
           await stripe.checkout.sessions.listLineItems(searchParams.session_id);
         if (lineItems) {
-          const orders: { product_id: string; quantity: number }[] =
-            lineItems.map((item, index) => ({
-              product_id: cartItems[index].product_id as string,
-              quantity: item.quantity as number,
-            }));
+          const orders: OrderProducts[] = lineItems.map((item, index) => ({
+            product_id: cartItems[index].product_id as number,
+            quantity: item.quantity as number,
+          }));
           if (orders) {
             const { data, error } = await supabase.from("orders").insert({
               user_id: user?.id,
