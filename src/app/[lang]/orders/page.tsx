@@ -1,13 +1,11 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { OrderCard } from "src/app/components/OrderCard/OrderCard";
-import { Order, OrderProducts, Product } from "src/app/components/types";
+import { Order } from "src/app/components/types";
 
 export default function Orders() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  // const router = useRouter();
   useEffect(() => {
     async function fetchOrders() {
       const response = await fetch("/api/orders", {
@@ -15,7 +13,6 @@ export default function Orders() {
       });
       if (response.ok) {
         const responseData = await response.json();
-        console.log(responseData);
         setOrders(responseData);
       }
       setIsLoading(false);

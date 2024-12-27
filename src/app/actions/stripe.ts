@@ -33,7 +33,6 @@ export async function createCheckoutSessionForCart(cartItems: CartItem[]) {
       },
     });
 
-  console.log(session);
   return {
     client_secret: session.client_secret,
     url: session.url,

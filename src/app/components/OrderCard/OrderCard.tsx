@@ -26,7 +26,6 @@ export function OrderCard(props: OrderCardProps) {
       });
       if (response.ok) {
         const responseData = await response.json();
-        console.log(responseData[0], "response");
         const responseArray = [...responseData[0]];
 
         responseArray.forEach((item: Product, index: number) => {

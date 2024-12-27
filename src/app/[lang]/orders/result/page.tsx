@@ -34,9 +34,7 @@ export default async function ResultPage({
               products: orders,
             });
             if (data) {
-              console.log(data);
-
-              // redirect("/orders");
+              redirect("/orders");
             }
           }
         }
