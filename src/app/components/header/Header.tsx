@@ -77,8 +77,12 @@ const Header = (props: HeaderProps) => {
               <li className={listItemStyle}>{props.dict.Equipment}</li>
             </Link>
             <li className={listItemStyle}>{props.dict.Trainers}</li>
-            <li className={listItemStyle}>{props.dict.Certificates}</li>
-            <li className={listItemStyle}>{props.dict.Schedules}</li>
+            <Link href={`/${locale}/orders`}>
+              <li className={listItemStyle}>{props.dict.Orders}</li>
+            </Link>
+            <Link href={`/${locale}/products`}>
+              <li className={listItemStyle}>{props.dict.Products}</li>
+            </Link>
             <li className={`${listItemStyle} hidden l:block`}>
               {props.dict.Locations}
             </li>
