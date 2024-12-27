@@ -55,6 +55,14 @@ export interface Product {
   stripe_product_id: string;
   img_url: string;
 }
-export interface Order extends Omit<Product, "img_url"> {
+export interface Order {
+  id: string;
+  created_at: string;
+  user_id: string;
+  total_price: number;
   stripe_purchase_id: string;
+  products: {
+    product_id: string;
+    quantity: number;
+  }[];
 }

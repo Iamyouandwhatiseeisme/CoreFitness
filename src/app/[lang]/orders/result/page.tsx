@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import { createClient } from "src/app/utils/supabase/server";
 import { stripe } from "src/lib/stripe";
 
@@ -17,24 +18,28 @@ export default async function ResultPage({
     if (session.status === "complete") {
       if (session.metadata) {
         const cartItems = JSON.parse(session.metadata.cart_items);
-        console.log(cartItems[0].product_id);
-        const lineItems = await stripe.checkout.sessions.listLineItems(
-          searchParams.session_id
-        );
-        lineItems.data.forEach(async (item) => {
-          const index = lineItems.data.indexOf(item);
-          console.log(cartItems[index]);
-          const { data, error } = await supabase.from("orders").insert({
-            stripe_product_id: item.price?.product,
-            stripe_price_id: item.price?.id,
-            user_id: user?.id,
-            price: item.price?.unit_amount_decimal,
-            title: cartItems[index].title,
-            product_id: cartItems[index].product_id,
-            stripe_purchase_id: session.payment_intent,
-          });
-          console.log(data, error, index);
-        });
+        const { data: lineItems } =
+          await stripe.checkout.sessions.listLineItems(searchParams.session_id);
+        if (lineItems) {
+          const orders: { product_id: string; quantity: number }[] =
+            lineItems.map((item, index) => ({
+              product_id: cartItems[index].product_id as string,
+              quantity: item.quantity as number,
+            }));
+          if (orders) {
+            const { data, error } = await supabase.from("orders").insert({
+              user_id: user?.id,
+              total_price: session.amount_total,
+              stripe_purchase_id: session.payment_intent,
+              products: orders,
+            });
+            if (data) {
+              console.log(data);
+
+              // redirect("/orders");
+            }
+          }
+        }
       }
     }
   }
