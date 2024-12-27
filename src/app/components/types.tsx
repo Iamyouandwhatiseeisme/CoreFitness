@@ -56,13 +56,14 @@ export interface Product {
   img_url: string;
 }
 export interface Order {
-  id: string;
+  id: number;
   created_at: string;
   user_id: string;
   total_price: number;
   stripe_purchase_id: string;
-  products: {
-    product_id: string;
-    quantity: number;
-  }[];
+  products: OrderProducts[];
+}
+export interface OrderProducts {
+  product_id: number;
+  quantity: number;
 }
