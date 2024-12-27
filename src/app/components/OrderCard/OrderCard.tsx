@@ -16,29 +16,32 @@ export function OrderCard(props: OrderCardProps) {
   useEffect(() => {
     async function fetchOrders() {
       let tempProducts: Array<{ product: Product; quantity: number }> = [];
-      for (const product of productsToFetch) {
-        const response = await fetch("/api/products", {
-          method: "GET",
-          headers: {
-            product_id: JSON.stringify(product.product_id),
-          },
-        });
-        if (response.ok) {
-          const responseData = await response.json();
-          if (responseData) {
-            const isProductInArray = tempProducts.some(
-              (item) => item.product.id === responseData.id
-            );
+      const response = await fetch("/api/products", {
+        method: "GET",
+        headers: {
+          product_id: JSON.stringify(
+            productsToFetch.map((product) => product.product_id)
+          ),
+        },
+      });
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData[0], "response");
+        const responseArray = [...responseData[0]];
 
-            if (!isProductInArray) {
-              tempProducts.push({
-                product: responseData[0],
-                quantity: product.quantity,
-              });
-            }
+        responseArray.forEach((item: Product, index: number) => {
+          const isProductInArray = tempProducts.some(
+            (itemToFetch) => itemToFetch.product.id === item.id
+          );
+          if (!isProductInArray) {
+            tempProducts.push({
+              product: item,
+              quantity: productsToFetch[index].quantity,
+            });
           }
-        }
+        });
       }
+
       setProducts(tempProducts);
 
       setIsLoading(false);
