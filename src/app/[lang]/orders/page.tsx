@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { OrderCard } from "src/app/components/OrderCard/OrderCard";
 import { Order, OrderProducts, Product } from "src/app/components/types";
 
 export default function Orders() {
@@ -28,94 +29,15 @@ export default function Orders() {
       ) : orders.length === 0 ? (
         <div className="pt-10">You haven't made any orders yet</div>
       ) : (
-        <div>
+        <div className="">
           {orders.map((order, index) => {
             return (
-              <OrderCard
-                key={order.id}
-                products={order.products}
-                order_id={order.id}
-              ></OrderCard>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  );
-}
-
-interface OrderCardProps {
-  products: OrderProducts[];
-  order_id: number;
-}
-
-export function OrderCard(props: OrderCardProps) {
-  const [products, setProducts] = useState<
-    Array<{ product: Product; quantity: number }>
-  >([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const productsToFetch = props.products;
-
-  useEffect(() => {
-    async function fetchOrders() {
-      let tempProducts: Array<{ product: Product; quantity: number }> = [];
-      for (const product of productsToFetch) {
-        const response = await fetch("/api/products", {
-          method: "GET",
-          headers: {
-            product_id: JSON.stringify(product.product_id),
-          },
-        });
-        if (response.ok) {
-          const responseData = await response.json();
-          if (responseData) {
-            const isProductInArray = tempProducts.some(
-              (item) => item.product.id === responseData.id
-            );
-
-            if (!isProductInArray) {
-              tempProducts.push({
-                product: responseData[0],
-                quantity: product.quantity,
-              });
-            }
-          }
-        }
-      }
-      setProducts(tempProducts);
-
-      setIsLoading(false);
-    }
-    fetchOrders();
-  }, []);
-
-  return (
-    <div className="min-h-wrapper bg-red-200 h-auto rounded-xl">
-      <div className="w-full border-b border-gray-200 p-5">
-        Order: # {props.order_id}
-      </div>
-
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : products.length === 0 ? (
-        <div>No products found</div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {products.map((productItem, index) => {
-            const { product, quantity } = productItem;
-            return (
-              <div
-                key={index}
-                className="border rounded-lg p-4 flex flex-col items-center"
-              >
-                <img
-                  src={product.img_url}
-                  alt={product.title}
-                  className="w-40 h-40 object-cover mb-4"
-                />
-                <h3 className="text-xl font-semibold">{product.title}</h3>
-                <p className="text-lg text-gray-600">${product.price / 100}</p>
-                <p className="text-sm text-gray-500">Quantity: {quantity}</p>
+              <div className="p-5">
+                <OrderCard
+                  key={order.id}
+                  products={order.products}
+                  order={order}
+                ></OrderCard>
               </div>
             );
           })}
