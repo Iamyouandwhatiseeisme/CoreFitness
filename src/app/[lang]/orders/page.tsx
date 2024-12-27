@@ -42,7 +42,14 @@ export default function Orders() {
                   <div className="">
                     Order Id: #{order[index].stripe_purchase_id}
                   </div>
-                  <div className="underline flex">See Details</div>
+                  <div
+                    className="underline flex cursor-pointer"
+                    onClick={() => {
+                      router.push(`/orders/${order[index].stripe_purchase_id}`);
+                    }}
+                  >
+                    See Details
+                  </div>
                 </div>
                 <div className="grid grid-cols-4 gap-4">
                   {order.map((order) => {
