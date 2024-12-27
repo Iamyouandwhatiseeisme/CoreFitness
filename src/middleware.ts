@@ -7,8 +7,6 @@ import {
   isStripeSubscriptionActive,
   SubscriptionStatus,
 } from "./app/utils/stripe/isStripeSubscriptionActive";
-import { User } from "@supabase/supabase-js";
-import path from "path";
 
 const locales = ["en-US", "ka"];
 
