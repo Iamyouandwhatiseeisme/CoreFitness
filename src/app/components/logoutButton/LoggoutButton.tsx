@@ -1,7 +1,6 @@
 import React from "react";
 import { ClipLoader } from "react-spinners";
 import { signOut } from "../../[lang]/login/actions";
-import { redirect, useRouter } from "next/navigation";
 
 interface AuthenticationButtonProps {
   href: string;
@@ -21,7 +20,6 @@ export default function AuthenticationButton(props: AuthenticationButtonProps) {
         onClick={() => {
           if (props.type === "logout") {
             signOut();
-            // router.push(`/${props.locale}/login`);
           }
         }}
         className="h-10 w-20  items-center mt-2 text-white dark:text-white bg-teal-400 hover:bg-teal-500 dark:bg-header-hover-dark rounded-br-full rounded-tl-full cursor-pointer "
