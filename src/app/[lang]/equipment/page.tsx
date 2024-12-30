@@ -26,23 +26,16 @@ export default function EquipmentPage() {
   );
   const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect(() => {
-    const fetchEquipment = fetch("/api/equipment")
+    fetch("/api/equipment")
       .then((res) => res.json())
       .then((data) => setEquipment(data))
       .catch((error) => console.error(error));
-    const fetchMuscles = fetch("/api/muscles")
+    fetch("/api/muscles")
       .then((res) => res.json())
       .then((data) => setMuscles(data))
       .catch((error) => console.error(error));
     setIsLoading(false);
   }, []);
-  const handleSelect = (item: Equipment) => {
-    setSelectedEquipment(item);
-  };
-
-  const closeModal = () => {
-    setSelectedEquipment(null);
-  };
 
   return (
     <main
