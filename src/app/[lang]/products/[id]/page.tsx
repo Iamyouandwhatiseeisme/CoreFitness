@@ -20,12 +20,12 @@ export default async function ProductPage(
       </h1>
       <img
         className="w-80 h-80 "
-        src={product.thumbnail}
+        src={product.img_url}
         alt="product-image"
       ></img>
-      <p className="text-5xl p-7">
+      {/* <p className="text-5xl p-7">
         Tags:{" "}
-        {product.tags.map((tag, index) => (
+        {product..map((tag, index) => (
           <span
             className="bg-gray-400 rounded-xl p-2 dark:bg-gray-200  mr-2"
             key={index}
@@ -33,7 +33,7 @@ export default async function ProductPage(
             #{tag}
           </span>
         ))}{" "}
-      </p>
+      </p> */}
       <div>
         <span className="border border-solid border-gray-500 rounded-lg p-2">
           Price: {product.price}$
