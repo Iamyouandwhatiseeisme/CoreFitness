@@ -6,8 +6,7 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import DropDown from "../../components/DropDown/DropDown";
 import fetchProducts from "../../fetcher/fetchProducts";
 import { useEffect, useState } from "react";
-// import ProductActions from "../../components/buttons/ProductActions";
-// import AddButton from "../../components/AddButton/AddButton";
+
 import { useRouter } from "next/navigation";
 import { Post, SortOption } from "../../components/types";
 
@@ -22,7 +21,6 @@ export default function Posts(props: PostsProps) {
   const sortOrder = searchParams.order || "";
   const fetchItemType = "posts";
   const [posts, setPosts] = useState<Post[]>([]);
-  const [editing, setEditing] = useState<boolean>();
   const router = useRouter();
   const postInfo =
     "bg-gray-400 dark:bg-gray-200 font-sans p-2 rounded-xl text-xl m-2";
@@ -54,30 +52,6 @@ export default function Posts(props: PostsProps) {
     },
   ];
 
-  // function editProducts(props: { posts, setPosts }) {
-  //   return function changeProductproducts(post) {
-  //     posts.forEach((item) => {
-  //       if (item.id === post.id) {
-  //         const index = posts.indexOf(item);
-  //         const newArray = posts;
-  //         newArray[index] = post;
-
-  //         setPosts(newArray);
-  //       }
-  //     });
-  //   };
-  // }
-
-  // const deleteProduct = (postId) => {
-  //   setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
-  // };
-
-  // const addPost = (item) => {
-  //   const newId = Date.now();
-  //   const itemWithId = { ...item, id: newId };
-  //   setPosts((prevPosts) => [...prevPosts, itemWithId]);
-  // };
-
   const toggleHandler = (
     option: string | undefined,
     order: string | undefined
@@ -87,12 +61,7 @@ export default function Posts(props: PostsProps) {
 
   useEffect(() => {
     async function fetch() {
-      var postsArray: Post[] = (await fetchProducts(
-        fetchItemType,
-        debouncedSearch,
-        sortOption,
-        sortOrder
-      )) as Post[];
+      var postsArray: Post[] = (await fetchProducts()) as Post[];
       setPosts(postsArray);
     }
     fetch();

@@ -21,9 +21,7 @@ interface Muscles {
 export default function EquipmentPage() {
   const [equipment, setEquipment] = useState<Equipment[]>([]);
   const [muscles, setMuscles] = useState<Muscles[]>([]);
-  const [selectedEquipment, setSelectedEquipment] = useState<Equipment | null>(
-    null
-  );
+
   const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect(() => {
     fetch("/api/equipment")

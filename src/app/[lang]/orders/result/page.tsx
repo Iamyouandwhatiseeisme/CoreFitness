@@ -27,7 +27,7 @@ export default async function ResultPage({
             quantity: item.quantity as number,
           }));
           if (orders) {
-            const { data, error } = await supabase.from("orders").insert({
+            const { data } = await supabase.from("orders").insert({
               user_id: user?.id,
               total_price: session.amount_total,
               stripe_purchase_id: session.payment_intent,
