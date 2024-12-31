@@ -1,6 +1,7 @@
 import { Button } from "@components/components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -10,6 +11,7 @@ import {
 } from "@components/components/ui/dialog";
 import { Input } from "@components/components/ui/input";
 import { Label } from "@components/components/ui/label";
+import { X } from "lucide-react";
 import React, { useState } from "react";
 import { toast } from "sonner";
 
@@ -41,6 +43,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
     <Dialog open={open}>
       <DialogTrigger asChild>
         <Button
+          data-cy="add-product-button"
           onClick={() => setOpen(true)}
           variant="outline"
           className="border w-40 rounded shadow-lg bg-slate-400 hover:bg-slate-300"
@@ -52,6 +55,18 @@ export default function AddProductDialog(props: AddProductDialogProps) {
       <DialogContent className="sm:max-w-[580px] h-80 m-5 p-5 absolute top-0 right-96 bg-slate-200 rounded-2xl   ">
         <DialogHeader className="flex flex-col items-start justify-start">
           <DialogTitle>Add Product</DialogTitle>
+          <DialogClose
+            style={{
+              position: "absolute",
+              top: "16px",
+              right: "16px",
+            }}
+            onClick={() => setOpen(false)}
+            className=" justify-end rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+          >
+            <X className="h-4 w-4" />
+          </DialogClose>
+
           <DialogDescription>
             Please type product details below
           </DialogDescription>
@@ -63,13 +78,25 @@ export default function AddProductDialog(props: AddProductDialogProps) {
               <Label htmlFor="name" className="text-right">
                 Name
               </Label>
-              <Input id="name" name="name" className="col-span-3" required />
+              <Input
+                id="name"
+                name="name"
+                className="col-span-3"
+                data-cy="name-input-field"
+                required
+              />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="price" className="text-right">
                 Price
               </Label>
-              <Input id="price" name="price" className="col-span-3" required />
+              <Input
+                id="price"
+                name="price"
+                className="col-span-3"
+                data-cy="price-input-field"
+                required
+              />
             </div>
             <div>
               <Label htmlFor="file" className="text-right">
@@ -80,6 +107,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
                 type="file"
                 name="file"
                 className="col-span-3"
+                data-cy="photo-browse-field"
                 required
               />
             </div>
