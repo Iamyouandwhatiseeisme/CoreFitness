@@ -1,16 +1,12 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { login, signup, signInWithGithub } from "./actions";
 import { useLocale } from "../../components/providers/LanguageContext";
 import LoginPageBoard from "../../components/LoginPageBoard/LoginPageBoard";
-import { createClient } from "../../utils/supabase/client";
-import { redirect } from "next/navigation";
-import { useRouter } from "next/navigation";
+
 export const LogIn = () => {
   const { locale } = useLocale();
   const [error, setError] = useState<string | null>(null);
-  const supabase = createClient();
-  const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -28,11 +24,9 @@ export const LogIn = () => {
     } else if (actionType === "signup") {
       result = await signup(formData, locale);
 
-      // if (success) {
       if (formRef.current) {
         formRef.current.reset();
       }
-      // }
     }
     if (result?.error) {
       setError(result.error);
