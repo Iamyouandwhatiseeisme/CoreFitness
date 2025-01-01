@@ -7,14 +7,13 @@ export default async function ProductPage(
   params: Record<string, Record<string, string>>
 ) {
   const { id } = params.params;
-  const fetchItemType = "products";
-  var product: Product;
 
-  product = (await fetchSingleProduct(id, fetchItemType)) as Product;
+  var product = (await fetchSingleProduct(id)) as Product | null;
+  console.log(product);
 
-  if (!product.id) return <NotFound page="products" />;
+  if (!product) return <NotFound page="products" />;
   return (
-    <div className="gap-4 flex flex-col items-center justify-center ">
+    <div className="gap-4 min-h-wrapper pt-40 flex flex-col items-center justify-center ">
       <h1 className="underline cursor-pointer font-serif font-bold text-2xl">
         {product.title}
       </h1>
