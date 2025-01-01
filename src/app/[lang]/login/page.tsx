@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { login, signup, signInWithGithub } from "./actions";
 import { useLocale } from "../../components/providers/LanguageContext";
 import LoginPageBoard from "../../components/LoginPageBoard/LoginPageBoard";
@@ -11,6 +11,7 @@ export const LogIn = () => {
   const [error, setError] = useState<string | null>(null);
   const supabase = createClient();
   const router = useRouter();
+  const formRef = useRef<HTMLFormElement>(null);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -26,7 +27,12 @@ export const LogIn = () => {
       result = await login(formData, locale);
     } else if (actionType === "signup") {
       result = await signup(formData, locale);
-      // alert("confirmation email sent");
+
+      // if (success) {
+      if (formRef.current) {
+        formRef.current.reset();
+      }
+      // }
     }
     if (result?.error) {
       setError(result.error);
@@ -43,6 +49,7 @@ export const LogIn = () => {
         <div className="items-center justify-center flex flex-col w-full h-full bg-gray-800 bg-opacity-50 pt-10">
           <div className=" border  rounded-2xl w-96 h-1/2 flex flex-col items-center justify-center bg-white">
             <form
+              ref={formRef}
               className="flex flex-col gap-3 w-80 text-black "
               onSubmit={(e) => {
                 handleSubmit(e);
@@ -80,6 +87,7 @@ export const LogIn = () => {
               </button>
 
               <button
+                data-cy="signup-button"
                 name="signup"
                 type="submit"
                 className="bg-green-700 rounded-2xl h-10 font-bold text-white"
