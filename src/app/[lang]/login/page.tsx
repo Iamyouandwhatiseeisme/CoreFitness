@@ -93,7 +93,11 @@ export const LogIn = () => {
               className="flex flex-row h-10 w-80 rounded-2xl bg-gray-200 items-center justify-center  cursor-pointer mt-4"
               onClick={() => signInWithGithub()}
             >
-              <img className="h-10 w-10" src="/images/github-mark.svg"></img>
+              <img
+                className="h-10 w-10"
+                alt="github"
+                src="/images/github-mark.svg"
+              ></img>
               <div>Sign in with GitHub</div>
             </button>
           </div>

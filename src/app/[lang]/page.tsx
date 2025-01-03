@@ -1,11 +1,11 @@
 "use client";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import InformationBoard from "../components/InformationBoard/InformationBoard";
 import ChatWindow from "../components/ChatWindow/ChatWindow";
 import { GridLoader } from "react-spinners";
 import { createClient } from "../utils/supabase/client";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 export interface HomePageCharityImageScreen {
   id: number;
   title: string;
@@ -35,7 +35,7 @@ function Welcome() {
   }, []);
 
   useEffect(() => {
-    const fetchImages = fetch("/api/homePageCharity")
+    fetch("/api/homePageCharity")
       .then((res) => res.json())
       .then((data) => setHomePageCharity(data))
       .catch((error) => console.error(error));
@@ -82,26 +82,3 @@ function Welcome() {
 }
 
 export default Welcome;
-
-{
-  /* <div className=" h-2/5 bg-green-200 bg-opacity-55 w-full m-5 rounded-3xl flex flex-col items-center justify-center p-5">
-                    <h1 className="font-serif text-2xl font-semibold text-gray-300">
-                      Personalised diet plan to reach your goals
-                    </h1>
-                  </div>
-                  <div className="border border-solid border-gray-800 bg-opacity-30 w-full"></div>
-
-                  <div className=" h-2/5 bg-purple-200 bg-opacity-55 w-full m-5 rounded-3xl flex flex-col items-center justify-center p-5">
-                    <h1 className="font-serif text-2xl font-semibold text-gray-300">
-                      Playlist maker for exercising based on your spotify
-                      algorithm
-                    </h1>
-                  </div>
-                  <div className="border border-solid border-gray-800 bg-opacity-30 w-full"></div>
-
-                  <div className=" h-2/5 bg-emerald-950 bg-opacity-85 w-full m-5 rounded-3xl flex flex-col items-center justify-center p-5">
-                    <h1 className="font-serif text-2xl font-semibold text-gray-300">
-                      Google calendar arrangment assistance
-                    </h1>
-                  </div> */
-}
