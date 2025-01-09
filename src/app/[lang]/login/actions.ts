@@ -61,7 +61,7 @@ export async function signInWithGithub() {
     redirect(data.url);
   }
 }
-export async function signOut(locale: string) {
+export async function signOut() {
   const supabase = await createClient();
 
   const { error } = await supabase.auth.signOut();

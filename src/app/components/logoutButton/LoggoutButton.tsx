@@ -20,7 +20,7 @@ export default function AuthenticationButton(props: AuthenticationButtonProps) {
       <button
         onClick={() => {
           if (props.type === "logout") {
-            signOut(props.locale);
+            signOut();
             router.push(`/${props.locale}/login`);
           }
         }}
