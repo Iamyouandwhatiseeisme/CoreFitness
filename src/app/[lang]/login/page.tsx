@@ -26,7 +26,7 @@ export const LogIn = () => {
       result = await login(formData, locale);
     } else if (actionType === "signup") {
       result = await signup(formData, locale);
-      alert("confirmation email sent");
+      // alert("confirmation email sent");
     }
     if (result?.error) {
       setError(result.error);
@@ -50,6 +50,7 @@ export const LogIn = () => {
             >
               <div className="flex flex-row w-full justify-between">
                 <input
+                  data-cy="email"
                   id="email"
                   name="email"
                   className="text-black  rounded-lg border-solid border border-gray-200 w-full p-2 "
@@ -61,6 +62,7 @@ export const LogIn = () => {
               <div className="flex flex-row w-full justify-between">
                 <input
                   className="text-black    rounded-lg border-solid border border-gray-200 w-full p-2 "
+                  data-cy="password"
                   type="password"
                   id="password"
                   name="password"
@@ -69,6 +71,7 @@ export const LogIn = () => {
                 />
               </div>
               <button
+                data-cy="login-button"
                 name="login"
                 type="submit"
                 className="bg-blue-700 rounded-2xl h-10 font-bold text-white"

@@ -112,7 +112,7 @@ const Header = (props: HeaderProps) => {
         <div>
           <CartDialog></CartDialog>
         </div>
-        <div className="mb-2  ">
+        <div data-cy="logout-button" className="mb-2  ">
           {props.currentUser === null ? (
             <AuthenticationButton
               locale={locale}
