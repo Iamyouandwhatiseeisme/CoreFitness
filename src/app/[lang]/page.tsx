@@ -4,6 +4,8 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import InformationBoard from "../components/InformationBoard/InformationBoard";
 import ChatWindow from "../components/ChatWindow/ChatWindow";
 import { GridLoader } from "react-spinners";
+import { createClient } from "../utils/supabase/client";
+import { redirect, useRouter } from "next/navigation";
 export interface HomePageCharityImageScreen {
   id: number;
   title: string;
@@ -16,6 +18,21 @@ function Welcome() {
   const [homePageCharity, setHomePageCharity] = useState<
     HomePageCharityImageScreen[]
   >([]);
+  const router = useRouter();
+
+  useEffect(() => {
+    async function fetchUser() {
+      const supabase = await createClient();
+
+      const { data } = await supabase.auth.getUser();
+
+      const { user } = data;
+      if (!user) {
+        router.push("/login");
+      }
+    }
+    fetchUser();
+  }, []);
 
   useEffect(() => {
     const fetchImages = fetch("/api/homePageCharity")
