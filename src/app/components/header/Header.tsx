@@ -86,7 +86,7 @@ const Header = (props: HeaderProps) => {
             <li className={`${listItemStyle} hidden l:block`}>
               {props.dict.Locations}
             </li>
-            <Link href={`/${locale}/profile`}>
+            <Link href={`/${locale}/profile`} data-cy="profile-button">
               <li className={`${listItemStyle} hidden xl:block`}>
                 {props.dict.Profile}
               </li>
