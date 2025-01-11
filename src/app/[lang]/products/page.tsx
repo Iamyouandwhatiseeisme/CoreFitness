@@ -54,8 +54,10 @@ export default function Products(props: ProductsProps) {
         <div className="p-5 grid grid-cols-3 gap-7  ">
           {products.map((product) => {
             return (
-              <div
+              <Link
                 key={product.id}
+                href={`/products/${product.id}`}
+                data-cy={product.title}
                 className="items-center flex flex-col border-2 border-solid border-gray-50 rounded-xl w-80 h-auto overflow-hidden bg-neutral-400 dark:bg-neutral-200"
               >
                 <img
@@ -63,11 +65,9 @@ export default function Products(props: ProductsProps) {
                   src={product.img_url}
                   alt={product.title}
                 ></img>
-                <Link key={product.id} href={`/products/${product.id}`}>
-                  <div className="p-2 font-serif size text-xs m-1 ">
-                    <strong>{product.title}</strong>
-                  </div>
-                </Link>
+                <div className="p-2 font-serif size text-xs m-1 ">
+                  <strong>{product.title}</strong>
+                </div>
                 <div className="p-2 font-serif size text-xs m-1 ">
                   Price: {product.price}$
                 </div>
@@ -79,7 +79,7 @@ export default function Products(props: ProductsProps) {
                 >
                   Add To cart
                 </div>
-              </div>
+              </Link>
             );
           })}
         </div>

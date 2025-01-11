@@ -44,6 +44,7 @@ declare namespace Cypress {
      */
 
     login(email: string, password: string): Chainable<Element>;
+    createProduct(title: string): Chainable<Element>;
   }
 }
 Cypress.Commands.add("login", (email: string, password: string) => {
@@ -53,4 +54,20 @@ Cypress.Commands.add("login", (email: string, password: string) => {
   cy.get("[data-cy='password']").type(password);
   cy.get("[data-cy='login-button']").click();
   cy.get("[data-cy='logout-button']").should("exist");
+});
+Cypress.Commands.add("createProduct", (title: string) => {
+  cy.login("karachka2@gmail.com", "Karachka2");
+  cy.get("[data-cy='products-page-button']").click();
+  cy.get("[data-cy='add-product-button']").should("exist");
+  cy.get("[data-cy='products-loaded']").should("exist");
+
+  cy.get("[data-cy='add-product-button']").click();
+  cy.get("[data-cy='name-input-field']").type(title);
+  cy.get("[data-cy='price-input-field']").type("33333");
+  cy.get("[data-cy='photo-browse-field']").selectFile(
+    "cypress/fixtures/CypressTest.png"
+  );
+  cy.get("[data-cy='create-product-button']").click();
+  cy.wait(2000);
+  cy.get("[data-cy='testProduct'").should("exist");
 });

@@ -20,6 +20,7 @@ export function DeleteProductButton(props: { id: string }) {
   }
   return (
     <button
+      data-cy="delete-button"
       className="rounded border-2xl h-10 w-40 bg-red-300"
       onClick={() => handleDelete()}
     >
