@@ -19,15 +19,30 @@ const CartDialog = () => {
     return total + (item.product.price * item.quantity) / 100;
   }, 0);
   async function handleChekout() {
-    const { url } = await createCheckoutSessionForCart(cartItems);
-
-    window.location.assign(url as string);
+    try {
+      const response = await fetch("/api/checkout", {
+        method: "POST",
+        body: JSON.stringify({
+          line_items: cartItems.map((item) => ({
+            quantity: item.quantity,
+            price: item.product.stripe_price_id,
+          })),
+          cart_items: cartItems.map((item) => ({
+            title: item.product.title,
+            product_id: item.product.id,
+            quantity: item.quantity,
+          })),
+        }),
+      });
+      const { url } = await response.json();
+      window.location.assign(url as string);
+    } catch (error) {}
   }
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button>Open Cart</button>
+        <button data-cy="open-cart-button">Open Cart</button>
       </DialogTrigger>
       <DialogContent className="fixed top-0 left-0 w-full h-full bg-gray-400 bg-opacity-50 backdrop-blur-md z-40">
         <DialogContent
@@ -120,7 +135,9 @@ const CartDialog = () => {
             >
               Clear Cart
             </Button>
-            <Button onClick={() => handleChekout()}>Buy</Button>
+            <Button data-cy="buy-button" onClick={() => handleChekout()}>
+              Buy
+            </Button>
           </DialogFooter>
         </DialogContent>
       </DialogContent>

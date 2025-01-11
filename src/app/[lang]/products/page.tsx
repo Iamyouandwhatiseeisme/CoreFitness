@@ -54,32 +54,38 @@ export default function Products(props: ProductsProps) {
         <div className="p-5 grid grid-cols-3 gap-7  ">
           {products.map((product) => {
             return (
-              <Link
+              <div
                 key={product.id}
-                href={`/products/${product.id}`}
-                data-cy={product.title}
                 className="items-center flex flex-col border-2 border-solid border-gray-50 rounded-xl w-80 h-auto overflow-hidden bg-neutral-400 dark:bg-neutral-200"
               >
-                <img
-                  className="object-scale-down w-6/12 h-3/6 m-2"
-                  src={product.img_url}
-                  alt={product.title}
-                ></img>
-                <div className="p-2 font-serif size text-xs m-1 ">
-                  <strong>{product.title}</strong>
-                </div>
-                <div className="p-2 font-serif size text-xs m-1 ">
-                  Price: {product.price}$
-                </div>
+                <Link
+                  key={product.id}
+                  href={`/products/${product.id}`}
+                  data-cy={product.title}
+                  className="items-center flex flex-col border-2 border-solid border-gray-50 rounded-xl w-80 h-auto overflow-hidden bg-neutral-400 dark:bg-neutral-200"
+                >
+                  <img
+                    className="object-scale-down w-6/12 h-3/6 m-2"
+                    src={product.img_url}
+                    alt={product.title}
+                  ></img>
+                  <div className="p-2 font-serif size text-xs m-1 ">
+                    <strong>{product.title}</strong>
+                  </div>
+                  <div className="p-2 font-serif size text-xs m-1 ">
+                    Price: {product.price}$
+                  </div>
+                </Link>
                 <div
                   className="cursor-pointer"
+                  data-cy={`add-to-cart-button-${product.title}`}
                   onClick={() =>
                     addItemToCart({ product: product, quantity: 1 })
                   }
                 >
                   Add To cart
                 </div>
-              </Link>
+              </div>
             );
           })}
         </div>
