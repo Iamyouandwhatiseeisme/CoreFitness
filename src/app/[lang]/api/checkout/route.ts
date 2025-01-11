@@ -8,7 +8,6 @@ export async function POST(request: NextRequest) {
     const { line_items, cart_items } = await request.json();
 
     try {
-      console.log(line_items, cart_items);
       const session: Stripe.Checkout.Session =
         await stripe.checkout.sessions.create({
           success_url:

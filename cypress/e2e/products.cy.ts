@@ -23,6 +23,6 @@ describe("Product Actions", () => {
       body: { sessionId: "mock-session-id" },
     }).as("createCheckoutSession");
     cy.get(`[data-cy='buy-button'`).click();
-    cy.wait(2000);
+    cy.wait("@createCheckoutSession");
   });
 });

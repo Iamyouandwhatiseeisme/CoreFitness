@@ -12,8 +12,7 @@ import { CartItem } from "../components/providers/CartProvider";
 
 export async function createCheckoutSessionForCart(cartItems: CartItem[]) {
   // try {
-  console.log("trying to fetch");
-
+  // console.log("trying to fetch");
   // const session: Stripe.Checkout.Session =
   //   await stripe.checkout.sessions.create({
   //     success_url:
@@ -35,7 +34,6 @@ export async function createCheckoutSessionForCart(cartItems: CartItem[]) {
   //       ),
   //     },
   //   });
-
   // return {
   //   client_secret: session.client_secret,
   //   url: session.url,
