@@ -44,7 +44,7 @@ export default function Products(props: ProductsProps) {
   }
 
   return (
-    <div className="w-full  min-h-wrapper pt-32 ">
+    <div className="w-full  min-h-wrapper pt-32 " data-cy="products-loaded">
       <div className="relative flex flex-col items-center">
         <div className="mt-5 flex flex-row items-center">
           <AddProductDialog retriggerFetch={setIsUpdating}></AddProductDialog>

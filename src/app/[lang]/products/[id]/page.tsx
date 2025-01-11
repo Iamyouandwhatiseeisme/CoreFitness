@@ -2,6 +2,7 @@ import NotFound from "../../notfound/NotFound";
 import { ReturnBackButton } from "../../notfound/NotFound";
 import fetchSingleProduct from "../../../fetcher/fetchSingleProduct";
 import { Product } from "../../../components/types";
+import { DeleteProductButton } from "src/app/components/DeleteProductButton/DeleteProductButton";
 
 export default async function ProductPage(
   params: Record<string, Record<string, string>>
@@ -9,7 +10,6 @@ export default async function ProductPage(
   const { id } = params.params;
 
   var product = (await fetchSingleProduct(id)) as Product | null;
-  console.log(product);
 
   if (!product) return <NotFound page="products" />;
   return (
@@ -22,23 +22,16 @@ export default async function ProductPage(
         src={product.img_url}
         alt="product-image"
       ></img>
-      {/* <p className="text-5xl p-7">
-        Tags:{" "}
-        {product..map((tag, index) => (
-          <span
-            className="bg-gray-400 rounded-xl p-2 dark:bg-gray-200  mr-2"
-            key={index}
-          >
-            #{tag}
-          </span>
-        ))}{" "}
-      </p> */}
+
       <div>
         <span className="border border-solid border-gray-500 rounded-lg p-2">
           Price: {product.price}$
         </span>{" "}
       </div>
-      <ReturnBackButton destination={"products"} />
+      <div className="flex flex-row items-center justify-center">
+        <ReturnBackButton destination={"products"} />
+        <DeleteProductButton id={id}></DeleteProductButton>
+      </div>
     </div>
   );
 }

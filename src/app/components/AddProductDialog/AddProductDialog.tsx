@@ -40,7 +40,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
     }
   }
   return (
-    <Dialog open={open}>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
           data-cy="add-product-button"
@@ -115,6 +115,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
 
           <DialogFooter className="flex flex-row items-center justify-center">
             <Button
+              data-cy="create-product-button"
               type="submit"
               className="rounded-2xl bg-slate-400 w-40 h-10"
             >
