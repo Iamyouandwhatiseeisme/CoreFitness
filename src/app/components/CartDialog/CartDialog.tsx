@@ -35,7 +35,9 @@ const CartDialog = () => {
         }),
       });
       const { url } = await response.json();
-      window.location.assign(url as string);
+      if (url !== undefined) {
+        window.location.assign(url as string);
+      }
     } catch (error) {}
   }
 
