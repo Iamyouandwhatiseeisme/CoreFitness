@@ -24,5 +24,20 @@ describe("Product Actions", () => {
     }).as("createCheckoutSession");
     cy.get(`[data-cy='buy-button'`).click();
     cy.wait("@createCheckoutSession");
+
+    cy.request({
+      method: "POST",
+      url: "/api/createOrder",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        total_price: 333,
+        stripe_purchase_id: "py_sSA313adsjfC",
+        products: [{ quantity: 1, product_id: 28 }],
+      }),
+    }).then((response) => {
+      expect(response.status).to.eq(200);
+    });
   });
 });
