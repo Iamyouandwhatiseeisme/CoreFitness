@@ -1,8 +1,8 @@
 describe("Product Actions", () => {
-  xit("Creates Product", () => {
+  it("Creates Product", () => {
     cy.createProduct("testProduct");
   });
-  xit("Deletes the product", () => {
+  it("Deletes the product", () => {
     cy.createProduct("testProduct1");
     cy.get("[data-cy='testProduct1'").click();
     cy.wait(1500);
@@ -24,6 +24,11 @@ describe("Product Actions", () => {
     }).as("createCheckoutSession");
     cy.get(`[data-cy='buy-button'`).click();
     cy.wait("@createCheckoutSession");
+  });
+
+  it("Creates Order, after cleans up database", () => {
+    cy.login("Karachka2@gmail.com", "Karachka2");
+    cy.wait(3000);
 
     cy.request({
       method: "POST",
@@ -38,14 +43,31 @@ describe("Product Actions", () => {
       }),
     }).then((response) => {
       expect(response.status).to.eq(200);
-      console.log("Response body:", response.body.data[0].id);
+      console.log("Response body:", response.body);
       const id = response.body?.data[0].id;
       cy.wrap(id).as("id");
       cy.wait(2000);
-      cy.get(`[data-cy='close-cart-dialog-button']`).click();
       cy.get(`[data-cy='orders-button'`).click();
       cy.wait(8000);
       cy.get(`[data-cy='${id}']`).should("exist");
+      cy.wait(2000);
+
+      cy.request({
+        method: "POST",
+        url: "/api/deleteOrder",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          order_id: id,
+        }),
+      });
+      cy.get(`[data-cy='products-page-button'`).click();
+      cy.wait(2000);
+      cy.get(`[data-cy='orders-button'`).click();
+
+      cy.get(`[data-cy='${id}']`).should("not.exist");
+      cy.wait(2000);
     });
   });
 });
