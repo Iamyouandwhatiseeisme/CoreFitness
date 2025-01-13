@@ -19,8 +19,6 @@ export async function POST(request: NextRequest) {
           },
         });
 
-      console.log(session.url);
-
       return NextResponse.json({
         client_secret: session.client_secret,
         url: session.url,

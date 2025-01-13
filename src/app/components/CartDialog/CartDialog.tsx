@@ -57,6 +57,7 @@ const CartDialog = () => {
             Your Cart
           </DialogTitle>
           <DialogClose
+            data-cy="close-cart-dialog-button"
             style={{
               position: "absolute",
               top: "16px",

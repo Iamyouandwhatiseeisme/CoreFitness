@@ -38,6 +38,14 @@ describe("Product Actions", () => {
       }),
     }).then((response) => {
       expect(response.status).to.eq(200);
+      console.log("Response body:", response.body.data[0].id);
+      const id = response.body?.data[0].id;
+      cy.wrap(id).as("id");
+      cy.wait(2000);
+      cy.get(`[data-cy='close-cart-dialog-button']`).click();
+      cy.get(`[data-cy='orders-button'`).click();
+      cy.wait(8000);
+      cy.get(`[data-cy='${id}']`).should("exist");
     });
   });
 });

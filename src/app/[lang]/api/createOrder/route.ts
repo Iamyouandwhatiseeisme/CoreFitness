@@ -11,12 +11,15 @@ export async function POST(request: NextRequest) {
       const { total_price, stripe_purchase_id, products } =
         await request.json();
 
-      const { data } = await supabase.from("orders").insert({
-        user_id: user?.id,
-        total_price: total_price,
-        stripe_purchase_id: stripe_purchase_id,
-        products: products,
-      });
+      const { data } = await supabase
+        .from("orders")
+        .insert({
+          user_id: user?.id,
+          total_price: total_price,
+          stripe_purchase_id: stripe_purchase_id,
+          products: products,
+        })
+        .select("id");
       return NextResponse.json({ data }, { status: 200 });
     }
   } catch (error) {

@@ -29,7 +29,7 @@ export default function Orders() {
         <div className="">
           {orders.map((order, index) => {
             return (
-              <div className="p-5">
+              <div className="p-5" data-cy={order.id}>
                 <OrderCard
                   key={order.id}
                   products={order.products}
