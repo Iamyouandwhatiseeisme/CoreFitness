@@ -37,7 +37,7 @@
 // }
 
 declare namespace Cypress {
-  interface Chainable {
+  export interface Chainable {
     /**
      * Custom command to select DOM element by data-cy attribute.
      * @example cy.dataCy('greeting')
@@ -47,6 +47,7 @@ declare namespace Cypress {
     createProduct(title: string): Chainable<Element>;
   }
 }
+
 Cypress.Commands.add("login", (email: string, password: string) => {
   cy.viewport(1536, 864);
   cy.visit("http://localhost:3000");
