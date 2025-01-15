@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import useDebounce from "../../hooks/useDebounce";
+import useDebounce from "src/app/hooks/useDebounce";
 
 interface SearchBarProps {
   searchItemType: string;
