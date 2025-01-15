@@ -36,7 +36,8 @@
     "**/*.ts",
     "**/*.tsx",
     "src/middleware.js",
-    "cypress/**/*.ts"
+    "cypress/**/*.ts",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
