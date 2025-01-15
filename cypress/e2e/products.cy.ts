@@ -64,8 +64,9 @@ describe("Product Actions", () => {
     cy.get("[data-cy='login-button']").click();
     cy.get("[data-cy='logout-button']").should("exist");
     cy.get("[data-cy='products-page-button']").click();
+    cy.wait(2000);
 
-    cy.get(`[data-cy='add-to-cart-button-${product}'`).click();
+    cy.get(`[data-cy='add-to-cart-button-testBuyProduct'`).click();
     cy.get(`[data-cy='open-cart-button'`).click();
     cy.get(`[data-cy='buy-button'`).should("exist");
 
