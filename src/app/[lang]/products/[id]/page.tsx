@@ -3,11 +3,15 @@ import { ReturnBackButton } from "../../notfound/NotFound";
 import fetchSingleProduct from "../../../fetcher/fetchSingleProduct";
 import { Product } from "../../../components/types";
 import { DeleteProductButton } from "src/app/components/DeleteProductButton/DeleteProductButton";
+interface ProductDetailsPageProps {
+  params: {
+    lang: string;
+    id: string;
+  };
+}
 
-export default async function ProductPage(
-  params: Record<string, Record<string, string>>
-) {
-  const { id } = params.params;
+export default async function ProductPage(props: ProductDetailsPageProps) {
+  const { id } = props.params;
 
   var product = (await fetchSingleProduct(id)) as Product | null;
 

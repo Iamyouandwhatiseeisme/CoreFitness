@@ -2,7 +2,6 @@ import CheckoutForm from "../../components/CheckoutForm/CheckoutForm";
 import { Plan } from "../../components/types";
 import { formatAmountForDisplay } from "../../utils/stripe/stripe-helpers";
 import * as config from "../../../config";
-import { createCheckoutSession } from "../../actions/stripe";
 
 export default function DonatePage(): JSX.Element {
   const plans: Plan[] = [

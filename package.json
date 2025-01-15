@@ -46,7 +46,6 @@
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "tough-cookie": "^5.0.0",
-    "vercel": "^39.3.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
