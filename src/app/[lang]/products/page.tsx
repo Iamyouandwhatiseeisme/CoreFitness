@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import Link from "next/link";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import fetchProducts from "../../fetcher/fetchProducts";
@@ -9,18 +9,14 @@ import AddProductDialog from "src/app/components/AddProductDialog/AddProductDial
 import { Toaster } from "sonner";
 import { useCart } from "src/app/components/providers/CartProvider";
 
-interface ProductsProps {
-  searchParams: Record<string, string | undefined>;
-}
-
-export default function Products(props: ProductsProps) {
+export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const { addItemToCart } = useCart();
 
   useEffect(() => {
     async function fetch() {
-      var productsArray = (await fetchProducts()) as Product[];
+      const productsArray = (await fetchProducts()) as Product[];
       setProducts(productsArray);
     }
 

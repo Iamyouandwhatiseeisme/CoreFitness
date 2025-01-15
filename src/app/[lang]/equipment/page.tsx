@@ -10,17 +10,17 @@ interface Equipment {
   title: string;
   description: string;
 }
-interface Muscles {
-  id: number;
-  img: {
-    img: string;
-  };
-  title: string;
-}
+// interface Muscles {
+//   id: number;
+//   img: {
+//     img: string;
+//   };
+//   title: string;
+// }
 
 export default function EquipmentPage() {
   const [equipment, setEquipment] = useState<Equipment[]>([]);
-  const [muscles, setMuscles] = useState<Muscles[]>([]);
+  // const [muscles, setMuscles] = useState<Muscles[]>([]);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   useEffect(() => {
@@ -28,10 +28,10 @@ export default function EquipmentPage() {
       .then((res) => res.json())
       .then((data) => setEquipment(data))
       .catch((error) => console.error(error));
-    fetch("/api/muscles")
-      .then((res) => res.json())
-      .then((data) => setMuscles(data))
-      .catch((error) => console.error(error));
+    // fetch("/api/muscles")
+    //   .then((res) => res.json())
+    //   .then((data) => setMuscles(data))
+    //   .catch((error) => console.error(error));
     setIsLoading(false);
   }, []);
 
@@ -47,7 +47,10 @@ export default function EquipmentPage() {
         <div className="flex flex-col gap-10 w-full m-10">
           {equipment.map((item) => {
             return (
-              <div className="w-full  h-120  bg-white flex flex-row items-start justify-between border border-gray-500 rounded-2xl">
+              <div
+                key={item.id}
+                className="w-full  h-120  bg-white flex flex-row items-start justify-between border border-gray-500 rounded-2xl"
+              >
                 <img
                   className="w-1/2 bg-white h-full rounded-tl-2xl rounded-bl-2xl rounded-br-3xl border border-gray-200 object-contain
                   "

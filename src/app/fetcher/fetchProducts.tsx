@@ -1,5 +1,4 @@
 import NotFound from "../[lang]/notfound/NotFound";
-import { Post, Product } from "../components/types";
 import { createClient } from "../utils/supabase/client";
 
 export default async function fetchProducts() {
