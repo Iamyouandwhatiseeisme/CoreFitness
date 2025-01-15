@@ -41,7 +41,7 @@ export default function EquipmentPage() {
     >
       {isLoading ? (
         <div className="flex flex-row items-center justify-center h-100vh">
-          {/* <GridLoader></GridLoader> */}
+          <GridLoader></GridLoader>
         </div>
       ) : (
         <div className="flex flex-col gap-10 w-full m-10">
@@ -52,7 +52,7 @@ export default function EquipmentPage() {
                   className="w-1/2 bg-white h-full rounded-tl-2xl rounded-bl-2xl rounded-br-3xl border border-gray-200 object-contain
                   "
                   src={item.img.img}
-                  alt={`${item.id}`}
+                  alt={`${item.id}1`}
                 ></img>
                 <div className="w-full  flex flex-col items-center mt-10 border-b-2 border-gray-200">
                   <h1 className="font-bold text-2xl underline  border-b-2 border-gray-200">
