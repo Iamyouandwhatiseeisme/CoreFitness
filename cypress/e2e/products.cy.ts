@@ -21,6 +21,12 @@ describe("Product Actions", () => {
     cy.get("[data-cy='create-product-button']").click();
     cy.wait(2000);
     cy.get("[data-cy='testProduct'").should("exist");
+    cy.wait(2000);
+
+    cy.get("[data-cy='testProduct1'").click();
+    cy.wait(1500);
+    cy.get("[data-cy='delete-button'").click();
+    cy.get("[data-cy='add-product-button'").should("exist");
   });
   it("Deletes the product", () => {
     cy.viewport(1536, 864);
