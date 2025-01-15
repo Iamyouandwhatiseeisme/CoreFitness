@@ -1,3 +1,5 @@
+export {};
+
 describe("Product Actions", () => {
   it("Creates Product", () => {
     cy.createProduct("testProduct");

@@ -1,3 +1,5 @@
+export {};
+
 describe("Auth", () => {
   it("Logs User In successfully", () => {
     cy.login("karachka2@gmail.com", "Karachka2");
