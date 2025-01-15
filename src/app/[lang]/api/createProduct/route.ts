@@ -19,12 +19,12 @@ export async function POST(request: NextRequest) {
       );
     }
     try {
-      var stripeProduct = await stripe.products.create({
+      const stripeProduct = await stripe.products.create({
         name: name,
       });
       if (stripeProduct) {
         try {
-          var stripePrice = await stripe.prices.create({
+          const stripePrice = await stripe.prices.create({
             product: stripeProduct.id,
             unit_amount: price,
             currency: "usd",
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
           if (stripePrice) {
             const fileName = `${Date.now()}-${file.name}`;
             try {
-              const { data, error } = await supabase.storage
+              const { data } = await supabase.storage
                 .from("product-images")
                 .upload(fileName, file, {
                   cacheControl: "3600",
@@ -57,33 +57,24 @@ export async function POST(request: NextRequest) {
                       img_url: publicUrl,
                       user_id: user?.id,
                     });
+                    if (error) {
+                      throw error;
+                    }
                   } catch (error) {
-                    return NextResponse.json(
-                      { error: "Failed to create product on supabase" },
-                      { status: 500 }
-                    );
+                    return NextResponse.json({ error }, { status: 500 });
                   }
                 }
               }
             } catch (error) {
-              return NextResponse.json(
-                { error: "Failed to upload image to storage" },
-                { status: 500 }
-              );
+              return NextResponse.json({ error: error }, { status: 500 });
             }
           }
         } catch (error) {
-          return NextResponse.json(
-            { error: "Failed to create stripePrice" },
-            { status: 500 }
-          );
+          return NextResponse.json({ error: error }, { status: 500 });
         }
       }
     } catch (error) {
-      return NextResponse.json(
-        { error: "Failed to create product" },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: error }, { status: 500 });
     }
 
     return NextResponse.json({}, { status: 200 });

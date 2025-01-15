@@ -21,6 +21,12 @@ describe("Product Actions", () => {
     cy.get("[data-cy='create-product-button']").click();
     cy.wait(2000);
     cy.get("[data-cy='testProduct'").should("exist");
+    cy.wait(2000);
+
+    cy.get("[data-cy='testProduct'").click();
+    cy.wait(1500);
+    cy.get("[data-cy='delete-button'").click();
+    cy.get("[data-cy='add-product-button'").should("exist");
   });
   it("Deletes the product", () => {
     cy.viewport(1536, 864);
@@ -30,6 +36,7 @@ describe("Product Actions", () => {
     cy.get("[data-cy='login-button']").click();
     cy.get("[data-cy='logout-button']").should("exist");
     cy.get("[data-cy='products-page-button']").click();
+    cy.wait(2000);
     cy.get("[data-cy='add-product-button']").should("exist");
     cy.get("[data-cy='products-loaded']").should("exist");
 
@@ -57,8 +64,9 @@ describe("Product Actions", () => {
     cy.get("[data-cy='login-button']").click();
     cy.get("[data-cy='logout-button']").should("exist");
     cy.get("[data-cy='products-page-button']").click();
+    cy.wait(2000);
 
-    cy.get(`[data-cy='add-to-cart-button-${product}'`).click();
+    cy.get(`[data-cy='add-to-cart-button-testBuyProduct'`).click();
     cy.get(`[data-cy='open-cart-button'`).click();
     cy.get(`[data-cy='buy-button'`).should("exist");
 

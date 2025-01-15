@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createAdminClient, createClient } from "src/app/utils/supabase/server";
+import { createAdminClient } from "src/app/utils/supabase/server";
 
 export async function GET() {
   const supabase = await createAdminClient();
@@ -9,15 +9,12 @@ export async function GET() {
 
   try {
     if (user) {
-      const { data, error } = await supabase.auth.admin.deleteUser(user.id);
+      const { data } = await supabase.auth.admin.deleteUser(user.id);
       if (data) {
         return NextResponse.json(data, { status: 200 });
       }
     }
   } catch (error) {
-    return NextResponse.json(
-      { error: "Failed to fetch products" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: error }, { status: 500 });
   }
 }

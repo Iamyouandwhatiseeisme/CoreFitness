@@ -46,7 +46,7 @@ export function OrderCard(props: OrderCardProps) {
       setIsLoading(false);
     }
     fetchOrders();
-  }, []);
+  }, [productsToFetch]);
 
   return (
     <div className=" bg-white h-auto rounded-xl border border-gray-300">

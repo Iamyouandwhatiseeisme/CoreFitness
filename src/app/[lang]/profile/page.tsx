@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { createClient } from "../../utils/supabase/client";
-
+import React from "react";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 
@@ -11,7 +11,7 @@ export default function Profile() {
   const supabase = createClient();
   useEffect(() => {
     async function fetchUser() {
-      var {
+      const {
         data: { user },
       } = await supabase.auth.getUser();
       setUser(user);
@@ -40,7 +40,7 @@ export default function Profile() {
             </div>
           </>
         ) : (
-          <div>"loading"</div>
+          <div>loading</div>
         )}
       </div>
     </div>

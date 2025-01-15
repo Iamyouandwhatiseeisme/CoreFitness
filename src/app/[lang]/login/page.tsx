@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { login, signup, signInWithGithub } from "./actions";
 import { useLocale } from "../../components/providers/LanguageContext";
 import LoginPageBoard from "../../components/LoginPageBoard/LoginPageBoard";
+import React from "react";
 
 export default function LogIn() {
   const { locale } = useLocale();
@@ -33,6 +34,9 @@ export default function LogIn() {
       alert(result.error);
     } else {
       setError(null);
+    }
+    if (error) {
+      alert(error);
     }
   }
   return (

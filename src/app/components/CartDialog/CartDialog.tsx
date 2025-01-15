@@ -10,7 +10,7 @@ import {
 import { Minus, Plus, X } from "lucide-react";
 import { CartItem, useCart } from "../providers/CartProvider";
 import { Button } from "@components/components/ui/button";
-import { createCheckoutSessionForCart } from "src/app/actions/stripe";
+import React from "react";
 
 const CartDialog = () => {
   const { cartItems, removeItemFromCart, clearCart, updateItemQuantity } =
@@ -38,7 +38,9 @@ const CartDialog = () => {
       if (url !== undefined) {
         window.location.assign(url as string);
       }
-    } catch (error) {}
+    } catch (error) {
+      alert(error);
+    }
   }
 
   return (
