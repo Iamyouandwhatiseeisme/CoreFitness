@@ -52,7 +52,7 @@ export default function EquipmentPage() {
                   className="w-1/2 bg-white h-full rounded-tl-2xl rounded-bl-2xl rounded-br-3xl border border-gray-200 object-contain
                   "
                   src={item.img.img}
-                  alt={`${item.id}`}
+                  alt={`${item.id}1`}
                 ></img>
                 <div className="w-full  flex flex-col items-center mt-10 border-b-2 border-gray-200">
                   <h1 className="font-bold text-2xl underline  border-b-2 border-gray-200">
