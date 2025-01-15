@@ -10,4 +10,11 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
+  {
+    files: ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
+
+    // rules: {
+    //   "react-hooks/exhaustive-deps": "off",
+    // },
+  },
 ];
