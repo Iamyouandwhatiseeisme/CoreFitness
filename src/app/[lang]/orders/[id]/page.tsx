@@ -1,24 +1,29 @@
 "use client";
 import { Product } from "../../../components/types";
 import { useEffect, useState } from "react";
+interface OrderPageProps {
+  params: {
+    lang: string;
+    id: string;
+  };
+}
 
-export default function OrdersPage(
-  params: Record<string, Record<string, string>>
-) {
+export default function OrdersPage(props: OrderPageProps) {
   const [orderDetails, setOrderDetails] = useState<Product[]>([]); // Use an array for order details
-  const { id } = params.params;
+  const { id } = props.params;
 
   useEffect(() => {
     async function fetchOrderDetails() {
       const response = await fetch("/api/orders/orderDetails", {
         method: "GET",
         headers: {
-          stripe_purchase_id: id,
+          order_id: id,
         },
       });
       if (response.ok) {
         const responseData: Product[] = await response.json();
         setOrderDetails(responseData);
+        console.log(responseData);
       }
     }
     fetchOrderDetails();

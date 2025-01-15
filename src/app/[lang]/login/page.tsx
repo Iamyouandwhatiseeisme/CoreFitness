@@ -4,7 +4,7 @@ import { login, signup, signInWithGithub } from "./actions";
 import { useLocale } from "../../components/providers/LanguageContext";
 import LoginPageBoard from "../../components/LoginPageBoard/LoginPageBoard";
 
-export const LogIn = () => {
+export default function LogIn() {
   const { locale } = useLocale();
   const [error, setError] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -105,6 +105,4 @@ export const LogIn = () => {
       </div>
     </div>
   );
-};
-
-export default LogIn;
+}

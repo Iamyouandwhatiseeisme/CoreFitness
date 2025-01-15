@@ -72,3 +72,4 @@
 //   cy.wait(2000);
 //   cy.get("[data-cy='testProduct'").should("exist");
 // });
+export {};
