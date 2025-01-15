@@ -6,6 +6,7 @@ import { cookies } from "next/headers";
 
 import { createClient } from "../../utils/supabase/server";
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
+import { getBaseUrl } from "src/app/actions/getBaseUrl";
 
 export async function login(formData: FormData, locale: string) {
   const supabase = await createClient();
@@ -29,6 +30,7 @@ export async function login(formData: FormData, locale: string) {
 export async function signup(formData: FormData, locale: string) {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
+  const baseUrl = getBaseUrl();
 
   const supabase = createServerActionClient({
     cookies,
@@ -37,7 +39,7 @@ export async function signup(formData: FormData, locale: string) {
   const { error } = await supabase.auth.signUp({
     email,
     password,
-    options: { emailRedirectTo: `http://localhost:3000/auth/callback` },
+    options: { emailRedirectTo: `${baseUrl}/auth/callback` },
   });
   if (error) {
     return { error: error.code };
@@ -47,11 +49,12 @@ export async function signup(formData: FormData, locale: string) {
 }
 export async function signInWithGithub() {
   const supabase = await createClient();
+  const baseUrl = getBaseUrl();
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "github",
     options: {
-      redirectTo: "http://localhost:3000/auth/callback",
+      redirectTo: `${baseUrl}/auth/callback`,
     },
   });
   if (error) {
