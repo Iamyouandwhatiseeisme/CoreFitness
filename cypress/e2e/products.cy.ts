@@ -2,10 +2,47 @@ export {};
 
 describe("Product Actions", () => {
   it("Creates Product", () => {
-    cy.createProduct("testProduct");
+    cy.viewport(1536, 864);
+    cy.visit("http://localhost:3000");
+    cy.get("[data-cy='email']").type("karachka22@gmail.com");
+    cy.get("[data-cy='password']").type("Karachka22");
+    cy.get("[data-cy='login-button']").click();
+    cy.get("[data-cy='logout-button']").should("exist");
+    cy.get("[data-cy='products-page-button']").click();
+    cy.get("[data-cy='add-product-button']").should("exist");
+    cy.get("[data-cy='products-loaded']").should("exist");
+
+    cy.get("[data-cy='add-product-button']").click();
+    cy.get("[data-cy='name-input-field']").type("testProduct");
+    cy.get("[data-cy='price-input-field']").type("33333");
+    cy.get("[data-cy='photo-browse-field']").selectFile(
+      "cypress/fixtures/CypressTest.png"
+    );
+    cy.get("[data-cy='create-product-button']").click();
+    cy.wait(2000);
+    cy.get("[data-cy='testProduct'").should("exist");
   });
   it("Deletes the product", () => {
-    cy.createProduct("testProduct1");
+    cy.viewport(1536, 864);
+    cy.visit("http://localhost:3000");
+    cy.get("[data-cy='email']").type("karachka22@gmail.com");
+    cy.get("[data-cy='password']").type("Karachka22");
+    cy.get("[data-cy='login-button']").click();
+    cy.get("[data-cy='logout-button']").should("exist");
+    cy.get("[data-cy='products-page-button']").click();
+    cy.get("[data-cy='add-product-button']").should("exist");
+    cy.get("[data-cy='products-loaded']").should("exist");
+
+    cy.get("[data-cy='add-product-button']").click();
+    cy.get("[data-cy='name-input-field']").type("testProduct1");
+    cy.get("[data-cy='price-input-field']").type("33333");
+    cy.get("[data-cy='photo-browse-field']").selectFile(
+      "cypress/fixtures/CypressTest.png"
+    );
+    cy.get("[data-cy='create-product-button']").click();
+    cy.wait(2000);
+    cy.get("[data-cy='testProduct1'").should("exist");
+
     cy.get("[data-cy='testProduct1'").click();
     cy.wait(1500);
     cy.get("[data-cy='delete-button'").click();
@@ -13,7 +50,12 @@ describe("Product Actions", () => {
   });
   it("Buys a Product", () => {
     const product = "testProduct";
-    cy.login("Karachka2@gmail.com", "Karachka2");
+    cy.viewport(1536, 864);
+    cy.visit("http://localhost:3000");
+    cy.get("[data-cy='email']").type("karachka22@gmail.com");
+    cy.get("[data-cy='password']").type("Karachka22");
+    cy.get("[data-cy='login-button']").click();
+    cy.get("[data-cy='logout-button']").should("exist");
     cy.get("[data-cy='products-page-button']").click();
 
     cy.get(`[data-cy='add-to-cart-button-${product}'`).click();
@@ -29,7 +71,12 @@ describe("Product Actions", () => {
   });
 
   it("Creates Order, after cleans up database", () => {
-    cy.login("Karachka2@gmail.com", "Karachka2");
+    cy.viewport(1536, 864);
+    cy.visit("http://localhost:3000");
+    cy.get("[data-cy='email']").type("karachka22@gmail.com");
+    cy.get("[data-cy='password']").type("Karachka22");
+    cy.get("[data-cy='login-button']").click();
+    cy.get("[data-cy='logout-button']").should("exist");
     cy.wait(3000);
 
     cy.request({
