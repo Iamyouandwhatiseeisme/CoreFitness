@@ -41,7 +41,7 @@ export default function EquipmentPage() {
     >
       {isLoading ? (
         <div className="flex flex-row items-center justify-center h-100vh">
-          {/* <GridLoader></GridLoader> */}
+          <GridLoader></GridLoader>
         </div>
       ) : (
         <div className="flex flex-col gap-10 w-full m-10">
