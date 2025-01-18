@@ -77,3 +77,8 @@ export interface SubscriptionInfo {
   currentPeriodStart: number;
   currentPeriodEnd: number;
 }
+export interface EditableInputProps {
+  value: string;
+  apiEndpoint: string;
+  updateButtonText: string;
+}

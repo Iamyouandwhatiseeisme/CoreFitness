@@ -6,6 +6,7 @@ import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import { SubscriptionInfo } from "src/app/components/types";
 import UploadImage from "src/app/components/UploadImage/UploadImage";
+import EditableInput from "src/app/components/EditableInput/EditableInput";
 
 export default function Profile() {
   const [user, setUser] = useState<User | null>();
@@ -47,12 +48,16 @@ export default function Profile() {
   }
 
   return (
-    <div className="min-h-wrapper ">
+    <div className="min-h-wrapper flex flex-row items-center justify-center ">
       {user ? (
-        <div className="pt-40 border-black w-150 h-150 bg-red-200 flex flex-row  justify-center items-start gap-20">
+        <div className=" mt-36 rounded-2xl border border-black w-150  h-150 bg-red-200 flex flex-row  justify-start items-start gap-20">
           <UploadImage></UploadImage>
-          <div className="flex flex-col items-center justify-center">
-            <div>{user.email}</div>
+          <div className="flex m-10 flex-col items-center justify-center w-96">
+            <EditableInput
+              value={user.email!}
+              apiEndpoint="/api/updateEmail"
+              updateButtonText="Update"
+            ></EditableInput>
             <div>{subscriptionInfo?.status}</div>
             <div>{subscriptionInfo?.currentPeriodEnd}</div>
             <div>{subscriptionInfo?.currentPeriodStart}</div>
