@@ -23,10 +23,10 @@ export default function EditableInput(props: EditableInputProps) {
   }
 
   return (
-    <div className="flex flex-row justify-start items-center gap-2">
-      <label>Email: </label>
+    <div className="flex flex-row justify-items-start items-center gap-5 ">
+      <label className="w-10">{props.label}</label>
       <input
-        className="rounded-2xl h-10 w-48 text-start pl-2"
+        className="rounded-2xl h-10 w- text-start w-48 pl-2"
         type="email"
         value={value}
         onSubmit={handleApiCall}
