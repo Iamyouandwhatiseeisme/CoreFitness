@@ -4,11 +4,12 @@ import Link from "next/link";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import fetchProducts from "../../fetcher/fetchProducts";
 import { useEffect, useState } from "react";
-import { Product } from "../../components/types";
+import { Product, SortOption } from "../../components/types";
 import AddProductDialog from "src/app/components/AddProductDialog/AddProductDialog";
 import { Toaster } from "sonner";
 import { useCart } from "src/app/components/providers/CartProvider";
 import { useLocale } from "src/app/components/providers/LanguageContext";
+import SortButton from "src/app/components/SortButton/SortButton";
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -56,6 +57,11 @@ export default function Products() {
             setProducts={setProducts}
             setIsUpdating={setIsUpdating}
           />
+
+          <SortButton
+            setItems={setProducts}
+            sortOptions={sortOptions}
+          ></SortButton>
           <Toaster />
         </div>
         <div className="fixed left-2 top-16 flex flex-col"></div>
@@ -102,3 +108,30 @@ export default function Products() {
     </div>
   );
 }
+
+const sortOptions: SortOption[] = [
+  {
+    label: "Price: Low to High",
+    value: "price",
+    option: "1",
+    order: "Ascending",
+  },
+  {
+    label: "Price: High to Low",
+    value: "price",
+    option: "2",
+    order: "Descending",
+  },
+  {
+    label: "Title: A-Z",
+    value: "title",
+    option: "3",
+    order: "Ascending",
+  },
+  {
+    label: "Title: Z-A",
+    value: "title",
+    option: "4",
+    order: "Descending",
+  },
+];

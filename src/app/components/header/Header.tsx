@@ -4,7 +4,7 @@ import Logo from "../../../../public/images/Header Logo.webp";
 import DropDown from "../DropDown/DropDown";
 import AuthenticationButton from "../logoutButton/LoggoutButton";
 import { useLocale } from "../providers/LanguageContext";
-
+import React from "react";
 import LocaleChange from "../LanguageChange/LanguageChange";
 import { User } from "@supabase/supabase-js";
 import { DictionaryChapter } from "../../[lang]/dictionaries";
