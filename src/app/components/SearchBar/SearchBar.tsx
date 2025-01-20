@@ -2,9 +2,13 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import useDebounce from "src/app/hooks/useDebounce";
+import React from "react";
+import { Product } from "../types";
 
 interface SearchBarProps {
   searchItemType: string;
+  setProducts: (products: Product[]) => void;
+  setIsUpdating: (isUpdating: boolean) => void;
 }
 
 export default function SearchBar(props: SearchBarProps) {
@@ -13,13 +17,26 @@ export default function SearchBar(props: SearchBarProps) {
   const debouncedValue = useDebounce(searchValue, 500);
   const router = useRouter();
   useEffect(() => {
-    if (debouncedValue) {
-      router.push(`?search=${debouncedValue}`);
+    async function fetchSearchedValue() {
+      if (debouncedValue) {
+        const response = await fetch("/api/search", {
+          headers: {
+            searchValue: debouncedValue,
+            searchTable: searchItemType,
+          },
+        });
+        const responseData = (await response.json()) as Product[];
+        props.setProducts(responseData);
+      }
+      if (debouncedValue === "") {
+        props.setIsUpdating(true);
+      }
     }
+    fetchSearchedValue();
   }, [debouncedValue, router]);
 
   return (
-    <div className="text-gray-200 border border-solid border-gray-400 rounded-xl p-3 dark:border-gray-200 bg-gray-800 ">
+    <div className="text-black border border-solid border-gray-400 rounded-xl p-3 dark:border-gray-200 bg-gray-800 ">
       Search:{"  "}
       <input
         className="rounded-xl placeholder:p-2"
@@ -27,10 +44,6 @@ export default function SearchBar(props: SearchBarProps) {
         value={searchValue}
         onChange={(e) => {
           setSearchValue(e.target.value);
-          if (e.target.value === "") {
-            if (searchItemType === "Search Posts") router.push("/posts");
-            if (searchItemType === "Search Products") router.push("/products");
-          }
         }}
         placeholder={searchItemType}
         title="search"
