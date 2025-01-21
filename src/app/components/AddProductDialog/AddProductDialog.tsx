@@ -23,6 +23,8 @@ export default function AddProductDialog(props: AddProductDialogProps) {
   const retriggerFetch = props.retriggerFetch;
   const [open, setOpen] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
   async function createProduct(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
@@ -39,9 +41,25 @@ export default function AddProductDialog(props: AddProductDialogProps) {
       setIsLoading(false);
     }
   }
+  const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
+    const input = e.target as HTMLInputElement;
+    const value = input.value;
+
+    const isLanguageValid = /^[\u10A0-\u10FF\s]*$/.test(value);
+
+    if (!isLanguageValid) {
+      setError("Only Georgian alphabet allowed");
+    } else if (!input.validity.valid) {
+      setError("");
+    } else {
+      setError(null);
+    }
+
+    input.value = value.replace(/[^\u10A0-\u10FF\s]/g, "");
+  };
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <div className=" border border-solid border-gray-400 rounded-xl p-3 dark:border-gray-200 bg-gray-800 ">
+      <div className="text-gray-200 border border-solid border-gray-400 rounded-xl p-3 dark:border-gray-200 bg-gray-800 ">
         <DialogTrigger asChild>
           <Button
             data-cy="add-product-button"
@@ -54,7 +72,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
         </DialogTrigger>
       </div>
 
-      <DialogContent className="sm:max-w-[580px] h-80 m-5 p-5 absolute top-0 right-96 bg-slate-200 rounded-2xl   ">
+      <DialogContent className="sm:max-w-[580px] h-120 m-5 p-5 absolute top-0 right-96 bg-slate-200 rounded-2xl   ">
         <DialogHeader className="flex flex-col items-start justify-start">
           <DialogTitle>Add Product</DialogTitle>
           <DialogClose
@@ -78,7 +96,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
           <div className="grid gap-4 py-4 pr-10">
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="name" className="text-right">
-                Name
+                Title
               </Label>
               <Input
                 id="name"
@@ -89,12 +107,72 @@ export default function AddProductDialog(props: AddProductDialogProps) {
               />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="name-georgian" className="text-right">
+                Title Georgian
+              </Label>
+              <Input
+                id="name-georgian"
+                name="name-georgian"
+                className="col-span-3"
+                onInput={handleInput}
+                data-cy="name-georgian-input-field"
+                required
+              />
+              {error && (
+                <p className="absolute text-xs text-red-500 bottom-2 left-3">
+                  {error}
+                </p>
+              )}
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="description" className="text-right">
+                Description
+              </Label>
+              <Input
+                id="description"
+                name="description"
+                className="col-span-3"
+                data-cy="description-input-field"
+                required
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="description-georgian" className="text-right">
+                Description Georgian
+              </Label>
+              <Input
+                id="description-georgian"
+                name="description-georgian"
+                className="col-span-3"
+                onInput={handleInput}
+                data-cy="description-georgian-input-field"
+                required
+              />
+              {error && (
+                <p className="absolute text-xs text-red-500 bottom-2 left-3">
+                  {error}
+                </p>
+              )}
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="price" className="text-right">
                 Price
               </Label>
               <Input
                 id="price"
                 name="price"
+                className="col-span-3"
+                data-cy="price-input-field"
+                required
+              />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="category" className="text-right">
+                Category
+              </Label>
+              <Input
+                id="category"
+                name="category"
                 className="col-span-3"
                 data-cy="price-input-field"
                 required

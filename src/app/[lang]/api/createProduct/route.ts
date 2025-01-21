@@ -6,6 +6,10 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
     const name = formData.get("name") as string;
+    const nameGeorgian = formData.get("name-georgian") as string;
+    const description = formData.get("description") as string;
+    const category = formData.get("category") as string;
+    const descriptionGeorgian = formData.get("description-georgian") as string;
     const price = Number(formData.get("price"));
     const file = formData.get("file") as File;
 
@@ -51,12 +55,17 @@ export async function POST(request: NextRequest) {
                     } = await supabase.auth.getUser();
                     const { error } = await supabase.from("products").insert({
                       title: name,
+                      title_ka: nameGeorgian,
+                      description: description,
+                      category: category,
+                      description_ka: descriptionGeorgian,
                       price: price,
                       stripe_product_id: stripeProduct.id,
                       stripe_price_id: stripePrice.id,
                       img_url: publicUrl,
                       user_id: user?.id,
                     });
+                    console.log(error);
                     if (error) {
                       throw error;
                     }
