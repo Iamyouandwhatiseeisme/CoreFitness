@@ -13,17 +13,21 @@ describe("Product Actions", () => {
     cy.get("[data-cy='products-loaded']").should("exist");
 
     cy.get("[data-cy='add-product-button']").click();
-    cy.get("[data-cy='name-input-field']").type("testProduct");
+    cy.get("[data-cy='name-input-field']").type("TestProduct");
+    cy.get("[data-cy='name-georgian-input-field']").type("ტესტის");
     cy.get("[data-cy='price-input-field']").type("33333");
+    cy.get("[data-cy='description-input-field']").type("description for test");
+    cy.get("[data-cy='description-georgian-input-field']").type("სატესტო");
+    cy.get("[data-cy='category-input-field']").type("Test");
     cy.get("[data-cy='photo-browse-field']").selectFile(
       "cypress/fixtures/CypressTest.png"
     );
     cy.get("[data-cy='create-product-button']").click();
     cy.wait(2000);
-    cy.get("[data-cy='testProduct'").should("exist");
+    cy.get("[data-cy='TestProduct'").should("exist");
     cy.wait(2000);
 
-    cy.get("[data-cy='testProduct'").click();
+    cy.get("[data-cy='TestProduct'").click();
     cy.wait(1500);
     cy.get("[data-cy='delete-button'").click();
     cy.get("[data-cy='add-product-button'").should("exist");
@@ -41,6 +45,7 @@ describe("Product Actions", () => {
     cy.get("[data-cy='products-loaded']").should("exist");
 
     cy.get("[data-cy='add-product-button']").click();
+    cy.get("[data-cy='name-input-field']").type("testProduct1");
     cy.get("[data-cy='name-georgian-input-field']").type("ტესტის");
     cy.get("[data-cy='price-input-field']").type("33333");
     cy.get("[data-cy='description-input-field']").type("description for test");
