@@ -41,8 +41,11 @@ describe("Product Actions", () => {
     cy.get("[data-cy='products-loaded']").should("exist");
 
     cy.get("[data-cy='add-product-button']").click();
-    cy.get("[data-cy='name-input-field']").type("testProduct1");
+    cy.get("[data-cy='name-georgian-input-field']").type("ტესტის");
     cy.get("[data-cy='price-input-field']").type("33333");
+    cy.get("[data-cy='description-input-field']").type("description for test");
+    cy.get("[data-cy='description-georgian-input-field']").type("სატესტო");
+    cy.get("[data-cy='category-input-field']").type("Test");
     cy.get("[data-cy='photo-browse-field']").selectFile(
       "cypress/fixtures/CypressTest.png"
     );

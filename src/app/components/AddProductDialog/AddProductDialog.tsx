@@ -174,7 +174,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
                 id="category"
                 name="category"
                 className="col-span-3"
-                data-cy="price-input-field"
+                data-cy="category-input-field"
                 required
               />
             </div>
