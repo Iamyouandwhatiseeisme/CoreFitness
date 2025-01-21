@@ -54,6 +54,7 @@ export interface Product {
   stripe_price_id: string;
   stripe_product_id: string;
   img_url: string;
+  title_ka: string;
 }
 export interface Order {
   id: number;

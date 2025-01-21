@@ -8,11 +8,13 @@ import { Product } from "../../components/types";
 import AddProductDialog from "src/app/components/AddProductDialog/AddProductDialog";
 import { Toaster } from "sonner";
 import { useCart } from "src/app/components/providers/CartProvider";
+import { useLocale } from "src/app/components/providers/LanguageContext";
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const { addItemToCart } = useCart();
+  const { locale } = useLocale();
 
   useEffect(() => {
     async function fetch() {
@@ -57,8 +59,9 @@ export default function Products() {
           <Toaster />
         </div>
         <div className="fixed left-2 top-16 flex flex-col"></div>
-        <div className="p-5 grid grid-cols-3 gap-7  ">
+        <div className="p-5 grid grid-cols-3 gap-7">
           {products.map((product) => {
+            const title = locale === "ka" ? product.title_ka : product.title;
             return (
               <div
                 key={product.id}
@@ -76,7 +79,7 @@ export default function Products() {
                     alt={product.title}
                   ></img>
                   <div className="p-2 font-serif size text-xs m-1 ">
-                    <strong>{product.title}</strong>
+                    <strong>{title}</strong>
                   </div>
                   <div className="p-2 font-serif size text-xs m-1 ">
                     Price: {product.price}$
