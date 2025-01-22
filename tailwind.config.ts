@@ -1,4 +1,3 @@
-import React from "react";
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
@@ -109,7 +108,7 @@ module.exports = {
         "header-hover-transition": "background-color 0.5s",
       },
       minHeight: {
-        wrapper: "calc(100vh - 110px)",
+        wrapper: "calc(100vh - 50px)",
       },
       maxHeight: {
         "40vh": "40vh",
