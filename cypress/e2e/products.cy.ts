@@ -28,7 +28,7 @@ describe("Product Actions", () => {
     cy.get("[data-cy='TestProduct'").should("exist");
     cy.wait(2000);
 
-    cy.get("[data-cy='TestProduct'").click();
+    cy.get("[data-cy='TestProduct']").click();
     cy.wait(1500);
     cy.get("[data-cy='delete-button'").click();
     cy.get("[data-cy='add-product-button'").should("exist");
