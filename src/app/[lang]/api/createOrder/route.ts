@@ -21,13 +21,9 @@ export async function POST(request: NextRequest) {
         })
         .select("id");
 
-      console.log(data);
       return NextResponse.json({ data }, { status: 200 });
     }
   } catch (error) {
-    return NextResponse.json(
-      { error: "Failed to process request" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: error }, { status: 500 });
   }
 }

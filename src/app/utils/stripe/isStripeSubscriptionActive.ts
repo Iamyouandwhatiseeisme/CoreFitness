@@ -3,7 +3,6 @@ import Stripe from "stripe";
 
 export async function isStripeSubscriptionActive(email: string) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
-  console.log(stripe);
 
   try {
     const customers = await stripe.customers.list({

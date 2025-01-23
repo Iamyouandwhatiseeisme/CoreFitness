@@ -65,7 +65,6 @@ export async function POST(request: NextRequest) {
                       img_url: publicUrl,
                       user_id: user?.id,
                     });
-                    console.log(error);
                     if (error) {
                       throw error;
                     }

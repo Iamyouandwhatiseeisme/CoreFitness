@@ -16,7 +16,6 @@ export default function UploadImage() {
       } = await supabase.auth.getUser();
       if (user !== null) {
         const photoUrl = user.user_metadata.profile_photo;
-        console.log(photoUrl);
         if (photoUrl !== null) {
           setImagePreview(photoUrl);
         }
@@ -43,7 +42,6 @@ export default function UploadImage() {
           cacheControl: "3600",
           upsert: false,
         });
-      console.log(data, error);
       if (error) {
         console.error("Error uploading file:", error.message);
         return;
@@ -55,7 +53,6 @@ export default function UploadImage() {
       const { error: metadataError } = await supabase.auth.updateUser({
         data: { profile_photo: publicUrlData.publicUrl },
       });
-      console.log(metadataError, publicUrlData);
       if (metadataError) {
         console.error("Error updating user metadata:", metadataError.message);
         return;

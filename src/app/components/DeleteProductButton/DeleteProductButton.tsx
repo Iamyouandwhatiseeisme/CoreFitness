@@ -1,5 +1,5 @@
 "use client";
-
+import React from "react";
 import { useRouter } from "next/navigation";
 
 export function DeleteProductButton(props: { id: string }) {
@@ -12,7 +12,6 @@ export function DeleteProductButton(props: { id: string }) {
       },
     });
     if (response) {
-      console.log(response);
       if (response.status === 200) {
         router.push("/products");
       }
