@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { Product } from "../../../components/types";
 import { useEffect, useState } from "react";
 interface OrderPageProps {
@@ -23,7 +24,6 @@ export default function OrdersPage(props: OrderPageProps) {
       if (response.ok) {
         const responseData: Product[] = await response.json();
         setOrderDetails(responseData);
-        console.log(responseData);
       }
     }
     fetchOrderDetails();

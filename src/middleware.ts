@@ -3,10 +3,8 @@ import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import { NextRequest } from "next/server";
 import { updateSession } from "./app/utils/supabase/middleware";
-import {
-  isStripeSubscriptionActive,
-  SubscriptionStatus,
-} from "./app/utils/stripe/isStripeSubscriptionActive";
+import { isStripeSubscriptionActive } from "./app/utils/stripe/isStripeSubscriptionActive";
+import { SubscriptionStatus } from "./app/components/types";
 
 const locales = ["en-US", "ka"];
 

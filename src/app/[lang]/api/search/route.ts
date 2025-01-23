@@ -12,7 +12,6 @@ export async function GET(request: NextRequest) {
         .from(searchTable)
         .select("*")
         .ilike("title", `%${searchValue}%`);
-      console.log(data);
       return NextResponse.json(data, { status: 200 });
     }
     return NextResponse.json([], { status: 400 });

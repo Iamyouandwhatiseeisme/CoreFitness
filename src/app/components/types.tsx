@@ -5,6 +5,10 @@ export interface UserInfo {
   activity: string;
   weight: string | number;
 }
+export enum SubscriptionStatus {
+  Active = "active",
+  Inactive = "inactive",
+}
 export interface DailyDiet {
   Protein: number;
   Fat: number;
@@ -67,4 +71,9 @@ export interface Order {
 export interface OrderProducts {
   product_id: number;
   quantity: number;
+}
+export interface SubscriptionInfo {
+  status: SubscriptionStatus;
+  currentPeriodStart: number;
+  currentPeriodEnd: number;
 }
