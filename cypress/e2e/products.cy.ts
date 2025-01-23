@@ -9,6 +9,7 @@ describe("Product Actions", () => {
     cy.get("[data-cy='login-button']").click();
     cy.get("[data-cy='logout-button']").should("exist");
     cy.get("[data-cy='products-page-button']").click();
+    cy.wait(4000);
     cy.get("[data-cy='add-product-button']").should("exist");
     cy.get("[data-cy='products-loaded']").should("exist");
 
@@ -22,6 +23,7 @@ describe("Product Actions", () => {
     cy.get("[data-cy='photo-browse-field']").selectFile(
       "cypress/fixtures/CypressTest.png"
     );
+    cy.wait(4000);
     cy.get("[data-cy='create-product-button']").click();
     cy.wait(2000);
     cy.get("[data-cy='TestProduct'").should("exist");
