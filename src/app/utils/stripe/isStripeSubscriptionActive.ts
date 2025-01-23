@@ -1,10 +1,9 @@
+import { SubscriptionStatus } from "src/app/components/types";
 import Stripe from "stripe";
-export enum SubscriptionStatus {
-  Active = "active",
-  Inactive = "inactive",
-}
+
 export async function isStripeSubscriptionActive(email: string) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+  console.log(stripe);
 
   try {
     const customers = await stripe.customers.list({

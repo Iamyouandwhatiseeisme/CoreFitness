@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { SubscriptionInfo, SubscriptionStatus } from "src/app/components/types";
 import Stripe from "stripe";
 
 export async function GET(request: NextRequest) {
@@ -19,18 +20,19 @@ export async function GET(request: NextRequest) {
         limit: 1,
       });
       if (subscriptions.data.length > 0) {
-        const subscription = await stripe.subscriptions.cancel(
-          subscriptions.data[0].id
-        );
-        if (subscription.status === "canceled") {
-          return NextResponse.json(subscription, { status: 200 });
-        }
+        const subscriptionInfo: SubscriptionInfo = {
+          status:
+            subscriptions.data[0].status === "active"
+              ? SubscriptionStatus.Active
+              : SubscriptionStatus.Inactive,
+          currentPeriodStart: subscriptions.data[0].current_period_start,
+          currentPeriodEnd: subscriptions.data[0].current_period_end,
+        };
+        return NextResponse.json(subscriptionInfo, { status: 200 });
       }
+      return NextResponse.json(SubscriptionStatus.Inactive, { status: 400 });
     } catch (error) {
-      return NextResponse.json(
-        { error: "Failed to cancel subscription" },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: error }, { status: 500 });
     }
   }
 }

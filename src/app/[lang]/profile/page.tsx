@@ -4,9 +4,13 @@ import { createClient } from "../../utils/supabase/client";
 import React from "react";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
+import { SubscriptionInfo } from "src/app/components/types";
 
 export default function Profile() {
   const [user, setUser] = useState<User | null>();
+  const [subscriptionInfo, setSubscriptionInfo] = useState<
+    SubscriptionInfo | undefined
+  >();
   const router = useRouter();
   const supabase = createClient();
   useEffect(() => {
@@ -15,8 +19,27 @@ export default function Profile() {
         data: { user },
       } = await supabase.auth.getUser();
       setUser(user);
+      try {
+        if (user?.email) {
+          const response = await fetch("/api/subscription", {
+            headers: {
+              email: user?.email,
+            },
+          });
+          if (response.status === 200) {
+            const subscriptionData =
+              (await response.json()) as SubscriptionInfo;
+            console.log(subscriptionData);
+            setSubscriptionInfo(subscriptionData);
+          } else {
+            setSubscriptionInfo(undefined);
+          }
+        }
+      } catch (error) {}
     }
-    fetchUser();
+    if (!user) {
+      fetchUser();
+    }
   }, []);
   async function handleUserDeletion() {
     const response = await fetch("/api/deleteUser");
