@@ -23,7 +23,6 @@ describe("Product Actions", () => {
     cy.get("[data-cy='photo-browse-field']").selectFile(
       "cypress/fixtures/CypressTest.png"
     );
-    cy.wait(4000);
     cy.get("[data-cy='create-product-button']").click();
     cy.wait(2000);
     cy.get("[data-cy='TestProduct'").should("exist");
