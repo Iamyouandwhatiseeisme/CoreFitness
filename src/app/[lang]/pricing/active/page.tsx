@@ -20,7 +20,7 @@ export default function ActivePage() {
   }, []);
   async function handleCancel() {
     if (user?.email) {
-      const response = await fetch("/api/subscription/", {
+      const response = await fetch("/api/subscriptionCancel/", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
