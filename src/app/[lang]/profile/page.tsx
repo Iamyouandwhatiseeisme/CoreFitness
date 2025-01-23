@@ -5,6 +5,7 @@ import React from "react";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import { SubscriptionInfo } from "src/app/components/types";
+import UploadImage from "src/app/components/UploadImage/UploadImage";
 
 export default function Profile() {
   const [user, setUser] = useState<User | null>();
@@ -19,23 +20,21 @@ export default function Profile() {
         data: { user },
       } = await supabase.auth.getUser();
       setUser(user);
-      try {
-        if (user?.email) {
-          const response = await fetch("/api/subscription", {
-            headers: {
-              email: user?.email,
-            },
-          });
-          if (response.status === 200) {
-            const subscriptionData =
-              (await response.json()) as SubscriptionInfo;
-            console.log(subscriptionData);
-            setSubscriptionInfo(subscriptionData);
-          } else {
-            setSubscriptionInfo(undefined);
-          }
+
+      if (user?.email) {
+        const response = await fetch("/api/subscription", {
+          headers: {
+            email: user?.email,
+          },
+        });
+        if (response.status === 200) {
+          const subscriptionData = (await response.json()) as SubscriptionInfo;
+          console.log(subscriptionData);
+          setSubscriptionInfo(subscriptionData);
+        } else {
+          setSubscriptionInfo(undefined);
         }
-      } catch (error) {}
+      }
     }
     if (!user) {
       fetchUser();
@@ -49,23 +48,27 @@ export default function Profile() {
   }
 
   return (
-    <div className="min-h-wrapper">
-      <div className="pt-40">
-        {user ? (
-          <>
+    <div className="min-h-wrapper ">
+      {user ? (
+        <div className="pt-40 border-black w-150 h-150 bg-red-200 flex flex-row  justify-center items-start gap-20">
+          <UploadImage></UploadImage>
+          <div className="flex flex-col items-center justify-center">
             <div>{user.email}</div>
+            <div>{subscriptionInfo?.status}</div>
+            <div>{subscriptionInfo?.currentPeriodEnd}</div>
+            <div>{subscriptionInfo?.currentPeriodStart}</div>
             <div
               onClick={() => handleUserDeletion()}
               className=" cursor-pointer w-40 h-10 border rounded-2xl bg-black text-white flex flex-row items-center justify-center"
               data-cy="delete-user-button"
             >
               Delete User
-            </div>
-          </>
-        ) : (
-          <div>loading</div>
-        )}
-      </div>
+            </div>{" "}
+          </div>
+        </div>
+      ) : (
+        <div>loading</div>
+      )}
     </div>
   );
 }
