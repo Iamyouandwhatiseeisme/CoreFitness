@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import React from "react";
 import { useEffect, useState } from "react";
 import { OrderCard } from "src/app/components/OrderCard/OrderCard";
 import { Order } from "src/app/components/types";
@@ -25,12 +26,13 @@ export default function Orders() {
       {isLoading ? (
         <div>Orders are loading</div>
       ) : orders.length === 0 ? (
-        <div className="pt-10">You haven't made any orders yet</div>
+        <div className="pt-10">You haven&apos;t made any orders yet</div>
       ) : (
         <div className="">
-          {orders.map((order, index) => {
+          {orders.map((order) => {
             return (
               <Link
+                key={order.id}
                 className="p-5"
                 data-cy={order.id}
                 href={`/orders/${order.id}`}

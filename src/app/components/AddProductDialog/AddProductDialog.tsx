@@ -41,16 +41,18 @@ export default function AddProductDialog(props: AddProductDialogProps) {
   }
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger asChild>
-        <Button
-          data-cy="add-product-button"
-          onClick={() => setOpen(true)}
-          variant="outline"
-          className="border w-40 rounded shadow-lg bg-slate-400 hover:bg-slate-300"
-        >
-          Add Product
-        </Button>
-      </DialogTrigger>
+      <div className=" border border-solid border-gray-400 rounded-xl p-3 dark:border-gray-200 bg-gray-800 ">
+        <DialogTrigger asChild>
+          <Button
+            data-cy="add-product-button"
+            onClick={() => setOpen(true)}
+            variant="outline"
+            className="border w-40 rounded shadow-lg bg-slate-400 hover:bg-slate-300"
+          >
+            Add Product
+          </Button>
+        </DialogTrigger>
+      </div>
 
       <DialogContent className="sm:max-w-[580px] h-80 m-5 p-5 absolute top-0 right-96 bg-slate-200 rounded-2xl   ">
         <DialogHeader className="flex flex-col items-start justify-start">

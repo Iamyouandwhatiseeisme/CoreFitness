@@ -28,7 +28,11 @@ export default function Products() {
       <div className="">
         <div className="flex flex-col items-center pt-40">
           <div className="mt-5 flex flex-row items-center">
-            <SearchBar searchItemType="Search Products" />
+            <SearchBar
+              searchItemType="products"
+              setProducts={setProducts}
+              setIsUpdating={setIsUpdating}
+            />
           </div>
           <h2 className="text-black dark:text-gray-200 font-sans font-bold text-2xl">
             Could not find anything...
@@ -42,8 +46,13 @@ export default function Products() {
   return (
     <div className="w-full  min-h-wrapper pt-32 " data-cy="products-loaded">
       <div className="relative flex flex-col items-center">
-        <div className="mt-5 flex flex-row items-center">
+        <div className=" h-24  bg-slate-600 w-full flex flex-row items-center justify-center gap-2">
           <AddProductDialog retriggerFetch={setIsUpdating}></AddProductDialog>
+          <SearchBar
+            searchItemType="products"
+            setProducts={setProducts}
+            setIsUpdating={setIsUpdating}
+          />
           <Toaster />
         </div>
         <div className="fixed left-2 top-16 flex flex-col"></div>
