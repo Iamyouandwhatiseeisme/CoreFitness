@@ -16,6 +16,7 @@ export default function Products() {
 
   useEffect(() => {
     async function fetch() {
+      setIsUpdating(false);
       const productsArray = (await fetchProducts()) as Product[];
       setProducts(productsArray);
     }
