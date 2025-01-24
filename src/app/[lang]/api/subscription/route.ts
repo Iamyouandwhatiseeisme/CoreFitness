@@ -19,6 +19,7 @@ export async function GET(request: NextRequest) {
         status: "active",
         limit: 1,
       });
+
       if (subscriptions.data.length > 0) {
         const subscriptionInfo: SubscriptionInfo = {
           status:

@@ -63,7 +63,7 @@ export default function UploadImage() {
   return (
     <div
       onClick={handleImageClick}
-      className="w-40 h-40 cursor-pointer bg-white border-gray-200 rounded-2xl flex flex-row items-center justify-center"
+      className="w-96 h-96 m-10  cursor-pointer bg-white border-gray-200 rounded-2xl flex flex-row justify-center"
     >
       <img
         src={imagePreview || StockImage.src}
