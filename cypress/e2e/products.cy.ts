@@ -66,7 +66,6 @@ describe("Product Actions", () => {
     cy.get("[data-cy='add-product-button'").should("exist");
   });
   it("Buys a Product", () => {
-    const product = "testProduct";
     cy.viewport(1536, 864);
     cy.visit("http://localhost:3000");
     cy.get("[data-cy='email']").type("karachka22@gmail.com");
