@@ -10,10 +10,15 @@ import { Toaster } from "sonner";
 import { useCart } from "src/app/components/providers/CartProvider";
 import { useLocale } from "src/app/components/providers/LanguageContext";
 import SortButton from "src/app/components/SortButton/SortButton";
+import { createClient } from "src/app/utils/supabase/client";
+import SideFilterPanel from "src/app/components/SideFilterPanel/SideFilterPanel";
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
+  const [selectedCategories, setSelectedCategories] = useState<Set<string>>(
+    new Set()
+  );
   const { addItemToCart } = useCart();
   const { locale } = useLocale();
 
@@ -49,6 +54,11 @@ export default function Products() {
 
   return (
     <div className="w-full  min-h-wrapper pt-32 " data-cy="products-loaded">
+      <SideFilterPanel
+        retriggerFetch={setIsUpdating}
+        setItems={setProducts}
+        setSelectedCategories={setSelectedCategories}
+      ></SideFilterPanel>
       <div className="relative flex flex-col items-center">
         <div className=" h-24  bg-slate-600 w-full flex flex-row items-center justify-center gap-2">
           <AddProductDialog retriggerFetch={setIsUpdating}></AddProductDialog>
@@ -59,50 +69,52 @@ export default function Products() {
           />
 
           <SortButton
+            selectedCategories={selectedCategories}
             setItems={setProducts}
             sortOptions={sortOptions}
           ></SortButton>
           <Toaster />
         </div>
-        <div className="fixed left-2 top-16 flex flex-col"></div>
-        <div className="p-5 grid grid-cols-3 gap-7">
-          {products.map((product) => {
-            const title = locale === "ka" ? product.title_ka : product.title;
-            return (
-              <div
-                key={product.id}
-                className="items-center flex flex-col border-2 border-solid border-gray-50 rounded-xl w-80 h-auto overflow-hidden bg-neutral-400 dark:bg-neutral-200"
-              >
-                <Link
+        <div className=" flex flex-row">
+          <div className="p-5 ml-44 grid grid-cols-3 gap-7">
+            {products.map((product) => {
+              const title = locale === "ka" ? product.title_ka : product.title;
+              return (
+                <div
                   key={product.id}
-                  href={`/products/${product.id}`}
-                  data-cy={product.title}
                   className="items-center flex flex-col border-2 border-solid border-gray-50 rounded-xl w-80 h-auto overflow-hidden bg-neutral-400 dark:bg-neutral-200"
                 >
-                  <img
-                    className="object-scale-down w-6/12 h-3/6 m-2"
-                    src={product.img_url}
-                    alt={product.title}
-                  ></img>
-                  <div className="p-2 font-serif size text-xs m-1 ">
-                    <strong>{title}</strong>
+                  <Link
+                    key={product.id}
+                    href={`/products/${product.id}`}
+                    data-cy={product.title}
+                    className="items-center flex flex-col border-2 border-solid border-gray-50 rounded-xl w-80 h-auto overflow-hidden bg-neutral-400 dark:bg-neutral-200"
+                  >
+                    <img
+                      className="object-scale-down w-6/12 h-3/6 m-2"
+                      src={product.img_url}
+                      alt={product.title}
+                    ></img>
+                    <div className="p-2 font-serif size text-xs m-1 ">
+                      <strong>{title}</strong>
+                    </div>
+                    <div className="p-2 font-serif size text-xs m-1 ">
+                      Price: {product.price}$
+                    </div>
+                  </Link>
+                  <div
+                    className="cursor-pointer"
+                    data-cy={`add-to-cart-button-${product.title}`}
+                    onClick={() =>
+                      addItemToCart({ product: product, quantity: 1 })
+                    }
+                  >
+                    Add To cart
                   </div>
-                  <div className="p-2 font-serif size text-xs m-1 ">
-                    Price: {product.price}$
-                  </div>
-                </Link>
-                <div
-                  className="cursor-pointer"
-                  data-cy={`add-to-cart-button-${product.title}`}
-                  onClick={() =>
-                    addItemToCart({ product: product, quantity: 1 })
-                  }
-                >
-                  Add To cart
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>

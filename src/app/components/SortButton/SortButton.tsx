@@ -3,6 +3,7 @@ import { Product, SortOption } from "../types";
 export interface SortButtonProps {
   setItems: (products: Product[]) => void;
   sortOptions: SortOption[];
+  selectedCategories: Set<string>;
 }
 export default function SortButton(props: SortButtonProps) {
   const sortOptions = props.sortOptions;
@@ -13,16 +14,13 @@ export default function SortButton(props: SortButtonProps) {
   async function handleSort(optionValue: number) {
     const sortOption = sortOptions[optionValue - 1];
     setSortBy(sortOption);
-    console.log(
-      sortOption.order === "Ascending" ? "true" : "false",
-      sortOption.option
-    );
 
     const response = await fetch("/api/filter", {
       headers: {
         tableName: "products",
         columnName: sortOption.value,
         orderBy: sortOption.order === "Ascending" ? "true" : "false",
+        selectedCategory: JSON.stringify(Array.from(props.selectedCategories)),
       },
     });
     if (response.ok) {

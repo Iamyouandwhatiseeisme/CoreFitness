@@ -6,11 +6,28 @@ export async function GET(request: NextRequest) {
   const tableName = request.headers.get("tableName");
   const columnName = request.headers.get("columnName");
   const orderBy = request.headers.get("orderBy");
+  const selectedCategoryHeader = request.headers.get("selectedCategory");
+  let selectedCategories = [];
+  if (selectedCategoryHeader) {
+    selectedCategories = JSON.parse(selectedCategoryHeader);
+  }
 
   try {
-    if (tableName && columnName && orderBy) {
+    if (tableName && columnName && orderBy && selectedCategories) {
       const isAscending = orderBy === "true" ? true : false;
-      console.log(isAscending, orderBy);
+      if (selectedCategories.length !== 0) {
+        const { data, error } = await supabase
+          .from(tableName)
+          .select("*")
+          .in("category", selectedCategories)
+          .order(columnName, { ascending: isAscending });
+        if (data) {
+          return NextResponse.json({ data: data, status: 200 });
+        }
+        if (error) {
+          throw error;
+        }
+      }
       const { data, error } = await supabase
         .from(tableName)
         .select("*")
