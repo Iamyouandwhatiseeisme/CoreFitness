@@ -1,10 +1,8 @@
-# Getting Started with Next JS
 
-This project was Created with [Next JS](https://github.com/vercel/next.js/).
 
 # Project Name
 
-A brief description of your Next.js application, its purpose, and any key features.
+CoreFitness is a project designed for a better fitness experience. To ease implementing your workout routine in your life
 
 ## Table of Contents
 
