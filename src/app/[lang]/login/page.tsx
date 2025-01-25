@@ -4,6 +4,7 @@ import { login, signup, signInWithGithub } from "./actions";
 import { useLocale } from "../../components/providers/LanguageContext";
 import LoginPageBoard from "../../components/LoginPageBoard/LoginPageBoard";
 import React from "react";
+import Link from "next/link";
 
 export default function LogIn() {
   const { locale } = useLocale();
@@ -75,6 +76,15 @@ export default function LogIn() {
                   required
                 />
               </div>
+              <div className="underline  text-end">
+                <Link
+                  href={`/login/passwordRecovery`}
+                  className="cursor-pointer"
+                >
+                  Forgot password
+                </Link>
+              </div>
+
               <button
                 data-cy="login-button"
                 name="login"
