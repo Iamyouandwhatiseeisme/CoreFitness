@@ -22,17 +22,28 @@ function getLocale(request: NextRequest): string {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const locale = getLocale(request);
+  console.log(pathname);
 
   const sessionResponse = await updateSession(request);
   const userHeader = sessionResponse.headers.get("user");
   const user = userHeader ? JSON.parse(userHeader) : null;
+  const publicPaths = [
+    `/${locale}/login`,
+    `/${locale}/login/passwordRecovery`,
+    `/${locale}/api/passwordRecovery`,
+    `/login`,
+    `/login/passwordRecovery`,
+    `/api/passwordRecovery`,
+  ];
+
   if (
     pathname.startsWith(`/auth/callback`) ||
     pathname.startsWith("/auth/auth-code-error")
   ) {
     return NextResponse.next();
   }
-  if (!user && pathname !== `/${locale}/login`) {
+  if (!user && !publicPaths.includes(pathname)) {
+    console.log("not included", !publicPaths.includes(pathname), pathname);
     const url = request.nextUrl.clone();
     url.pathname = `/${locale}/login`;
     return NextResponse.redirect(url);
@@ -70,6 +81,7 @@ export async function middleware(request: NextRequest) {
   );
 
   if (pathnameHasLocale) return NextResponse.next();
+  console.log(request.nextUrl.pathname, "new path after");
 
   request.nextUrl.pathname = `/${locale}${pathname}`;
 
