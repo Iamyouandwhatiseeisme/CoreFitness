@@ -46,6 +46,9 @@ export default function LogIn() {
       setError(result.error);
       alert(result.error);
     } else {
+      if (actionType === "login") {
+        toast("Successfully logged in!");
+      }
       toast("Successfully registered user!");
       setError(null);
     }
@@ -97,7 +100,7 @@ export default function LogIn() {
                 <div className="flex flex-row w-full justify-between">
                   <input
                     className="text-black    rounded-lg border-solid border border-gray-200 w-full p-2 "
-                    data-cy="confirm-passowrd"
+                    data-cy="confirm-password"
                     type="password"
                     id="password"
                     name="confirm-password"
