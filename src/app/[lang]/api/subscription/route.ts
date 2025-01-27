@@ -19,6 +19,7 @@ export async function GET(request: NextRequest) {
         status: "active",
         limit: 1,
       });
+      console.log(subscriptions);
 
       if (subscriptions.data.length > 0) {
         const subscriptionInfo: SubscriptionInfo = {
@@ -30,8 +31,16 @@ export async function GET(request: NextRequest) {
           currentPeriodEnd: subscriptions.data[0].current_period_end,
         };
         return NextResponse.json(subscriptionInfo, { status: 200 });
+      } else {
+        console.log("throw subscription error");
+        const inactiveSubscription: SubscriptionInfo = {
+          status: SubscriptionStatus.Inactive,
+          currentPeriodStart: 0,
+          currentPeriodEnd: 0,
+        };
+
+        return NextResponse.json({ inactiveSubscription }, { status: 200 });
       }
-      return NextResponse.json(SubscriptionStatus.Inactive, { status: 400 });
     } catch (error) {
       return NextResponse.json({ error: error }, { status: 500 });
     }
