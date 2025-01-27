@@ -15,7 +15,6 @@ export default function EditableInput(props: EditableInputProps) {
     });
     if (response.ok) {
       const responseData = await response.json();
-      console.log(responseData);
       if (responseData.updateType === "email") {
         alert(`Verification email sent to ${value}`);
       }

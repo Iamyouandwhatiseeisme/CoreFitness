@@ -22,7 +22,6 @@ function getLocale(request: NextRequest): string {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const locale = getLocale(request);
-  console.log(pathname);
 
   const sessionResponse = await updateSession(request);
   const userHeader = sessionResponse.headers.get("user");
@@ -43,7 +42,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
   if (!user && !publicPaths.includes(pathname)) {
-    console.log("not included", !publicPaths.includes(pathname), pathname);
     const url = request.nextUrl.clone();
     url.pathname = `/${locale}/login`;
     return NextResponse.redirect(url);
@@ -81,7 +79,6 @@ export async function middleware(request: NextRequest) {
   );
 
   if (pathnameHasLocale) return NextResponse.next();
-  console.log(request.nextUrl.pathname, "new path after");
 
   request.nextUrl.pathname = `/${locale}${pathname}`;
 

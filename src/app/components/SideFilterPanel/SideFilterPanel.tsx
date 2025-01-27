@@ -30,7 +30,6 @@ export default function SideFilterPanel(props: SideFilterPanelPorps) {
   }, []);
   useEffect(() => {
     async function fetchProducts() {
-      console.log(1);
       props.setSelectedCategories(selectedCategories);
       const response = await fetch("/api/filter/category", {
         headers: {

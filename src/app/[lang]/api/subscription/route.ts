@@ -19,7 +19,6 @@ export async function GET(request: NextRequest) {
         status: "active",
         limit: 1,
       });
-      console.log(subscriptions);
 
       if (subscriptions.data.length > 0) {
         const subscriptionInfo: SubscriptionInfo = {
@@ -32,7 +31,6 @@ export async function GET(request: NextRequest) {
         };
         return NextResponse.json(subscriptionInfo, { status: 200 });
       } else {
-        console.log("throw subscription error");
         const inactiveSubscription: SubscriptionInfo = {
           status: SubscriptionStatus.Inactive,
           currentPeriodStart: 0,

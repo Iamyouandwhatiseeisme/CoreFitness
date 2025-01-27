@@ -16,11 +16,9 @@ export async function GET(request: NextRequest) {
             password: newPassword,
           });
           if (data) {
-            console.log(data, "data");
             return NextResponse.json({ code: "Password Updated", status: 200 });
           }
           if (error) {
-            console.log(error, "error");
             return NextResponse.json({ code: error.code, status: 400 });
           }
         }

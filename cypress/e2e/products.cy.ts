@@ -109,7 +109,6 @@ describe("Product Actions", () => {
       }),
     }).then((response) => {
       expect(response.status).to.eq(200);
-      console.log("Response body:", response.body);
       const id = response.body?.data[0].id;
       cy.wrap(id).as("id");
       cy.wait(2000);

@@ -10,7 +10,6 @@ export async function POST(request: NextRequest) {
       const { data, error: metadataError } = await supabase.auth.updateUser({
         data: { name: name },
       });
-      console.log(data, metadataError, "nameChange");
       if (data) {
         return NextResponse.json(
           { data: data, updateType: "name" },

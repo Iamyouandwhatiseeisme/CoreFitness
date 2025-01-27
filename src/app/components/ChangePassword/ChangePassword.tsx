@@ -46,9 +46,7 @@ export default function ChangePassword() {
   }, [debouncedValue]);
   async function handlePasswordChange(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log("dasda");
     if (newPassword === confirmPassword && newPassword.length > 5) {
-      console.log("1321");
       const response = await fetch("/api/changePassword", {
         headers: {
           newPassword: confirmPassword,

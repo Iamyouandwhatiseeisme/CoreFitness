@@ -35,16 +35,12 @@ export default function Profile() {
             email: user?.email,
           },
         });
-        console.log(response);
         const subscriptionInfo = (await response.json()) as SubscriptionInfo;
-        console.log(subscriptionInfo);
         const photoUrl = user.user_metadata.profile_photo;
         const userInfoResponse = await fetch("/api/userInfo");
         if (response) {
           const userInfoResponseData = await userInfoResponse.json();
-          console.log(userInfoResponseData);
           const userDisplayName = userInfoResponseData.displayName;
-          console.log(userDisplayName);
           const userProfile: UserProfile = {
             user: user,
             subscription_info: subscriptionInfo,
