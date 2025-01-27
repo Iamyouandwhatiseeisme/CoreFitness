@@ -4,8 +4,8 @@ describe("Product Actions", () => {
   it("Creates Product", () => {
     cy.viewport(1536, 864);
     cy.visit("http://localhost:3000");
-    cy.get("[data-cy='email']").type("karachka22@gmail.com");
-    cy.get("[data-cy='password']").type("Karachka22");
+    cy.get("[data-cy='email']").type("karachka2@gmail.com");
+    cy.get("[data-cy='password']").type("Karachka2");
     cy.get("[data-cy='login-button']").click();
     cy.get("[data-cy='logout-button']").should("exist");
     cy.get("[data-cy='products-page-button']").click();
@@ -37,8 +37,8 @@ describe("Product Actions", () => {
   it("Deletes the product", () => {
     cy.viewport(1536, 864);
     cy.visit("http://localhost:3000");
-    cy.get("[data-cy='email']").type("karachka22@gmail.com");
-    cy.get("[data-cy='password']").type("Karachka22");
+    cy.get("[data-cy='email']").type("karachka2@gmail.com");
+    cy.get("[data-cy='password']").type("Karachka2");
     cy.get("[data-cy='login-button']").click();
     cy.get("[data-cy='logout-button']").should("exist");
     cy.get("[data-cy='products-page-button']").click();
@@ -68,8 +68,8 @@ describe("Product Actions", () => {
   it("Buys a Product", () => {
     cy.viewport(1536, 864);
     cy.visit("http://localhost:3000");
-    cy.get("[data-cy='email']").type("karachka22@gmail.com");
-    cy.get("[data-cy='password']").type("Karachka22");
+    cy.get("[data-cy='email']").type("karachka2@gmail.com");
+    cy.get("[data-cy='password']").type("Karachka2");
     cy.get("[data-cy='login-button']").click();
     cy.get("[data-cy='logout-button']").should("exist");
     cy.get("[data-cy='products-page-button']").click();
@@ -90,8 +90,8 @@ describe("Product Actions", () => {
   it("Creates Order, after cleans up database", () => {
     cy.viewport(1536, 864);
     cy.visit("http://localhost:3000");
-    cy.get("[data-cy='email']").type("karachka22@gmail.com");
-    cy.get("[data-cy='password']").type("Karachka22");
+    cy.get("[data-cy='email']").type("karachka2@gmail.com");
+    cy.get("[data-cy='password']").type("Karachka2");
     cy.get("[data-cy='login-button']").click();
     cy.get("[data-cy='logout-button']").should("exist");
     cy.wait(3000);

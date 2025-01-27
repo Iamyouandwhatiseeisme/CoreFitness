@@ -52,7 +52,10 @@ export default function Profile() {
   async function handleUserDeletion() {
     const response = await fetch("/api/deleteUser");
     if (response.ok) {
-      router.push("/login");
+      const responseData = await response.json();
+      if (responseData.user === null) {
+        router.push("/login");
+      }
     }
   }
   if (loading) {
