@@ -4,12 +4,11 @@ import { createClient } from "../../utils/supabase/client";
 import React from "react";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
-import { SubscriptionInfo, SubscriptionStatus } from "src/app/components/types";
+import { SubscriptionInfo } from "src/app/components/types";
 import UploadImage from "src/app/components/UploadImage/UploadImage";
 import EditableInput from "src/app/components/EditableInput/EditableInput";
 import AccountSubscriptionInfo from "src/app/components/ProfileSubscriptionInfo/AccountSubscriptionInfo";
 import ChangePassword from "src/app/components/ChangePassword/ChangePassword";
-import { userInfo } from "os";
 
 interface UserProfile {
   user: User;

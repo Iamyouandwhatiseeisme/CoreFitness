@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { EditableInputProps } from "../types";
+import { toast, Toaster } from "sonner";
 export default function EditableInput(props: EditableInputProps) {
   const [value, setValue] = useState<string>(props.value);
   const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,13 +17,17 @@ export default function EditableInput(props: EditableInputProps) {
     if (response.ok) {
       const responseData = await response.json();
       if (responseData.updateType === "email") {
-        alert(`Verification email sent to ${value}`);
+        toast(`Verification email sent to ${value}`);
+      }
+      if (responseData.updateType === "name") {
+        toast(`Updated name`);
       }
     }
   }
 
   return (
     <div className="flex flex-row justify-items-start items-center gap-5 ">
+      <Toaster></Toaster>
       <label className="w-10">{props.label}</label>
       <input
         className="rounded-2xl h-10 w- text-start w-48 pl-2"
