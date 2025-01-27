@@ -1,28 +1,16 @@
 import StockImage from "public/images/upload_image.jpg";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { createClient } from "src/app/utils/supabase/client";
-export default function UploadImage() {
+interface UploadImageProps {
+  image: string | null;
+}
+export default function UploadImage(props: UploadImageProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(props.image);
 
   const handleImageClick = () => {
     fileInputRef.current?.click();
   };
-  useEffect(() => {
-    async function fetchImage() {
-      const supabase = await createClient();
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (user !== null) {
-        const photoUrl = user.user_metadata.profile_photo;
-        if (photoUrl !== null) {
-          setImagePreview(photoUrl);
-        }
-      }
-    }
-    fetchImage();
-  }, []);
   async function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
     if (file) {

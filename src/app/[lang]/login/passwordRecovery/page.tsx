@@ -18,7 +18,6 @@ export default function PasswordRecovery() {
 
   async function handleEmailSend(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(1);
     setEmail("");
     const response = await fetch(`/api/passwordRecovery`, {
       headers: {
@@ -27,7 +26,6 @@ export default function PasswordRecovery() {
     });
     if (response) {
       const responseData = await response.json();
-      console.log(responseData);
       if (responseData.status === 200) {
         toast("Please check your email address");
       } else {
@@ -41,21 +39,18 @@ export default function PasswordRecovery() {
 
       const confirmationUrl = urlParams.get("confirmation_url");
       if (confirmationUrl) {
-        console.log(confirmationUrl);
         const confirmationParams = new URLSearchParams(
           new URL(decodeURIComponent(confirmationUrl)).search
         );
         const token = confirmationParams.get("token");
         const email = confirmationParams.get("email");
         const type = confirmationParams.get("type") as EmailOtpType;
-        console.log(token, email, type);
         if (token && email && type) {
           const { data, error } = await supabase.auth.verifyOtp({
             token: token,
             email: email,
             type: type,
           });
-          console.log(data, error, token, email, type);
           if (data) {
             setIsverified(true);
           }

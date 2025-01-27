@@ -4,15 +4,21 @@ import { createClient } from "../../utils/supabase/client";
 import React from "react";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
-import { SubscriptionInfo, SubscriptionStatus } from "src/app/components/types";
+import { SubscriptionInfo } from "src/app/components/types";
 import UploadImage from "src/app/components/UploadImage/UploadImage";
 import EditableInput from "src/app/components/EditableInput/EditableInput";
 import AccountSubscriptionInfo from "src/app/components/ProfileSubscriptionInfo/AccountSubscriptionInfo";
 import ChangePassword from "src/app/components/ChangePassword/ChangePassword";
 
+interface UserProfile {
+  user: User;
+  display_name: string | null;
+  image: string | null;
+  subscription_info: SubscriptionInfo;
+}
+
 export default function Profile() {
-  const [user, setUser] = useState<User | null>();
-  const [subscriptionInfo, setSubscriptionInfo] = useState<SubscriptionInfo>();
+  const [user, setUser] = useState<UserProfile | null>();
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const supabase = createClient();
@@ -21,7 +27,6 @@ export default function Profile() {
       const {
         data: { user },
       } = await supabase.auth.getUser();
-      setUser(user);
 
       if (user?.email) {
         const response = await fetch("/api/subscription", {
@@ -29,20 +34,32 @@ export default function Profile() {
             email: user?.email,
           },
         });
-        console.log(response, "subscription");
-        if (response.status === 200) {
-          const subscriptionData = (await response.json()) as SubscriptionInfo;
-          console.log(subscriptionData);
-          setSubscriptionInfo(subscriptionData);
-        } else {
-          const currentUserSubscriptionInfo: SubscriptionInfo = {
-            status: SubscriptionStatus.Inactive,
-            currentPeriodStart: 0,
-            currentPeriodEnd: 0,
+        const subscriptionInfo = (await response.json()) as SubscriptionInfo;
+        const photoUrl = user.user_metadata.profile_photo;
+        const userInfoResponse = await fetch("/api/userInfo");
+        if (response) {
+          const userInfoResponseData = await userInfoResponse.json();
+          const userDisplayName = userInfoResponseData.displayName;
+          const userProfile: UserProfile = {
+            user: user,
+            subscription_info: subscriptionInfo,
+            image: photoUrl,
+            display_name: userDisplayName,
           };
-          setSubscriptionInfo(currentUserSubscriptionInfo);
-          setLoading(false);
+          setUser(userProfile);
         }
+        if (!response) {
+          const userProfile: UserProfile = {
+            user: user,
+            subscription_info: subscriptionInfo,
+            image: photoUrl,
+            display_name: null,
+          };
+
+          setUser(userProfile);
+        }
+
+        setLoading(false);
       }
     }
     if (!user) {
@@ -72,23 +89,31 @@ export default function Profile() {
         <div className=" mt-36 rounded-2xl border border-black w-150  h-150 bg-gray-200 flex flex-row  justify-start items-start gap-20">
           <div className="w-96">
             {" "}
-            <UploadImage></UploadImage>
+            <UploadImage image={user.image}></UploadImage>
           </div>
           <ul className="flex m-10 p-10 flex-col items-start justify-start gap-5 border border-black rounded-2xl h-3/4 w-full">
             <li className="w-full">
               <EditableInput
                 label="Email:"
-                value={user.email!}
-                apiEndpoint="/api/updateEmail"
+                value={user.user.email!}
+                apiEndpoint="/api/updateUser/updateEmail"
+                updateButtonText="Update"
+              />
+            </li>
+            <li className="w-full">
+              <EditableInput
+                label="Name:"
+                value={!user.display_name ? "Display name" : user.display_name}
+                apiEndpoint="/api/updateUser/updateName"
                 updateButtonText="Update"
               />
             </li>
             <hr className="border-gray-300 w-full" />
-            {subscriptionInfo && (
+            {user.subscription_info && (
               <>
                 <li className="w-full">
                   <AccountSubscriptionInfo
-                    subscriptionInfo={subscriptionInfo}
+                    subscriptionInfo={user.subscription_info}
                   />
                 </li>
                 <hr className="border-gray-300 w-full" />

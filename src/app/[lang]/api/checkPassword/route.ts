@@ -25,7 +25,6 @@ export async function GET(request: NextRequest) {
             });
           }
           if (!signInError) {
-            console.log("no error");
             return NextResponse.json({ code: signInData, status: 200 });
           }
         }
