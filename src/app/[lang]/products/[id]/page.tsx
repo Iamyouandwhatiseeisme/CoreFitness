@@ -1,8 +1,12 @@
+import React from "react";
 import NotFound from "../../notfound/NotFound";
 import { ReturnBackButton } from "../../notfound/NotFound";
 import fetchSingleProduct from "../../../fetcher/fetchSingleProduct";
 import { Product } from "../../../components/types";
 import { DeleteProductButton } from "src/app/components/DeleteProductButton/DeleteProductButton";
+import { createClient } from "src/app/utils/supabase/server";
+import EditProductDIalog from "src/app/components/EditProductDialog/EditProductDialog";
+import { Toaster } from "sonner";
 interface ProductDetailsPageProps {
   params: {
     lang: string;
@@ -12,8 +16,15 @@ interface ProductDetailsPageProps {
 
 export default async function ProductPage(props: ProductDetailsPageProps) {
   const { id } = props.params;
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  var product = (await fetchSingleProduct(id)) as Product | null;
+  const product = (await fetchSingleProduct(id)) as Product | null;
+  if (user) {
+    console.log(user.id, product?.user_id, "id");
+  }
 
   if (!product) return <NotFound page="products" />;
   return (
@@ -34,7 +45,16 @@ export default async function ProductPage(props: ProductDetailsPageProps) {
       </div>
       <div className="flex flex-row items-center justify-center">
         <ReturnBackButton destination={"products"} />
-        <DeleteProductButton id={id}></DeleteProductButton>
+        <Toaster></Toaster>
+        {user && user.id === product.user_id ? (
+          <div className="flex flex-row gap-2">
+            {" "}
+            <DeleteProductButton id={id}></DeleteProductButton>
+            <EditProductDIalog product={product}></EditProductDIalog>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
