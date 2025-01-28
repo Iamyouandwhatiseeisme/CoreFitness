@@ -35,6 +35,7 @@ describe("Product Actions", () => {
   });
   it("Deletes the product", () => {
     cy.viewport(1536, 864);
+    const name = `testProduct${Date.now()}`;
     cy.visit("http://localhost:3000");
     cy.get("[data-cy='email']").type("karachka2@gmail.com");
     cy.get("[data-cy='password']").type("Karachka2");
@@ -46,7 +47,7 @@ describe("Product Actions", () => {
     cy.get("[data-cy='products-loaded']").should("exist");
 
     cy.get("[data-cy='add-product-button']").click();
-    cy.get("[data-cy='name-input-field']").type("testProduct1");
+    cy.get("[data-cy='name-input-field']").type(`${name}`);
     cy.get("[data-cy='name-georgian-input-field']").type("ტესტის");
     cy.get("[data-cy='price-input-field']").type("33333");
     cy.get("[data-cy='description-input-field']").type("description for test");
@@ -57,11 +58,13 @@ describe("Product Actions", () => {
     );
     cy.get("[data-cy='create-product-button']").click();
     cy.wait(2000);
-    cy.get("[data-cy='testProduct1'").should("exist");
+    cy.get(`[data-cy=${name}]`).should("exist");
 
-    cy.get("[data-cy='testProduct1'").click();
+    cy.get(`[data-cy=${name}]`).click();
+
     cy.wait(4000);
     cy.get("[data-cy='delete-button'").click();
+    cy.wait(4000);
     cy.get("[data-cy='add-product-button'").should("exist");
   });
   it("Buys a Product", () => {
