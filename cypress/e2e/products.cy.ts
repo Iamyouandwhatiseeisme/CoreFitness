@@ -8,6 +8,7 @@ describe("Product Actions", () => {
     cy.get("[data-cy='password']").type("Karachka2");
     cy.get("[data-cy='login-button']").click();
     cy.get("[data-cy='logout-button']").should("exist");
+    cy.wait(2000);
     cy.get("[data-cy='products-page-button']").click();
     cy.wait(4000);
     cy.get("[data-cy='add-product-button']").should("exist");
@@ -129,10 +130,12 @@ describe("Product Actions", () => {
           order_id: id,
         }),
       });
-      cy.get(`[data-cy='products-page-button'`).click();
-      cy.wait(2000);
+      cy.visit("http://localhost:3000");
+
+      cy.wait(4000);
       cy.get(`[data-cy='orders-button'`).click();
 
+      cy.wait(4000);
       cy.get(`[data-cy='${id}']`).should("not.exist");
       cy.wait(2000);
     });
