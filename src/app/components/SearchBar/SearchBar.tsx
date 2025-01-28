@@ -21,7 +21,7 @@ export default function SearchBar(props: SearchBarProps) {
       if (debouncedValue) {
         const response = await fetch("/api/search", {
           headers: {
-            searchValue: debouncedValue,
+            searchValue: encodeURIComponent(debouncedValue),
             searchTable: searchItemType,
           },
         });
