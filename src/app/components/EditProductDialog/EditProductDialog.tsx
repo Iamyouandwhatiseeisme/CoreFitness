@@ -231,7 +231,7 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
               type="submit"
               className="rounded-2xl bg-slate-400 w-40 h-10"
             >
-              Create
+              Update
             </Button>
           </DialogFooter>
         </form>

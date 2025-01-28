@@ -10,7 +10,8 @@ interface OrderPageProps {
 }
 
 export default function OrdersPage(props: OrderPageProps) {
-  const [orderDetails, setOrderDetails] = useState<Product[]>([]); // Use an array for order details
+  const [orderDetails, setOrderDetails] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const { id } = props.params;
 
   useEffect(() => {
@@ -24,6 +25,7 @@ export default function OrdersPage(props: OrderPageProps) {
       if (response.ok) {
         const responseData: Product[] = await response.json();
         setOrderDetails(responseData);
+        setIsLoading(false);
       }
     }
     fetchOrderDetails();
@@ -31,7 +33,9 @@ export default function OrdersPage(props: OrderPageProps) {
 
   return (
     <div className="gap-4 flex pt-44 flex-col items-center justify-center min-h-wrapper">
-      {orderDetails.length > 0 ? (
+      {isLoading === true ? (
+        <div>Products are loading</div>
+      ) : orderDetails.length > 0 ? (
         orderDetails.map((product, index) => {
           const formattedDate = new Date(product.created_at).toLocaleDateString(
             "en-CA"
@@ -57,7 +61,7 @@ export default function OrdersPage(props: OrderPageProps) {
           );
         })
       ) : (
-        <div>No products found for this order.</div> // Display a message if no products are found
+        <div>No products found for this order.</div>
       )}
     </div>
   );
