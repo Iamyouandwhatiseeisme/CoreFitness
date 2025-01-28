@@ -76,7 +76,7 @@ const Header = (props: HeaderProps) => {
             <Link href={`/${locale}/equipment`}>
               <li className={listItemStyle}>{props.dict.Equipment}</li>
             </Link>
-            <Link href={`/${locale}/blog`}>
+            <Link href={`/${locale}/blogs`}>
               <li className={listItemStyle}>{props.dict.Blog}</li>
             </Link>
             <Link href={`/${locale}/orders`} data-cy="orders-button">
