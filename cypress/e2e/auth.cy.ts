@@ -42,7 +42,7 @@ describe("Auth", () => {
     cy.wait(3000);
 
     cy.get("[data-cy='profile-button']").click();
-    cy.wait(8000);
+    cy.wait(10000);
     cy.get("[data-cy='delete-user-button']").click();
     cy.visit("http://localhost:3000");
     cy.wait(4000);
