@@ -10,7 +10,6 @@ import { Toaster } from "sonner";
 import { useCart } from "src/app/components/providers/CartProvider";
 import { useLocale } from "src/app/components/providers/LanguageContext";
 import SortButton from "src/app/components/SortButton/SortButton";
-import { createClient } from "src/app/utils/supabase/client";
 import SideFilterPanel from "src/app/components/SideFilterPanel/SideFilterPanel";
 
 export default function Products() {

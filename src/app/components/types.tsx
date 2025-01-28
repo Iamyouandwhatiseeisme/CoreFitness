@@ -68,8 +68,8 @@ export interface Blog {
   created_at: string;
   user_id: string;
   title: string;
-  content: string;
-  content_ka: string;
+  description: string;
+  description_ka: string;
   category: string;
   title_ka: string;
 }

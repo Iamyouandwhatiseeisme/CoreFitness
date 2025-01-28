@@ -1,12 +1,13 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-// import SearchBar from "../../components/SearchBar/SearchBar";
+import SearchBar from "../../components/SearchBar/SearchBar";
 import { useEffect, useState } from "react";
 import { Blog, SortOption } from "../../components/types";
 // import AddBlogDialog from "src/app/components/AddBlogDialog/AddBlogDialog";
 import { Toaster } from "sonner";
 import { useLocale } from "src/app/components/providers/LanguageContext";
+import SearchBlogs from "src/app/components/SearchBar/SearchBlogs";
 // import SortButton from "src/app/components/SortButton/SortButton";
 // import SideFilterPanel from "src/app/components/SideFilterPanel/SideFilterPanel";
 
@@ -36,11 +37,11 @@ export default function Blogs() {
       <div className="">
         <div className="flex flex-col items-center pt-40">
           <div className="mt-5 flex flex-row items-center">
-            {/* <SearchBar
+            <SearchBlogs
               searchItemType="blogs"
               setBlogs={setBlogs}
               setIsUpdating={setIsUpdating}
-            /> */}
+            />
           </div>
           <h2 className="text-black dark:text-gray-200 font-sans font-bold text-2xl">
             Could not find anything...
@@ -54,13 +55,7 @@ export default function Blogs() {
     return (
       <div className="">
         <div className="flex flex-col items-center pt-40">
-          <div className="mt-5 flex flex-row items-center">
-            {/* <SearchBar
-              searchItemType="blogs"
-              setBlogs={setBlogs}
-              setIsUpdating={setIsUpdating}
-            /> */}
-          </div>
+          <div className="mt-5 flex flex-row items-center"></div>
           <h2 className="text-black dark:text-gray-200 font-sans font-bold text-2xl">
             Blogs are loading...
           </h2>
@@ -80,11 +75,11 @@ export default function Blogs() {
       <div className="relative flex flex-col items-center">
         <div className=" h-24  bg-slate-600 w-full flex flex-row items-center justify-center gap-2">
           {/* <AddBlogDialog retriggerFetch={setIsUpdating}></AddBlogDialog> */}
-          {/* <SearchBar
+          <SearchBlogs
             searchItemType="blogs"
             setBlogs={setBlogs}
             setIsUpdating={setIsUpdating}
-          /> */}
+          />
 
           {/* <SortButton
             selectedCategories={selectedCategories}
