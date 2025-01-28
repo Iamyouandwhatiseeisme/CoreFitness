@@ -8,10 +8,17 @@ export async function GET(request: NextRequest) {
 
   try {
     if (searchTable && searchValue) {
-      const { data } = await supabase
+      const encodedSearchValue = decodeURIComponent(searchValue);
+      console.log(encodedSearchValue);
+
+      console.log(searchTable, searchValue);
+      const { data, error } = await supabase
         .from(searchTable)
         .select("*")
-        .ilike("title", `%${searchValue}%`);
+        .or(
+          `title.ilike.%${encodedSearchValue}%,title_ka.ilike.%${encodedSearchValue}%,description.ilike.%${encodedSearchValue}%, description_ka.ilike.%${encodedSearchValue}%`
+        );
+      console.log(error, data);
       return NextResponse.json(data, { status: 200 });
     }
     return NextResponse.json([], { status: 400 });

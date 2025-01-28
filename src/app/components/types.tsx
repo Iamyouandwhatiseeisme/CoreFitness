@@ -63,6 +63,16 @@ export interface Product {
   img_url: string;
   title_ka: string;
 }
+export interface Blog {
+  id: number;
+  created_at: string;
+  user_id: string;
+  title: string;
+  description: string;
+  description_ka: string;
+  category: string;
+  title_ka: string;
+}
 export interface Order {
   id: number;
   created_at: string;

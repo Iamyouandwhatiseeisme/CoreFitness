@@ -3,15 +3,15 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import useDebounce from "src/app/hooks/useDebounce";
 import React from "react";
-import { Product } from "../types";
+import { Blog } from "../types";
 
 interface SearchBarProps {
   searchItemType: string;
-  setProducts: (products: Product[]) => void;
+  setBlogs: (products: Blog[]) => void;
   setIsUpdating: (isUpdating: boolean) => void;
 }
 
-export default function SearchBar(props: SearchBarProps) {
+export default function SearchBlogs(props: SearchBarProps) {
   const searchItemType = props.searchItemType;
   const [searchValue, setSearchValue] = useState<string>("");
   const debouncedValue = useDebounce(searchValue, 500);
@@ -19,14 +19,18 @@ export default function SearchBar(props: SearchBarProps) {
   useEffect(() => {
     async function fetchSearchedValue() {
       if (debouncedValue) {
+        console.log(debouncedValue);
         const response = await fetch("/api/search", {
           headers: {
+            "Content-Type": "application/json; charset=utf-8",
             searchValue: encodeURIComponent(debouncedValue),
             searchTable: searchItemType,
           },
         });
-        const responseData = (await response.json()) as Product[];
-        props.setProducts(responseData);
+        console.log(response);
+        const responseData = (await response.json()) as Blog[];
+        console.log(responseData);
+        props.setBlogs(responseData);
       }
       if (debouncedValue === "") {
         props.setIsUpdating(true);

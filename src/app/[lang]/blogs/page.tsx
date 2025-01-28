@@ -2,114 +2,111 @@
 import React from "react";
 import Link from "next/link";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import fetchProducts from "../../fetcher/fetchProducts";
 import { useEffect, useState } from "react";
-import { Product, SortOption } from "../../components/types";
-import AddProductDialog from "src/app/components/AddProductDialog/AddProductDialog";
+import { Blog, SortOption } from "../../components/types";
+// import AddBlogDialog from "src/app/components/AddBlogDialog/AddBlogDialog";
 import { Toaster } from "sonner";
-import { useCart } from "src/app/components/providers/CartProvider";
 import { useLocale } from "src/app/components/providers/LanguageContext";
-import SortButton from "src/app/components/SortButton/SortButton";
-import SideFilterPanel from "src/app/components/SideFilterPanel/SideFilterPanel";
+import SearchBlogs from "src/app/components/SearchBar/SearchBlogs";
+// import SortButton from "src/app/components/SortButton/SortButton";
+// import SideFilterPanel from "src/app/components/SideFilterPanel/SideFilterPanel";
 
-export default function Products() {
-  const [products, setProducts] = useState<Product[]>([]);
+export default function Blogs() {
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const [selectedCategories, setSelectedCategories] = useState<Set<string>>(
     new Set()
   );
-  const { addItemToCart } = useCart();
   const { locale } = useLocale();
 
   useEffect(() => {
-    async function fetch() {
+    async function fetchBlogs() {
       setIsUpdating(false);
-      const productsArray = (await fetchProducts()) as Product[];
-      setProducts(productsArray);
+      const response = await fetch("/api/blogs");
+      const blogsArray = (await response.json()) as Blog[];
+      setBlogs(blogsArray);
+      setIsLoading(false);
     }
 
-    fetch();
+    fetchBlogs();
   }, [isUpdating]);
 
-  if (products.length === 0) {
+  if (blogs.length === 0 && !isLoading) {
     return (
       <div className="">
         <div className="flex flex-col items-center pt-40">
           <div className="mt-5 flex flex-row items-center">
-            <SearchBar
-              searchItemType="products"
-              setProducts={setProducts}
+            <SearchBlogs
+              searchItemType="blogs"
+              setBlogs={setBlogs}
               setIsUpdating={setIsUpdating}
             />
           </div>
           <h2 className="text-black dark:text-gray-200 font-sans font-bold text-2xl">
             Could not find anything...
           </h2>
-          <AddProductDialog retriggerFetch={setIsUpdating}></AddProductDialog>
+          {/* <AddBlogDialog retriggerFetch={setIsUpdating}></AddBlogDialog> */}
+        </div>
+      </div>
+    );
+  }
+  if (isLoading) {
+    return (
+      <div className="">
+        <div className="flex flex-col items-center pt-40">
+          <div className="mt-5 flex flex-row items-center"></div>
+          <h2 className="text-black dark:text-gray-200 font-sans font-bold text-2xl">
+            Blogs are loading...
+          </h2>
+          {/* <AddBlogDialog retriggerFetch={setIsUpdating}></AddBlogDialog> */}
         </div>
       </div>
     );
   }
 
   return (
-    <div className="w-full  min-h-wrapper pt-32 " data-cy="products-loaded">
-      <SideFilterPanel
+    <div className="w-full  min-h-wrapper pt-32 " data-cy="blogs-loaded">
+      {/* <SideFilterPanel
         retriggerFetch={setIsUpdating}
-        setItems={setProducts}
+        setItems={setBlogs}
         setSelectedCategories={setSelectedCategories}
-      ></SideFilterPanel>
+      ></SideFilterPanel> */}
       <div className="relative flex flex-col items-center">
         <div className=" h-24  bg-slate-600 w-full flex flex-row items-center justify-center gap-2">
-          <AddProductDialog retriggerFetch={setIsUpdating}></AddProductDialog>
-          <SearchBar
-            searchItemType="products"
-            setProducts={setProducts}
+          {/* <AddBlogDialog retriggerFetch={setIsUpdating}></AddBlogDialog> */}
+          <SearchBlogs
+            searchItemType="blogs"
+            setBlogs={setBlogs}
             setIsUpdating={setIsUpdating}
           />
 
-          <SortButton
+          {/* <SortButton
             selectedCategories={selectedCategories}
-            setItems={setProducts}
+            setItems={setBlogs}
             sortOptions={sortOptions}
-          ></SortButton>
+          ></SortButton> */}
           <Toaster />
         </div>
         <div className=" flex flex-row">
           <div className="p-5 ml-44 grid grid-cols-3 gap-7">
-            {products.map((product) => {
-              const title = locale === "ka" ? product.title_ka : product.title;
+            {blogs.map((Blog) => {
+              const title = locale === "ka" ? Blog.title_ka : Blog.title;
               return (
                 <div
-                  key={product.id}
+                  key={Blog.id}
                   className="items-center flex flex-col border-2 border-solid border-gray-50 rounded-xl w-80 h-auto overflow-hidden bg-neutral-400 dark:bg-neutral-200"
                 >
                   <Link
-                    key={product.id}
-                    href={`/products/${product.id}`}
-                    data-cy={product.title}
+                    key={Blog.id}
+                    href={`/blogs/${Blog.id}`}
+                    data-cy={Blog.title}
                     className="items-center flex flex-col border-2 border-solid border-gray-50 rounded-xl w-80 h-auto overflow-hidden bg-neutral-400 dark:bg-neutral-200"
                   >
-                    <img
-                      className="object-scale-down w-6/12 h-3/6 m-2"
-                      src={product.img_url}
-                      alt={product.title}
-                    ></img>
                     <div className="p-2 font-serif size text-xs m-1 ">
                       <strong>{title}</strong>
                     </div>
-                    <div className="p-2 font-serif size text-xs m-1 ">
-                      Price: {product.price}$
-                    </div>
                   </Link>
-                  <div
-                    className="cursor-pointer"
-                    data-cy={`add-to-cart-button-${product.title}`}
-                    onClick={() =>
-                      addItemToCart({ product: product, quantity: 1 })
-                    }
-                  >
-                    Add To cart
-                  </div>
                 </div>
               );
             })}
