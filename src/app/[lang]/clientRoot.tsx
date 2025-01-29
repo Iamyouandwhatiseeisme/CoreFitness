@@ -1,27 +1,13 @@
 "use client";
 import React from "react";
 import { useEffect, useState } from "react";
-import { ThemeProvider } from "next-themes";
 import { CartProvider } from "../components/providers/CartProvider";
 import { LocaleProvider } from "../components/providers/LanguageContext";
 import Header from "../components/header/Header";
 import Footer from "../components/footer/Footer";
-import type { ThemeProviderProps } from "next-themes/dist/types";
 import { Dictionary } from "./dictionaries";
 import { User } from "@supabase/supabase-js";
-
-function ThemeWrapper({ children }: ThemeProviderProps) {
-  return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
-      {children}
-    </ThemeProvider>
-  );
-}
+import { ThemeProvider } from "../hooks/themeProvider";
 
 export default function ClientRoot({
   children,
@@ -48,7 +34,7 @@ export default function ClientRoot({
     );
 
   return (
-    <ThemeWrapper>
+    <ThemeProvider>
       <LocaleProvider
         lang={lang}
         dictChat={dict.chatWindow}
@@ -62,6 +48,6 @@ export default function ClientRoot({
           </div>
         </CartProvider>
       </LocaleProvider>
-    </ThemeWrapper>
+    </ThemeProvider>
   );
 }
