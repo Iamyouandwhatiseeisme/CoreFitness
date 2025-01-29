@@ -1,12 +1,11 @@
 import React from "react";
 import NotFound from "../../notfound/NotFound";
 import { ReturnBackButton } from "../../notfound/NotFound";
-// import fetchSingleBlog from "../../../fetcher/fetchSingleBlog";
 import { Blog } from "../../../components/types";
-// import { DeleteBlogButton } from "src/app/components/DeleteBlogButton/DeleteBlogButton";
 import { createClient } from "src/app/utils/supabase/server";
-// import EditBlogDIalog from "src/app/components/EditBlogDialog/EditBlogDialog";
 import { Toaster } from "sonner";
+import { DeleteItem } from "src/app/components/DeleteItem/DeleteItem";
+import EditBlogDIalog from "src/app/components/EditBlogDialog/EditBlogDIalog";
 
 interface BlogDetailsProps {
   params: {
@@ -16,7 +15,6 @@ interface BlogDetailsProps {
 }
 
 export default async function BlogDetails(props: BlogDetailsProps) {
-  let blog: Blog | null = null;
   const { id } = props.params;
   const supabase = await createClient();
   const {
@@ -37,7 +35,6 @@ export default async function BlogDetails(props: BlogDetailsProps) {
   }
   if (data) {
     const blog: Blog = data;
-    console.log(props.params.lang);
 
     return (
       <div className="gap-4 min-h-wrapper pt-40 flex flex-col items-center justify-center ">
@@ -55,8 +52,8 @@ export default async function BlogDetails(props: BlogDetailsProps) {
           {user && user.id === blog.user_id ? (
             <div className="flex flex-row gap-2">
               {" "}
-              {/* <DeleteBlogButton id={id}></DeleteBlogButton> */}
-              {/* <EditBlogDIalog Blog={Blog}></EditBlogDIalog> */}
+              <DeleteItem id={id} table="blogs"></DeleteItem>
+              <EditBlogDIalog blog={blog}></EditBlogDIalog>
             </div>
           ) : (
             ""
