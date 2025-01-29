@@ -1,17 +1,11 @@
 import React from "react";
 import DropDownItem from "../DropDownItem/DropDownItem";
 import { ThemeOption } from "../../hooks/useTheme";
-import { SortOption } from "../types";
 
 interface DropDownContentProps {
-  children: ThemeOption[] | SortOption[];
+  children: ThemeOption[];
   open: boolean;
   onSelect: () => void;
-  toggleHandler: (
-    option: string | undefined,
-    order: string | undefined
-  ) => void;
-  type: string;
 }
 
 const DropDownContent = (props: DropDownContentProps) => {
@@ -31,12 +25,7 @@ const DropDownContent = (props: DropDownContentProps) => {
       {
         <>
           {props.children.map((options) => (
-            <DropDownItem
-              onClick={props.onSelect}
-              key={options.label}
-              toggleHandler={props.toggleHandler}
-              type={props.type}
-            >
+            <DropDownItem onClick={props.onSelect} key={options.label}>
               {options}
             </DropDownItem>
           ))}

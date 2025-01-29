@@ -3,29 +3,24 @@ import React from "react";
 import { CIcon } from "@coreui/icons-react";
 import { ThemeOption } from "../../hooks/useTheme";
 import { SortOption } from "../types";
+import { useTheme } from "next-themes";
 
 interface DropDownItemProps {
   children: ThemeOption | SortOption;
   onClick: () => void;
-  toggleHandler: (
-    option: string | undefined,
-    order: string | undefined
-  ) => void;
-  type: string;
+  // toggleHandler: (
+  //   option: string | undefined,
+  //   order: string | undefined
+  // ) => void;
 }
 
 const DropDownItem = (props: DropDownItemProps) => {
+  const { setTheme } = useTheme();
+
   const clickHandler = () => {
     props.onClick();
-    if (props.type === "Sorter") {
-      var sortItem = props.children as SortOption;
-      props.toggleHandler(sortItem.option, sortItem.order);
-    }
-    if (props.type === "Theme") {
-      var themeItem = props.children as ThemeOption;
-      themeItem.changeTheme();
-      props.toggleHandler(undefined, undefined);
-    }
+
+    setTheme(props.children.label);
   };
 
   return (
@@ -35,11 +30,7 @@ const DropDownItem = (props: DropDownItemProps) => {
         clickHandler();
       }}
     >
-      {props.type === "Sorter" ? (
-        (props.children as SortOption).label
-      ) : (
-        <CIcon icon={(props.children as ThemeOption).icon}></CIcon>
-      )}
+      <CIcon icon={(props.children as ThemeOption).icon}></CIcon>
     </div>
   );
 };
