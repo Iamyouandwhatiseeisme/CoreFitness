@@ -44,7 +44,7 @@ export default async function ProductPage(props: ProductDetailsPageProps) {
         </span>{" "}
       </div>
       <div className="flex flex-row items-center justify-center">
-        <ReturnBackButton destination={"products"} />
+        <ReturnBackButton destination={`${props.params.lang}/products`} />
         <Toaster></Toaster>
         {user && user.id === product.user_id ? (
           <div className="flex flex-row gap-2">

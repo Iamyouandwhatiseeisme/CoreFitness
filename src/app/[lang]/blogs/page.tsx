@@ -99,8 +99,8 @@ export default function Blogs() {
                 >
                   <Link
                     key={Blog.id}
-                    href={`/blogs/${Blog.id}`}
-                    data-cy={Blog.title}
+                    lang={locale}
+                    href={`${locale}/blogs/${Blog.id}`}
                     className="items-center flex flex-col border-2 border-solid border-gray-50 rounded-xl w-80 h-auto overflow-hidden bg-neutral-400 dark:bg-neutral-200"
                   >
                     <div className="p-2 font-serif size text-xs m-1 ">
