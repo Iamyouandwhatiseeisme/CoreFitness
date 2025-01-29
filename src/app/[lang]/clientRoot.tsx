@@ -34,7 +34,12 @@ export default function ClientRoot({
     );
 
   return (
-    <ThemeProvider>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
       <LocaleProvider
         lang={lang}
         dictChat={dict.chatWindow}
