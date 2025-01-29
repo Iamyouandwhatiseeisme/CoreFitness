@@ -34,7 +34,7 @@ export default function ClientRoot({
     );
 
   return (
-    <>
+    <div>
       <ThemeProvider
         attribute="class"
         defaultTheme="system"
@@ -55,6 +55,6 @@ export default function ClientRoot({
           </CartProvider>
         </LocaleProvider>
       </ThemeProvider>
-    </>
+    </div>
   );
 }
