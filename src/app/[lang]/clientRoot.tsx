@@ -34,25 +34,27 @@ export default function ClientRoot({
     );
 
   return (
-    <ThemeProvider
-      attribute="class"
-      defaultTheme="system"
-      enableSystem
-      disableTransitionOnChange
-    >
-      <LocaleProvider
-        lang={lang}
-        dictChat={dict.chatWindow}
-        informationBoard={dict.informationBoard}
+    <>
+      <ThemeProvider
+        attribute="class"
+        defaultTheme="system"
+        enableSystem
+        disableTransitionOnChange
       >
-        <CartProvider>
-          <div className="bg-neutral-200 dark:bg-neutral-900 font-serif">
-            <Header currentUser={user} dict={dict.header} />
-            {children}
-            <Footer />
-          </div>
-        </CartProvider>
-      </LocaleProvider>
-    </ThemeProvider>
+        <LocaleProvider
+          lang={lang}
+          dictChat={dict.chatWindow}
+          informationBoard={dict.informationBoard}
+        >
+          <CartProvider>
+            <div className="bg-neutral-200 dark:bg-neutral-900 font-serif">
+              <Header currentUser={user} dict={dict.header} />
+              {children}
+              <Footer />
+            </div>
+          </CartProvider>
+        </LocaleProvider>
+      </ThemeProvider>
+    </>
   );
 }
