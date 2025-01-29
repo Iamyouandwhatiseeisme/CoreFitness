@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "../../../utils/supabase/server";
+import { createClient } from "../../utils/supabase/server";
 
 export async function GET(request: NextRequest) {
   try {
@@ -19,9 +19,6 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json([], { status: 200 });
   } catch (error) {
-    return NextResponse.json(
-      { error: "Failed to fetch products" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: error }, { status: 500 });
   }
 }

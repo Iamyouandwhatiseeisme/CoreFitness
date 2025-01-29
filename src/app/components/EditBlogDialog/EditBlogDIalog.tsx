@@ -15,49 +15,35 @@ import { Label } from "@components/components/ui/label";
 import { X } from "lucide-react";
 import { useState } from "react";
 import React from "react";
-import { Product } from "../types";
+import { Blog } from "../types";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-interface EditProductDIalogProps {
-  product: Omit<
-    Product,
-    Exclude<
-      keyof Product,
-      | "title"
-      | "price"
-      | "img_url"
-      | "title_ka"
-      | "description"
-      | "description_ka"
-      | "category"
-      | "id"
-    >
-  >;
+interface EditBlogDIalogProps {
+  blog: Blog;
 }
 
-export default function EditProductDIalog(props: EditProductDIalogProps) {
-  const product = props.product;
+export default function EditBlogDIalog(props: EditBlogDIalogProps) {
+  const blog = props.blog;
 
   const [open, setOpen] = useState<boolean>(false);
-  const [title, setTitle] = useState<string>(product.title);
-  const [georgianTitle, setGeorgianTitle] = useState<string>(product.title_ka);
+  const [title, setTitle] = useState<string>(blog.title);
+  const [georgianTitle, setGeorgianTitle] = useState<string>(blog.title_ka);
   const [error, setError] = useState<string | null>(null);
-  const [description, setDescription] = useState<string>(product.description);
+  const [description, setDescription] = useState<string>(blog.description);
   const [georgianDescription, setGeorgianDescription] = useState<string>(
-    product.description_ka
+    blog.description_ka
   );
-  const [price, setPrice] = useState<number>(product.price);
-  const [category, setCategory] = useState<string>(product.category);
+  const [category, setCategory] = useState<string>(blog.category);
   const router = useRouter();
 
-  async function updateProduct(event: React.FormEvent<HTMLFormElement>) {
+  async function updateblog(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const response = await fetch("/api/updateItem", {
       method: "POST",
       headers: {
-        id: product.id.toString(),
-        table: "products",
+        id: blog.id.toString(),
+        table: "blogs",
       },
       body: formData,
     });
@@ -68,7 +54,7 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
       console.log(responseData);
     }
     if (response.ok) {
-      toast("Product has been updated", {});
+      toast("Blog has been updated", {});
       setOpen(false);
       router.refresh();
     }
@@ -94,17 +80,17 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button
-          data-cy="add-product-button"
+          data-cy="add-blog-button"
           onClick={() => setOpen(true)}
           variant="outline"
           className="border w-40 rounded shadow-lg bg-slate-400 hover:bg-slate-300"
         >
-          Edit Product
+          Edit Blog
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[580px] h-120 m-5 p-5 absolute top-0 right-96 bg-slate-200 rounded-2xl   ">
         <DialogHeader className="flex flex-col items-start justify-start">
-          <DialogTitle>Add Product</DialogTitle>
+          <DialogTitle>Add blog</DialogTitle>
           <DialogClose
             style={{
               position: "absolute",
@@ -117,12 +103,10 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
             <X className="h-4 w-4" />
           </DialogClose>
 
-          <DialogDescription>
-            Please type product details below
-          </DialogDescription>
+          <DialogDescription>Please type blog details below</DialogDescription>
         </DialogHeader>
         {/* {isLoading && <div>...isLoading</div>} */}
-        <form onSubmit={updateProduct}>
+        <form onSubmit={updateblog}>
           <div className="grid gap-4 py-4 pr-10">
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="name" className="text-right">
@@ -190,21 +174,7 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
                 </p>
               )}
             </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="price" className="text-right">
-                Price
-              </Label>
-              <Input
-                type="number"
-                id="price"
-                name="price"
-                value={price}
-                maxLength={9}
-                onChange={(e) => setPrice(Number(e.target.value))}
-                className="col-span-3"
-                required
-              />
-            </div>
+
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="category" className="text-right">
                 Category
@@ -218,17 +188,11 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
                 required
               />
             </div>
-            <div>
-              <Label htmlFor="file" className="text-right">
-                Upload Photo
-              </Label>
-              <Input id="file" type="file" name="file" className="col-span-3" />
-            </div>
           </div>
 
           <DialogFooter className="flex flex-row items-center justify-center">
             <Button
-              data-cy="create-product-button"
+              data-cy="create-blog-button"
               type="submit"
               className="rounded-2xl bg-slate-400 w-40 h-10"
             >

@@ -2,13 +2,19 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 
-export function DeleteProductButton(props: { id: string }) {
+interface DeleteItemProps {
+  id: string;
+  table: string;
+}
+
+export function DeleteItem(props: DeleteItemProps) {
   const router = useRouter();
   async function handleDelete() {
-    const response = await fetch("/api/deleteProduct", {
+    const response = await fetch("/api/deleteItem", {
       method: "POST",
       headers: {
         id: props.id,
+        table: props.table,
       },
     });
     if (response) {

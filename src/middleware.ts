@@ -10,7 +10,11 @@ const locales = ["en-US", "ka"];
 
 function getLocale(request: NextRequest): string {
   const requestHeaders = new Headers(request.headers);
-  const accepted = requestHeaders.get("accept-language") || "";
+  let accepted = requestHeaders.get("accept-language") || "";
+
+  if (request.nextUrl.pathname.startsWith("ka")) {
+    accepted = "ka";
+  }
 
   const headers = { "accept-language": `${accepted};q=0.5` };
   const languages = new Negotiator({ headers }).languages();
@@ -21,7 +25,13 @@ function getLocale(request: NextRequest): string {
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const locale = getLocale(request);
+
+  if (request.nextUrl.pathname.startsWith("/api")) {
+    return NextResponse.next();
+  }
+  const pathnameSegments = pathname.split("/");
+  const pathnameLocale = pathnameSegments[1];
+  const locale = locales.includes(pathnameLocale) ? pathnameLocale : "en-US";
 
   const sessionResponse = await updateSession(request);
   const userHeader = sessionResponse.headers.get("user");
@@ -47,6 +57,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
   if (user && pathname === `/${locale}/login`) {
+    console.log("user trying to access login page");
     request.nextUrl.pathname = `/${locale}`;
     return NextResponse.redirect(request.nextUrl);
   }
@@ -73,16 +84,31 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(request.nextUrl);
     }
   }
-
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
 
-  if (pathnameHasLocale) return NextResponse.next();
+  if (pathnameHasLocale) {
+    if (pathnameSegments[2]) {
+      if (pathnameSegments[2] === pathnameLocale) {
+        const response = NextResponse.next();
+        response.headers.set("accept-Language", locale);
 
-  request.nextUrl.pathname = `/${locale}${pathname}`;
+        request.nextUrl.pathname = `/${locale}/${pathnameSegments[3]}/${pathnameSegments[4]}`;
 
-  return NextResponse.redirect(request.nextUrl);
+        return NextResponse.redirect(request.nextUrl);
+      }
+    }
+    const response = NextResponse.next();
+    response.headers.set("accept-Language", locale);
+    return response;
+  }
+  if (!pathnameHasLocale) {
+    const loc = getLocale(request);
+    request.nextUrl.pathname = `/${loc}${pathname}`;
+
+    return NextResponse.redirect(request.nextUrl);
+  }
 }
 
 export const config = {

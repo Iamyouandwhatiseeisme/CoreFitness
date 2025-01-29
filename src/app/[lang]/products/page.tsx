@@ -85,7 +85,7 @@ export default function Products() {
                 >
                   <Link
                     key={product.id}
-                    href={`/products/${product.id}`}
+                    href={`${locale}/products/${product.id}`}
                     data-cy={product.title}
                     className="items-center flex flex-col border-2 border-solid border-gray-50 rounded-xl w-80 h-auto overflow-hidden bg-neutral-400 dark:bg-neutral-200"
                   >

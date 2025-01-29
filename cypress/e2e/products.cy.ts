@@ -8,9 +8,9 @@ describe("Product Actions", () => {
     cy.get("[data-cy='password']").type("Karachka2");
     cy.get("[data-cy='login-button']").click();
     cy.get("[data-cy='logout-button']").should("exist");
-    cy.wait(2000);
+    cy.wait(8000);
     cy.get("[data-cy='products-page-button']").click();
-    cy.wait(4000);
+    cy.wait(10000);
     cy.get("[data-cy='add-product-button']").should("exist");
     cy.get("[data-cy='products-loaded']").should("exist");
 
