@@ -1,14 +1,15 @@
 import React from "react";
 import CIcon from "@coreui/icons-react";
+import { useTheme } from "next-themes";
+import { cilMoon, cilScreenDesktop, cilSun } from "@coreui/icons";
 
 interface DropDownButtonProps {
-  children: string[];
   open: boolean;
   toggle: () => void;
-  type: string;
 }
 
 const DropDownButton = (props: DropDownButtonProps) => {
+  const { theme } = useTheme();
   return (
     <div
       className={
@@ -18,11 +19,15 @@ const DropDownButton = (props: DropDownButtonProps) => {
       }
       onClick={props.toggle}
     >
-      {props.type === "Theme" ? (
-        <CIcon icon={props.children}></CIcon>
-      ) : (
-        <div>{props.children}</div>
-      )}
+      <CIcon
+        icon={
+          theme === "system"
+            ? cilScreenDesktop
+            : theme === "light"
+            ? cilSun
+            : cilMoon
+        }
+      ></CIcon>
     </div>
   );
 };

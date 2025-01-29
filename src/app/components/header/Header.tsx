@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Logo from "../../../../public/images/Header Logo.webp";
-import DropDown from "../DropDown/DropDown";
+// import DropDown from "../DropDown/DropDown";
 import AuthenticationButton from "../logoutButton/LoggoutButton";
 import { useLocale } from "../providers/LanguageContext";
 import React from "react";
@@ -11,6 +11,8 @@ import { DictionaryChapter } from "../../[lang]/dictionaries";
 import useTheme from "../../hooks/useTheme";
 import { useCallback, useEffect, useRef, useState } from "react";
 import CartDialog from "../CartDialog/CartDialog";
+import { ModeToggle } from "../ThemeDropDown/ThemeDropDown";
+import DropDown from "../DropDown/DropDown";
 
 interface HeaderProps {
   dict: DictionaryChapter;
@@ -19,7 +21,8 @@ interface HeaderProps {
 
 const Header = (props: HeaderProps) => {
   const { locale } = useLocale();
-  const { currentTheme, themeOptions, themeHandler } = useTheme();
+
+  const { themeOptions } = useTheme();
   const [isAnimationTriggered, setIsAnimationTriggered] =
     useState<boolean>(false);
   const isAnimationTriggeredRef = useRef(isAnimationTriggered);
@@ -104,12 +107,7 @@ const Header = (props: HeaderProps) => {
       </div>
       <div className="flex flex-row gap-2 items-center mr-5 justify-end w-full z-10">
         <div className="">
-          <DropDown
-            content={themeOptions}
-            buttonText={currentTheme}
-            toggleHandler={themeHandler}
-            type="Theme"
-          ></DropDown>
+          <DropDown content={themeOptions}></DropDown>
         </div>
         <div>
           <CartDialog></CartDialog>

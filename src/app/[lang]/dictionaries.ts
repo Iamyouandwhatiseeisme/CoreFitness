@@ -1,5 +1,5 @@
 import "server-only";
-interface Dictionary {
+export interface Dictionary {
   [key: string]: DictionaryChapter;
 }
 export interface DictionaryChapter {
