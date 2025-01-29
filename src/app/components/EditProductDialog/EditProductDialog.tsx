@@ -53,10 +53,11 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
   async function updateProduct(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const response = await fetch("/api/updateProduct", {
+    const response = await fetch("/api/updateItem", {
       method: "POST",
       headers: {
         id: product.id.toString(),
+        table: "products",
       },
       body: formData,
     });
