@@ -48,6 +48,7 @@ export default function DialogFactory(props: DialogFactoryProps) {
       <DialogTrigger asChild>
         <Button
           variant="outline"
+          data-cy="add-product-button"
           className="border w-40 rounded-lg shadow-md bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
         >
           {props.triggerText}
