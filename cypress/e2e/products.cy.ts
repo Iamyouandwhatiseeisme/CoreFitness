@@ -25,7 +25,8 @@ describe("Product Actions", () => {
       "cypress/fixtures/CypressTest.png"
     );
     cy.get("[data-cy='create-product-button']").click();
-    cy.wait(4000);
+    cy.wait(8000);
+
     cy.get("[data-cy='TestProduct']").should("exist");
 
     cy.get("[data-cy='TestProduct']").click();

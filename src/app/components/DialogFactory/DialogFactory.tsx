@@ -48,6 +48,7 @@ export default function DialogFactory(props: DialogFactoryProps) {
       <DialogTrigger asChild>
         <Button
           variant="outline"
+          data-cy="add-product-button"
           className="border w-40 rounded-lg shadow-md bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-white"
         >
           {props.triggerText}
@@ -76,6 +77,7 @@ export default function DialogFactory(props: DialogFactoryProps) {
           <DialogFooter className="flex justify-end">
             <Button
               type="submit"
+              data-cy="create-product-button"
               className="rounded-lg w-32 h-10 bg-blue-500 hover:bg-blue-600 text-white dark:bg-blue-600 dark:hover:bg-blue-700"
             >
               Create
