@@ -13,8 +13,10 @@ export default function AddBlogDialog(props: ProductDialogProps) {
     description_ka?: string;
   }>({});
 
-  const handleGeorgianInput = (e: React.FormEvent<HTMLInputElement>) => {
-    const input = e.target as HTMLInputElement;
+  const handleGeorgianInput = (
+    e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const input = e.target as HTMLInputElement | HTMLTextAreaElement;
     const field = input.name as "title_ka" | "description_ka";
     const value = input.value;
     const isLanguageValid = /^[\u10A0-\u10FF\s]*$/.test(value);
@@ -40,81 +42,95 @@ export default function AddBlogDialog(props: ProductDialogProps) {
         });
       }}
     >
-      <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="title" className="text-right">
-          Title (English)
-        </Label>
-        <Input
-          id="title"
-          name="title"
-          className="col-span-3"
-          required
-          data-cy="blog-title-input"
-        />
-      </div>
+      <div className="space-y-6">
+        {/* Title Section */}
+        <div className="space-y-4">
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="title" className="text-right">
+              Title (English)
+            </Label>
+            <Input
+              id="title"
+              name="title"
+              className="col-span-3"
+              required
+              data-cy="blog-title-input"
+            />
+          </div>
 
-      <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="title_ka" className="text-right">
-          Title Georgian
-        </Label>
-        <Input
-          id="title_ka"
-          name="title_ka"
-          className="col-span-3"
-          onInput={handleGeorgianInput}
-          required
-          data-cy="blog-title-ka-input"
-        />
-        {errors.title_ka && (
-          <p className="absolute text-xs text-red-500 bottom-2 left-3">
-            {errors.title_ka}
-          </p>
-        )}
-      </div>
+          <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="title_ka" className="text-right">
+              Title Georgian
+            </Label>
+            <div className="col-span-3 space-y-1">
+              <Input
+                id="title_ka"
+                name="title_ka"
+                className="w-full"
+                onInput={handleGeorgianInput}
+                required
+                data-cy="blog-title-ka-input"
+              />
+              {errors.title_ka && (
+                <p className="text-xs text-red-500">{errors.title_ka}</p>
+              )}
+            </div>
+          </div>
+        </div>
 
-      <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="description" className="text-right">
-          Description (English)
-        </Label>
-        <Input
-          id="description"
-          name="description"
-          className="col-span-3"
-          required
-          data-cy="blog-description-input"
-        />
-      </div>
+        <div className="space-y-4">
+          <div className="grid grid-cols-4 items-start gap-4">
+            <Label htmlFor="description" className="text-right mt-2">
+              Description (English)
+            </Label>
+            <textarea
+              id="description"
+              name="description"
+              className="col-span-3 w-full min-w-[500px] h-32 px-3 py-2 border rounded-md text-sm 
+             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring 
+             focus-visible:ring-offset-2 resize-none dark:bg-slate-700 dark:border-slate-600 
+             dark:text-white dark:focus-visible:ring-slate-400"
+              required
+              data-cy="blog-description-input"
+            />
+          </div>
 
-      <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="description_ka" className="text-right">
-          Description Georgian
-        </Label>
-        <Input
-          id="description_ka"
-          name="description_ka"
-          className="col-span-3"
-          onInput={handleGeorgianInput}
-          required
-          data-cy="blog-description-ka-input"
-        />
-        {errors.description_ka && (
-          <p className="absolute text-xs text-red-500 bottom-2 left-3">
-            {errors.description_ka}
-          </p>
-        )}
-      </div>
+          <div className="grid grid-cols-4 items-start gap-4">
+            <Label htmlFor="description_ka" className="text-right mt-2">
+              Description Georgian
+            </Label>
+            <div className="col-span-3 space-y-1">
+              <textarea
+                id="description_ka"
+                name="description_ka"
+                className="w-full min-w-[500px] h-32 px-3 py-2 border rounded-md text-sm 
+               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring 
+               focus-visible:ring-offset-2 resize-none dark:bg-slate-700 dark:border-slate-600 
+               dark:text-white dark:focus-visible:ring-slate-400"
+                onInput={handleGeorgianInput}
+                required
+                data-cy="blog-description-ka-input"
+              />
+              {errors.description_ka && (
+                <p className="text-xs text-red-500">{errors.description_ka}</p>
+              )}
+            </div>
+          </div>
+        </div>
 
-      <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="category" className="text-right">
-          Category
-        </Label>
-        <Input
-          id="category"
-          name="category"
-          className="col-span-3"
-          required
-          data-cy="blog-category-input"
-        />
+        {/* Category */}
+        <div className="grid grid-cols-4 items-center gap-4">
+          <Label htmlFor="category" className="text-right">
+            Category
+          </Label>
+          <Input
+            id="category"
+            name="category"
+            className="col-span-3"
+            required
+            data-cy="blog-category-input"
+          />
+        </div>
       </div>
     </DialogFactory>
   );
