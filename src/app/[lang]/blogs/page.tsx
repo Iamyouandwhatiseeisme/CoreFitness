@@ -1,25 +1,19 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import SearchBar from "../../components/SearchBar/SearchBar";
 import { useEffect, useState } from "react";
-import { Blog, SortOption } from "../../components/types";
+import { Blog } from "../../components/types";
 // import AddBlogDialog from "src/app/components/AddBlogDialog/AddBlogDialog";
 import { Toaster } from "sonner";
 import { useLocale } from "src/app/components/providers/LanguageContext";
 import SearchBlogs from "src/app/components/SearchBar/SearchBlogs";
-import AddProductDialog from "src/app/components/AddProductDialog/AddProductDialog";
 import AddBlogDialog from "src/app/components/AddBlogDialog/AddBlogDialog";
-// import SortButton from "src/app/components/SortButton/SortButton";
-// import SideFilterPanel from "src/app/components/SideFilterPanel/SideFilterPanel";
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
-  const [selectedCategories, setSelectedCategories] = useState<Set<string>>(
-    new Set()
-  );
+
   const { locale } = useLocale();
 
   useEffect(() => {
@@ -48,7 +42,7 @@ export default function Blogs() {
           <h2 className="text-black dark:text-gray-200 font-sans font-bold text-2xl">
             Could not find anything...
           </h2>
-          {/* <AddBlogDialog retriggerFetch={setIsUpdating}></AddBlogDialog> */}
+          <AddBlogDialog retriggerFetch={setIsUpdating}></AddBlogDialog>
         </div>
       </div>
     );
@@ -61,7 +55,6 @@ export default function Blogs() {
           <h2 className="text-black dark:text-gray-200 font-sans font-bold text-2xl">
             Blogs are loading...
           </h2>
-          {/* <AddBlogDialog retriggerFetch={setIsUpdating}></AddBlogDialog> */}
         </div>
       </div>
     );
@@ -69,11 +62,6 @@ export default function Blogs() {
 
   return (
     <div className="w-full  min-h-wrapper pt-32 " data-cy="blogs-loaded">
-      {/* <SideFilterPanel
-        retriggerFetch={setIsUpdating}
-        setItems={setBlogs}
-        setSelectedCategories={setSelectedCategories}
-      ></SideFilterPanel> */}
       <div className="relative flex flex-col items-center">
         <div className=" h-24  bg-slate-600 w-full flex flex-row items-center justify-center gap-2">
           <AddBlogDialog retriggerFetch={setIsUpdating}></AddBlogDialog>
