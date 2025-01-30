@@ -72,6 +72,7 @@ export interface Blog {
   description_ka: string;
   category: string;
   title_ka: string;
+  email: string;
 }
 export interface Order {
   id: number;

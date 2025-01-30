@@ -25,6 +25,7 @@ export async function POST(request: NextRequest) {
         description_ka: descriptionGeorgian,
         user_id: user?.id,
       });
+      console.log(error);
       if (error) {
         throw error;
       }
