@@ -63,7 +63,7 @@ export default async function BlogDetails(props: BlogDetailsProps) {
             </div>
 
             <article className="prose lg:prose-lg max-w-none mb-8 dark:prose-invert">
-              <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed break-words max-w-[600px]">
                 {props.params.lang === "ka"
                   ? blog.description_ka
                   : blog.description}
