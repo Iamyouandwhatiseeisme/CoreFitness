@@ -6,10 +6,10 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
     const name = formData.get("name") as string;
-    const nameGeorgian = formData.get("name-georgian") as string;
+    const nameGeorgian = formData.get("title_ka") as string;
     const description = formData.get("description") as string;
     const category = formData.get("category") as string;
-    const descriptionGeorgian = formData.get("description-georgian") as string;
+    const descriptionGeorgian = formData.get("description_ka") as string;
     const price = Number(formData.get("price"));
     const file = formData.get("file") as File;
 
