@@ -77,6 +77,7 @@ export default function DialogFactory(props: DialogFactoryProps) {
           <DialogFooter className="flex justify-end">
             <Button
               type="submit"
+              data-cy="create-product-button"
               className="rounded-lg w-32 h-10 bg-blue-500 hover:bg-blue-600 text-white dark:bg-blue-600 dark:hover:bg-blue-700"
             >
               Create
