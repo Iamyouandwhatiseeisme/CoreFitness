@@ -96,90 +96,92 @@ export default function ChatWindow() {
 
   return (
     <div>
-      <div className="min-h-wrapper flex flex-col bg-chatbot-background bg-cover">
-        <div className="flex flex-row h-90vh gap-3 justify-center mt-5 mb-5 ">
-          <div className="flex flex-col gap-2 items-center mt-5 m-5 text-white  w-3/4   ">
-            <h1 className="font-serif text-3xl font-semibold text-white ">
-              Try our AI assistant to create a diet plan
-            </h1>
-            <div className="flex flex-row gap-10 w-full">
-              <div className=" shadow-lg shadow-slate-200 flex flex-col w-full h-80vh bg-gray-800 bg-opacity-75 rounded-2xl items-center border border-b-gray-500  ">
-                <div className="xl:hidden flex flex-col items-center justify-center font-bold font-serif text-2xl mt-36  ">
-                  Please Enter full screen to use chatbot
-                </div>
-                <div className="w-95% h-40 shadow-lg shadow-slate-800  bg-opacity-35 border border-gray-400 rounded-2xl m-5 hidden grid-rows-2 xl:grid ">
-                  <div>
-                    <div className="flex flex-row">
-                      <MuscleGoalButtonGroup
-                        muscleGoalData={buttonInputs.muscleGoalData}
-                        handleChange={handleChange}
-                        userInfo={userInfo}
-                      ></MuscleGoalButtonGroup>
-
-                      <div className="flex flex-row w-1/2 h-3/5 rounded-2xl m-5 items-center border justify-start mr-5 p-2 bg-gray-400 bg-opacity-20">
-                        <GenderButtonGroup
-                          userInfo={userInfo}
-                          genderData={buttonInputs.genderData}
+      <div className="min-h-wrapper flex flex-col bg-chatbot-background bg-cover bg-fixed bg-center bg-no-repeat">
+        <div className="bg-gradient-to-r from-slate-50/50 to-gray-300/50 dark:from-gray-900/40 dark:via-gray-800/80 dark:to-gray-700/70">
+          <div className="flex flex-row h-90vh gap-3 justify-center mt-5 mb-5 ">
+            <div className="flex flex-col gap-2 items-center mt-5 m-5 text-white  w-3/4   ">
+              <h1 className="font-serif text-3xl font-semibold text-white ">
+                Try our AI assistant to create a diet plan
+              </h1>
+              <div className="flex flex-row gap-10 w-full">
+                <div className=" shadow-lg shadow-slate-200 flex flex-col w-full h-80vh bg-gray-800 bg-opacity-75 rounded-2xl items-center border border-b-gray-500  ">
+                  <div className="xl:hidden flex flex-col items-center justify-center font-bold font-serif text-2xl mt-36  ">
+                    Please Enter full screen to use chatbot
+                  </div>
+                  <div className="w-95% h-40 shadow-lg shadow-slate-800  bg-opacity-35 border border-gray-400 rounded-2xl m-5 hidden grid-rows-2 xl:grid ">
+                    <div>
+                      <div className="flex flex-row">
+                        <MuscleGoalButtonGroup
+                          muscleGoalData={buttonInputs.muscleGoalData}
                           handleChange={handleChange}
-                        ></GenderButtonGroup>
-                        <div className="ml-2 w-1/2 ">
-                          <AgeButtonGroup
+                          userInfo={userInfo}
+                        ></MuscleGoalButtonGroup>
+
+                        <div className="flex flex-row w-1/2 h-3/5 rounded-2xl m-5 items-center border justify-start mr-5 p-2 bg-gray-400 bg-opacity-20">
+                          <GenderButtonGroup
                             userInfo={userInfo}
-                            ageData={buttonInputs.ageData}
+                            genderData={buttonInputs.genderData}
                             handleChange={handleChange}
-                          ></AgeButtonGroup>
+                          ></GenderButtonGroup>
+                          <div className="ml-2 w-1/2 ">
+                            <AgeButtonGroup
+                              userInfo={userInfo}
+                              ageData={buttonInputs.ageData}
+                              handleChange={handleChange}
+                            ></AgeButtonGroup>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-row gap-10 ">
+                        <div className="flex flex-col ml-10 mb-2 gap-1">
+                          <ActivityGroupButton
+                            userInfo={userInfo}
+                            handleChange={handleChange}
+                            activityData={buttonInputs.activityData}
+                          ></ActivityGroupButton>
+                        </div>
+                        <div className="flex flex-row items-end">
+                          <div className="flex flex-col gap-2 justify-end">
+                            <WeightGroupButton
+                              handleChange={handleChange}
+                              userInfo={userInfo}
+                              weightData={buttonInputs.weightData}
+                            ></WeightGroupButton>
+                          </div>
+                          <div className="w-1/4 flex flex-col items-center justify-center">
+                            <Button
+                              onClick={aiRun}
+                              variant="contained"
+                              endIcon={<SendIcon />}
+                            >
+                              {chatWindow.Send}
+                            </Button>
+                          </div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="flex flex-row gap-10 ">
-                      <div className="flex flex-col ml-10 mb-2 gap-1">
-                        <ActivityGroupButton
-                          userInfo={userInfo}
-                          handleChange={handleChange}
-                          activityData={buttonInputs.activityData}
-                        ></ActivityGroupButton>
-                      </div>
-                      <div className="flex flex-row items-end">
-                        <div className="flex flex-col gap-2 justify-end">
-                          <WeightGroupButton
-                            handleChange={handleChange}
-                            userInfo={userInfo}
-                            weightData={buttonInputs.weightData}
-                          ></WeightGroupButton>
+                    <div
+                      className={`flex flex-row  m-5 mb-2 gap-1 shadow-lg shadow-slate-700 rounded-xl ${
+                        isLoading ? "items-center justify-center" : ""
+                      }`}
+                    >
+                      {isLoading ? (
+                        <div className=" z-10 rounded-xl">
+                          <GridLoader color="#42A5F5"></GridLoader>
                         </div>
-                        <div className="w-1/4 flex flex-col items-center justify-center">
-                          <Button
-                            onClick={aiRun}
-                            variant="contained"
-                            endIcon={<SendIcon />}
-                          >
-                            {chatWindow.Send}
-                          </Button>
-                        </div>
-                      </div>
+                      ) : (
+                        <TypeWriter
+                          aiResponse={aiResponse}
+                          delay={20}
+                        ></TypeWriter>
+                      )}
                     </div>
                   </div>
-
-                  <div
-                    className={`flex flex-row  m-5 mb-2 gap-1 shadow-lg shadow-slate-700 rounded-xl ${
-                      isLoading ? "items-center justify-center" : ""
-                    }`}
-                  >
-                    {isLoading ? (
-                      <div className=" z-10 rounded-xl">
-                        <GridLoader color="#42A5F5"></GridLoader>
-                      </div>
-                    ) : (
-                      <TypeWriter
-                        aiResponse={aiResponse}
-                        delay={20}
-                      ></TypeWriter>
-                    )}
-                  </div>
                 </div>
+                <DietPieChart dailyDiet={dailyDiet}></DietPieChart>
               </div>
-              <DietPieChart dailyDiet={dailyDiet}></DietPieChart>
             </div>
           </div>
         </div>
