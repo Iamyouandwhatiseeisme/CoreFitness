@@ -4,7 +4,6 @@ import SendIcon from "@mui/icons-material/Send";
 
 import { Button } from "@mui/material";
 import { GridLoader } from "react-spinners";
-import ExtractDailyDietInfo from "../ExtractDailyDietInfo/ExtractDailyDietInfo";
 
 import MuscleGoalButtonGroup from "../MuscleGoalButtonGroup/MuscleGoalButtonGroup";
 import GenderButtonGroup from "../GenderButtonGroup/GenderButtonGroup";
@@ -13,8 +12,7 @@ import ActivityGroupButton from "../ActivityGroupButton/ActivityGroupButton";
 import WeightGroupButton from "../WeightGroupButton/WeightGroupButton";
 import { useLocale } from "../providers/LanguageContext";
 import TypeWriter from "../TypeWriter/TypeWriter";
-import { DailyDiet, UserInfo } from "../types";
-import DietPieChart from "../PieiChart/DietPieChart";
+import { UserInfo } from "../types";
 
 export default function ChatWindow() {
   const { chatWindow } = useLocale();
@@ -28,7 +26,6 @@ export default function ChatWindow() {
   });
   const [aiResponse, setResponse] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [dailyDiet, setDailyDiet] = useState<DailyDiet | null>();
 
   const genAI = new GoogleGenerativeAI(process.env.NEXT_PUBLIC_GOOGLE_API_KEY!);
   const model = genAI.getGenerativeModel({ model: "gemini-pro" });
@@ -45,9 +42,8 @@ export default function ChatWindow() {
 
   useEffect(() => {
     setResponse(aiResponse);
-    setDailyDiet(dailyDiet);
     setIsLoading(false);
-  }, [aiResponse, dailyDiet]);
+  }, [aiResponse]);
   useEffect(() => {
     setIsLoading(isLoading);
   }, [isLoading]);
@@ -55,30 +51,14 @@ export default function ChatWindow() {
   async function aiRun() {
     const prompt = `Please give me approximate amount of calories, protein, fat and sugar I need to take to reach my goal of ${userInfo.muscleGoal}ing weight, if I am ${userInfo.age} years old ${userInfo.gender} and I work out ${userInfo.activity} days a week and currently weigh ${userInfo.weight}
     `;
-    setResponse((e) => "");
-    setDailyDiet((e) => null);
-    // setIsGraphReady(false);
+    setResponse("");
     setIsLoading(true);
-    const graphPrompt = `Please give me Protein:%, Fat:%, Sugar:% from my daily diet (total should make 100% of the diet) if my goal is to ${userInfo.muscleGoal}ing weight, if I am ${userInfo.weight} kg ${userInfo.age} years old ${userInfo.gender} and I work out ${userInfo.activity} days a week.
-    the answer should be in this format **Goal:** 
-
-**Calorie Needs:** Approximately  calories per day**
-
-**Macronutrient Distribution:**
-**Protein - <one integer>%**
-**Fat - <one integer>%**
-**Sugar - <one integer>%**`;
 
     const result = await model.generateContent(prompt);
     const response = result.response;
     const text = response.text();
 
     setResponse(text);
-    const graphResult = await model.generateContent(graphPrompt);
-    const dailyDietResult = graphResult.response.text();
-    const dailyDietInfo = ExtractDailyDietInfo(dailyDietResult);
-
-    setDailyDiet(dailyDietInfo);
   }
 
   const buttonInputs = {
@@ -95,92 +75,92 @@ export default function ChatWindow() {
   };
 
   return (
-    <div>
-      <div className="min-h-wrapper flex flex-col bg-chatbot-background bg-cover bg-fixed bg-center bg-no-repeat">
-        <div className="bg-gradient-to-r from-slate-50/50 to-gray-300/50 dark:from-gray-900/40 dark:via-gray-800/80 dark:to-gray-700/70">
-          <div className="flex flex-row h-90vh gap-3 justify-center mt-5 mb-5 ">
-            <div className="flex flex-col gap-2 items-center mt-5 m-5 text-white  w-3/4   ">
-              <h1 className="font-serif text-3xl font-semibold text-white ">
-                Try our AI assistant to create a diet plan
-              </h1>
-              <div className="flex flex-row gap-10 w-full">
-                <div className=" shadow-lg shadow-slate-200 flex flex-col w-full h-80vh bg-gray-800 bg-opacity-75 rounded-2xl items-center border border-b-gray-500  ">
-                  <div className="xl:hidden flex flex-col items-center justify-center font-bold font-serif text-2xl mt-36  ">
-                    Please Enter full screen to use chatbot
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 rounded-xl">
+      <div className="container mx-auto px-4 py-8">
+        <div className="flex flex-col items-center gap-6">
+          <h1 className="text-4xl font-bold text-center text-gray-800 dark:text-gray-100 font-serif bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Try our AI assistant to create a diet plan
+          </h1>
+
+          <div className="w-full max-w-6xl bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 transition-all duration-300">
+            <div className="xl:hidden flex flex-col items-center justify-center p-8 text-center">
+              <p className="text-xl font-semibold text-gray-600 dark:text-gray-300 mb-4">
+                Please switch to full screen for optimal chatbot experience
+              </p>
+              <div className="w-24 h-1 bg-blue-500 rounded-full" />
+            </div>
+
+            <div className="hidden xl:block space-y-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="space-y-6">
+                  <div className="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
+                    <MuscleGoalButtonGroup
+                      muscleGoalData={buttonInputs.muscleGoalData}
+                      handleChange={handleChange}
+                      userInfo={userInfo}
+                    />
                   </div>
-                  <div className="w-95% h-40 shadow-lg shadow-slate-800  bg-opacity-35 border border-gray-400 rounded-2xl m-5 hidden grid-rows-2 xl:grid ">
-                    <div>
-                      <div className="flex flex-row">
-                        <MuscleGoalButtonGroup
-                          muscleGoalData={buttonInputs.muscleGoalData}
-                          handleChange={handleChange}
-                          userInfo={userInfo}
-                        ></MuscleGoalButtonGroup>
 
-                        <div className="flex flex-row w-1/2 h-3/5 rounded-2xl m-5 items-center border justify-start mr-5 p-2 bg-gray-400 bg-opacity-20">
-                          <GenderButtonGroup
-                            userInfo={userInfo}
-                            genderData={buttonInputs.genderData}
-                            handleChange={handleChange}
-                          ></GenderButtonGroup>
-                          <div className="ml-2 w-1/2 ">
-                            <AgeButtonGroup
-                              userInfo={userInfo}
-                              ageData={buttonInputs.ageData}
-                              handleChange={handleChange}
-                            ></AgeButtonGroup>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-row gap-10 ">
-                        <div className="flex flex-col ml-10 mb-2 gap-1">
-                          <ActivityGroupButton
-                            userInfo={userInfo}
-                            handleChange={handleChange}
-                            activityData={buttonInputs.activityData}
-                          ></ActivityGroupButton>
-                        </div>
-                        <div className="flex flex-row items-end">
-                          <div className="flex flex-col gap-2 justify-end">
-                            <WeightGroupButton
-                              handleChange={handleChange}
-                              userInfo={userInfo}
-                              weightData={buttonInputs.weightData}
-                            ></WeightGroupButton>
-                          </div>
-                          <div className="w-1/4 flex flex-col items-center justify-center">
-                            <Button
-                              onClick={aiRun}
-                              variant="contained"
-                              endIcon={<SendIcon />}
-                            >
-                              {chatWindow.Send}
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
+                      <GenderButtonGroup
+                        userInfo={userInfo}
+                        genderData={buttonInputs.genderData}
+                        handleChange={handleChange}
+                      />
                     </div>
 
-                    <div
-                      className={`flex flex-row  m-5 mb-2 gap-1 shadow-lg shadow-slate-700 rounded-xl ${
-                        isLoading ? "items-center justify-center" : ""
-                      }`}
-                    >
-                      {isLoading ? (
-                        <div className=" z-10 rounded-xl">
-                          <GridLoader color="#42A5F5"></GridLoader>
-                        </div>
-                      ) : (
-                        <TypeWriter
-                          aiResponse={aiResponse}
-                          delay={20}
-                        ></TypeWriter>
-                      )}
+                    <div className="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
+                      <AgeButtonGroup
+                        userInfo={userInfo}
+                        ageData={buttonInputs.ageData}
+                        handleChange={handleChange}
+                      />
                     </div>
                   </div>
                 </div>
-                <DietPieChart dailyDiet={dailyDiet}></DietPieChart>
+
+                <div className="space-y-6">
+                  <div className="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
+                    <ActivityGroupButton
+                      userInfo={userInfo}
+                      handleChange={handleChange}
+                      activityData={buttonInputs.activityData}
+                    />
+                  </div>
+
+                  <div className="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
+                    <WeightGroupButton
+                      handleChange={handleChange}
+                      userInfo={userInfo}
+                      weightData={buttonInputs.weightData}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <Button
+                onClick={aiRun}
+                variant="contained"
+                endIcon={<SendIcon />}
+                className="w-full py-4 bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 text-white transition-transform duration-200 hover:scale-[1.02]"
+              >
+                {chatWindow.Send}
+              </Button>
+
+              <div className="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600 min-h-[400px] max-h-full">
+                {isLoading ? (
+                  <div className="h-[400px] flex items-center justify-center">
+                    <GridLoader
+                      color="#3B82F6"
+                      className="dark:text-blue-300"
+                    />
+                  </div>
+                ) : (
+                  <div className="prose dark:prose-invert  h-[400px] overflow-y-auto ">
+                    <TypeWriter aiResponse={aiResponse} delay={20} />
+                  </div>
+                )}
               </div>
             </div>
           </div>

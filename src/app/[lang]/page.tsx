@@ -42,9 +42,9 @@ function Welcome() {
   }, []);
 
   return (
-    <div className="bg-neutral-400 dark:bg-neutral-900 text-white gap-4  flex flex-col   ">
-      <div className="min-h-wrapper flex flex-col bg-gym-background lg:bg-contain bg-fixed bg-center bg-no-repeat bg-cover">
-        <div className="bg-gradient-to-r from-slate-50/50 to-gray-300/50 dark:from-gray-900/40 dark:via-gray-800/80 dark:to-gray-700/70">
+    <div className="bg-gradient-to-br from-gray-100 to-blue-100 dark:from-gray-900 dark:to-gray-800 text-white gap-4  flex flex-col rounded-xl   ">
+      <div className="min-h-wrapper flex flex-col bg-gym-background bg-cover bg-fixed bg-center bg-no-repeat rounded-xl">
+        <div className="bg-gradient-to-r from-slate-50/50 to-gray-300/50 dark:from-gray-900/40 dark:via-gray-800/80 dark:to-gray-700/70 rounded-xl">
           <InformationBoard />
         </div>
       </div>
