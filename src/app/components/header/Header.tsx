@@ -5,7 +5,6 @@ import { useLocale } from "../providers/LanguageContext";
 import React, { useState } from "react";
 import { User } from "@supabase/supabase-js";
 import { DictionaryChapter } from "../../[lang]/dictionaries";
-import useTheme from "../../hooks/useTheme";
 
 interface HeaderProps {
   dict: DictionaryChapter;
@@ -16,20 +15,20 @@ export default function Header(props: HeaderProps) {
   const { locale } = useLocale();
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
-  const { themeOptions } = useTheme();
-
   const listItemStyle: string =
     " hover:bg-teal-200 w-32   dark:hover:bg-header-hover-dark hover:rounded-3xl font-serif font-normal dark:text-yellow-500 p-5 text-center transition-header-hover-transition cursor-pointer";
   if (!props.currentUser) return null;
   return (
     <>
       <div
-        className="fixed left-0 top-1/2 transform -translate-y-1/2 w-20 h-16 bg-gray-300 cursor-pointer z-20"
+        className={`fixed left-0 top-1/2 transform -translate-y-1/2 w-20 h-16 bg-gray-500 cursor-pointer z-20 bg-opacity-35 dark:bg-opacity-35 ${
+          !isHovered ? "transform translate-x-0" : "transform -translate-x-full"
+        }`}
         onMouseEnter={() => setIsHovered(true)}
       ></div>
       <header
         id="header"
-        className={`flex flex-col h-full fixed justify-start items-center bg-slate-50 dark:bg-black text-header-green w-64 overflow-hidden z-20 transition-transform duration-300 ${
+        className={`flex flex-col h-full fixed rounded justify-start items-center bg-gradient-to-r from-slate-50 to-gray-300 bg-opacity-50 dark:bg-opacity-80 dark:bg-gradient-to-r dark:from-black dark:to-gray-800 text-header-green w-64 overflow-hidden z-20 transition-transform duration-300 ${
           isHovered ? "transform translate-x-0" : "transform -translate-x-full"
         }`}
         onMouseLeave={() => setIsHovered(false)}
