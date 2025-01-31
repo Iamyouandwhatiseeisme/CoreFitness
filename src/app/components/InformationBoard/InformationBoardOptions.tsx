@@ -1,6 +1,5 @@
 import React from "react";
 import { InformationBoardItem } from "../types";
-import { useTheme } from "next-themes";
 
 interface InformationBoardOptionsProps {
   item: InformationBoardItem;

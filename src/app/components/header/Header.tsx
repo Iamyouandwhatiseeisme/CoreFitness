@@ -24,6 +24,7 @@ export default function Header(props: HeaderProps) {
         className={`fixed left-0 top-1/2 transform -translate-y-1/2 w-20 h-16 bg-gray-500 cursor-pointer z-20 bg-opacity-35 dark:bg-opacity-35 ${
           !isHovered ? "transform translate-x-0" : "transform -translate-x-full"
         }`}
+        data-cy="header"
         onMouseEnter={() => setIsHovered(true)}
       ></div>
       <header

@@ -9,6 +9,8 @@ describe("Product Actions", () => {
     cy.get("[data-cy='login-button']").click();
     cy.get("[data-cy='logout-button']").should("exist");
     cy.wait(8000);
+    cy.get("[data-cy='header']").trigger("mouseover");
+    cy.wait(3000);
     cy.get("[data-cy='products-page-button']").click();
     cy.wait(10000);
     cy.get("[data-cy='add-product-button']").should("exist");
@@ -43,6 +45,9 @@ describe("Product Actions", () => {
     cy.get("[data-cy='password']").type("Karachka2");
     cy.get("[data-cy='login-button']").click();
     cy.get("[data-cy='logout-button']").should("exist");
+    cy.wait(3000);
+    cy.get("[data-cy='header']").trigger("mouseover");
+    cy.wait(3000);
     cy.get("[data-cy='products-page-button']").click();
     cy.wait(2000);
     cy.get("[data-cy='add-product-button']").should("exist");
@@ -76,10 +81,17 @@ describe("Product Actions", () => {
     cy.get("[data-cy='password']").type("Karachka2");
     cy.get("[data-cy='login-button']").click();
     cy.get("[data-cy='logout-button']").should("exist");
+    cy.wait(3000);
+    cy.get("[data-cy='header']").trigger("mouseover");
+    cy.wait(3000);
     cy.get("[data-cy='products-page-button']").click();
     cy.wait(2000);
 
     cy.get(`[data-cy='add-to-cart-button-testBuyProduct'`).click();
+    cy.wait(3000);
+    cy.get("[data-cy='right-side-panel']").trigger("mouseover");
+    cy.wait(3000);
+
     cy.get(`[data-cy='open-cart-button'`).click();
     cy.get(`[data-cy='buy-button'`).should("exist");
 
@@ -116,6 +128,8 @@ describe("Product Actions", () => {
       const id = response.body?.data[0].id;
       cy.wrap(id).as("id");
       cy.wait(2000);
+      cy.get("[data-cy='header']").trigger("mouseover");
+      cy.wait(3000);
       cy.get(`[data-cy='orders-button'`).click();
       cy.wait(8000);
       cy.get(`[data-cy='${id}']`).should("exist");
@@ -134,6 +148,10 @@ describe("Product Actions", () => {
       cy.visit("http://localhost:3000");
 
       cy.wait(4000);
+
+      cy.get("[data-cy='header']").trigger("mouseover");
+      cy.wait(3000);
+
       cy.get(`[data-cy='orders-button'`).click();
 
       cy.wait(4000);
