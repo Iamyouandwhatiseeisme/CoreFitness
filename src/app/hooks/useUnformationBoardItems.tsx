@@ -10,7 +10,10 @@ export default function useInformationBoardItems() {
         informationBoard.AccessToEveryFacility,
         informationBoard.InCaesOfUsingFacility,
       ],
-      hoverColor: "#FBBF24",
+      hoverColors: {
+        light: "#FBBF24",
+        dark: "#F59E0B",
+      },
       hoverImage: "/images/Fitpass Image.png",
     },
     {
@@ -20,14 +23,20 @@ export default function useInformationBoardItems() {
         informationBoard.ModernEquipment,
         informationBoard.ElectronicSystem,
       ],
-      hoverColor: "#60A5FA ",
+      hoverColors: {
+        light: "#60A5FA",
+        dark: "#3B82F6",
+      },
       hoverImage: "/images/Equipment Image.jpeg",
     },
     {
       key: 2,
       logo: "/images/Healthy Logo.jpg",
       titles: [informationBoard.HealthySnacks, informationBoard.Kitchen],
-      hoverColor: "#A78BFA",
+      hoverColors: {
+        light: "#A78BFA",
+        dark: "#8B5CF6",
+      },
       hoverImage: "/images/Cafe Image.jpg",
     },
     {
@@ -37,7 +46,10 @@ export default function useInformationBoardItems() {
         informationBoard.CertifiedTrainers,
         informationBoard.PilatesAndYoga,
       ],
-      hoverColor: "#2DD4BF ",
+      hoverColors: {
+        light: "#2DD4BF",
+        dark: "#14B8A6",
+      },
       hoverImage: "/images/Trainer Image.jpg",
     },
     {
@@ -47,7 +59,10 @@ export default function useInformationBoardItems() {
         informationBoard.BranchesOnEachSide,
         informationBoard.SubscriptionSystemForEvery,
       ],
-      hoverColor: "#4ADE80 ",
+      hoverColors: {
+        light: "#4ADE80",
+        dark: "#22C55E",
+      },
       hoverImage: "/images/Branches Image.png",
     },
   ];

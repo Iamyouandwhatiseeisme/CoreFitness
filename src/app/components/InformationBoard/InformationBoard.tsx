@@ -2,14 +2,16 @@
 import React, { useState } from "react";
 import InformationBoardOptions from "./InformationBoardOptions";
 import useInformationBoardItems from "../../hooks/useUnformationBoardItems";
+import { useTheme } from "next-themes";
 
 export default function InformationBoard() {
   const [hovered, setHovered] = useState(0);
   const { informationBoardItems } = useInformationBoardItems();
+  const { theme } = useTheme();
 
   return (
-    <div className="flex flex-row h-150 gap-20 justify-center mt-32 mb-5">
-      <div className="hidden   flex-col rounded-2xl w-1/3 border border-header-hover-dark border-solid bg-black bg-opacity-85  xl:flex ">
+    <div className="flex flex-row h-150 gap-20 justify-center mt-32 mb-5 ">
+      <div className="hidden   flex-col rounded-2xl w-1/3 border border-header-hover-dark border-solid bg-white text-black bg-opacity-40 dark:bg-gray-800 dark:text-white dark:bg-opacity-40  xl:flex ">
         {informationBoardItems.map((item) => {
           const isHovered = hovered === item.key;
           return (
@@ -18,7 +20,11 @@ export default function InformationBoard() {
               key={item.key}
               setHovered={setHovered}
               isHovered={isHovered}
-              hoverColor={item.hoverColor}
+              hoverColor={
+                theme === "dark"
+                  ? item.hoverColors.dark
+                  : item.hoverColors.light
+              }
             ></InformationBoardOptions>
           );
         })}
