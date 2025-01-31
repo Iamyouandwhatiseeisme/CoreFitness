@@ -49,7 +49,11 @@ export default function ClientRoot({
         <CartProvider>
           <div className="bg-neutral-200 dark:bg-neutral-900 font-serif flex flex-row justify-between">
             <Header currentUser={user} dict={dict.header} />
-            <main className="flex flex-col max-w-full  m-0 pl-[100px] pr-[100px]">
+            <main
+              className={`flex flex-col max-w-full  m-0 ${
+                !user ? "" : "pl-[100px] pr-[100px]"
+              }`}
+            >
               {" "}
               {children}
               <Footer />

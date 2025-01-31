@@ -1,64 +1,26 @@
 "use client";
 import Link from "next/link";
 import Logo from "../../../../public/images/Header Logo.webp";
-// import DropDown from "../DropDown/DropDown";
-import AuthenticationButton from "../logoutButton/LoggoutButton";
 import { useLocale } from "../providers/LanguageContext";
-import React from "react";
-import LocaleChange from "../LanguageChange/LanguageChange";
+import React, { useState } from "react";
 import { User } from "@supabase/supabase-js";
 import { DictionaryChapter } from "../../[lang]/dictionaries";
 import useTheme from "../../hooks/useTheme";
-import { useCallback, useEffect, useRef, useState } from "react";
-import CartDialog from "../CartDialog/CartDialog";
-import DropDown from "../DropDown/DropDown";
 
 interface HeaderProps {
   dict: DictionaryChapter;
   currentUser: User | null;
 }
 
-const Header = (props: HeaderProps) => {
+export default function Header(props: HeaderProps) {
   const { locale } = useLocale();
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
   const { themeOptions } = useTheme();
 
-  // const [isAnimationTriggered, setIsAnimationTriggered] =
-  //   useState<boolean>(false);
-  // const isAnimationTriggeredRef = useRef(isAnimationTriggered);
-  // useEffect(() => {
-  //   isAnimationTriggeredRef.current = isAnimationTriggered;
-  // }, [isAnimationTriggered]);
-
   const listItemStyle: string =
     " hover:bg-teal-200 w-32   dark:hover:bg-header-hover-dark hover:rounded-3xl font-serif font-normal dark:text-yellow-500 p-5 text-center transition-header-hover-transition cursor-pointer";
-
-  // const handleScroll = useCallback(() => {
-  //   const triggered = isAnimationTriggeredRef.current;
-
-  //   const header = document.getElementById("header");
-  //   const scrollable = document.getElementById("info-charity");
-
-  //   if (header && scrollable) {
-  //     if (window.scrollY > 0 && !triggered) {
-  //       header.classList.remove("animate-first-scroll-header-reverse");
-  //       header.classList.add("animate-first-scroll-header");
-  //       setIsAnimationTriggered(true);
-  //     } else if (window.scrollY === 0 && triggered) {
-  //       header.classList.remove("animate-first-scroll-header");
-  //       header.classList.add("animate-first-scroll-header-reverse");
-  //       setIsAnimationTriggered(false);
-  //     }
-  //   }
-  // }, []);
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", handleScroll);
-  //   };
-  // }, [handleScroll]);
+  if (!props.currentUser) return null;
   return (
     <>
       <div
@@ -72,10 +34,6 @@ const Header = (props: HeaderProps) => {
         }`}
         onMouseLeave={() => setIsHovered(false)}
       >
-        {/* <div className="w-60 ml-5">
-        <LocaleChange></LocaleChange>
-      </div> */}
-
         <div className="flex gap-38 items-center   flex-col  pt-5 pb-5 ml-20 ">
           <Link
             href={`/${locale}`}
@@ -83,7 +41,7 @@ const Header = (props: HeaderProps) => {
           >
             <img src={Logo.src} alt="logo"></img>
           </Link>
-          <nav className="rounded-3xl  flex- flex-col  border border-solid dark:border-header-hover-dark h-20 items-center p-2  hidden sm:block">
+          <nav className="rounded-3xl  flex- flex-col   dark:border-header-hover-dark h-20 items-center p-2  hidden sm:block">
             <ul className="gap-5 flex  list-none flex-col">
               <Link href={`/${locale}/equipment`}>
                 <li className={listItemStyle}>{props.dict.Equipment}</li>
@@ -114,34 +72,7 @@ const Header = (props: HeaderProps) => {
             </ul>
           </nav>
         </div>
-        {/* <div className="flex flex-row gap-2 items-center mr-5 justify-end w-full z-10"> */}
-        {/* <div className="">
-          <DropDown content={themeOptions}></DropDown>
-        </div>
-        <div>
-          <CartDialog></CartDialog>
-        </div> */}
-        {/* <div data-cy="logout-button" className="mb-2  ">
-          {props.currentUser === null ? (
-            <AuthenticationButton
-              locale={locale}
-              href={`/${locale}/login`}
-              type="login"
-              buttonText={props.dict.Login}
-            />
-          ) : (
-            <AuthenticationButton
-              locale={locale}
-              href={`/${locale}/login`}
-              type="logout"
-              buttonText={props.dict.Logout}
-            />
-          )}
-        </div> */}
-        {/* </d iv> */}
       </header>
     </>
   );
-};
-
-export default Header;
+}
