@@ -10,7 +10,7 @@ export default function InformationBoard() {
   const { theme } = useTheme();
 
   return (
-    <div className="flex flex-row h-150 gap-20 justify-center mt-32 mb-5 ">
+    <div className="flex flex-row h-150 gap-20 justify-center mt-32 mb-5 rounded-xl ">
       <div className="hidden   flex-col rounded-2xl w-1/3 border border-header-hover-dark border-solid bg-white text-black bg-opacity-40 dark:bg-gray-800 dark:text-white dark:bg-opacity-40  xl:flex ">
         {informationBoardItems.map((item) => {
           const isHovered = hovered === item.key;
