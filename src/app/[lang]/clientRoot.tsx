@@ -47,12 +47,17 @@ export default function ClientRoot({
         informationBoard={dict.informationBoard}
       >
         <CartProvider>
-          <div className="bg-neutral-200 dark:bg-neutral-900 font-serif flex flex-row justify-between">
+          <div className="bg-white dark:bg-neutral-900 font-serif flex flex-row justify-between">
             <Header currentUser={user} dict={dict.header} />
             <main
-              className={`flex flex-col max-w-full  m-0 ${
-                !user ? "" : "pl-[100px] pr-[100px]"
-              }`}
+              className={`flex flex-col items-center justify-start m-auto 
+                bg-white/80 dark:bg-slate-900/90 backdrop-blur-lg
+                rounded-2xl shadow-2xl shadow-slate-200/50 dark:shadow-slate-950/30
+                border border-white/20 dark:border-slate-800
+                transition-all duration-300 ease-out
+                max-w-[calc(100%-200px)] w-full
+                p-8 space-y-8
+                hover:shadow-3xl hover:shadow-slate-400/40 dark:hover:shadow-slate-950/50}`}
             >
               {" "}
               {children}
