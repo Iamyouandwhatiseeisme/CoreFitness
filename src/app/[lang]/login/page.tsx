@@ -49,7 +49,9 @@ export default function LogIn() {
       if (actionType === "login") {
         toast("Successfully logged in!");
       }
-      toast("Successfully registered user!");
+      if (actionType === "signup") {
+        toast("Successfully registered user!");
+      }
       setError(null);
     }
     if (error) {

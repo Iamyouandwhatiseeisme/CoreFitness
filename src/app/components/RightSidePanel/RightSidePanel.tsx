@@ -7,6 +7,7 @@ import { useLocale } from "../providers/LanguageContext";
 import useTheme from "../../hooks/useTheme";
 import { User } from "@supabase/supabase-js";
 import { useState } from "react";
+import { TbSquareRoundedChevronLeftFilled } from "react-icons/tb";
 
 import { DictionaryChapter } from "src/app/[lang]/dictionaries";
 import CartDialog from "../CartDialog/CartDialog";
@@ -19,17 +20,20 @@ interface RightSidePanelProps {
 export default function RightSidePanel(props: RightSidePanelProps) {
   const { locale } = useLocale();
   const { themeOptions } = useTheme();
+
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <>
       <div
-        className={`fixed right-0 top-1/2 transform -translate-y-1/2 w-20 h-16 bg-gray-300 cursor-pointer z-20 ${
+        className={`fixed right-0 top-1/2 transform -translate-y-1/2 w-20 h-16 bg-transparent cursor-pointer z-20 ${
           !isHovered ? "transform translate-x-0" : "transform translate-x-full"
         }`}
         data-cy="right-side-panel"
         onMouseEnter={() => setIsHovered(true)}
-      ></div>
+      >
+        <TbSquareRoundedChevronLeftFilled className="w-20 h-20  "></TbSquareRoundedChevronLeftFilled>
+      </div>
       <aside
         className={`flex flex-col h-full fixed justify-between items-center bg-gradient-to-r from-slate-50 to-gray-300 rounded dark:bg-gradient-to-r dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 dark:bg-opacity-80 bg-opacity-50 text-header-green w-64 overflow-hidden z-20 right-0 p-4 transition-transform duration-300 ${
           isHovered ? "transform translate-x-0" : "transform translate-x-full"

@@ -43,7 +43,7 @@ function Welcome() {
 
   return (
     <div className="bg-neutral-400 dark:bg-neutral-900 text-white gap-4  flex flex-col   ">
-      <div className="min-h-wrapper flex flex-col bg-gym-background lg:bg-contain bg-fixed bg-center bg-no-repeat bg-cover">
+      <div className="min-h-wrapper flex flex-col bg-gym-background bg-cover bg-fixed bg-center bg-no-repeat">
         <div className="bg-gradient-to-r from-slate-50/50 to-gray-300/50 dark:from-gray-900/40 dark:via-gray-800/80 dark:to-gray-700/70">
           <InformationBoard />
         </div>

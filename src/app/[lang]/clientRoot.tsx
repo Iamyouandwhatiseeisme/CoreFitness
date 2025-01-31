@@ -58,7 +58,7 @@ export default function ClientRoot({
                 rounded-2xl shadow-2xl shadow-slate-200/50 dark:shadow-slate-950/30
                 border border-white/20 dark:border-slate-800
                 transition-all duration-300 ease-out
-                max-w-[calc(100%-200px)] w-full
+                max-w-[calc(100%-100  px)] w-full
                 p-8 space-y-8
                 hover:shadow-3xl hover:shadow-slate-400/40 dark:hover:shadow-slate-950/50`
               }
