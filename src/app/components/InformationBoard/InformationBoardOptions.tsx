@@ -16,11 +16,9 @@ export default function InformationBoardOptions(
       key={props.item.key}
       onMouseEnter={() => props.setHovered(props.item.key)}
       style={{
-        backgroundColor: props.isHovered
-          ? props.item.hoverColor
-          : "transparent",
+        backgroundColor: props.isHovered ? props.hoverColor : "transparent",
         transition: "transform 0.15s ease-in-out",
-        width: props.isHovered ? "550px" : "",
+        width: props.isHovered ? "480px" : "",
         transform: props.isHovered ? "scale(1.05)" : "scale(1.0)",
         height: props.isHovered ? "384px" : "",
         transitionTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",

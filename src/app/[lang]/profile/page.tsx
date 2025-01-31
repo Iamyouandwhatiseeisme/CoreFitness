@@ -71,7 +71,10 @@ export default function Profile() {
     if (response.ok) {
       const responseData = await response.json();
       if (responseData.user === null) {
-        router.push("/login");
+        const { error } = await supabase.auth.signOut();
+        if (error === null) {
+          router.push("/login");
+        }
       }
     }
   }
