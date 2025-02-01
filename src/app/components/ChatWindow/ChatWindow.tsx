@@ -158,7 +158,7 @@ export default function ChatWindow() {
                   </div>
                 ) : (
                   <div className="prose dark:prose-invert  h-[400px] overflow-y-auto ">
-                    <TypeWriter aiResponse={aiResponse} delay={20} />
+                    <TypeWriter aiResponse={aiResponse} delay={10} />
                   </div>
                 )}
               </div>
