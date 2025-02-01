@@ -14,8 +14,8 @@ const DropDownButton = (props: DropDownButtonProps) => {
     <div
       className={
         props.open
-          ? "flex items-center w-fit p-4 min-w-12 rounded-lg cursor-pointer border-2 border-solid border-blue-400 shadow-lg shadow-blue-400 dark:shadow-yellow-400"
-          : "flex items-center w-fit p-4 min-w-12 rounded-lg cursor-pointer border-2 border-solid border-blue-50 shadow-sm shadow-blue-400 dark:shadow-yellow-400"
+          ? "flex items-center w-fit p-4 min-w-12 rounded-lg cursor-pointer border-2 border-solid border-blue-400 shadow-lg shadow-blue-400/20 dark:shadow-yellow-400/20  dark:hover:bg-yellow-200 hover:bg-blue-200 hover:scale-105 transition-all duration-300"
+          : "flex items-center w-fit p-4 min-w-12 rounded-lg cursor-pointer border-2 border-solid border-blue-200 shadow-sm shadow-blue-400/20 dark:shadow-yellow-400/20 dark:hover:bg-yellow-200 hover:bg-blue-200 hover:scale-105 transition-all duration-300"
       }
       onClick={props.toggle}
     >

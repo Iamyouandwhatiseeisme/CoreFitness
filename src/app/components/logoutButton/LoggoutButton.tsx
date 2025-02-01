@@ -1,6 +1,7 @@
 import React from "react";
 import { ClipLoader } from "react-spinners";
 import { signOut } from "../../[lang]/login/actions";
+import { CiLogout } from "react-icons/ci";
 
 interface AuthenticationButtonProps {
   href: string;
@@ -22,9 +23,9 @@ export default function AuthenticationButton(props: AuthenticationButtonProps) {
             signOut();
           }
         }}
-        className="h-10 w-20  items-center mt-2 text-white dark:text-white bg-teal-400 hover:bg-teal-500 dark:bg-header-hover-dark rounded-br-full rounded-tl-full cursor-pointer "
+        className="w-14 h-14 items-center justify-center flex mt-2 text-white dark:text-white rounded-2xl bg-teal-400 hover:bg-teal-500 dark:bg-header-hover-dark cursor-pointer transition-transform duration-300 transform hover:scale-105"
       >
-        {props.buttonText}
+        <CiLogout className="w-10 h-10"></CiLogout>
       </button>
     </a>
   );

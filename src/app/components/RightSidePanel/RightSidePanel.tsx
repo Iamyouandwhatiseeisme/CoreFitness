@@ -40,8 +40,14 @@ export default function RightSidePanel(props: RightSidePanelProps) {
         }`}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div className="flex flex-row gap-4 items-center justify-between w-full">
+        <div className="flex flex-row gap-4 items-start justify-between w-full">
           <DropDown content={themeOptions} />
+          <div className="flex flex-col gap-4">
+            <LocaleChange />
+            <CartDialog></CartDialog>
+          </div>
+        </div>
+        <div className="w-full mb-4 flex flex-row">
           <div data-cy="logout-button">
             {props.currentUser === null ? (
               <AuthenticationButton
@@ -59,10 +65,6 @@ export default function RightSidePanel(props: RightSidePanelProps) {
               />
             )}
           </div>
-        </div>
-        <div className="w-full mb-4 flex flex-row">
-          <LocaleChange />
-          <CartDialog></CartDialog>
         </div>
       </aside>
     </>

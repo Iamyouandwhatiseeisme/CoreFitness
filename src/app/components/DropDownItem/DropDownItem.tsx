@@ -25,7 +25,7 @@ const DropDownItem = (props: DropDownItemProps) => {
 
   return (
     <div
-      className="p-2 m-0.5 w-full rounded-lg  cursor-pointer hover:bg-gray-200"
+      className="p-2 m-0.5 w-full rounded-lg  cursor-pointer hover:bg-blue-200  dark:hover:bg-yellow-200/80 hover:scale-105 dark:hover:scale-105 transition-all duration-300"
       onClick={() => {
         clickHandler();
       }}

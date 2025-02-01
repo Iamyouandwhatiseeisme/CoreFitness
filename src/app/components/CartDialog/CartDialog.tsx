@@ -11,6 +11,7 @@ import { Minus, Plus, X } from "lucide-react";
 import { CartItem, useCart } from "../providers/CartProvider";
 import { Button } from "@components/components/ui/button";
 import React from "react";
+import { PiShoppingCart } from "react-icons/pi";
 
 const CartDialog = () => {
   const { cartItems, removeItemFromCart, clearCart, updateItemQuantity } =
@@ -46,7 +47,13 @@ const CartDialog = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button data-cy="open-cart-button">Open Cart</button>
+        <button
+          data-cy="open-cart-button"
+          className="flex flex-row items-center border border-gray-200 p-2 m-2 rounded-2xl bg-white/20 hover:bg-white/40 transform transition-transform hover:scale-105 dark:text-yellow-500"
+        >
+          Open Cart
+          <PiShoppingCart></PiShoppingCart>
+        </button>
       </DialogTrigger>
       <DialogContent className="fixed top-0 left-0 w-full h-full bg-gray-400 bg-opacity-50 backdrop-blur-md z-40">
         <DialogContent
