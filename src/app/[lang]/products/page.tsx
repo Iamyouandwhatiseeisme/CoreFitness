@@ -15,11 +15,11 @@ const PRODUCTS_PER_PAGE = 10;
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
-  const [isUpdating, setIsUpdating] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
 
   const [hasMore, setHasMore] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isUpdating, setisUpdating] = useState(false);
 
   const [selectedCategories, setSelectedCategories] = useState<Set<string>>(
     new Set()
@@ -40,15 +40,6 @@ export default function Products() {
     setProducts(productsArray);
   }
 
-  // useEffect(() => {
-  //   async function fetch() {
-  //     setIsUpdating(false);
-  //     const productsArray = (await fetchProducts()) as Product[];
-  //     setProducts(productsArray);
-  //   }
-
-  //   fetch();
-  // }, [isUpdating]);
   useEffect(() => {
     const fetchProducts = async () => {
       const start = (page - 1) * PRODUCTS_PER_PAGE;
@@ -75,20 +66,21 @@ export default function Products() {
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
+        setisUpdating(false);
         setIsLoading(false);
       }
     };
 
     fetchProducts();
-  }, [page, isLoading]);
+  }, [page, isUpdating]);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isUpdating, page]);
+  }, [page]);
   const handleScroll = () => {
     if (
       window.innerHeight + window.scrollY >= document.body.scrollHeight &&
-      !isLoading &&
+      !isUpdating &&
       hasMore
     ) {
       setPage((prev) => prev + 1);
@@ -104,8 +96,6 @@ export default function Products() {
               searchItemType="products"
               setProducts={setProducts}
               refetchProducts={refetchProducts}
-              // setIsUpdating={setIsUpdat
-              // ing}
             />
           </div>
           <h2 className="text-black dark:text-gray-200 font-sans font-bold text-2xl">
@@ -146,43 +136,50 @@ export default function Products() {
         </div>
         <div className=" flex flex-row">
           <div className="p-5 ml-44 grid grid-cols-3 gap-7">
-            {products.map((product) => {
-              const title = locale === "ka" ? product.title_ka : product.title;
-              return (
-                <div
-                  key={product.id}
-                  className="items-center flex flex-col border-2 border-solid border-gray-50 rounded-xl w-80 h-auto overflow-hidden bg-neutral-400 dark:bg-neutral-200"
-                >
-                  <Link
+            {!isLoading &&
+              products.map((product) => {
+                const title =
+                  locale === "ka" ? product.title_ka : product.title;
+                return (
+                  <div
                     key={product.id}
-                    href={`${locale}/products/${product.id}`}
-                    data-cy={product.title}
                     className="items-center flex flex-col border-2 border-solid border-gray-50 rounded-xl w-80 h-auto overflow-hidden bg-neutral-400 dark:bg-neutral-200"
                   >
-                    <img
-                      className="object-scale-down w-6/12 h-3/6 m-2"
-                      src={product.img_url}
-                      alt={product.title}
-                    ></img>
-                    <div className="p-2 font-serif size text-xs m-1 ">
-                      <strong>{title}</strong>
+                    <Link
+                      key={product.id}
+                      href={`${locale}/products/${product.id}`}
+                      data-cy={product.title}
+                      className="items-center flex flex-col border-2 border-solid border-gray-50 rounded-xl w-80 h-auto overflow-hidden bg-neutral-400 dark:bg-neutral-200"
+                    >
+                      <img
+                        className="object-scale-down w-6/12 h-3/6 m-2"
+                        src={product.img_url}
+                        alt={product.title}
+                      ></img>
+                      <div className="p-2 font-serif size text-xs m-1 ">
+                        <strong>{title}</strong>
+                      </div>
+                      <div className="p-2 font-serif size text-xs m-1 ">
+                        Price: {product.price}$
+                      </div>
+                    </Link>
+                    <div
+                      className="cursor-pointer"
+                      data-cy={`add-to-cart-button-${product.title}`}
+                      onClick={() =>
+                        addItemToCart({ product: product, quantity: 1 })
+                      }
+                    >
+                      Add To cart
                     </div>
-                    <div className="p-2 font-serif size text-xs m-1 ">
-                      Price: {product.price}$
-                    </div>
-                  </Link>
-                  <div
-                    className="cursor-pointer"
-                    data-cy={`add-to-cart-button-${product.title}`}
-                    onClick={() =>
-                      addItemToCart({ product: product, quantity: 1 })
-                    }
-                  >
-                    Add To cart
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            {isLoading && (
+              <div className="flex justify-center items-center w-full h-full">
+                <div className="animate-spin rounded-full h-12 w-12 border-4 border-solid border-current border-r-transparent"></div>
+              </div>
+            )}
           </div>
         </div>
       </div>
