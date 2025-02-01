@@ -52,7 +52,7 @@ export default async function BlogDetails(props: BlogDetailsProps) {
               </time>
             </div>
 
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4 font-serif">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100 mb-4 ">
               {props.params.lang === "ka" ? blog.title_ka : blog.title}
             </h1>
 

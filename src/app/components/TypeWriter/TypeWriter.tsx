@@ -20,7 +20,7 @@ export default function TypeWriter(props: TypeWriterProps) {
   }, [currentIndex, props.delay, props.aiResponse]);
   return (
     <textarea
-      className="flex flex-col w-full border border-solid border-gray-400 prose dark:prose-invert text-black dark:text-white rounded-xl resize-none font-serif text-sm h-full"
+      className="flex flex-col w-full border border-solid border-gray-400 prose dark:prose-invert text-black dark:text-white rounded-xl resize-none  text-sm h-full"
       readOnly
       value={currentText}
     ></textarea>

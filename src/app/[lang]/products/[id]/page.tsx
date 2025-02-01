@@ -26,7 +26,7 @@ export default async function ProductPage(props: ProductDetailsPageProps) {
   if (!product) return <NotFound page="products" />;
   return (
     <div className="gap-4 min-h-wrapper pt-40 flex flex-col items-center justify-center ">
-      <h1 className="underline cursor-pointer font-serif font-bold text-2xl">
+      <h1 className="underline cursor-pointer  font-bold text-2xl">
         {props.params.lang === "ka" ? product.title_ka : product.title}
       </h1>
       <img

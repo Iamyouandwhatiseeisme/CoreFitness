@@ -19,7 +19,7 @@ export default function BlogCard(props: BlogCardProps) {
         href={`${locale}/blogs/${blog.id}`}
         className="w-full h-full flex flex-col items-center text-center p-6"
       >
-        <div className="font-serif text-lg text-gray-800 dark:text-white mb-2 line-clamp-2">
+        <div className=" text-lg text-gray-800 dark:text-white mb-2 line-clamp-2">
           <strong>{title}</strong>
         </div>
         <div className="text-sm text-gray-600 dark:text-gray-300 mb-4">

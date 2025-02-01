@@ -13,7 +13,7 @@ export default function WeightGroupButton(props: WeightGroupButtonProps) {
   const { chatWindow } = useLocale();
   return (
     <div>
-      <h1 className="font-serif">Please specify your weight in KGs</h1>
+      <h1 className="">Please specify your weight in KGs</h1>
       <div className=" w-1/2 ">
         <FormControl color="primary" className="bg-white " fullWidth>
           <Select

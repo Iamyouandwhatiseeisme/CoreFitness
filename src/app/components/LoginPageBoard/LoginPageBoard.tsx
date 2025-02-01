@@ -20,7 +20,7 @@ export default function LoginPageBoard() {
             className="rounded-md w-20 shadow-sm shadow-white"
           ></img>
           <div className="border border-black bg-black bg-opacity-80 rounded-md pr-4 pl-4 flex flex-col  shadow-black shadow-sm items-center">
-            <h1 className=" z-40 text-white font-serif text-2xl">
+            <h1 className=" z-40 text-white  text-2xl">
               Welcome to Core Fitness
             </h1>
           </div>
@@ -34,7 +34,7 @@ export default function LoginPageBoard() {
           >
             <div className="  rounded-md pr-4 pl-4 flex flex-col  items-center justify-center text-center">
               <h1
-                className={` z-40  font-serif text-2xl font-extrabold text-white  ${
+                className={` z-40   text-2xl font-bold text-white  ${
                   isHovered ? "flex" : "hidden"
                 } `}
               >

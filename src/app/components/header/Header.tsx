@@ -23,7 +23,7 @@ export default function Header(props: HeaderProps) {
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
   const listItemStyle: string =
-    "hover:border-[#5A5B5C] hover:border w-40 gap-2 transition-all duration-300 transform hover:scale-110 hover:shadow-xl dark:hover:bg-[#4E4F50] hover:rounded-3xl font-serif font-normal dark:text-[#E4E6EB] p-5 text-start cursor-pointer flex flex-row items-center justify-start";
+    "hover:border-[#5A5B5C] hover:border w-40 gap-2 transition-all duration-300 transform hover:scale-110 hover:shadow-xl dark:hover:bg-[#4E4F50] hover:rounded-3xl  font-normal dark:text-[#E4E6EB] p-5 text-start cursor-pointer flex flex-row items-center justify-start";
   if (!props.currentUser) return null;
   return (
     <>
