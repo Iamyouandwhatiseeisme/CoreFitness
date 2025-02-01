@@ -49,21 +49,12 @@ export default function RightSidePanel(props: RightSidePanelProps) {
         </div>
         <div className="w-full mb-4 flex flex-row">
           <div data-cy="logout-button">
-            {props.currentUser === null ? (
-              <AuthenticationButton
-                locale={locale}
-                href={`/${locale}/login`}
-                type="login"
-                buttonText={props.dict.Login}
-              />
-            ) : (
-              <AuthenticationButton
-                locale={locale}
-                href={`/${locale}/login`}
-                type="logout"
-                buttonText={props.dict.Logout}
-              />
-            )}
+            <AuthenticationButton
+              locale={locale}
+              href={`/${locale}/login`}
+              type="logout"
+              buttonText={props.dict.Logout}
+            />
           </div>
         </div>
       </aside>

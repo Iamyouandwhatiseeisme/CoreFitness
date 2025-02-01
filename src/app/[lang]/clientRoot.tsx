@@ -59,7 +59,7 @@ export default function ClientRoot({
                 border border-white/20 dark:border-slate-800
                 transition-all duration-300 ease-out
                 max-w-[calc(100%-100  px)] w-full
-                p-10 space-y-8
+                 space-y-8
                 hover:shadow-3xl hover:shadow-slate-400/40 dark:hover:shadow-slate-950/50`
               }
                 `}
