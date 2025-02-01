@@ -4,7 +4,7 @@ import { createClient } from "src/app/utils/supabase/client";
 export interface SideFilterPanelPorps {
   setSelectedCategories: (cateogires: Set<string>) => void;
   setItems: (items: Product[]) => void;
-  retriggerFetch: (retriggerFetch: boolean) => void;
+  refetchProducts: () => void;
 }
 
 export default function SideFilterPanel(props: SideFilterPanelPorps) {
@@ -49,7 +49,7 @@ export default function SideFilterPanel(props: SideFilterPanelPorps) {
     }
     if (selectedCategories.size === 0) {
       props.setSelectedCategories(selectedCategories);
-      props.retriggerFetch(true);
+      props.refetchProducts();
     }
   }, [selectedCategories]);
 

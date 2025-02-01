@@ -11,27 +11,91 @@ import { useCart } from "src/app/components/providers/CartProvider";
 import { useLocale } from "src/app/components/providers/LanguageContext";
 import SortButton from "src/app/components/SortButton/SortButton";
 import SideFilterPanel from "src/app/components/SideFilterPanel/SideFilterPanel";
+const PRODUCTS_PER_PAGE = 10;
 
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isUpdating, setIsUpdating] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
   const [selectedCategories, setSelectedCategories] = useState<Set<string>>(
     new Set()
   );
   const { addItemToCart } = useCart();
   const { locale } = useLocale();
+  async function refetchProducts() {
+    const end = page * PRODUCTS_PER_PAGE - 1;
 
+    const response = await fetch("/api/products", {
+      headers: {
+        start: "0",
+        end: end.toString(),
+      },
+    });
+
+    const productsArray = await response.json();
+    setProducts(productsArray);
+  }
+
+  // useEffect(() => {
+  //   async function fetch() {
+  //     setIsUpdating(false);
+  //     const productsArray = (await fetchProducts()) as Product[];
+  //     setProducts(productsArray);
+  //   }
+
+  //   fetch();
+  // }, [isUpdating]);
   useEffect(() => {
-    async function fetch() {
-      setIsUpdating(false);
-      const productsArray = (await fetchProducts()) as Product[];
-      setProducts(productsArray);
+    const fetchProducts = async () => {
+      const start = (page - 1) * PRODUCTS_PER_PAGE;
+      const end = page * PRODUCTS_PER_PAGE - 1;
+      console.log("start", start, "end", end, page);
+
+      try {
+        const response = await fetch("/api/products", {
+          headers: {
+            start: start.toString(),
+            end: end.toString(),
+          },
+        });
+
+        const productsArray = await response.json();
+
+        setProducts((prev) =>
+          page === 1 ? productsArray : [...prev, ...productsArray]
+        );
+
+        if (productsArray.length < PRODUCTS_PER_PAGE) {
+          setHasMore(false);
+        }
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, [page, isLoading]);
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isUpdating, page]);
+  const handleScroll = () => {
+    if (
+      window.innerHeight + window.scrollY >= document.body.scrollHeight &&
+      !isLoading &&
+      hasMore
+    ) {
+      setPage((prev) => prev + 1);
     }
+  };
 
-    fetch();
-  }, [isUpdating]);
-
-  if (products.length === 0) {
+  if (products.length === 0 && !isLoading) {
     return (
       <div className="">
         <div className="flex flex-col items-center pt-40">
@@ -39,13 +103,17 @@ export default function Products() {
             <SearchBar
               searchItemType="products"
               setProducts={setProducts}
-              setIsUpdating={setIsUpdating}
+              refetchProducts={refetchProducts}
+              // setIsUpdating={setIsUpdat
+              // ing}
             />
           </div>
           <h2 className="text-black dark:text-gray-200 font-sans font-bold text-2xl">
             Could not find anything...
           </h2>
-          <AddProductDialog retriggerFetch={setIsUpdating}></AddProductDialog>
+          <AddProductDialog
+            refetchProducts={refetchProducts}
+          ></AddProductDialog>
         </div>
       </div>
     );
@@ -54,17 +122,19 @@ export default function Products() {
   return (
     <div className="w-full  min-h-wrapper pt-32 " data-cy="products-loaded">
       <SideFilterPanel
-        retriggerFetch={setIsUpdating}
+        refetchProducts={refetchProducts}
         setItems={setProducts}
         setSelectedCategories={setSelectedCategories}
       ></SideFilterPanel>
       <div className="relative flex flex-col items-center">
         <div className=" h-24  bg-slate-600 w-full flex flex-row items-center justify-center gap-2">
-          <AddProductDialog retriggerFetch={setIsUpdating}></AddProductDialog>
+          <AddProductDialog
+            refetchProducts={refetchProducts}
+          ></AddProductDialog>
           <SearchBar
             searchItemType="products"
             setProducts={setProducts}
-            setIsUpdating={setIsUpdating}
+            refetchProducts={refetchProducts}
           />
 
           <SortButton

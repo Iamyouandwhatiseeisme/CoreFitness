@@ -8,7 +8,7 @@ import { Product } from "../types";
 interface SearchBarProps {
   searchItemType: string;
   setProducts: (products: Product[]) => void;
-  setIsUpdating: (isUpdating: boolean) => void;
+  refetchProducts: () => void;
 }
 
 export default function SearchBar(props: SearchBarProps) {
@@ -29,7 +29,7 @@ export default function SearchBar(props: SearchBarProps) {
         props.setProducts(responseData);
       }
       if (debouncedValue === "") {
-        props.setIsUpdating(true);
+        props.refetchProducts();
       }
     }
     fetchSearchedValue();
