@@ -2,7 +2,6 @@
 import React from "react";
 import Link from "next/link";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import fetchProducts from "../../fetcher/fetchProducts";
 import { useEffect, useState } from "react";
 import { Product, SortOption } from "../../components/types";
 import AddProductDialog from "src/app/components/AddProductDialog/AddProductDialog";

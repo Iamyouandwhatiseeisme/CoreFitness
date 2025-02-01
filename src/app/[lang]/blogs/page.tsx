@@ -12,7 +12,7 @@ export default function Blogs() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const [page, setPage] = useState<number>(1);
   const [hasMore, setHasMore] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [isUpdating, setIsUpdating] = useState(false);
   const { locale } = useLocale();
@@ -57,36 +57,33 @@ export default function Blogs() {
         console.error("Error fetching blogs:", error);
       } finally {
         setIsLoading(false);
+        setIsUpdating(false);
       }
     };
 
     fetchBlogs();
-  }, [page, isLoading]);
+  }, [page, isUpdating]);
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [isUpdating, page]);
+  }, [page]);
   const handleScroll = () => {
     if (
       window.innerHeight + window.scrollY >= document.body.scrollHeight &&
-      !isLoading &&
+      !isUpdating &&
       hasMore
     ) {
       setPage((prev) => prev + 1);
     }
   };
 
-  if (isLoading) {
-    return (
-      <div className="flex flex-col items-center pt-40">
-        <h2 className="text-black dark:text-gray-200 font-sans font-bold text-2xl">
-          Blogs are loading...
-        </h2>
-      </div>
-    );
-  }
+  // if (isLoading) {
+  //   return (
 
-  if (!blogs.length) {
+  //   );
+  // }
+
+  if (!blogs.length && !isLoading) {
     return (
       <div className="flex flex-col items-center pt-40">
         <div className="mt-5 flex flex-row items-center">
@@ -117,12 +114,18 @@ export default function Blogs() {
           <Toaster richColors position="top-right" />
         </div>
 
-        <div className="mt-12 w-full max-w-6xl">
+        <div className="mt-12 w-full max-w-6xl pb-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
-            {blogs.map((blog) => (
-              <BlogCard key={blog.id} blog={blog} locale={locale} />
-            ))}
+            {!isLoading &&
+              blogs.map((blog) => (
+                <BlogCard key={blog.id} blog={blog} locale={locale} />
+              ))}
           </div>
+          {isLoading && (
+            <div className="flex justify-center items-center w-full h-full">
+              <div className="animate-spin rounded-full h-12 w-12 border-4 border-solid border-current border-r-transparent"></div>
+            </div>
+          )}
         </div>
       </div>
     </div>
