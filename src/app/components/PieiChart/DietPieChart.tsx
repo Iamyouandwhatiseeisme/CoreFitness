@@ -10,7 +10,7 @@ interface DietPieChartProps {
 export default function DietPieChart(props: DietPieChartProps) {
   return (
     <div className="w-1/2 bg-gray-800 shadow-lg flex flex-col items-center shadow-white bg-opacity-65 rounded-xl text-white ">
-      <h1 className="font-serif text-5xl font-bold     shadow-sm shadow-gray-200 w-3/4 m-5 text-center rounded-2xl">
+      <h1 className=" text-5xl font-bold     shadow-sm shadow-gray-200 w-3/4 m-5 text-center rounded-2xl">
         Diet Chart
       </h1>
       {props.dailyDiet ? <h1>{props.dailyDiet.Calories}</h1> : ""}

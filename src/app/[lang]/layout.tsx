@@ -3,6 +3,9 @@ import { getDictionary } from "./dictionaries";
 import { createClient } from "../utils/supabase/server";
 import React from "react";
 import ClientRoot from "./clientRoot";
+import { Inter, Oswald } from "next/font/google";
+const inter = Inter({ subsets: ["latin"] });
+const oswald = Oswald({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Core Fitness",
@@ -22,11 +25,9 @@ export default async function RootLayout(props: LayoutProps) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log(231);
-
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body>
+      <body className={`${inter.className} ${oswald.className}`}>
         <ClientRoot lang={props.params.lang} dict={dict} user={user}>
           {props.children}
         </ClientRoot>

@@ -155,10 +155,10 @@ export default function Products() {
                         src={product.img_url}
                         alt={product.title}
                       ></img>
-                      <div className="p-2 font-serif size text-xs m-1 ">
+                      <div className="p-2  size text-xs m-1 ">
                         <strong>{title}</strong>
                       </div>
-                      <div className="p-2 font-serif size text-xs m-1 ">
+                      <div className="p-2  size text-xs m-1 ">
                         Price: {product.price}$
                       </div>
                     </Link>

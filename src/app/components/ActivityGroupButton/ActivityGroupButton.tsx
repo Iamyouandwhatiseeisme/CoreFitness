@@ -11,7 +11,7 @@ interface AcitvityGroupButtonProps {
 export default function ActivityGroupButton(props: AcitvityGroupButtonProps) {
   return (
     <div className="flex flex-col w-1/2 h-3/5 p-4 rounded-2xl m-5 items-center border justify-center bg-gray-400 bg-opacity-20">
-      <label className="text-lg font-bold text-center text-gray-800 dark:text-gray-100 font-serif bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+      <label className="text-lg font-bold text-center text-gray-800 dark:text-gray-100  bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
         How many days a week do you exercise?
       </label>
       <div className="shadow-lg shadow-slate-800 rounded-2xl m-2 w-full">
