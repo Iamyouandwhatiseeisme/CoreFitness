@@ -20,7 +20,7 @@ interface DialogFactoryProps {
   dialogDescription: string;
   children: React.ReactNode;
   onSubmit: (formData: FormData) => Promise<Response>;
-  retriggerFetch: React.Dispatch<React.SetStateAction<boolean>>;
+  refetch: () => void;
 }
 
 export default function DialogFactory(props: DialogFactoryProps) {
@@ -35,7 +35,7 @@ export default function DialogFactory(props: DialogFactoryProps) {
       const response = await props.onSubmit(formData);
       if (response.ok) {
         toast.success(`${props.dialogTitle} has been added`);
-        props.retriggerFetch(true);
+        props.refetch();
         setOpen(false);
       }
     } finally {

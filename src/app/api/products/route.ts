@@ -1,23 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "../../utils/supabase/server";
+import { createClient } from "src/app/utils/supabase/server";
 
 export async function GET(request: NextRequest) {
-  try {
-    const supabase = await createClient();
-    const product_id = request.headers.get("product_id");
-    if (product_id) {
-      const productIdsArray = JSON.parse(product_id);
-      const productIdsAsNumbers = productIdsArray.map((id: string) =>
-        Number(id)
-      );
-      const { data } = await supabase
-        .from("products")
-        .select()
-        .in("id", productIdsAsNumbers);
-      return NextResponse.json([data], { status: 200 });
-    }
+  const supabase = await createClient();
+  const start = request.headers.get("start");
+  const end = request.headers.get("end");
 
-    return NextResponse.json([], { status: 200 });
+  try {
+    const { data } = await supabase
+      .from("products")
+      .select()
+      .range(Number(start), Number(end))
+      .order("created_at", { ascending: false });
+
+    console.log(data?.length);
+    return NextResponse.json(data, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 500 });
   }

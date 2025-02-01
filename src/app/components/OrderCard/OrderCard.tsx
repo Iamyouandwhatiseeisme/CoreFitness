@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Order, OrderProducts, Product } from "../types";
+import React from "react";
 
 export interface OrderCardProps {
   products: OrderProducts[];
@@ -16,7 +17,7 @@ export function OrderCard(props: OrderCardProps) {
   useEffect(() => {
     async function fetchOrders() {
       let tempProducts: Array<{ product: Product; quantity: number }> = [];
-      const response = await fetch("/api/products", {
+      const response = await fetch("/api/products/orderProducts", {
         method: "GET",
         headers: {
           product_id: JSON.stringify(

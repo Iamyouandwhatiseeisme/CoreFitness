@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import DialogFactory from "../DialogFactory/DialogFactory";
 
 interface ProductDialogProps {
-  retriggerFetch: React.Dispatch<React.SetStateAction<boolean>>;
+  refetchBlogs: () => void;
 }
 
 export default function AddBlogDialog(props: ProductDialogProps) {
@@ -34,7 +34,7 @@ export default function AddBlogDialog(props: ProductDialogProps) {
       triggerText="Add Blog Post"
       dialogTitle="Add New Blog Post"
       dialogDescription="Please enter blog post details"
-      retriggerFetch={props.retriggerFetch}
+      refetch={props.refetchBlogs}
       onSubmit={async (formData) => {
         return fetch("/api/createBlog", {
           method: "POST",
