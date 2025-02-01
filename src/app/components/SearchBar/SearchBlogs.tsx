@@ -8,7 +8,7 @@ import { Blog } from "../types";
 interface SearchBarProps {
   searchItemType: string;
   setBlogs: (products: Blog[]) => void;
-  setIsUpdating: (isUpdating: boolean) => void;
+  refetchBlogs: () => void;
 }
 
 export default function SearchBlogs(props: SearchBarProps) {
@@ -19,7 +19,6 @@ export default function SearchBlogs(props: SearchBarProps) {
   useEffect(() => {
     async function fetchSearchedValue() {
       if (debouncedValue) {
-        console.log(debouncedValue);
         const response = await fetch("/api/search", {
           headers: {
             "Content-Type": "application/json; charset=utf-8",
@@ -27,13 +26,11 @@ export default function SearchBlogs(props: SearchBarProps) {
             searchTable: searchItemType,
           },
         });
-        console.log(response);
         const responseData = (await response.json()) as Blog[];
-        console.log(responseData);
         props.setBlogs(responseData);
       }
       if (debouncedValue === "") {
-        props.setIsUpdating(true);
+        props.refetchBlogs();
       }
     }
     fetchSearchedValue();
