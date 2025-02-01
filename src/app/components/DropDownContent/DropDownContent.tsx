@@ -13,13 +13,14 @@ const DropDownContent = (props: DropDownContentProps) => {
     <div
       style={{
         visibility: `${props.open ? "visible" : "hidden"}`,
-        transition: "transform 150ms ease-in-out",
-        transform: "translateY(-5%)",
+        transition: "transform 150ms ease-in-out, opacity 150ms ease-in-out",
+        transform: `${props.open ? "translateY(0)" : "translateY(-5%)"}`,
+        overflow: "hidden",
       }}
       className={
         props.open
-          ? "fixed rounded-lg animate-slide-in min-w-12 bg-gray-200 shadow-lg shadow-teal-300 dark:shadow-yellow-400  dark:bg-transparent text-green-950 dark:text-yellow-400 flex-col items-center mt-4 max-h-40vh z-50 flex cursor-pointer opacity-100 translate-y-0 pointer-events-auto"
-          : "absolute min-w-12 flex-col items-center mt-4 max-h-40vh  pointer-events-none z-50 flex "
+          ? "fixed rounded-lg animate-slide-in min-w-[48px] flex-col items-center mt-4 max-h-40vh z-50 flex cursor-pointer opacity-100 pointer-events-auto"
+          : "absolute min-w-12 flex-col items-center mt-4 max-h-40vh pointer-events-none z-50 flex opacity-0"
       }
     >
       {

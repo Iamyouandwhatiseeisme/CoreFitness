@@ -83,14 +83,9 @@ export default function ChatWindow() {
           </h1>
 
           <div className="w-full max-w-6xl bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 transition-all duration-300">
-            <div className="xl:hidden flex flex-col items-center justify-center p-8 text-center">
-              <p className="text-xl font-semibold text-gray-600 dark:text-gray-300 mb-4">
-                Please switch to full screen for optimal chatbot experience
-              </p>
-              <div className="w-24 h-1 bg-blue-500 rounded-full" />
-            </div>
-
-            <div className="hidden xl:block space-y-6">
+            {/* Instead of showing a message to switch to full screen,
+            we provide a responsive layout that works on all devices */}
+            <div className="space-y-6">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="space-y-6">
                   <div className="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
@@ -157,8 +152,8 @@ export default function ChatWindow() {
                     />
                   </div>
                 ) : (
-                  <div className="prose dark:prose-invert  h-[400px] overflow-y-auto ">
-                    <TypeWriter aiResponse={aiResponse} delay={20} />
+                  <div className="prose dark:prose-invert h-[400px] overflow-y-auto">
+                    <TypeWriter aiResponse={aiResponse} delay={10} />
                   </div>
                 )}
               </div>

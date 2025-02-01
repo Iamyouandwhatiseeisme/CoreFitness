@@ -15,7 +15,7 @@ const DropDown = (props: DropDownProps) => {
   };
 
   return (
-    <div>
+    <div className="h-60 w-20 " onMouseLeave={() => setOpen(false)}>
       <DropDownButton toggle={toggleDropDown} open={open}></DropDownButton>
       <DropDownContent onSelect={toggleDropDown} open={open}>
         {props.content}

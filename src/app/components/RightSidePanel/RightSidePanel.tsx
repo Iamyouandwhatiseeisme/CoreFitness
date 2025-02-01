@@ -35,34 +35,27 @@ export default function RightSidePanel(props: RightSidePanelProps) {
         <TbSquareRoundedChevronLeftFilled className="w-20 h-20  "></TbSquareRoundedChevronLeftFilled>
       </div>
       <aside
-        className={`flex flex-col h-full fixed justify-between items-center bg-gradient-to-r from-slate-50 to-gray-300 rounded dark:bg-gradient-to-r dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 dark:bg-opacity-80 bg-opacity-50 text-header-green w-64 overflow-hidden z-20 right-0 p-4 transition-transform duration-300 ${
+        className={`flex flex-col h-full fixed justify-between items-center bg-gray-200 dark:bg-gray-900 text-black dark:text-gray-200 w-64 overflow-hidden z-20 right-0 p-4 transition-transform duration-300 ${
           isHovered ? "transform translate-x-0" : "transform translate-x-full"
         }`}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div className="flex flex-row gap-4 items-center justify-between w-full">
+        <div className="flex flex-row gap-4 items-start justify-between w-full">
           <DropDown content={themeOptions} />
-          <div data-cy="logout-button">
-            {props.currentUser === null ? (
-              <AuthenticationButton
-                locale={locale}
-                href={`/${locale}/login`}
-                type="login"
-                buttonText={props.dict.Login}
-              />
-            ) : (
-              <AuthenticationButton
-                locale={locale}
-                href={`/${locale}/login`}
-                type="logout"
-                buttonText={props.dict.Logout}
-              />
-            )}
+          <div className="flex flex-col gap-4">
+            <LocaleChange />
+            <CartDialog></CartDialog>
           </div>
         </div>
         <div className="w-full mb-4 flex flex-row">
-          <LocaleChange />
-          <CartDialog></CartDialog>
+          <div data-cy="logout-button">
+            <AuthenticationButton
+              locale={locale}
+              href={`/${locale}/login`}
+              type="logout"
+              buttonText={props.dict.Logout}
+            />
+          </div>
         </div>
       </aside>
     </>

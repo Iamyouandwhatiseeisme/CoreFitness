@@ -22,7 +22,7 @@ function LocaleChange() {
   }, [locale]);
 
   const toggleLanguage = () => {
-    var updatedLocale: string;
+    let updatedLocale: string;
     if (locale === "ka") {
       updatedLocale = "en-US";
       setChecked(false);
@@ -31,13 +31,13 @@ function LocaleChange() {
       setChecked(true);
     }
 
-    let updatedPath = pathname.replace(`/${locale}`, `/${updatedLocale}`);
+    const updatedPath = pathname.replace(`/${locale}`, `/${updatedLocale}`);
     setLocale(updatedLocale);
     router.push(updatedPath);
   };
 
   return (
-    <div className="flex flex-row h-7 w-32 items-center rounded-br-full rounded-bl-full border border-gray-200 rounded-xl p-3 dark:bg-yellow-500 bg-teal-400">
+    <div className="flex flex-row h-7 mt-2 w-32 items-center rounded-br-full rounded-bl-full border  rounded-xl p-3 bg-white/5   shadow-md transition-all duration-300 ease-in-out transform hover:scale-105 dark:shadow-lg">
       <ReactCountryFlag
         countryCode="US"
         svg

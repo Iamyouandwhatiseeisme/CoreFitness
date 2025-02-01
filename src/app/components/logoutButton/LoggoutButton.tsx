@@ -1,6 +1,7 @@
 import React from "react";
 import { ClipLoader } from "react-spinners";
 import { signOut } from "../../[lang]/login/actions";
+import { CiLogout } from "react-icons/ci";
 
 interface AuthenticationButtonProps {
   href: string;
@@ -9,22 +10,19 @@ interface AuthenticationButtonProps {
   locale: string;
 }
 export default function AuthenticationButton(props: AuthenticationButtonProps) {
-  // const router = useRouter();
   return props.buttonText === "Loading" ? (
-    <div className="h-10 w-20 items-center justify-center flex flex-col mt-2 text-black dark:text-white bg-teal-400 hover:bg-gray-500 dark:bg-header-hover-dark rounded-md cursor-pointer ">
+    <div className="h-10 w-20 items-center justify-center flex flex-col mt-2 text-black dark:text-white bg-white/20 border-[#5A5B5C] hover:border  hover:border-blue-200 shadow-sm shadow-blue-400/20 dark:shadow-yellow-400/20 dark:hover:bg-[#4E4F50]  hover:bg-white/40 hover:scale-105 transition-all duration-300  rounded-md cursor-pointer ">
       <ClipLoader color="white"></ClipLoader>
     </div>
   ) : (
     <a href={props.href}>
       <button
         onClick={() => {
-          if (props.type === "logout") {
-            signOut();
-          }
+          signOut();
         }}
-        className="h-10 w-20  items-center mt-2 text-white dark:text-white bg-teal-400 hover:bg-teal-500 dark:bg-header-hover-dark rounded-br-full rounded-tl-full cursor-pointer "
+        className="w-14 h-14 items-center justify-center flex mt-2 text-black dark:text-white bg-white/20 border-[#5A5B5C]   shadow-sm shadow-blue-400/20 dark:shadow-yellow-400/20 dark:hover:bg-[#4E4F50]  hover:bg-white/40 hover:scale-105 transition-all duration-300  rounded-md cursor-pointer"
       >
-        {props.buttonText}
+        <CiLogout className="w-10 h-10"></CiLogout>
       </button>
     </a>
   );

@@ -27,10 +27,6 @@ export interface InformationBoardItem {
   key: number;
   logo: string;
   titles: string[];
-  hoverColors: {
-    light: string;
-    dark: string;
-  };
   hoverImage: string;
 }
 
