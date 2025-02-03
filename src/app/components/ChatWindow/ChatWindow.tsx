@@ -82,51 +82,40 @@ export default function ChatWindow() {
             Try our AI assistant to create a diet plan
           </h1>
 
-          <div className="w-full max-w-6xl bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 transition-all duration-300">
+          <div className="w-full max-w-6xl  bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 transition-all duration-300">
             <div className="space-y-6">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div className="space-y-6">
-                  <div className="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 ">
+                <div className="space-y-6 ">
+                  <div className="p-6 min-h-[540px] flex flex-col justify-between items-center bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
                     <MuscleGoalButtonGroup
                       muscleGoalData={buttonInputs.muscleGoalData}
                       handleChange={handleChange}
                       userInfo={userInfo}
                     />
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
-                      <GenderButtonGroup
-                        userInfo={userInfo}
-                        genderData={buttonInputs.genderData}
-                        handleChange={handleChange}
-                      />
-                    </div>
-
-                    <div className="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
-                      <AgeButtonGroup
-                        userInfo={userInfo}
-                        ageData={buttonInputs.ageData}
-                        handleChange={handleChange}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="space-y-6">
-                  <div className="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
                     <ActivityGroupButton
                       userInfo={userInfo}
                       handleChange={handleChange}
                       activityData={buttonInputs.activityData}
                     />
                   </div>
+                </div>
 
-                  <div className="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
+                <div className="space-y-6">
+                  <div className="p-6 min-h-[540px] flex flex-col justify-between items-center bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
                     <WeightGroupButton
                       handleChange={handleChange}
                       userInfo={userInfo}
                       weightData={buttonInputs.weightData}
+                    />
+                    <GenderButtonGroup
+                      userInfo={userInfo}
+                      genderData={buttonInputs.genderData}
+                      handleChange={handleChange}
+                    />
+                    <AgeButtonGroup
+                      userInfo={userInfo}
+                      ageData={buttonInputs.ageData}
+                      handleChange={handleChange}
                     />
                   </div>
                 </div>
