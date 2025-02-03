@@ -6,7 +6,7 @@ import { useLocale } from "src/app/components/providers/LanguageContext";
 import SearchBlogs from "src/app/components/SearchBar/SearchBlogs";
 import AddBlogDialog from "src/app/components/AddBlogDialog/AddBlogDialog";
 import BlogCard from "src/app/components/BlogCard/BlogCard";
-const BLOGS_PER_PAGE = 10;
+const BLOGS_PER_PAGE = 9;
 
 export default function Blogs() {
   const [blogs, setBlogs] = useState<Blog[]>([]);
@@ -46,36 +46,42 @@ export default function Blogs() {
 
         const blogsArray = await response.json();
 
-        setBlogs((prev) =>
-          page === 1 ? blogsArray : [...prev, ...blogsArray]
-        );
+        setBlogs((prev) => {
+          const newBlogs = [...prev, ...blogsArray];
+          const uniqueBlogs = Array.from(
+            new Map(newBlogs.map((b) => [b.id, b])).values()
+          );
+          return uniqueBlogs;
+        });
 
         if (blogsArray.length < BLOGS_PER_PAGE) {
+          console.log("No more blogs");
           setHasMore(false);
         }
       } catch (error) {
         console.error("Error fetching blogs:", error);
       } finally {
-        setIsLoading(false);
         setIsUpdating(false);
+        setIsLoading(false);
       }
     };
 
     fetchBlogs();
-  }, [page, isUpdating]);
+  }, [page]);
   useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >= document.body.scrollHeight - 1 &&
+        !isUpdating &&
+        hasMore
+      ) {
+        setPage((prev) => prev + 1);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [page]);
-  const handleScroll = () => {
-    if (
-      window.innerHeight + window.scrollY >= document.body.scrollHeight &&
-      !isUpdating &&
-      hasMore
-    ) {
-      setPage((prev) => prev + 1);
-    }
-  };
+  }, [isUpdating, hasMore]);
 
   // if (isLoading) {
   //   return (

@@ -86,7 +86,7 @@ export default function ChatWindow() {
             <div className="space-y-6">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 ">
                 <div className="space-y-6 ">
-                  <div className="p-6 min-h-[540px] flex flex-col justify-between items-center bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
+                  <div className="p-6 min-h-[570px] flex flex-col justify-between items-center bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
                     <MuscleGoalButtonGroup
                       muscleGoalData={buttonInputs.muscleGoalData}
                       handleChange={handleChange}
@@ -101,7 +101,7 @@ export default function ChatWindow() {
                 </div>
 
                 <div className="space-y-6">
-                  <div className="p-6 min-h-[540px] flex flex-col justify-between items-center bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
+                  <div className="p-6 min-h-[570px] flex flex-col justify-between items-center bg-gray-50 dark:bg-gray-700 rounded-xl border border-gray-200 dark:border-gray-600">
                     <WeightGroupButton
                       handleChange={handleChange}
                       userInfo={userInfo}
