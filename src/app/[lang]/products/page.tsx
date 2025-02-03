@@ -55,9 +55,13 @@ export default function Products() {
 
         const productsArray = await response.json();
 
-        setProducts((prev) =>
-          page === 1 ? productsArray : [...prev, ...productsArray]
-        );
+        setProducts((prev) => {
+          const newProducts = [...prev, ...productsArray];
+          const uniqueProducts = Array.from(
+            new Map(newProducts.map((p) => [p.id, p])).values()
+          );
+          return uniqueProducts;
+        });
 
         if (productsArray.length < PRODUCTS_PER_PAGE) {
           setHasMore(false);
@@ -71,20 +75,22 @@ export default function Products() {
     };
 
     fetchProducts();
-  }, [page, isUpdating]);
+  }, [page]);
+
   useEffect(() => {
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >= document.body.scrollHeight - 1 &&
+        !isUpdating &&
+        hasMore
+      ) {
+        setPage((prev) => prev + 1);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [page]);
-  const handleScroll = () => {
-    if (
-      window.innerHeight + window.scrollY >= document.body.scrollHeight &&
-      !isUpdating &&
-      hasMore
-    ) {
-      setPage((prev) => prev + 1);
-    }
-  };
+  }, [isUpdating, hasMore]);
 
   if (products.length === 0 && !isLoading) {
     return (
