@@ -23,9 +23,14 @@ describe("Product Actions", () => {
     cy.get("[data-cy='description-input-field']").type("description for test");
     cy.get("[data-cy='description-georgian-input-field']").type("სატესტო");
     cy.get("[data-cy='category-input-field']").type("Test");
-    cy.get("[data-cy='photo-browse-field']").selectFile(
-      "cypress/fixtures/CypressTest.png"
+    cy.get("[data-cy='photo-browse-field-1']").selectFile(
+      "cypress/fixtures/shaker1.jpg"
     );
+
+    cy.get("[data-cy='photo-browse-field-2']").selectFile(
+      "cypress/fixtures/shaker2.jpg"
+    );
+
     cy.get("[data-cy='create-product-button']").click();
     cy.wait(8000);
 
@@ -60,9 +65,14 @@ describe("Product Actions", () => {
     cy.get("[data-cy='description-input-field']").type("description for test");
     cy.get("[data-cy='description-georgian-input-field']").type("სატესტო");
     cy.get("[data-cy='category-input-field']").type("Test");
-    cy.get("[data-cy='photo-browse-field']").selectFile(
-      "cypress/fixtures/CypressTest.png"
+    cy.get("[data-cy='photo-browse-field-1']").selectFile(
+      "cypress/fixtures/shaker1.jpg"
     );
+
+    cy.get("[data-cy='photo-browse-field-2']").selectFile(
+      "cypress/fixtures/shaker2.jpg"
+    );
+
     cy.get("[data-cy='create-product-button']").click();
     cy.wait(2000);
     cy.get(`[data-cy=${name}]`).should("exist");
