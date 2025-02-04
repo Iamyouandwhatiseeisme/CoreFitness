@@ -45,10 +45,8 @@ export default function Products() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      console.log(1);
       const start = (page - 1) * PRODUCTS_PER_PAGE;
       const end = page * PRODUCTS_PER_PAGE - 1;
-      console.log("start", start, "end", end, page);
 
       try {
         const response = await fetch("/api/products", {
@@ -102,23 +100,30 @@ export default function Products() {
   return (
     <div className="w-full  min-h-wrapper  " data-cy="products-loaded">
       <div className="relative flex flex-col items-center">
-        <div className="h-24 w-full flex flex-row items-center justify-center gap-2 bg-slate-200/20 bg-opacity-50 dark:bg-slate-800 dark:bg-opacity-50">
-          <AddProductDialog
-            refetchProducts={refetchProducts}
-          ></AddProductDialog>
-          <SearchBar
-            searchItemType="products"
-            setProducts={setProducts}
-            refetchProducts={refetchProducts}
-          />
-
-          <SortButton
-            selectedCategories={selectedCategories}
-            setItems={setProducts}
-            sortOptions={sortOptions}
-            sortBy={sortBy}
-            setSortBy={setSortBy}
-          ></SortButton>
+        <div className="h-24 w-full flex flex-row items-center justify-center gap-2 bg-slate-200/20 bg-opacity-50 dark:bg-slate-800 dark:bg-opacity-50 shadow-sm shadow-black/80">
+          <ul className="flex flex-row items-center gap-2 h-20 justify-center">
+            <li className="border-r border-l h-full justify-center items-center flex flex-col   p-4">
+              <AddProductDialog
+                refetchProducts={refetchProducts}
+              ></AddProductDialog>
+            </li>
+            <li className="border-r h-full justify-center items-center flex flex-col  p-4">
+              <SearchBar
+                searchItemType="products"
+                setProducts={setProducts}
+                refetchProducts={refetchProducts}
+              />
+            </li>
+            <li className="p-4 h-full border-r justify-center items-center flex flex-col">
+              <SortButton
+                selectedCategories={selectedCategories}
+                setItems={setProducts}
+                sortOptions={sortOptions}
+                sortBy={sortBy}
+                setSortBy={setSortBy}
+              ></SortButton>
+            </li>
+          </ul>
           <Toaster />
         </div>
         <FilterPanel
@@ -127,6 +132,7 @@ export default function Products() {
           setSelectedCategories={setSelectedCategories}
           sortBy={sortBy}
         ></FilterPanel>
+
         <div className="flex flex-row justify-center">
           <div className="p-5 ml-4 grid w-full sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[min(4vw,4rem)]">
             {products.length === 0 && !isLoading && (
