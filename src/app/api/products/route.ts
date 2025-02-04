@@ -7,20 +7,19 @@ export async function GET(request: NextRequest) {
   const end = request.headers.get("end");
   const columnName = request.headers.get("columnName");
   const orderBy = request.headers.get("orderBy");
+  console.log(start, end, columnName, orderBy);
 
   try {
-    if (columnName && orderBy) {
-      const isAscending = orderBy === "true" ? true : false;
+    const isAscending = orderBy === "true" ? true : false;
 
-      const { data } = await supabase
-        .from("products")
-        .select()
-        .range(Number(start), Number(end))
-        .order(columnName, { ascending: isAscending });
+    const { data } = await supabase
+      .from("products")
+      .select()
+      .range(Number(start), Number(end))
+      .order(columnName!, { ascending: isAscending });
 
-      console.log(data?.length);
-      return NextResponse.json(data, { status: 200 });
-    }
+    console.log(data?.length);
+    return NextResponse.json(data, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 500 });
   }

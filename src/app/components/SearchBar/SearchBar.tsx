@@ -26,7 +26,11 @@ export default function SearchBar(props: SearchBarProps) {
           },
         });
         const responseData = (await response.json()) as Product[];
-        props.setProducts(responseData);
+        if (responseData.length === 0) {
+          props.setProducts([]);
+        } else {
+          props.setProducts(responseData);
+        }
       }
       if (debouncedValue === "") {
         props.refetchProducts();

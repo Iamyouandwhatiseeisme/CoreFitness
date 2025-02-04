@@ -44,6 +44,7 @@ export default function Products() {
 
   useEffect(() => {
     const fetchProducts = async () => {
+      console.log(1);
       const start = (page - 1) * PRODUCTS_PER_PAGE;
       const end = page * PRODUCTS_PER_PAGE - 1;
       console.log("start", start, "end", end, page);
@@ -53,6 +54,8 @@ export default function Products() {
           headers: {
             start: start.toString(),
             end: end.toString(),
+            columnName: sortBy.value,
+            orderBy: sortBy.order === "Ascending" ? "true" : "false",
           },
         });
 
@@ -95,28 +98,6 @@ export default function Products() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isUpdating, hasMore]);
 
-  if (products.length === 0 && !isLoading) {
-    return (
-      <div className="">
-        <div className="flex flex-col items-center pt-40">
-          <div className="mt-5 flex flex-row items-center">
-            <SearchBar
-              searchItemType="products"
-              setProducts={setProducts}
-              refetchProducts={refetchProducts}
-            />
-          </div>
-          <h2 className="text-black dark:text-gray-200 font-sans font-bold text-2xl">
-            Could not find anything...
-          </h2>
-          <AddProductDialog
-            refetchProducts={refetchProducts}
-          ></AddProductDialog>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="w-full  min-h-wrapper  " data-cy="products-loaded">
       <div className="relative flex flex-col items-center">
@@ -147,6 +128,17 @@ export default function Products() {
         ></FilterPanel>
         <div className=" flex flex-row">
           <div className="p-5 ml-44 grid grid-cols-3 gap-7">
+            {products.length === 0 && !isLoading && (
+              <div className="flex flex-col items-center justify-center w-full h-full">
+                <h2 className="text-gray-700 dark:text-gray-200 font-sans font-bold text-2xl mb-4">
+                  Could not find anything...
+                </h2>
+                <p className="text-gray-500 dark:text-gray-400 text-lg">
+                  Try adjusting your search or filter to find what you&apos;re
+                  looking for.
+                </p>
+              </div>
+            )}
             {!isLoading &&
               products.map((product) => {
                 const title =
