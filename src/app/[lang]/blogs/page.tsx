@@ -34,7 +34,6 @@ export default function Blogs() {
     const fetchBlogs = async () => {
       const start = (page - 1) * BLOGS_PER_PAGE;
       const end = page * BLOGS_PER_PAGE - 1;
-      console.log("start", start, "end", end, page);
 
       try {
         const response = await fetch("/api/blogs", {
@@ -83,29 +82,21 @@ export default function Blogs() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [isUpdating, hasMore]);
 
-  // if (isLoading) {
+  // if (!blogs.length && !isLoading) {
   //   return (
+  //     <div className="flex flex-col items-center pt-40">
+  //       <div className="mt-5 flex flex-row items-center">
+  //         <SearchBlogs
+  //           searchItemType="blogs"
+  //           setBlogs={setBlogs}
+  //           refetchBlogs={refetchBlogs}
+  //         />
+  //       </div>
 
+  //       <AddBlogDialog refetchBlogs={refetchBlogs} />
+  //     </div>
   //   );
   // }
-
-  if (!blogs.length && !isLoading) {
-    return (
-      <div className="flex flex-col items-center pt-40">
-        <div className="mt-5 flex flex-row items-center">
-          <SearchBlogs
-            searchItemType="blogs"
-            setBlogs={setBlogs}
-            refetchBlogs={refetchBlogs}
-          />
-        </div>
-        <h2 className="text-black dark:text-gray-200 font-sans font-bold text-2xl">
-          Could not find anything...
-        </h2>
-        <AddBlogDialog refetchBlogs={refetchBlogs} />
-      </div>
-    );
-  }
 
   return (
     <div className="w-full min-h-screen pt-32 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-blue-900 dark:to-purple-900">
@@ -122,6 +113,17 @@ export default function Blogs() {
 
         <div className="mt-12 w-full max-w-6xl pb-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+            {blogs.length === 0 && !isLoading && (
+              <div className="flex flex-col items-center justify-center w-full h-full">
+                <h2 className="text-gray-700 dark:text-gray-200 font-sans font-bold text-2xl mb-4">
+                  Could not find anything...
+                </h2>
+                <p className="text-gray-500 dark:text-gray-400 text-lg">
+                  Try adjusting your search or filter to find what you&apos;re
+                  looking for.
+                </p>
+              </div>
+            )}
             {!isLoading &&
               blogs.map((blog) => (
                 <BlogCard key={blog.id} blog={blog} locale={locale} />

@@ -19,13 +19,18 @@ describe("Product Actions", () => {
     cy.get("[data-cy='add-product-button']").click();
     cy.get("[data-cy='name-input-field']").type("TestProduct");
     cy.get("[data-cy='name-georgian-input-field']").type("ტესტის");
-    cy.get("[data-cy='price-input-field']").type("33333");
+    cy.get("[data-cy='price-input-field']").type("2");
     cy.get("[data-cy='description-input-field']").type("description for test");
     cy.get("[data-cy='description-georgian-input-field']").type("სატესტო");
     cy.get("[data-cy='category-input-field']").type("Test");
-    cy.get("[data-cy='photo-browse-field']").selectFile(
-      "cypress/fixtures/CypressTest.png"
+    cy.get("[data-cy='photo-browse-field-1']").selectFile(
+      "cypress/fixtures/shaker1.jpg"
     );
+
+    cy.get("[data-cy='photo-browse-field-2']").selectFile(
+      "cypress/fixtures/shaker2.jpg"
+    );
+
     cy.get("[data-cy='create-product-button']").click();
     cy.wait(8000);
 
@@ -56,13 +61,18 @@ describe("Product Actions", () => {
     cy.get("[data-cy='add-product-button']").click();
     cy.get("[data-cy='name-input-field']").type(`${name}`);
     cy.get("[data-cy='name-georgian-input-field']").type("ტესტის");
-    cy.get("[data-cy='price-input-field']").type("33333");
+    cy.get("[data-cy='price-input-field']").type("2");
     cy.get("[data-cy='description-input-field']").type("description for test");
     cy.get("[data-cy='description-georgian-input-field']").type("სატესტო");
     cy.get("[data-cy='category-input-field']").type("Test");
-    cy.get("[data-cy='photo-browse-field']").selectFile(
-      "cypress/fixtures/CypressTest.png"
+    cy.get("[data-cy='photo-browse-field-1']").selectFile(
+      "cypress/fixtures/shaker1.jpg"
     );
+
+    cy.get("[data-cy='photo-browse-field-2']").selectFile(
+      "cypress/fixtures/shaker2.jpg"
+    );
+
     cy.get("[data-cy='create-product-button']").click();
     cy.wait(2000);
     cy.get(`[data-cy=${name}]`).should("exist");
@@ -119,7 +129,7 @@ describe("Product Actions", () => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        total_price: 333,
+        total_price: 2,
         stripe_purchase_id: "py_sSA313adsjfC",
         products: [{ quantity: 1, product_id: 28 }],
       }),

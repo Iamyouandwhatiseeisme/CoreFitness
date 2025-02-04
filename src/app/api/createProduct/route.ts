@@ -11,7 +11,8 @@ export async function POST(request: NextRequest) {
     const category = formData.get("category") as string;
     const descriptionGeorgian = formData.get("description_ka") as string;
     const price = Number(formData.get("price"));
-    const file = formData.get("file") as File;
+    const file1 = formData.get("file1") as File;
+    const file2 = formData.get("file2") as File;
 
     const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
     const supabase = await createClient();
@@ -34,42 +35,69 @@ export async function POST(request: NextRequest) {
             currency: "usd",
           });
           if (stripePrice) {
-            const fileName = `${Date.now()}-${file.name}`;
+            const file1Name = `${Date.now()}-${file1.name}`;
+            const file2Name = `${Date.now()}-${file2.name}`;
+
             try {
               const { data } = await supabase.storage
                 .from("product-images")
-                .upload(fileName, file, {
+                .upload(file1Name, file1, {
                   cacheControl: "3600",
                   upsert: false,
                 });
               if (data) {
                 const {
-                  data: { publicUrl },
+                  data: { publicUrl: publicUrl1 },
                 } = supabase.storage
                   .from("product-images")
-                  .getPublicUrl(fileName);
-                if (publicUrl) {
+                  .getPublicUrl(file1Name);
+                if (publicUrl1) {
                   try {
-                    const {
-                      data: { user },
-                    } = await supabase.auth.getUser();
-                    const { error } = await supabase.from("products").insert({
-                      title: name,
-                      title_ka: nameGeorgian,
-                      description: description,
-                      category: category,
-                      description_ka: descriptionGeorgian,
-                      price: price,
-                      stripe_product_id: stripeProduct.id,
-                      stripe_price_id: stripePrice.id,
-                      img_url: publicUrl,
-                      user_id: user?.id,
-                    });
-                    if (error) {
-                      throw error;
+                    const { data } = await supabase.storage
+                      .from("product-images")
+                      .upload(file2Name, file2, {
+                        cacheControl: "3600",
+                        upsert: false,
+                      });
+                    if (data) {
+                      const {
+                        data: { publicUrl: publicUrl2 },
+                      } = supabase.storage
+                        .from("product-images")
+                        .getPublicUrl(file2Name);
+                      if (publicUrl2) {
+                        try {
+                          const {
+                            data: { user },
+                          } = await supabase.auth.getUser();
+                          const { error } = await supabase
+                            .from("products")
+                            .insert({
+                              title: name,
+                              title_ka: nameGeorgian,
+                              description: description,
+                              category: category,
+                              description_ka: descriptionGeorgian,
+                              price: price,
+                              stripe_product_id: stripeProduct.id,
+                              stripe_price_id: stripePrice.id,
+                              images: [publicUrl1, publicUrl2],
+                              user_id: user?.id,
+                            });
+                          if (error) {
+                            throw error;
+                          }
+                        } catch (error) {
+                          console.log(error);
+
+                          return NextResponse.json({ error }, { status: 500 });
+                        }
+                      }
                     }
                   } catch (error) {
-                    return NextResponse.json({ error }, { status: 500 });
+                    console.log(error);
+
+                    return NextResponse.json({ error: error }, { status: 500 });
                   }
                 }
               }
