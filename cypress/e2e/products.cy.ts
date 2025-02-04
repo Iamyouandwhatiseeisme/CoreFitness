@@ -1,7 +1,7 @@
 export {};
 
 describe("Product Actions", () => {
-  it("Creates Product", () => {
+  xit("Creates Product", () => {
     cy.viewport(1536, 864);
     cy.visit("http://localhost:3000");
     cy.get("[data-cy='email']").type("karachka2@gmail.com");
@@ -42,7 +42,7 @@ describe("Product Actions", () => {
     cy.wait(2000);
     cy.get("[data-cy='add-product-button'").should("exist");
   });
-  it("Deletes the product", () => {
+  it("Creates and Deletes the product", () => {
     cy.viewport(1536, 864);
     const name = `testProduct${Date.now()}`;
     cy.visit("http://localhost:3000");
