@@ -69,7 +69,7 @@ export default function FilterPael(props: SideFilterPanelPorps) {
   }
 
   return (
-    <div className="flex flex-row w-full min-h-24 border-r-2 overflow-y-auto items-center border-gray-400 dark:border-gray-700 bg-white dark:bg-gray-800 p-4">
+    <div className="flex flex-row w-full min-h-24  overflow-y-auto items-center border-gray-400 dark:border-gray-700 border-b-2 border-opacity-20 bg-white/80 dark:bg-gray-600/20 p-4">
       <h2 className="font-bold text-lg text-gray-900 dark:text-gray-100 w-40 ">
         Select filters:
       </h2>
@@ -77,7 +77,7 @@ export default function FilterPael(props: SideFilterPanelPorps) {
         {categories.map((category) => (
           <div
             key={category}
-            className="border rounded-lg hover:bg-gray-200/40 border-gray-400 dark:border-gray-700 m-2 p-2 w-full sm:w-1/2 md:w-1/3 lg:w-48 transition-transform transform hover:scale-105 hover:shadow-lg"
+            className="border border-opacity-30 border-b-2 border-r-2 shadow-sm dark:shadow-white/10 shadow-black/10 rounded-lg hover:bg-gray-200/40 border-gray-400 dark:border-gray-700 m-2 p-2 w-full sm:w-1/2 md:w-1/3 lg:w-48 transition-transform transform hover:scale-105 hover:shadow-lg"
           >
             <div className="flex items-center">
               <input
