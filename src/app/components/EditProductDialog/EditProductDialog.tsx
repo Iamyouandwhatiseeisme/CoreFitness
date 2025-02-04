@@ -62,11 +62,6 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
       body: formData,
     });
 
-    console.log(response);
-    if (response) {
-      const responseData = await response.json();
-      console.log(responseData);
-    }
     if (response.ok) {
       toast("Product has been updated", {});
       setOpen(false);
@@ -121,7 +116,6 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
             Please type product details below
           </DialogDescription>
         </DialogHeader>
-        {/* {isLoading && <div>...isLoading</div>} */}
         <form onSubmit={updateProduct}>
           <div className="grid gap-4 py-4 pr-10">
             <div className="grid grid-cols-4 items-center gap-4">
@@ -222,7 +216,22 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
               <Label htmlFor="file" className="text-right">
                 Upload Photo
               </Label>
-              <Input id="file" type="file" name="file" className="col-span-3" />
+              <div className="col-span-3 space-y-1">
+                <Input
+                  id="file1"
+                  type="file"
+                  name="file1"
+                  className="col-span-3"
+                  required
+                />
+                <Input
+                  id="file2"
+                  type="file"
+                  name="file2"
+                  className="col-span-3"
+                  required
+                />
+              </div>
             </div>
           </div>
 
