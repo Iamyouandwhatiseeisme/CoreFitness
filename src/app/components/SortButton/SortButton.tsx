@@ -1,19 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { Product, SortOption } from "../types";
 export interface SortButtonProps {
   setItems: (products: Product[]) => void;
   sortOptions: SortOption[];
   selectedCategories: Set<string>;
+  setSortBy: (sortOption: SortOption) => void;
+  sortBy: SortOption;
 }
 export default function SortButton(props: SortButtonProps) {
   const sortOptions = props.sortOptions;
   const setItems = props.setItems;
 
-  const [sortBy, setSortBy] = useState<SortOption>(sortOptions[0]);
+  // const [sortBy, setSortBy] = useState<SortOption>(sortOptions[0]);
 
   async function handleSort(optionValue: number) {
     const sortOption = sortOptions[optionValue - 1];
-    setSortBy(sortOption);
+    props.setSortBy(sortOption);
 
     const response = await fetch("/api/filter", {
       headers: {

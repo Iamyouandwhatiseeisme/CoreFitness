@@ -15,6 +15,7 @@ const PRODUCTS_PER_PAGE = 10;
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
   const [page, setPage] = useState<number>(1);
+  const [sortBy, setSortBy] = useState<SortOption>(sortOptions[0]);
 
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
@@ -32,6 +33,8 @@ export default function Products() {
       headers: {
         start: "0",
         end: end.toString(),
+        columnName: sortBy.value,
+        orderBy: sortBy.order === "Ascending" ? "true" : "false",
       },
     });
 
@@ -131,6 +134,8 @@ export default function Products() {
             selectedCategories={selectedCategories}
             setItems={setProducts}
             sortOptions={sortOptions}
+            sortBy={sortBy}
+            setSortBy={setSortBy}
           ></SortButton>
           <Toaster />
         </div>
@@ -138,6 +143,7 @@ export default function Products() {
           refetchProducts={refetchProducts}
           setItems={setProducts}
           setSelectedCategories={setSelectedCategories}
+          sortBy={sortBy}
         ></FilterPanel>
         <div className=" flex flex-row">
           <div className="p-5 ml-44 grid grid-cols-3 gap-7">

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Product } from "../types";
+import { Product, SortOption } from "../types";
 import { createClient } from "src/app/utils/supabase/client";
 export interface SideFilterPanelPorps {
   setSelectedCategories: (cateogires: Set<string>) => void;
   setItems: (items: Product[]) => void;
   refetchProducts: () => void;
+  sortBy: SortOption;
 }
 
 export default function FilterPael(props: SideFilterPanelPorps) {
@@ -35,6 +36,8 @@ export default function FilterPael(props: SideFilterPanelPorps) {
         headers: {
           categories: JSON.stringify(Array.from(selectedCategories)),
           tableName: "products",
+          columnName: props.sortBy.value,
+          orderBy: props.sortBy.order === "Ascending" ? "true" : "false",
         },
       });
       if (response.ok) {
