@@ -61,6 +61,7 @@ export interface Product {
   stripe_product_id: string;
   img_url: string;
   title_ka: string;
+  images: string[];
 }
 export interface Blog {
   id: number;

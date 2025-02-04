@@ -129,18 +129,28 @@ export default function AddProductDialog(props: AddProductDialogProps) {
             required
           />
         </div>
-        <div>
+        <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="file" className="text-right">
-            Upload Photo
+            Upload Photos
           </Label>
-          <Input
-            id="file"
-            type="file"
-            name="file"
-            className="col-span-3"
-            data-cy="photo-browse-field"
-            required
-          />
+          <div className="col-span-3 space-y-1">
+            <Input
+              id="file1"
+              type="file"
+              name="file1"
+              className="col-span-3"
+              data-cy="photo-browse-field-1"
+              required
+            />
+            <Input
+              id="file2"
+              type="file"
+              name="file2"
+              className="col-span-3"
+              data-cy="photo-browse-field-2"
+              required
+            />
+          </div>
         </div>
       </div>
     </DialogFactory>
