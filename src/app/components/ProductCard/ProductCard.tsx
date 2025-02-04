@@ -15,7 +15,9 @@ export default function ProductCard({
   const [isHovered, setIsHovered] = useState(false);
   const title = locale === "ka" ? product.title_ka : product.title;
   return (
-    <div className="flex flex-col items-center rounded-lg shadow-lg w-full sm:w-80 bg-white dark:bg-gray-800 overflow-hidden group">
+    <div
+      className={`flex flex-col items-center rounded-lg shadow-lg w-full sm:w-80 bg-white dark:bg-gray-800 overflow-hidden group duration-100 ease-in-out transition-transform transform hover:scale-105`}
+    >
       <div
         key={product.id}
         className="flex flex-col items-center border h-80 rounded-t-lg  border-gray-200 border-b-0 dark:border-gray-700 shadow-lg w-full sm:w-80 bg-white dark:bg-gray-800 overflow-hidden group"
