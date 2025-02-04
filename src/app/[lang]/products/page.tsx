@@ -9,7 +9,7 @@ import { Toaster } from "sonner";
 import { useCart } from "src/app/components/providers/CartProvider";
 import { useLocale } from "src/app/components/providers/LanguageContext";
 import SortButton from "src/app/components/SortButton/SortButton";
-import SideFilterPanel from "src/app/components/SideFilterPanel/SideFilterPanel";
+import FilterPanel from "src/app/components/FilterPanel/FilterPanel";
 const PRODUCTS_PER_PAGE = 10;
 
 export default function Products() {
@@ -116,11 +116,11 @@ export default function Products() {
 
   return (
     <div className="w-full  min-h-wrapper pt-32 " data-cy="products-loaded">
-      <SideFilterPanel
+      <FilterPanel
         refetchProducts={refetchProducts}
         setItems={setProducts}
         setSelectedCategories={setSelectedCategories}
-      ></SideFilterPanel>
+      ></FilterPanel>
       <div className="relative flex flex-col items-center">
         <div className=" h-24  bg-slate-600 w-full flex flex-row items-center justify-center gap-2">
           <AddProductDialog

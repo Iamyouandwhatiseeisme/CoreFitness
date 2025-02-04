@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Product } from "../types";
 import { createClient } from "src/app/utils/supabase/client";
-
-export interface SideFilterPanelProps {
-  setSelectedCategories: (categories: Set<string>) => void;
+export interface SideFilterPanelPorps {
+  setSelectedCategories: (cateogires: Set<string>) => void;
   setItems: (items: Product[]) => void;
   refetchProducts: () => void;
 }
 
-export default function SideFilterPanel(props: SideFilterPanelProps) {
+export default function FilterPanel(props: SideFilterPanelPorps) {
   const [categories, setCategories] = useState<string[]>([]);
   const [selectedCategories, setSelectedCategories] = useState<Set<string>>(
     new Set()
@@ -29,7 +28,6 @@ export default function SideFilterPanel(props: SideFilterPanelProps) {
     }
     fetchCategories();
   }, []);
-
   useEffect(() => {
     async function fetchProducts() {
       props.setSelectedCategories(selectedCategories);
@@ -68,32 +66,23 @@ export default function SideFilterPanel(props: SideFilterPanelProps) {
   }
 
   return (
-    <div className="flex flex-col md:flex-row items-center w-full p-4 border-r-2 border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-900 shadow-lg transition-colors duration-300">
-      <h2 className="font-bold text-xl text-gray-700 dark:text-gray-300 cursor-pointer pr-2">
-        Select Filters:
-      </h2>
-      <div
-        className={`flex flex-col md:flex-row fixed md:static top-[200px] md:top-auto space-y-2 md:space-y-0 md:space-x-4   z-50 `}
-      >
+    <div className="flex flex-col w-60 h-[470px]  border-r-2 overflow-y-auto border-gray-400 fixed left-0 top-56 z-50 ">
+      <div className="overflow-auto h-full flex flex-col items-start w-50 m-1 ">
+        <h2 className="font-bold text-lg">Select categories to fetch</h2>
         {categories.map((category) => (
           <div
             key={category}
-            className="border-r border-gray/20 pr-2 dark:border-gray/20"
+            className="border-b-2 border-gray-400  m-2 p-2 w-52 "
           >
-            <div className="flex items-center p-2 border-r-2 border-b bg-gray-100 dark:bg-gray-800 rounded-lg shadow-sm cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-700 transition duration-200">
+            <div className="flex items-center">
               <input
                 type="checkbox"
                 id={category}
                 checked={selectedCategories.has(category)}
                 onChange={() => handleCategoryChange(category)}
-                className="mr-2 h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 dark:border-gray-600 rounded"
+                className="mr-2"
               />
-              <label
-                htmlFor={category}
-                className="text-gray-700 dark:text-gray-300"
-              >
-                {category}
-              </label>
+              <label htmlFor={category}>{category}</label>
             </div>
           </div>
         ))}
