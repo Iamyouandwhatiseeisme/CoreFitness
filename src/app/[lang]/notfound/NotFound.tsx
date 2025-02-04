@@ -1,4 +1,6 @@
+import React from "react";
 import Link from "next/link";
+import { PiArrowLeft } from "react-icons/pi";
 type ReturnBackButtonProps = {
   destination: string;
 };
@@ -8,10 +10,10 @@ type NotFoudnProps = {
 export function ReturnBackButton(props: ReturnBackButtonProps) {
   return (
     <Link
-      className="flex flex-col bg-red-700 text-white text-2xl p-3 m-6 items-center border border-solid rounded-50 border-black"
+      className="flex flex-col items-center p-6 m-8 transition duration-300 ease-in-out transform hover:scale-110"
       href={`/${props.destination}`}
     >
-      <button>Go back </button>
+      <PiArrowLeft size={100} />
     </Link>
   );
 }

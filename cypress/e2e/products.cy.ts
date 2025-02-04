@@ -40,6 +40,10 @@ describe("Product Actions", () => {
     cy.wait(4000);
     cy.get("[data-cy='delete-button'").click();
     cy.wait(2000);
+    cy.get("[data-cy='delete-dialog'").should("exist");
+    cy.wait(2000);
+    cy.get("[data-cy='confirm-delete-button'").click();
+    cy.wait(2000);
     cy.get("[data-cy='add-product-button'").should("exist");
   });
   it("Creates and Deletes the product", () => {
@@ -81,6 +85,11 @@ describe("Product Actions", () => {
 
     cy.wait(8000);
     cy.get("[data-cy='delete-button'").click();
+    cy.wait(4000);
+
+    cy.get("[data-cy='delete-dialog'").should("exist");
+    cy.wait(2000);
+    cy.get("[data-cy='confirm-delete-button'").click();
     cy.wait(4000);
     cy.get("[data-cy='add-product-button'").should("exist");
   });
