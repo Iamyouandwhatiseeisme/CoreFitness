@@ -79,7 +79,7 @@ describe("Product Actions", () => {
 
     cy.get(`[data-cy=${name}]`).click();
 
-    cy.wait(4000);
+    cy.wait(8000);
     cy.get("[data-cy='delete-button'").click();
     cy.wait(4000);
     cy.get("[data-cy='add-product-button'").should("exist");
