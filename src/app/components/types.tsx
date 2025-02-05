@@ -21,6 +21,7 @@ export interface Plan {
   price: number;
   priceId: string;
   payementFrequency: string;
+  benefits: string[];
 }
 
 export interface InformationBoardItem {
@@ -90,6 +91,7 @@ export interface SubscriptionInfo {
   status: SubscriptionStatus;
   currentPeriodStart: number;
   currentPeriodEnd: number;
+  name: string;
 }
 export interface EditableInputProps {
   label: string;

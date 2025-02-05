@@ -38,20 +38,24 @@ export default function AccountSubscriptionInfo(props: SubscriptionInfoProps) {
   return (
     <div className="flex flex-row gap-5  items-center justify-items-start">
       <label className="w-10">Status:</label>
-      <div className="pl-2 cursor-pointer dark:text-black   w-48 rounded-2xl h-10 bg-white flex flex-row items-center justify-center  ">
-        {subscriptionInfo?.status === SubscriptionStatus.Active
-          ? `Active ${new Date(
-              subscriptionInfo?.currentPeriodStart * 1000
-            ).toLocaleDateString("en-CA", {
-              month: "2-digit",
-              day: "2-digit",
-            })} - ${new Date(
-              subscriptionInfo?.currentPeriodEnd * 1000
-            ).toLocaleDateString("en-CA", {
-              month: "2-digit",
-              day: "2-digit",
-            })}`
-          : "Inactive"}
+      <div className="pl-2 cursor-pointer dark:text-black  p-8  w-48 rounded-2xl h-10 bg-white flex flex-col items-center justify-center   ">
+        <div> {subscriptionInfo.name}</div>
+        <div>
+          {subscriptionInfo?.status === SubscriptionStatus.Active
+            ? `Active ${new Date(
+                subscriptionInfo?.currentPeriodStart * 1000
+              ).toLocaleDateString("en-CA", {
+                month: "2-digit",
+                day: "2-digit",
+              })} - ${new Date(
+                subscriptionInfo?.currentPeriodEnd * 1000
+              ).toLocaleDateString("en-CA", {
+                month: "2-digit",
+                day: "2-digit",
+                year: "2-digit",
+              })}`
+            : "Inactive"}
+        </div>
       </div>
 
       <button

@@ -33,7 +33,7 @@ export default function CheckoutForm(props: CheckoutFormProps): JSX.Element {
           type="submit"
           disabled={loading}
         >
-          {props.plan.reccurence} Subscription{" "}
+          Subscribe{" "}
         </button>
       </form>
     </>
