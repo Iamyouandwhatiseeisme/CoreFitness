@@ -34,6 +34,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
     <DialogFactory
       triggerText="Add Product"
       dialogTitle="Add New Product"
+      submitButtonText="Create Product"
       dialogDescription="Please enter product details"
       refetch={props.refetchProducts}
       onSubmit={async (formData) => {

@@ -17,6 +17,7 @@ import { Button } from "@components/components/ui/button";
 interface DialogFactoryProps {
   triggerText: string;
   dialogTitle: string;
+  submitButtonText: string;
   dialogDescription: string;
   children: React.ReactNode;
   onSubmit: (formData: FormData) => Promise<Response>;
@@ -80,7 +81,7 @@ export default function DialogFactory(props: DialogFactoryProps) {
               data-cy="create-product-button"
               className="rounded-lg w-32 h-10 bg-blue-500 hover:bg-blue-600 text-white dark:bg-blue-600 dark:hover:bg-blue-700"
             >
-              Create
+              {props.submitButtonText}
             </Button>
           </DialogFooter>
         </form>
