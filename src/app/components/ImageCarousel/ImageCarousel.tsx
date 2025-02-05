@@ -37,7 +37,7 @@ export default function ImageCarousel({ images }: ImageCarouselProps) {
       <Carousel
         setApi={setApi}
         opts={{ loop: true }}
-        className="w-full h-96 max-h-[500px] z-10"
+        className="w-full h-96 max-h-[500px] "
       >
         <CarouselContent className="w-full shrink-0">
           {images.map((image, index) => (

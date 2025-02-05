@@ -43,7 +43,7 @@ export function DeleteItem(props: DeleteItemProps) {
           onClick={() => setShowDialog(false)}
         >
           <div
-            className="bg-white p-6 rounded-lg shadow-lg"
+            className="bg-white p-6 rounded-lg shadow-lg z-40"
             onClick={(e) => e.stopPropagation()}
           >
             <p>Are you sure you want to delete this item?</p>
