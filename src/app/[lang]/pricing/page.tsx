@@ -1,101 +1,10 @@
 import CheckoutForm from "../../components/CheckoutForm/CheckoutForm";
-import { Plan } from "../../components/types";
 import { formatAmountForDisplay } from "../../utils/stripe/stripe-helpers";
 import * as config from "../../../config";
 import React from "react";
+import { plans } from "src/app/constants/plans";
 
 export default function DonatePage(): JSX.Element {
-  // const plans: Plan[] = [
-  //   {
-  //     reccurence: "Monthly",
-  //     price: 100,
-  //     priceId: process.env.PRICE_ID_MONTHLY!,
-  //     payementFrequency: "Every Month",
-  //   },
-  //   {
-  //     reccurence: "Yearly",
-  //     price: 800,
-  //     priceId: process.env.PRICE_ID_YEARLY!,
-  //     payementFrequency: "Every Year",
-  //   },
-  // ];
-  const plans: Plan[] = [
-    {
-      reccurence: "Monthly",
-      price: 100,
-      priceId: process.env.PRICE_ID_MONTHLY!,
-      payementFrequency: "Every Month",
-      benefits: [
-        "Access to gym",
-        "Free group classes",
-        "1 personal training session per month",
-      ],
-    },
-    {
-      reccurence: "Yearly",
-      price: 800,
-      priceId: process.env.PRICE_ID_YEARLY!,
-      payementFrequency: "Every Year",
-      benefits: [
-        "Access to gym",
-        "Free group classes",
-        "5 personal training sessions per year",
-        "Access to pool",
-      ],
-    },
-    {
-      reccurence: "Premium Monthly",
-      price: 150,
-      priceId: process.env.PRICE_ID_MONTHLY_PREMIUM!,
-      payementFrequency: "Every Month",
-      benefits: [
-        "Access to gym",
-        "Free group classes",
-        "3 personal training sessions per month",
-        "Access to pool",
-      ],
-    },
-    {
-      reccurence: "Premium Yearly",
-      price: 1200,
-      priceId: process.env.PRICE_ID_YEARLY_PREMIUM!,
-      payementFrequency: "Every Year",
-      benefits: [
-        "Access to gym",
-        "Free group classes",
-        "10 personal training sessions per year",
-        "Access to pool",
-        "Access to spa",
-      ],
-    },
-    {
-      reccurence: "Vip Monthly",
-      price: 200,
-      priceId: process.env.PRICE_ID_MONTHLY_VIP!,
-      payementFrequency: "Every Month",
-      benefits: [
-        "Access to gym",
-        "Free group classes",
-        "Unlimited personal training sessions",
-        "Access to pool",
-        "Access to spa",
-      ],
-    },
-    {
-      reccurence: "Vip Yearly",
-      price: 1350,
-      priceId: process.env.PRICE_ID_EARYLY_VIP!,
-      payementFrequency: "Every Year",
-      benefits: [
-        "Access to gym",
-        "Free group classes",
-        "Unlimited personal training sessions",
-        "Access to pool",
-        "Access to spa",
-      ],
-    },
-  ];
-
   return (
     <div className="min-h-wrapper flex flex-wrap w-full items-center justify-center gap-8 p-8 bg-gradient-to-tl from-blue-500/20 to-purple-600/20 dark:from-blue-900/40 dark:to-purple-900/40">
       {plans.map((plan) => {

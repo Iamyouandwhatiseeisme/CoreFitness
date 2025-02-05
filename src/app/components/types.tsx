@@ -18,6 +18,7 @@ export interface DailyDiet {
 }
 export interface Plan {
   reccurence: string;
+  name: string;
   price: number;
   priceId: string;
   payementFrequency: string;
