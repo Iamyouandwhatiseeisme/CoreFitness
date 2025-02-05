@@ -36,9 +36,9 @@ export default function AccountSubscriptionInfo(props: SubscriptionInfoProps) {
     }
   }
   return (
-    <div className="flex flex-row gap-5 items-center justify-items-start">
+    <div className="flex flex-row gap-5  items-center justify-items-start">
       <label className="w-10">Status:</label>
-      <div className="pl-2 cursor-pointer   w-48 rounded-2xl h-10 bg-white flex flex-row items-center justify-center  ">
+      <div className="pl-2 cursor-pointer dark:text-black   w-48 rounded-2xl h-10 bg-white flex flex-row items-center justify-center  ">
         {subscriptionInfo?.status === SubscriptionStatus.Active
           ? `Active ${new Date(
               subscriptionInfo?.currentPeriodStart * 1000
@@ -55,7 +55,7 @@ export default function AccountSubscriptionInfo(props: SubscriptionInfoProps) {
       </div>
 
       <button
-        className="rounded-2xl border bg-white border-black h-10 w-20"
+        className="rounded-2xl border dark:text-black bg-white border-black h-10 w-20"
         onClick={handleSubscriptionButton}
       >
         {subscriptionInfo?.status === SubscriptionStatus.Active

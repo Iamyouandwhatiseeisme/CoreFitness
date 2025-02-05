@@ -69,7 +69,7 @@ export default function FilterPael(props: SideFilterPanelPorps) {
   }
 
   return (
-    <div className="flex flex-row w-full min-h-24  overflow-y-auto shadow-sm shadow-black/20 items-center border-gray-400 dark:border-gray-700 border-b-2 border-opacity-20 bg-white/80 dark:bg-gray-600/20 p-4">
+    <div className="flex flex-row w-full min-h-24  overflow-y-auto bg-white/30 dark:bg-black/20   items-center justify-center gap-4 shadow-lg p-4">
       <h2 className="font-bold text-lg text-gray-900 dark:text-gray-100 w-40 ">
         Select filters:
       </h2>
