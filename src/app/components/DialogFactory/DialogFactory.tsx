@@ -63,7 +63,10 @@ export default function DialogFactory(props: DialogFactoryProps) {
         }`}
         onClick={() => setOpen(false)}
       >
-        <DialogContent className="fixed inset-0 w-[90vw] ml-auto mr-auto mt-10  h-[80vh] max-w-none max-h-none bg-white dark:bg-gray-900 p-10 backdrop-blur-2xl ">
+        <DialogContent
+          onClick={(e) => e.stopPropagation()}
+          className="fixed inset-0 w-[90vw] ml-auto mr-auto mt-10  h-[80vh] max-w-none max-h-none bg-white dark:bg-gray-900 p-10 backdrop-blur-2xl "
+        >
           <DialogHeader className="flex flex-row items-start justify-around">
             <div className=" flex-col  flex-1 text-center ">
               <DialogTitle className="text-lg font-semibold">
