@@ -50,7 +50,6 @@ describe("Auth", () => {
     cy.get("[data-cy='profile-button']").click();
     cy.wait(12000);
     cy.get("[data-cy='delete-button']").click();
-    cy.get("[data-cy='delete-button'").click();
     cy.scrollTo("top");
     cy.wait(4000);
 
