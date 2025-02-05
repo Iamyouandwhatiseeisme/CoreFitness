@@ -49,7 +49,14 @@ describe("Auth", () => {
 
     cy.get("[data-cy='profile-button']").click();
     cy.wait(12000);
-    cy.get("[data-cy='delete-user-button']").click();
+    cy.get("[data-cy='delete-button']").click();
+    cy.scrollTo("top");
+    cy.wait(4000);
+
+    cy.get("[data-cy='delete-dialog'").should("exist");
+    cy.wait(2000);
+    cy.get("[data-cy='confirm-delete-button'").click({ force: true });
+    cy.wait(4000);
     cy.visit("http://localhost:3000");
     cy.wait(4000);
     cy.get("[data-cy='login-button']").should("exist");

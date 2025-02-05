@@ -99,9 +99,9 @@ export default function Blogs() {
   // }
 
   return (
-    <div className="w-full min-h-screen pt-32 bg-gradient-to-r from-blue-500 to-purple-600 dark:from-blue-900 dark:to-purple-900">
-      <div className="relative flex flex-col items-center px-4">
-        <div className="h-24 bg-white/30 dark:bg-black/30 backdrop-blur-lg w-full max-w-6xl flex items-center justify-center gap-4 shadow-lg rounded-md">
+    <div className="w-full min-h-screen  bg-gradient-to-tl from-blue-500/20 to-purple-600/20 dark:from-blue-900/40 dark:to-purple-900/40  ">
+      <div className="relative flex flex-col items-center  ">
+        <div className="h-24 bg-white/30 dark:bg-black/30 w-full  flex items-center justify-center gap-4 shadow-lg ">
           <AddBlogDialog refetchBlogs={refetchBlogs} />
           <SearchBlogs
             searchItemType="blogs"

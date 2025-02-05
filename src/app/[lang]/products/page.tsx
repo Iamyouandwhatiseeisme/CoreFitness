@@ -98,7 +98,10 @@ export default function Products() {
   }, [isUpdating, hasMore]);
 
   return (
-    <div className="w-full  min-h-wrapper  " data-cy="products-loaded">
+    <div
+      className="w-full  min-h-wrapper bg-gradient-to-tl from-blue-500/20 to-purple-600/20 dark:from-blue-900/40 dark:to-purple-900/40  "
+      data-cy="products-loaded"
+    >
       <div className="relative flex flex-col items-center">
         <div className="h-24 w-full flex flex-row items-center justify-center gap-2 bg-slate-200/20 bg-opacity-50 dark:bg-slate-800 dark:bg-opacity-50 shadow-sm shadow-black/80">
           <ul className="flex flex-row items-center gap-2 h-20 justify-center">

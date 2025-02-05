@@ -26,18 +26,18 @@ export default function EditableInput(props: EditableInputProps) {
   }
 
   return (
-    <div className="flex flex-row justify-items-start items-center gap-5 ">
+    <div className="flex flex-row  items-center justify-items-start  gap-5  ">
       <Toaster></Toaster>
-      <label className="w-10">{props.label}</label>
+      <label className="w-10 pr-2 ">{props.label}</label>
       <input
-        className="rounded-2xl h-10 w- text-start w-48 pl-2"
+        className="rounded-2xl h-10 w- text-start w-48 pl-2 bg-white dark:text-black"
         type="email"
         value={value}
         onSubmit={handleApiCall}
         onChange={handleValueChange}
       ></input>
       <button
-        className="rounded-2xl border bg-white border-black h-10 w-20"
+        className="rounded-2xl border dark:text-black bg-white border-black h-10 w-20"
         onClick={handleApiCall}
       >
         {props.updateButtonText}
