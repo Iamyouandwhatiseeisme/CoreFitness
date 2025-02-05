@@ -28,7 +28,7 @@ export default async function ProductPage(props: ProductDetailsPageProps) {
 
   if (!product) return <NotFound page="products" />;
   return (
-    <div className="min-h-screen flex flex-row items-start justify-between gap-20 dark:bg-gray-900">
+    <div className="min-h-screen flex flex-row items-start justify-between gap-20 dark:bg-gray-900 ">
       <ReturnBackButton destination={`${props.params.lang}/products`} />
 
       <div className="min-h-screen flex flex-col items-center justify-center py-10 bg-gray-100 dark:bg-gray-800">

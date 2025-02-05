@@ -35,6 +35,7 @@ export default function AddBlogDialog(props: ProductDialogProps) {
       dialogTitle="Add New Blog Post"
       dialogDescription="Please enter blog post details"
       refetch={props.refetchBlogs}
+      submitButtonText="Create Blog"
       onSubmit={async (formData) => {
         return fetch("/api/createBlog", {
           method: "POST",
@@ -43,7 +44,6 @@ export default function AddBlogDialog(props: ProductDialogProps) {
       }}
     >
       <div className="space-y-6">
-        {/* Title Section */}
         <div className="space-y-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="title" className="text-right">
@@ -118,7 +118,6 @@ export default function AddBlogDialog(props: ProductDialogProps) {
           </div>
         </div>
 
-        {/* Category */}
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="category" className="text-right">
             Category

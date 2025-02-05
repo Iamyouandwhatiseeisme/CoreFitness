@@ -5,11 +5,11 @@ import Stripe from "stripe";
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
-    const name = formData.get("name") as string;
-    const nameGeorgian = formData.get("name-georgian") as string;
+    const name = formData.get("title") as string;
+    const nameGeorgian = formData.get("title_ka") as string;
     const description = formData.get("description") as string;
     const category = formData.get("category") as string;
-    const descriptionGeorgian = formData.get("description-georgian") as string;
+    const descriptionGeorgian = formData.get("description_ka") as string;
 
     const id = request.headers.get("id");
     const table = request.headers.get("table");
@@ -24,6 +24,13 @@ export async function POST(request: NextRequest) {
       );
     }
     if (table === "products") {
+      console.log(
+        name,
+        nameGeorgian,
+        description,
+        category,
+        descriptionGeorgian
+      );
       const price = Number(formData.get("price"));
       const file1 = formData.get("file1") as File;
       const file2 = formData.get("file2") as File;
@@ -137,15 +144,18 @@ export async function POST(request: NextRequest) {
                     throw error;
                   }
                 } catch (error) {
+                  console.log(error);
                   return NextResponse.json({ error }, { status: 500 });
                 }
               }
             }
           } catch (error) {
+            console.log(error);
             return NextResponse.json({ error: error }, { status: 500 });
           }
         }
       } catch (error) {
+        console.log(error);
         return NextResponse.json({ error: error }, { status: 500 });
       }
       return NextResponse.json({ code: "Product updated" }, { status: 200 });
@@ -160,6 +170,7 @@ export async function POST(request: NextRequest) {
           description_ka: descriptionGeorgian,
         })
         .eq("id", id);
+      console.log(data, error);
       if (error) {
         return NextResponse.json({ error: error }, { status: 500 });
       }
