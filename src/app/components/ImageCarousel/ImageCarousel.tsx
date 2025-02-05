@@ -25,7 +25,7 @@ export default function ImageCarousel({ images }: ImageCarouselProps) {
     };
 
     api.on("select", updateCarouselState);
-    updateCarouselState(); // Set initial state
+    updateCarouselState();
 
     return () => {
       api.off("select", updateCarouselState);
