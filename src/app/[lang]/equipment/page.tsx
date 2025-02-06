@@ -27,7 +27,9 @@ export default function EquipmentPage() {
     fetch("/api/equipment")
       .then((res) => res.json())
       .then((data) => setEquipment(data))
+      .then((data) => console.log(data))
       .catch((error) => console.error(error));
+
     // fetch("/api/muscles")
     //   .then((res) => res.json())
     //   .then((data) => setMuscles(data))
