@@ -41,6 +41,7 @@ const CartDialog = () => {
         const { url } = await response.json();
         if (url !== undefined) {
           window.location.assign(url as string);
+          clearCart();
         }
       } catch (error) {
         alert(error);
@@ -97,7 +98,7 @@ const CartDialog = () => {
                       className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg"
                     >
                       <img
-                        src={item.product.images[0]}
+                        src={item.product.images?.[0] || "/placeholder.jpg"}
                         alt={item.product.title}
                         className="w-20 h-20 object-cover rounded-md border"
                       />
