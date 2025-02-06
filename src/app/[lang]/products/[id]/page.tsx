@@ -9,6 +9,7 @@ import EditProductDIalog from "src/app/components/EditProductDialog/EditProductD
 import { Toaster } from "sonner";
 
 import ImageCarousel from "src/app/components/ImageCarousel/ImageCarousel";
+import AddToCart from "src/app/components/AddToCart/AddToCart";
 
 interface ProductDetailsPageProps {
   params: {
@@ -33,6 +34,15 @@ export default async function ProductPage(props: ProductDetailsPageProps) {
 
       <div className="min-h-screen flex flex-col items-center justify-center py-10 bg-gray-100 dark:bg-gray-800">
         <div className="relative w-150 max-w-4xl p-6">
+          {/* <button
+            className="w-full py-2 bg-gray-600/40 text-black border-b-0 hover:bg-blue-700 hover:text-white dark:bg-blue-500 dark:hover:bg-blue-600 transition-colors duration-300 opacity-0 group-hover:opacity-100"
+            data-cy={`add-to-cart-button-${product.title}`}
+            onClick={()=> addItemToCart({ product: product, quantity: 1 })}
+          >
+            Add To Cart
+          </button> */}
+          <AddToCart product={product} quantity={1}></AddToCart>
+
           <h1 className="text-4xl font-bold mb-4 text-center dark:text-white">
             {props.params.lang === "ka" ? product.title_ka : product.title}
           </h1>

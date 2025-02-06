@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
             const file2Name = `${Date.now()}-${file2.name}`;
 
             try {
-              const { data } = await supabase.storage
+              const { data, error } = await supabase.storage
                 .from("product-images")
                 .upload(file1Name, file1, {
                   cacheControl: "3600",
@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
                           const {
                             data: { user },
                           } = await supabase.auth.getUser();
-                          const { error } = await supabase
+                          const { data, error } = await supabase
                             .from("products")
                             .insert({
                               title: name,
@@ -84,6 +84,7 @@ export async function POST(request: NextRequest) {
                               images: [publicUrl1, publicUrl2],
                               user_id: user?.id,
                             });
+                          console.log(error, data);
                           if (error) {
                             throw error;
                           }
@@ -100,6 +101,12 @@ export async function POST(request: NextRequest) {
                     return NextResponse.json({ error: error }, { status: 500 });
                   }
                 }
+              } else {
+                console.log("error", error);
+                return NextResponse.json(
+                  { error: "Images could not be inserted" },
+                  { status: 500 }
+                );
               }
             } catch (error) {
               return NextResponse.json({ error: error }, { status: 500 });

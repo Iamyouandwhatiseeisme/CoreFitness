@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { OrderProducts } from "src/app/components/types";
 import { createClient } from "src/app/utils/supabase/server";
 import { stripe } from "src/lib/stripe";
+import React from "react";
 
 export default async function ResultPage({
   searchParams,
@@ -46,6 +47,12 @@ export default async function ResultPage({
     <div className="min-h-wrapper ">
       <h2 className="pt-52">
         Successfull Payement, you will be redirected to home page
+      </h2>
+      <h2>
+        if not please click{" "}
+        <a className="text-blue-500 underline text-lg" href="/orders">
+          here
+        </a>
       </h2>
     </div>
   );

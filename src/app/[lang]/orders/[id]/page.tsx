@@ -1,7 +1,15 @@
 "use client";
 import React from "react";
-import { Product } from "../../../components/types";
+import { Order, Product } from "../../../components/types";
 import { useEffect, useState } from "react";
+
+interface OrderPageProps {
+  params: {
+    lang: string;
+    id: string;
+  };
+}
+
 interface OrderPageProps {
   params: {
     lang: string;
@@ -10,7 +18,8 @@ interface OrderPageProps {
 }
 
 export default function OrdersPage(props: OrderPageProps) {
-  const [orderDetails, setOrderDetails] = useState<Product[]>([]);
+  const [order, setOrder] = useState<Order | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { id } = props.params;
 
@@ -24,44 +33,151 @@ export default function OrdersPage(props: OrderPageProps) {
       });
       if (response.ok) {
         const responseData: Product[] = await response.json();
-        setOrderDetails(responseData);
-        setIsLoading(false);
+        setProducts(responseData);
       }
+      const responseOrder = await fetch("/api/orders/singleOrder", {
+        method: "GET",
+        headers: {
+          id: id,
+        },
+      });
+      if (responseOrder.ok) {
+        const responseData: Order = (await responseOrder.json()) as Order;
+        console.log(responseData);
+        setOrder(responseData);
+      }
+      setIsLoading(false);
     }
     fetchOrderDetails();
   }, [id]);
 
+  const formatDate = (dateString: string) =>
+    new Date(dateString).toLocaleDateString("en-CA", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
   return (
-    <div className="gap-4 flex pt-44 flex-col items-center justify-center min-h-wrapper">
-      {isLoading === true ? (
-        <div>Products are loading</div>
-      ) : orderDetails.length > 0 ? (
-        orderDetails.map((product, index) => {
-          const formattedDate = new Date(product.created_at).toLocaleDateString(
-            "en-CA"
-          );
-          return (
-            <div
-              key={index}
-              className="w-150 h-120 border rounded-2xl items-start flex flex-row justify-start border-gray-400"
-            >
-              <img
-                className="w-96 h-96 rounded-2xl p-2"
-                src={product.img_url}
-                alt={product.title}
-              />
-              <div className="flex flex-col w-full p-2 m-5 gap-2">
-                <div className="font-bold border-b w-full border-gray-400 ">
-                  {product.title}
-                </div>
-                <div>Price: {product.price / 100}$</div>
-                <div>Date of Order: {formattedDate}</div>
+    <div className="min-h-wrapper bg-gray-50 h-full w-full dark:bg-gray-900 p-8">
+      {isLoading ? (
+        <div className="flex justify-center items-center w-full h-full">
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-solid border-blue-600 border-r-transparent"></div>
+        </div>
+      ) : order ? (
+        <div className="max-w-7xl mx-auto space-y-8">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg">
+            <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+              Order #{order.id}
+            </h1>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+              <div className="space-y-1">
+                <p className="text-gray-500 dark:text-gray-400">Order Date</p>
+                <p className="font-medium dark:text-gray-200">
+                  {formatDate(order.created_at)}
+                </p>
               </div>
+              <div className="space-y-1">
+                <p className="text-gray-500 dark:text-gray-400">Total Amount</p>
+                <p className="font-medium dark:text-gray-200">
+                  ${(order.total_price / 100).toFixed(2)}
+                </p>
+              </div>
+              <div className="space-y-1">
+                <p className="text-gray-500 dark:text-gray-400">
+                  Customer Email
+                </p>
+                <p className="font-medium dark:text-gray-200">{order.email}</p>
+              </div>
+              <div className="space-y-1"></div>
             </div>
-          );
-        })
+          </div>
+
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white">
+            Products ({products.length})
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {products.map((product) => {
+              const title =
+                props.params.lang === "ka" ? product.title_ka : product.title;
+              const description =
+                props.params.lang === "ka"
+                  ? product.description_ka
+                  : product.description;
+              return (
+                <div
+                  key={product.id}
+                  className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-md hover:shadow-lg transition-shadow duration-300"
+                >
+                  <div className="relative h-48 mb-4 rounded-lg overflow-hidden">
+                    {product.images.map((image, idx) => (
+                      <img
+                        key={idx}
+                        src={image}
+                        alt={`${product.title} - Image ${idx + 1}`}
+                        className={`object-cover ${idx === 0 ? "" : "hidden"}`}
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                    ))}
+                  </div>
+
+                  <div className="space-y-2">
+                    <h3 className="text-lg font-semibold dark:text-white">
+                      {title}
+                    </h3>
+
+                    <p className="text-xl font-bold text-blue-600 dark:text-blue-400">
+                      ${(product.price / 100).toFixed(2)}
+                    </p>
+
+                    <div className="border-t pt-2 mt-2">
+                      <p className="text-sm text-gray-600 dark:text-gray-400">
+                        {description}
+                      </p>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 text-sm mt-4">
+                      <div>
+                        <span className="text-gray-500 dark:text-gray-400">
+                          Category:
+                        </span>
+                        <span className="ml-1 dark:text-gray-200">
+                          {product.category}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-gray-500 dark:text-gray-400">
+                          Quantity:
+                        </span>
+                        <span className="ml-1 font-mono dark:text-gray-200">
+                          {order.products.map((orderProduct) => {
+                            return orderProduct.product_id === product.id
+                              ? orderProduct.quantity
+                              : "";
+                          })}
+                        </span>
+                      </div>
+                      <div>
+                        <span className="text-gray-500 dark:text-gray-400">
+                          Created:
+                        </span>
+                        <span className="ml-1 dark:text-gray-200">
+                          {formatDate(product.created_at)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       ) : (
-        <div>No products found for this order.</div>
+        <div className="text-center text-gray-500 dark:text-gray-400 text-xl mt-8">
+          Order not found
+        </div>
       )}
     </div>
   );
