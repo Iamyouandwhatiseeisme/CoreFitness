@@ -82,6 +82,7 @@ export interface Order {
   user_id: string;
   total_price: number;
   stripe_purchase_id: string;
+  email: string;
   products: OrderProducts[];
 }
 export interface OrderProducts {
