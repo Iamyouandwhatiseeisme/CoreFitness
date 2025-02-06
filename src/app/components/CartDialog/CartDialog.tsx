@@ -89,19 +89,9 @@ const CartDialog = () => {
             </div>
 
             <div className="flex-1 overflow-y-auto p-6">
-              {cartItems.length === 0 ? (
-                <div className="text-center text-gray-500 py-8">
-                  {error ? (
-                    <div className="text-red-500 bg-red-50 px-4 py-2 rounded-lg">
-                      {error}
-                    </div>
-                  ) : (
-                    "Your cart is empty. Start adding some products!"
-                  )}
-                </div>
-              ) : (
-                <ul className="space-y-4">
-                  {cartItems.map((item: CartItem) => (
+              <ul className="space-y-4">
+                {cartItems?.length > 0 ? (
+                  cartItems.map((item: CartItem) => (
                     <li
                       key={item.product.id}
                       className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg"
@@ -159,9 +149,19 @@ const CartDialog = () => {
                         </Button>
                       </div>
                     </li>
-                  ))}
-                </ul>
-              )}
+                  ))
+                ) : (
+                  <div className="text-center text-gray-500 py-8">
+                    {error ? (
+                      <div className="text-red-500 bg-red-50 px-4 py-2 rounded-lg">
+                        {error}
+                      </div>
+                    ) : (
+                      "Your cart is empty. Start adding some products!"
+                    )}
+                  </div>
+                )}
+              </ul>
             </div>
 
             {cartItems.length > 0 && (
