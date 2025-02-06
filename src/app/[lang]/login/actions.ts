@@ -50,7 +50,7 @@ export async function signup(formData: FormData, locale: string) {
 export async function signInWithGithub() {
   const supabase = await createClient();
   const baseUrl = getBaseUrl();
-  console.log(baseUrl);
+  console.log(baseUrl, "baseUrl");
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: "github",
