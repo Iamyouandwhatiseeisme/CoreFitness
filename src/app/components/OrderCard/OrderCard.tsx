@@ -16,7 +16,7 @@ export function OrderCard(props: OrderCardProps) {
 
   useEffect(() => {
     async function fetchOrders() {
-      let tempProducts: Array<{ product: Product; quantity: number }> = [];
+      const tempProducts: Array<{ product: Product; quantity: number }> = [];
       const response = await fetch("/api/products/orderProducts", {
         method: "GET",
         headers: {
@@ -50,33 +50,57 @@ export function OrderCard(props: OrderCardProps) {
   }, [productsToFetch]);
 
   return (
-    <div className=" bg-white h-auto rounded-xl border border-gray-300">
-      <div className="w-full border-b border-gray-200 p-5 flex flex-row justify-between">
-        <div> Order: # {props.order.id}</div>
-        <div> Total: {props.order.total_price / 100}$</div>
+    <div className="bg-white ml-40 mr-40 pl-10 pr-10 pt-10 dark:bg-gray-800 h-auto rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+      <div className="w-full border-b border-gray-200 dark:border-gray-700 p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center">
+        <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+          Order: #{props.order.id}
+        </div>
+        <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+          Total: ${(props.order.total_price / 100).toFixed(2)}
+        </div>
+      </div>
+      <div className="p-5 text-gray-700 dark:text-gray-300">
+        <p>
+          <strong>Created At:</strong>{" "}
+          {new Date(props.order.created_at).toLocaleString()}
+        </p>
+
+        <p>
+          <strong>Email:</strong> {props.order.email}
+        </p>
       </div>
 
       {isLoading ? (
-        <div>Loading...</div>
+        <div className="flex justify-center items-center w-full h-full py-10">
+          <div className="animate-spin rounded-full h-12 w-12 border-4 border-solid border-current border-r-transparent"></div>
+        </div>
       ) : products.length === 0 ? (
-        <div>No products found</div>
+        <div className="p-5 text-center text-gray-500 dark:text-gray-400">
+          No products found
+        </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-5">
           {products.map((productItem, index) => {
             const { product, quantity } = productItem;
             return (
               <div
                 key={index}
-                className="border rounded-lg p-4 flex flex-col items-center"
+                className="border rounded-lg p-4 flex flex-col items-center shadow-sm hover:shadow-md transition-shadow duration-300 dark:bg-gray-700 dark:border-gray-600"
               >
                 <img
-                  src={product.img_url}
+                  src={product.images[0]}
                   alt={product.title}
-                  className="w-40 h-40 object-cover mb-4"
+                  className="w-40 h-40 object-cover mb-4 rounded-md"
                 />
-                <h3 className="text-xl font-semibold">{product.title}</h3>
-                <p className="text-lg text-gray-600">${product.price / 100}</p>
-                <p className="text-sm text-gray-500">Quantity: {quantity}</p>
+                <h3 className="text-xl font-semibold text-center text-gray-900 dark:text-gray-100">
+                  {product.title}
+                </h3>
+                <p className="text-lg text-gray-600 dark:text-gray-300">
+                  ${(product.price / 100).toFixed(2)}
+                </p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Quantity: {quantity}
+                </p>
               </div>
             );
           })}
