@@ -6,16 +6,18 @@ interface ProductCardtProps {
   product: Product;
   locale: string;
   addItemToCart: (product: { product: Product; quantity: number }) => void;
+  toasterTrigger: (output: string) => void;
 }
 
 export default function ProductCard({
   product,
   locale,
   addItemToCart,
+  toasterTrigger,
 }: ProductCardtProps) {
   const [isHovered, setIsHovered] = useState(false);
   const {
-    dictionary: { products },
+    dictionary: { products, cart },
   } = useLocale();
   const title = locale === "ka" ? product.title_ka : product.title;
   const description =
@@ -49,7 +51,10 @@ export default function ProductCard({
       <button
         className="w-full py-2 bg-gray-600/40  text-black border-b-0 hover:bg-blue-700 hover:text-white dark:bg-blue-500 dark:hover:bg-blue-600 transition-colors duration-300 opacity-0 group-hover:opacity-100"
         data-cy={`add-to-cart-button-${product.title}`}
-        onClick={() => addItemToCart({ product: product, quantity: 1 })}
+        onClick={() => {
+          addItemToCart({ product: product, quantity: 1 });
+          toasterTrigger(cart.Added);
+        }}
       >
         {products.AddToCart}
       </button>
