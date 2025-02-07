@@ -4,7 +4,6 @@ import Stripe from "stripe";
 export async function GET(request: NextRequest) {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
   const email = request.headers.get("email");
-
   if (email) {
     try {
       const customers = await stripe.customers.list({

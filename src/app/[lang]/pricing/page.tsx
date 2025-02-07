@@ -10,7 +10,6 @@ export default function DonatePage(): JSX.Element {
   const {
     dictionary: { subscription: subscriptionDict },
   } = useLocale();
-  console.log(plans);
 
   const benefitsChapter = subscriptionDict.benefits as unknown;
   const dictionaryChaPter = benefitsChapter as DictionaryChapter;

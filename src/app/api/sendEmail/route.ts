@@ -18,7 +18,6 @@ export async function POST(request: NextRequest) {
       rejectUnauthorized: false,
     },
   } as SMTPTransport.Options);
-  console.log(transport);
 
   if (request) {
     const formData = await request.formData();
@@ -27,7 +26,6 @@ export async function POST(request: NextRequest) {
     const content = formData.get("content") as string;
 
     if (content && from && subject) {
-      console.log("sending email");
       try {
         const info = await transport.sendMail({
           from: from,
@@ -36,7 +34,6 @@ export async function POST(request: NextRequest) {
           text: content,
           html: `<strong>${content}</strong>`,
         });
-        console.log(info, "info");
         if (info) {
           return NextResponse.json({ data: info, status: 200 });
         }

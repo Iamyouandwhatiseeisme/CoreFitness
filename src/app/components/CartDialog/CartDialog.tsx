@@ -26,7 +26,6 @@ const CartDialog = () => {
 
   async function handleChekout() {
     if (cartItems.length !== 0) {
-      console.log(cartItems.length, "cart");
       try {
         const response = await fetch("/api/checkout", {
           method: "POST",
@@ -191,6 +190,7 @@ const CartDialog = () => {
                   </Button>
                   <Button
                     onClick={handleChekout}
+                    data-cy="buy-button"
                     className="bg-green-600 hover:bg-green-700 px-8 py-4"
                   >
                     {cart.Checkout}

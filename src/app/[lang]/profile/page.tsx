@@ -40,10 +40,12 @@ export default function Profile() {
           },
         });
         const subscriptionInfo = await response.json();
-        console.log(subscriptionInfo, "status check");
+        console.log(subscriptionInfo);
+
         const photoUrl = user.user_metadata.profile_photo;
         const userInfoResponse = await fetch("/api/userInfo");
         if (response.status === 200) {
+          console.log(response.status);
           const userInfoResponseData = await userInfoResponse.json();
           const userDisplayName = userInfoResponseData.displayName;
           const userProfile: UserProfile = {
@@ -52,9 +54,10 @@ export default function Profile() {
             image: photoUrl,
             display_name: userDisplayName,
           };
+          setLoading(false);
           setUser(userProfile);
-        }
-        if (response.status === 400) {
+        } else {
+          console.log("else");
           const userProfile: UserProfile = {
             user: user,
             subscription_info: {
@@ -68,9 +71,8 @@ export default function Profile() {
           };
 
           setUser(userProfile);
+          setLoading(false);
         }
-
-        setLoading(false);
       }
     }
     if (!user) {
@@ -89,6 +91,7 @@ export default function Profile() {
       }
     }
   }
+  console.log(loading);
 
   return (
     <div className="min-h-wrapper flex items-center w-full justify-center bg-gradient-to-tl from-blue-500/20 to-purple-600/20 dark:from-blue-900/40 dark:to-purple-900/40">

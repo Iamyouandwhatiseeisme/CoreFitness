@@ -10,7 +10,6 @@ export default function AccountSubscriptionInfo(props: SubscriptionInfoProps) {
     dictionary: { profile },
   } = useLocale();
   const { subscriptionInfo } = props;
-  console.log(subscriptionInfo, "check sub info");
   async function handleSubscriptionButton() {
     if (subscriptionInfo.status === SubscriptionStatus.Active) {
       const supabase = await createClient();
@@ -18,7 +17,7 @@ export default function AccountSubscriptionInfo(props: SubscriptionInfoProps) {
         data: { user },
       } = await supabase.auth.getUser();
       if (user) {
-        const response = await fetch("api/subscriptionCancel", {
+        const response = await fetch("/api/subscriptionCancel", {
           headers: {
             email: user.email!,
           },
@@ -36,7 +35,6 @@ export default function AccountSubscriptionInfo(props: SubscriptionInfoProps) {
         }
       }
     }
-    console.log(subscriptionInfo.status);
     if (subscriptionInfo.status === SubscriptionStatus.Inactive) {
       router.push("/pricing");
     }

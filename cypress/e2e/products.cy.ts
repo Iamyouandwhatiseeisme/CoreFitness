@@ -78,13 +78,13 @@ describe("Product Actions", () => {
     );
 
     cy.get("[data-cy='create-product-button']").click();
-    cy.wait(4000);
+    cy.wait(8000);
     cy.get(`[data-cy=${name}]`).should("exist");
 
     cy.get(`[data-cy=${name}]`).click();
 
     cy.wait(10000);
-    cy.get("[data-cy='delete-button'").click();
+    cy.get("[data-cy='delete-button']").click();
     cy.scrollTo("top");
     cy.wait(4000);
 
@@ -151,7 +151,7 @@ describe("Product Actions", () => {
       cy.get("[data-cy='header']").trigger("mouseover");
       cy.wait(3000);
       cy.get(`[data-cy='orders-button'`).click();
-      cy.wait(8000);
+      cy.wait(10000);
       cy.get(`[data-cy='${id}']`).should("exist");
       cy.wait(2000);
 

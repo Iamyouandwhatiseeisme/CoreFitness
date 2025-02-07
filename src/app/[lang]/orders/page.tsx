@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React from "react";
 import { useEffect, useState } from "react";
+import { PiShoppingBagOpen } from "react-icons/pi";
 import { OrderCard } from "src/app/components/OrderCard/OrderCard";
 import { useLocale } from "src/app/components/providers/LanguageContext";
 import { Order } from "src/app/components/types";
@@ -11,6 +12,7 @@ export default function Orders() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const {
     dictionary: { order },
+    locale,
   } = useLocale();
   useEffect(() => {
     async function fetchOrders() {
@@ -32,10 +34,17 @@ export default function Orders() {
           <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white"></div>
         </div>
       ) : orders.length === 0 ? (
-        <div className="flex justify-center items-center h-full">
-          <div className="pt-10 text-center text-gray-700 dark:text-gray-300 text-lg">
+        <div className="flex  flex-col justify-center mt-40 items-center h-full gap-20 ">
+          <div className=" text-center text-gray-700 dark:text-gray-300 text-lg">
             {order.YouHaventYet}
           </div>
+          <Link
+            href="/products"
+            className="flex items-center justify-center mt-4 px-4 py-2 bg-blue-500/40 text-white rounded-md hover:bg-blue-600/80 transition duration-300 ease-in-out transform hover:scale-105"
+          >
+            {locale === "ka" ? " იშოპინგე ახლავე!" : " Shop Now"}
+            <PiShoppingBagOpen size={24} className="ml-2"></PiShoppingBagOpen>
+          </Link>
         </div>
       ) : (
         <div className="">

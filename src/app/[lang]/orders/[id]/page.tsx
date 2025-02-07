@@ -40,7 +40,6 @@ export default function OrdersPage(props: OrderPageProps) {
       });
       if (responseOrder.ok) {
         const responseData: Order = (await responseOrder.json()) as Order;
-        console.log(responseData);
         setOrder(responseData);
       }
       setIsLoading(false);

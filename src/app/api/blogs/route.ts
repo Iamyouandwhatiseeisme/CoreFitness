@@ -13,7 +13,6 @@ export async function GET(request: NextRequest) {
       .range(Number(start), Number(end))
       .order("created_at", { ascending: false });
 
-    console.log(data?.length);
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 500 });
