@@ -7,11 +7,15 @@ import { Blog } from "../types";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import DialogFactory from "../DialogFactory/DialogFactory";
+import { useLocale } from "../providers/LanguageContext";
 interface EditBlogDIalogProps {
   blog: Blog;
 }
 
 export default function EditBlogDIalog(props: EditBlogDIalogProps) {
+  const {
+    dictionary: { blog: blogDictionary },
+  } = useLocale();
   const blog = props.blog;
 
   const [title, setTitle] = useState<string>(blog.title);
@@ -33,21 +37,25 @@ export default function EditBlogDIalog(props: EditBlogDIalogProps) {
     const input = e.target as HTMLInputElement | HTMLTextAreaElement;
     const field = input.name as "title_ka" | "description_ka";
     const value = input.value;
-    const isLanguageValid = /^[\u10A0-\u10FF\s]*$/.test(value);
+    const isLanguageValid =
+      /^[\u10A0-\u10FF\s0-9!@#$%^&*()_+=[\]{};':"\\|,.<>/?-]*$/.test(value);
 
     setErrors((prev) => ({
       ...prev,
-      [field]: isLanguageValid ? undefined : "Only Georgian alphabet allowed",
+      [field]: isLanguageValid ? undefined : blogDictionary.ErrorMessage,
     }));
 
-    input.value = value.replace(/[^\u10A0-\u10FF\s]/g, "");
+    input.value = value.replace(
+      /[^\u10A0-\u10FF\s0-9!@#$%^&*()_+=[\]{};':"\\|,.<>/?-]/g,
+      ""
+    );
   };
   return (
     <DialogFactory
-      triggerText="Edit Blog Post"
-      dialogTitle="Edit Blog Post"
-      submitButtonText="Update Blog"
-      dialogDescription="Please enter blog post details"
+      triggerText={blogDictionary.EditBlog}
+      dialogTitle={blogDictionary.EditBlog}
+      submitButtonText={blogDictionary.UpdateBlog}
+      dialogDescription={blogDictionary.PleaseEnter}
       refetch={() => {
         toast("Blog has been updated", {});
         router.refresh();
@@ -66,7 +74,7 @@ export default function EditBlogDIalog(props: EditBlogDIalogProps) {
       <div className="grid gap-4 py-4 ">
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="title" className="text-right">
-            Title (English)
+            {blogDictionary.TitleEn}
           </Label>
           <Input
             value={title}
@@ -81,7 +89,7 @@ export default function EditBlogDIalog(props: EditBlogDIalogProps) {
 
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="title_ka" className="text-right">
-            Title Georgian
+            {blogDictionary.TitleKa}
           </Label>
           <div className="col-span-3 space-y-1">
             <Input
@@ -104,7 +112,7 @@ export default function EditBlogDIalog(props: EditBlogDIalogProps) {
       <div className="space-y-4">
         <div className="grid grid-cols-4 items-start gap-4">
           <Label htmlFor="description" className="text-right mt-2">
-            Description (English)
+            {blogDictionary.DescriptionEn}
           </Label>
           <textarea
             id="description"
@@ -122,7 +130,7 @@ export default function EditBlogDIalog(props: EditBlogDIalogProps) {
 
         <div className="grid grid-cols-4 items-start gap-4">
           <Label htmlFor="description_ka" className="text-right mt-2">
-            Description Georgian
+            {blogDictionary.DescriptionKa}
           </Label>
           <div className="col-span-3 space-y-1">
             <textarea
@@ -147,7 +155,7 @@ export default function EditBlogDIalog(props: EditBlogDIalogProps) {
 
       <div className="grid grid-cols-4 items-center gap-4">
         <Label htmlFor="category" className="text-right">
-          Category
+          {blogDictionary.Category}
         </Label>
         <Input
           id="category"

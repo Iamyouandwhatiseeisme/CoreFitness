@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Blog } from "../types";
 import React from "react";
+import { useLocale } from "../providers/LanguageContext";
 
 interface BlogCardProps {
   blog: Blog;
@@ -9,6 +10,9 @@ interface BlogCardProps {
 
 export default function BlogCard(props: BlogCardProps) {
   const { blog, locale } = props;
+  const {
+    dictionary: { blog: BlogDictionary },
+  } = useLocale();
   const title = locale === "ka" ? blog.title_ka : blog.title;
   const description = locale === "ka" ? blog.description_ka : blog.description;
 
@@ -23,7 +27,7 @@ export default function BlogCard(props: BlogCardProps) {
           <strong>{title}</strong>
         </div>
         <div className="text-sm text-gray-600 dark:text-gray-300 mb-4">
-          Posted by {blog.email}
+          {BlogDictionary.PostedBy} : {blog.email}
         </div>
         <p className="text-gray-700 dark:text-gray-400 text-sm line-clamp-3">
           {description}

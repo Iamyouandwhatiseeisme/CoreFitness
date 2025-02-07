@@ -1,7 +1,9 @@
 import { useLocale } from "../components/providers/LanguageContext";
 
 export default function useInformationBoardItems() {
-  const { informationBoard } = useLocale();
+  const {
+    dictionary: { informationBoard },
+  } = useLocale();
   const informationBoardItems = [
     {
       key: 0,

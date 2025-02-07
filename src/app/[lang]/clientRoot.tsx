@@ -43,12 +43,15 @@ export default function ClientRoot({
     >
       <LocaleProvider
         lang={lang}
-        dictChat={dict.chatWindow}
-        informationBoard={dict.informationBoard}
+        // dictChat={dict.chatWindow}
+        // informationBoard={dict.informationBoard}
       >
         <CartProvider>
           <div className="bg-gradient-to-br  from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800   flex flex-row justify-between">
-            <Header currentUser={user} dict={dict.header} />
+            <Header
+              currentUser={user}
+              // dict={dict.header}
+            />
             <main
               className={`${
                 user === null

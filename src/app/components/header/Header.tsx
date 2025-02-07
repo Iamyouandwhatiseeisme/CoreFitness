@@ -4,7 +4,6 @@ import Logo from "../../../../public/images/Header Logo.webp";
 import { useLocale } from "../providers/LanguageContext";
 import React, { useState } from "react";
 import { User } from "@supabase/supabase-js";
-import { DictionaryChapter } from "../../[lang]/dictionaries";
 import { TbSquareRoundedChevronRightFilled } from "react-icons/tb";
 import { PiBarbell } from "react-icons/pi";
 import { PiNewspaper } from "react-icons/pi";
@@ -14,12 +13,14 @@ import { PiCreditCard } from "react-icons/pi";
 import { PiUserCircle } from "react-icons/pi";
 
 interface HeaderProps {
-  dict: DictionaryChapter;
   currentUser: User | null;
 }
 
 export default function Header(props: HeaderProps) {
-  const { locale } = useLocale();
+  const {
+    dictionary: { header },
+    locale,
+  } = useLocale();
   const [isHovered, setIsHovered] = useState<boolean>(false);
 
   const listItemStyle: string =
@@ -54,40 +55,40 @@ export default function Header(props: HeaderProps) {
             <ul className="gap-5 flex list-none flex-col">
               <Link href={`/${locale}/equipment`}>
                 <li className={listItemStyle}>
-                  {props.dict.Equipment}
+                  {header.Equipment}
                   <PiBarbell></PiBarbell>
                 </li>
               </Link>
               <Link href={`/${locale}/blogs`}>
                 <li className={listItemStyle}>
-                  {props.dict.Blog}
+                  {header.Blog}
                   <PiNewspaper></PiNewspaper>
                 </li>
               </Link>
               <Link href={`/${locale}/orders`} data-cy="orders-button">
                 <li className={listItemStyle}>
-                  {props.dict.Orders}
+                  {header.Orders}
                   <PiClipboardText></PiClipboardText>
                 </li>
               </Link>
               <Link href={`/${locale}/products`} data-cy="products-page-button">
                 <li className={listItemStyle}>
-                  {props.dict.Products}
+                  {header.Products}
                   <PiShoppingBagOpen></PiShoppingBagOpen>
                 </li>
               </Link>
               <li className={`${listItemStyle} hidden l:flex`}>
-                {props.dict.Locations}
+                {header.Locations}
               </li>
               <Link href={`/${locale}/profile`} data-cy="profile-button">
                 <li className={`${listItemStyle} hidden xl:flex`}>
-                  {props.dict.Profile}
+                  {header.Profile}
                   <PiUserCircle></PiUserCircle>
                 </li>
               </Link>
               <Link href={`/${locale}/pricing`}>
                 <li className={`${listItemStyle} hidden xl:flex`}>
-                  {props.dict.Subscribe}
+                  {header.Subscribe}
                   <PiCreditCard></PiCreditCard>
                 </li>
               </Link>

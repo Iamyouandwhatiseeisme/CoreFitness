@@ -65,10 +65,10 @@ export default function DialogFactory(props: DialogFactoryProps) {
       >
         <DialogContent
           onClick={(e) => e.stopPropagation()}
-          className="fixed inset-0 w-[90vw] ml-auto mr-auto mt-10  h-[80vh] max-w-none max-h-none bg-white dark:bg-gray-900 p-10 backdrop-blur-2xl "
+          className="fixed inset-0 w-[90vw] ml-auto mr-auto mt-10 h-[95vh] max-w-none max-h-none bg-white dark:bg-gray-900 p-4 sm:p-6 md:p-10 backdrop-blur-2xl overflow-y-auto"
         >
-          <DialogHeader className="flex flex-row items-start justify-around">
-            <div className=" flex-col  flex-1 text-center ">
+          <DialogHeader className="flex flex-row items-start justify-between">
+            <div className="flex flex-col flex-1 text-center">
               <DialogTitle className="text-lg font-semibold">
                 {props.dialogTitle}
               </DialogTitle>
@@ -89,7 +89,7 @@ export default function DialogFactory(props: DialogFactoryProps) {
               <Button
                 type="submit"
                 data-cy="create-product-button"
-                className="rounded-lg w-32 h-10 bg-blue-500 hover:bg-blue-600 text-white dark:bg-blue-600 dark:hover:bg-blue-700"
+                className="rounded-lg w-32 h-10 m-2 bg-blue-500 hover:bg-blue-600 text-white dark:bg-blue-600 dark:hover:bg-blue-700"
               >
                 {props.submitButtonText}
               </Button>

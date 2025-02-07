@@ -2,6 +2,7 @@ import { Input } from "@components/components/ui/input";
 import { Label } from "@components/components/ui/label";
 import React, { useState } from "react";
 import DialogFactory from "../DialogFactory/DialogFactory";
+import { useLocale } from "../providers/LanguageContext";
 
 interface ProductDialogProps {
   refetchBlogs: () => void;
@@ -12,6 +13,9 @@ export default function AddBlogDialog(props: ProductDialogProps) {
     title_ka?: string;
     description_ka?: string;
   }>({});
+  const {
+    dictionary: { blog },
+  } = useLocale();
 
   const handleGeorgianInput = (
     e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -23,7 +27,7 @@ export default function AddBlogDialog(props: ProductDialogProps) {
 
     setErrors((prev) => ({
       ...prev,
-      [field]: isLanguageValid ? undefined : "Only Georgian alphabet allowed",
+      [field]: isLanguageValid ? undefined : blog.ErrorMessage,
     }));
 
     input.value = value.replace(/[^\u10A0-\u10FF\s]/g, "");
@@ -31,11 +35,11 @@ export default function AddBlogDialog(props: ProductDialogProps) {
 
   return (
     <DialogFactory
-      triggerText="Add Blog Post"
-      dialogTitle="Add New Blog Post"
-      dialogDescription="Please enter blog post details"
+      triggerText={blog.AddBlog}
+      dialogTitle={blog.AddBlog}
+      dialogDescription={blog.PleaseEnter}
       refetch={props.refetchBlogs}
-      submitButtonText="Create Blog"
+      submitButtonText={blog.CreateBlog}
       onSubmit={async (formData) => {
         return fetch("/api/createBlog", {
           method: "POST",
@@ -47,7 +51,7 @@ export default function AddBlogDialog(props: ProductDialogProps) {
         <div className="space-y-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="title" className="text-right">
-              Title (English)
+              {blog.TitleEn}
             </Label>
             <Input
               id="title"
@@ -60,7 +64,7 @@ export default function AddBlogDialog(props: ProductDialogProps) {
 
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="title_ka" className="text-right">
-              Title Georgian
+              {blog.TitleKa}
             </Label>
             <div className="col-span-3 space-y-1">
               <Input
@@ -81,7 +85,7 @@ export default function AddBlogDialog(props: ProductDialogProps) {
         <div className="space-y-4">
           <div className="grid grid-cols-4 items-start gap-4">
             <Label htmlFor="description" className="text-right mt-2">
-              Description (English)
+              {blog.DescriptionEn}
             </Label>
             <textarea
               id="description"
@@ -97,7 +101,7 @@ export default function AddBlogDialog(props: ProductDialogProps) {
 
           <div className="grid grid-cols-4 items-start gap-4">
             <Label htmlFor="description_ka" className="text-right mt-2">
-              Description Georgian
+              {blog.DescriptionKa}
             </Label>
             <div className="col-span-3 space-y-1">
               <textarea
@@ -120,7 +124,7 @@ export default function AddBlogDialog(props: ProductDialogProps) {
 
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="category" className="text-right">
-            Category
+            {blog.Category}
           </Label>
           <Input
             id="category"
