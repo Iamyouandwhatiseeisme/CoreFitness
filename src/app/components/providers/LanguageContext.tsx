@@ -12,19 +12,17 @@ interface LocaleContextType {
   locale: string;
   setLocale: (locale: string) => void;
   dictionary: Dictionary;
-  // chatWindow: Record<string, string>;
-  // informationBoard: Record<string, string>;
 }
+
 interface LocaleProviderProps {
   lang: string;
   children: React.ReactNode;
-  // dictChat: Record<string, string>;
-  // informationBoard: Record<string, string>;
 }
 
 export const LocaleProvider = (props: LocaleProviderProps) => {
   const [locale, setLocale] = useState<string>(props.lang);
   const [dictionary, setDictionary] = useState<Dictionary | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const supabase = createClient();
 
   const pathname = usePathname();
@@ -40,29 +38,34 @@ export const LocaleProvider = (props: LocaleProviderProps) => {
         .eq("locale", currentLocale)
         .single();
       if (data) {
-        console.log(data);
         setDictionary(data.dictionary);
       }
+      setLoading(false);
     }
     fetchDictionary();
   }, [locale, pathname, props.lang]);
 
-  if (dictionary) {
-    const passedLocale: LocaleContextType = {
-      locale: locale,
-      setLocale(locale) {
-        setLocale(locale);
-      },
-      dictionary: dictionary,
-      // chatWindow: props.dictChat,
-      // informationBoard: props.informationBoard,
-    };
+  if (loading) {
     return (
-      <localeContext.Provider value={passedLocale}>
-        {props.children}
-      </localeContext.Provider>
+      <div className="flex justify-center items-center w-full h-full">
+        <div className="animate-spin rounded-full h-12 w-12 border-4 border-solid border-current border-r-transparent"></div>
+      </div>
     );
   }
+
+  const passedLocale: LocaleContextType = {
+    locale: locale,
+    setLocale(locale) {
+      setLocale(locale);
+    },
+    dictionary: dictionary!,
+  };
+
+  return (
+    <localeContext.Provider value={passedLocale}>
+      {props.children}
+    </localeContext.Provider>
+  );
 };
 
 export const useLocale = (): LocaleContextType => {
