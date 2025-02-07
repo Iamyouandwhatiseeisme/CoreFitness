@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Order, OrderProducts, Product } from "../types";
 import React from "react";
+import { useLocale } from "../providers/LanguageContext";
 
 export interface OrderCardProps {
   products: OrderProducts[];
@@ -12,6 +13,9 @@ export function OrderCard(props: OrderCardProps) {
     Array<{ product: Product; quantity: number }>
   >([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const {
+    dictionary: { order },
+  } = useLocale();
   const productsToFetch = props.products;
 
   useEffect(() => {
@@ -53,20 +57,20 @@ export function OrderCard(props: OrderCardProps) {
     <div className="bg-white ml-40 mr-40 pl-10 pr-10 pt-10 dark:bg-gray-800 h-auto rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
       <div className="w-full border-b border-gray-200 dark:border-gray-700 p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center">
         <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-          Order: #{props.order.id}
+          {order.Order}: #{props.order.id}
         </div>
         <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-          Total: ${(props.order.total_price / 100).toFixed(2)}
+          {order.Total}: ${(props.order.total_price / 100).toFixed(2)}
         </div>
       </div>
       <div className="p-5 text-gray-700 dark:text-gray-300">
         <p>
-          <strong>Created At:</strong>{" "}
+          <strong>{order.CreatedAt}:</strong>{" "}
           {new Date(props.order.created_at).toLocaleString()}
         </p>
 
         <p>
-          <strong>Email:</strong> {props.order.email}
+          <strong>{order.Email}:</strong> {props.order.email}
         </p>
       </div>
 
@@ -76,7 +80,7 @@ export function OrderCard(props: OrderCardProps) {
         </div>
       ) : products.length === 0 ? (
         <div className="p-5 text-center text-gray-500 dark:text-gray-400">
-          No products found
+          {order.Products} {order.NotFound}
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-5">
@@ -96,10 +100,10 @@ export function OrderCard(props: OrderCardProps) {
                   {product.title}
                 </h3>
                 <p className="text-lg text-gray-600 dark:text-gray-300">
-                  ${(product.price / 100).toFixed(2)}
+                  {order.Price}: ${(product.price / 100).toFixed(2)}
                 </p>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Quantity: {quantity}
+                  {order.Quantity}: {quantity}
                 </p>
               </div>
             );

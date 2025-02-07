@@ -49,6 +49,7 @@ export async function createCheckoutSessionForSubscription(
   ) as Stripe.Checkout.SessionCreateParams.UiMode;
 
   const origin: string = headers().get("origin") as string;
+  console.log(plan);
 
   const checkoutSession: Stripe.Checkout.Session =
     await stripe.checkout.sessions.create({

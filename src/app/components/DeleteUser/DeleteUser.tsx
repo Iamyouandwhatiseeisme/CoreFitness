@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { useLocale } from "../providers/LanguageContext";
 
 interface DeleteUserProps {
   handleDelete: () => Promise<void>;
 }
 
 export default function DeleteUser({ handleDelete }: DeleteUserProps) {
+  const {
+    dictionary: { dialog },
+  } = useLocale();
   const [showDialog, setShowDialog] = useState<boolean>(false);
   return (
     <div>
@@ -15,7 +19,7 @@ export default function DeleteUser({ handleDelete }: DeleteUserProps) {
           setShowDialog(true);
         }}
       >
-        Delete
+        {dialog.Delete}
       </button>
       {showDialog && (
         <div
@@ -27,20 +31,20 @@ export default function DeleteUser({ handleDelete }: DeleteUserProps) {
             className="bg-white dark:text-black text-black p-6 rounded-lg shadow-lg z-40"
             onClick={(e) => e.stopPropagation()}
           >
-            <p>Are you sure you want to delete this item?</p>
+            <p>{dialog.AreYouSure}</p>
             <div className="mt-4 flex justify-end">
               <button
                 className="mr-2 px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
                 onClick={() => setShowDialog(false)}
               >
-                Cancel
+                {dialog.Cancel}
               </button>
               <button
                 data-cy="confirm-delete-button"
                 className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
                 onClick={handleDelete}
               >
-                Delete
+                {dialog.Delete}
               </button>
             </div>
           </div>

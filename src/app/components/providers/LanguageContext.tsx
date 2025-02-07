@@ -32,7 +32,7 @@ export const LocaleProvider = (props: LocaleProviderProps) => {
       const currentLocale =
         locales.find((locale) => pathname.includes(`/${locale}`)) ?? props.lang;
       setLocale(currentLocale);
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from("dictionary")
         .select()
         .eq("locale", currentLocale)

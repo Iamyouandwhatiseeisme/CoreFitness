@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import useDebounce from "src/app/hooks/useDebounce";
 import React from "react";
 import { Product } from "../types";
+import { useLocale } from "../providers/LanguageContext";
 
 interface SearchBarProps {
   searchItemType: string;
@@ -12,6 +13,9 @@ interface SearchBarProps {
 }
 
 export default function SearchBar(props: SearchBarProps) {
+  const {
+    dictionary: { products },
+  } = useLocale();
   const searchItemType = props.searchItemType;
   const [searchValue, setSearchValue] = useState<string>("");
   const debouncedValue = useDebounce(searchValue, 500);
@@ -49,7 +53,7 @@ export default function SearchBar(props: SearchBarProps) {
         onChange={(e) => {
           setSearchValue(e.target.value);
         }}
-        placeholder={`Search ${searchItemType}`}
+        placeholder={products.SearchProduct}
         title="search"
       />
     </div>

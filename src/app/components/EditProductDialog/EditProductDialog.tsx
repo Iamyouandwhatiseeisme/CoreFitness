@@ -7,6 +7,8 @@ import { Product } from "../types";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import DialogFactory from "../DialogFactory/DialogFactory";
+import { useLocale } from "../providers/LanguageContext";
+
 interface EditProductDIalogProps {
   product: Omit<
     Product,
@@ -40,6 +42,9 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
   const [price, setPrice] = useState<number>(product.price);
   const [category, setCategory] = useState<string>(product.category);
   const router = useRouter();
+  const {
+    dictionary: { blog, products },
+  } = useLocale();
 
   const handleInput = (
     e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -47,23 +52,28 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
     const input = e.target as HTMLInputElement | HTMLTextAreaElement;
     const field = input.name as "title_ka" | "description_ka";
     const value = input.value;
-    const isLanguageValid = /^[\u10A0-\u10FF\s]*$/.test(value);
+    const isLanguageValid =
+      /^[\u10A0-\u10FF\s0-9!@#$%^&*()_+=[\]{};':"\\|,.<>/?-]*$/.test(value);
 
     setErrors((prev) => ({
       ...prev,
-      [field]: isLanguageValid ? undefined : "Only Georgian alphabet allowed",
+      [field]: isLanguageValid ? undefined : blog.ErrorMessage,
     }));
 
-    input.value = value.replace(/[^\u10A0-\u10FF\s]/g, "");
+    input.value = value.replace(
+      /[^\u10A0-\u10FF\s0-9!@#$%^&*()_+=[\]{};':"\\|,.<>/?-]/g,
+      ""
+    );
   };
+
   return (
     <DialogFactory
-      triggerText="Edit Product "
-      dialogTitle="Edit Product"
-      submitButtonText="Update Blog"
-      dialogDescription="Please enter product details"
+      triggerText={products.EditProduct}
+      dialogTitle={products.EditProduct}
+      submitButtonText={products.Update}
+      dialogDescription={blog.PleaseEnter}
       refetch={() => {
-        toast("Product has been updated", {});
+        toast(products.ProductUpdated, {});
         router.refresh();
       }}
       onSubmit={async (formData) => {
@@ -77,10 +87,10 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
         });
       }}
     >
-      <div className="grid gap-4 py-4  ">
+      <div className="grid gap-4 py-4">
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="name" className="text-right">
-            Title
+            {blog.TitleEn}
           </Label>
           <Input
             id="name"
@@ -95,7 +105,7 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
         </div>
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="name-georgian" className="text-right">
-            Title Georgian
+            {blog.TitleKa}
           </Label>
           <div className="col-span-3 space-y-1">
             <Input
@@ -107,15 +117,14 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
               onInput={handleInput}
               required
             />
-
             {errors.title_ka && (
-              <p className=" text-xs text-red-500 ">{errors.title_ka}</p>
+              <p className="text-xs text-red-500">{errors.title_ka}</p>
             )}
           </div>
         </div>
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="description" className="text-right">
-            Description
+            {blog.DescriptionEn}
           </Label>
           <Input
             id="description"
@@ -128,7 +137,7 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
         </div>
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="description-georgian" className="text-right">
-            Description Georgian
+            {blog.DescriptionKa}
           </Label>
           <div className="col-span-3 space-y-1">
             <Input
@@ -141,13 +150,13 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
               required
             />
             {errors.description_ka && (
-              <p className=" text-xs text-red-500 ">{errors.description_ka}</p>
+              <p className="text-xs text-red-500">{errors.description_ka}</p>
             )}
           </div>
         </div>
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="price" className="text-right">
-            Price
+            {products.Price}
           </Label>
           <Input
             type="number"
@@ -162,7 +171,7 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
         </div>
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="category" className="text-right">
-            Category
+            {blog.Category}
           </Label>
           <Input
             id="category"
@@ -175,7 +184,7 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
         </div>
         <div>
           <Label htmlFor="file" className="text-right">
-            Upload Photo
+            {products.UploadPhotos}
           </Label>
           <div className="col-span-3 space-y-1">
             <Input

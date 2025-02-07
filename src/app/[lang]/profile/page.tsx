@@ -10,6 +10,7 @@ import EditableInput from "src/app/components/EditableInput/EditableInput";
 import AccountSubscriptionInfo from "src/app/components/ProfileSubscriptionInfo/AccountSubscriptionInfo";
 import ChangePassword from "src/app/components/ChangePassword/ChangePassword";
 import DeleteUser from "src/app/components/DeleteUser/DeleteUser";
+import { useLocale } from "src/app/components/providers/LanguageContext";
 
 interface UserProfile {
   user: User;
@@ -23,6 +24,10 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const supabase = createClient();
+  const {
+    dictionary: { profile },
+  } = useLocale();
+  console.log(profile);
   useEffect(() => {
     async function fetchUser() {
       const {
@@ -93,29 +98,29 @@ export default function Profile() {
       {user ? (
         <div
           className="mt-20 rounded-xl dark:text-white text-black border animated-border   
-                w-150 h-150 bg-gradient-to-tl from-blue-500/20 to-purple-600/20 
-                dark:from-blue-700/20 mb-20 dark:to-purple-700/20 flex flex-row 
-                justify-start items-start gap-20 "
+          w-150 h-150 bg-gradient-to-tl from-blue-500/20 to-purple-600/20 
+          dark:from-blue-700/20 mb-20 dark:to-purple-700/20 flex flex-row 
+          justify-start items-start gap-20 "
         >
           <div className="w-96 flex flex-col z-40 items-center  gap-2 justify-center pl-24 ml-auto mr-auto">
             <UploadImage image={user.image}></UploadImage>
-            <h2>Click on image to change photo</h2>
+            <h2>{profile.ClickOnImage}</h2>
           </div>
           <ul className="flex m-10 p-10 z-40  flex-col items-start justify-start gap-5 border border-black rounded-2xl h-3/4 w-full">
             <li className="w-full ">
               <EditableInput
-                label="Email:"
+                label={profile.Email}
                 value={user.user.email!}
                 apiEndpoint="/api/updateUser/updateEmail"
-                updateButtonText="Update"
+                updateButtonText={profile.Update}
               />
             </li>
             <li className="w-full">
               <EditableInput
-                label="Name:"
+                label={profile.Name}
                 value={!user.display_name ? "Display name" : user.display_name}
                 apiEndpoint="/api/updateUser/updateName"
-                updateButtonText="Update"
+                updateButtonText={profile.Update}
               />
             </li>
             <hr className="border-gray-300 w-full" />

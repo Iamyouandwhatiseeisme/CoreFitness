@@ -24,8 +24,13 @@ export default async function ProductPage(props: ProductDetailsPageProps) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-
+  const { data: dictionaryData } = await supabase
+    .from("dictionary")
+    .select()
+    .eq("locale", props.params.lang)
+    .single();
   const product = (await fetchSingleProduct(id)) as Product | null;
+  const products = dictionaryData.dictionary.products;
 
   if (!product) return <NotFound page="products" />;
   return (
@@ -34,13 +39,6 @@ export default async function ProductPage(props: ProductDetailsPageProps) {
 
       <div className="min-h-screen flex flex-col items-center justify-center py-10 bg-gray-100 dark:bg-gray-800">
         <div className="relative w-150 max-w-4xl p-6">
-          {/* <button
-            className="w-full py-2 bg-gray-600/40 text-black border-b-0 hover:bg-blue-700 hover:text-white dark:bg-blue-500 dark:hover:bg-blue-600 transition-colors duration-300 opacity-0 group-hover:opacity-100"
-            data-cy={`add-to-cart-button-${product.title}`}
-            onClick={()=> addItemToCart({ product: product, quantity: 1 })}
-          >
-            Add To Cart
-          </button> */}
           <AddToCart product={product} quantity={1}></AddToCart>
 
           <h1 className="text-4xl font-bold mb-4 text-center dark:text-white">
@@ -56,13 +54,15 @@ export default async function ProductPage(props: ProductDetailsPageProps) {
             </p>
           </div>
           <div className="text-lg mb-4 dark:text-gray-300">
-            <p>Category: {product.category}</p>
+            <p>
+              {products.Category}: {product.category}
+            </p>
           </div>
           <div className="flex flex-col items-center">
             <Toaster />
           </div>
           <div className="text-2xl font-semibold mb-4 text-center dark:text-white">
-            Price: ${product.price}
+            {products.Price}: ${product.price}
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Product, SortOption } from "../types";
 import { createClient } from "src/app/utils/supabase/client";
+import { useLocale } from "../providers/LanguageContext";
 export interface SideFilterPanelPorps {
   setSelectedCategories: (cateogires: Set<string>) => void;
   setItems: (items: Product[]) => void;
@@ -13,6 +14,9 @@ export default function FilterPael(props: SideFilterPanelPorps) {
   const [selectedCategories, setSelectedCategories] = useState<Set<string>>(
     new Set()
   );
+  const {
+    dictionary: { products },
+  } = useLocale();
 
   useEffect(() => {
     async function fetchCategories() {
@@ -71,7 +75,7 @@ export default function FilterPael(props: SideFilterPanelPorps) {
   return (
     <div className="flex flex-row w-full min-h-24  overflow-y-auto bg-white/30 dark:bg-black/20   items-center justify-center gap-4 shadow-lg p-4">
       <h2 className="font-bold text-lg text-gray-900 dark:text-gray-100 w-40 ">
-        Select filters:
+        {products.SelectFilters} :
       </h2>
       <div className="flex flex-wrap">
         {categories.map((category) => (

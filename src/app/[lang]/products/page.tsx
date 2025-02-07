@@ -10,6 +10,32 @@ import { useLocale } from "src/app/components/providers/LanguageContext";
 import SortButton from "src/app/components/SortButton/SortButton";
 import FilterPanel from "src/app/components/FilterPanel/SideFilterPanel";
 import ProductCard from "src/app/components/ProductCard/ProductCard";
+let sortOptions: SortOption[] = [
+  {
+    label: "Price: Low to High",
+    value: "price",
+    option: "1",
+    order: "Ascending",
+  },
+  {
+    label: "Price: High to Low",
+    value: "price",
+    option: "2",
+    order: "Descending",
+  },
+  {
+    label: "Title: A-Z",
+    value: "title",
+    option: "3",
+    order: "Ascending",
+  },
+  {
+    label: "Title: Z-A",
+    value: "title",
+    option: "4",
+    order: "Descending",
+  },
+];
 
 const PRODUCTS_PER_PAGE = 10;
 
@@ -17,6 +43,9 @@ export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
   const [page, setPage] = useState<number>(1);
   const [sortBy, setSortBy] = useState<SortOption>(sortOptions[0]);
+  const {
+    dictionary: { products: productsDicionary },
+  } = useLocale();
 
   const [hasMore, setHasMore] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
@@ -25,6 +54,34 @@ export default function Products() {
   const [selectedCategories, setSelectedCategories] = useState<Set<string>>(
     new Set()
   );
+
+  sortOptions = [
+    {
+      label: productsDicionary.PriceLowToHigh,
+      value: "price",
+      option: "1",
+      order: "Ascending",
+    },
+    {
+      label: productsDicionary.PriceHighToLow,
+      value: "price",
+      option: "2",
+      order: "Descending",
+    },
+    {
+      label: productsDicionary.TitleAZ,
+      value: "title",
+      option: "3",
+      order: "Ascending",
+    },
+    {
+      label: productsDicionary.TitleZA,
+      value: "title",
+      option: "4",
+      order: "Descending",
+    },
+  ];
+
   const { addItemToCart } = useCart();
   const { locale } = useLocale();
   async function refetchProducts() {
@@ -169,30 +226,3 @@ export default function Products() {
     </div>
   );
 }
-
-const sortOptions: SortOption[] = [
-  {
-    label: "Price: Low to High",
-    value: "price",
-    option: "1",
-    order: "Ascending",
-  },
-  {
-    label: "Price: High to Low",
-    value: "price",
-    option: "2",
-    order: "Descending",
-  },
-  {
-    label: "Title: A-Z",
-    value: "title",
-    option: "3",
-    order: "Ascending",
-  },
-  {
-    label: "Title: Z-A",
-    value: "title",
-    option: "4",
-    order: "Descending",
-  },
-];
