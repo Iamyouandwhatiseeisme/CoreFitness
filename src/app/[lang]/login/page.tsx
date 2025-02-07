@@ -47,7 +47,6 @@ export default function LogIn() {
     }
     if (result?.error) {
       setError(result.error);
-      alert(result.error);
     } else {
       if (actionType === "login") {
         toast(toastDict.Login);
@@ -58,7 +57,7 @@ export default function LogIn() {
       setError(null);
     }
     if (error) {
-      alert(error);
+      setError(error);
     }
   }
   return (
@@ -81,7 +80,7 @@ export default function LogIn() {
                   data-cy="email"
                   id="email"
                   name="email"
-                  className="text-black rounded-lg border-solid border border-gray-200 w-full p-2"
+                  className="text-black rounded-lg border-solid border bg-white border-gray-200 w-full p-2"
                   type="email"
                   placeholder="E-mail"
                   required
@@ -89,7 +88,7 @@ export default function LogIn() {
               </div>
               <div className="flex flex-row w-full justify-between">
                 <input
-                  className="text-black rounded-lg border-solid border border-gray-200 w-full p-2"
+                  className="text-black rounded-lg border-solid border bg-white  border-gray-200 w-full p-2"
                   data-cy="password"
                   type="password"
                   id="password"
@@ -101,10 +100,12 @@ export default function LogIn() {
                   required
                 />
               </div>
+              {error && <div className="text-xs text-red-500">{error}</div>}
+
               {isSigningUp && (
                 <div className="flex flex-row w-full justify-between">
                   <input
-                    className="text-black rounded-lg border-solid border border-gray-200 w-full p-2"
+                    className="text-black rounded-lg border-solid border bg-white border-gray-200 w-full p-2"
                     data-cy="confirm-password"
                     type="password"
                     id="confirm-password"
@@ -153,7 +154,7 @@ export default function LogIn() {
                   data-cy="login-button"
                   name="login"
                   type="submit"
-                  className="bg-blue-700 rounded-2xl h-10 font-bold text-white"
+                  className="bg-blue-700 rounded-2xl h-10 font-bold text-white transform transition-transform duration-300 hover:scale-105 hover:bg-blue-800"
                 >
                   Log In
                 </button>
@@ -163,7 +164,7 @@ export default function LogIn() {
                 <button
                   data-cy="signup-button"
                   onClick={() => setIsSigningUp(true)}
-                  className="bg-green-700 rounded-2xl h-10 font-bold text-white"
+                  className="bg-green-700 rounded-2xl h-10 font-bold text-white transform transition-transform duration-300 hover:scale-105 hover:bg-green-800"
                 >
                   Sign up
                 </button>
@@ -174,14 +175,14 @@ export default function LogIn() {
                   onClick={() => setIsSigningUp(true)}
                   name="signup"
                   type="submit"
-                  className="bg-green-700 rounded-2xl h-10 font-bold text-white"
+                  className="bg-green-700 rounded-2xl h-10 font-bold text-white transform transition-transform duration-300 hover:scale-105 hover:bg-green-800"
                 >
                   Sign up
                 </button>
               )}
             </form>
             <button
-              className="flex flex-row h-10 w-full sm:w-80 rounded-2xl bg-gray-200 items-center justify-center cursor-pointer mt-4"
+              className="flex flex-row h-10 w-full sm:w-80 rounded-2xl bg-gray-200 items-center justify-center cursor-pointer mt-4 transform transition-transform duration-300 hover:scale-105 hover:bg-gray-300"
               onClick={() => signInWithGithub()}
             >
               <img
