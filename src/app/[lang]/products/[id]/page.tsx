@@ -62,7 +62,7 @@ export default async function ProductPage(props: ProductDetailsPageProps) {
             <Toaster />
           </div>
           <div className="text-2xl font-semibold mb-4 text-center dark:text-white">
-            {products.Price}: ${product.price}
+            {products.Price}: ${product.price / 100}
           </div>
         </div>
       </div>
