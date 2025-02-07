@@ -28,6 +28,9 @@ export default function EditBlogDIalog(props: EditBlogDIalogProps) {
   const [georgianDescription, setGeorgianDescription] = useState<string>(
     blog.description_ka
   );
+  const {
+    dictionary: { toast: toastDict },
+  } = useLocale();
   const [category, setCategory] = useState<string>(blog.category);
   const router = useRouter();
 
@@ -57,7 +60,7 @@ export default function EditBlogDIalog(props: EditBlogDIalogProps) {
       submitButtonText={blogDictionary.UpdateBlog}
       dialogDescription={blogDictionary.PleaseEnter}
       refetch={() => {
-        toast("Blog has been updated", {});
+        toast(toastDict.BlogUpdated);
         router.refresh();
       }}
       onSubmit={async (formData) => {

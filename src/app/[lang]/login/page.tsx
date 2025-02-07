@@ -14,6 +14,9 @@ export default function LogIn() {
   const [passwordError, setPasswordError] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const {
+    dictionary: { toast: toastDict },
+  } = useLocale();
 
   const formRef = useRef<HTMLFormElement>(null);
 
@@ -47,10 +50,10 @@ export default function LogIn() {
       alert(result.error);
     } else {
       if (actionType === "login") {
-        toast("Successfully logged in!");
+        toast(toastDict.Login);
       }
       if (actionType === "signup") {
-        toast("Successfully registered user!");
+        toast(toastDict.Register);
       }
       setError(null);
     }

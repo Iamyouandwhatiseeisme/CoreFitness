@@ -25,7 +25,7 @@ export default function ChangePassword() {
   const [passwordsMatch, setPasswordsMatch] = useState<boolean>(false);
   const debouncedValue = useDebounce(currentPassword, 2500);
   const {
-    dictionary: { profile },
+    dictionary: { profile, toast: toastDict },
   } = useLocale();
 
   useEffect(() => {
@@ -59,13 +59,13 @@ export default function ChangePassword() {
       if (response.ok) {
         const responseData = await response.json();
         if (responseData.status === 200) {
-          toast("Password has been changed!");
+          toast(toastDict.PasswordChanged);
           setShowPasswordFields(false);
           setCurrentPassword("");
           setNewPassword("");
           setConfirmPassword("");
         } else {
-          toast("Something went wrong.");
+          toast(toastDict.SomethingWrong);
         }
       }
     }
