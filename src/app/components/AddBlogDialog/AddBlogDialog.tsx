@@ -23,14 +23,18 @@ export default function AddBlogDialog(props: ProductDialogProps) {
     const input = e.target as HTMLInputElement | HTMLTextAreaElement;
     const field = input.name as "title_ka" | "description_ka";
     const value = input.value;
-    const isLanguageValid = /^[\u10A0-\u10FF\s]*$/.test(value);
+    const isLanguageValid =
+      /^[\u10A0-\u10FF\s0-9!@#$%^&*()_+=[\]{};':"\\|,.<>/?-]*$/.test(value);
 
     setErrors((prev) => ({
       ...prev,
       [field]: isLanguageValid ? undefined : blog.ErrorMessage,
     }));
 
-    input.value = value.replace(/[^\u10A0-\u10FF\s]/g, "");
+    input.value = value.replace(
+      /[^\u10A0-\u10FF\s0-9!@#$%^&*()_+=[\]{};':"\\|,.<>/?-]/g,
+      ""
+    );
   };
 
   return (
