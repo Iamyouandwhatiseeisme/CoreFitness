@@ -53,11 +53,11 @@ export default function ProductCard({
       >
         {products.AddToCart}
       </button>
-      <div className="p-4 w-full text-center">
+      <div className="p-4 w-full text-center flex flex-col items-center space-y-2">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
           {title}
         </h3>
-        <h4 className="text-md text-gray-900 dark:text-gray-100 h-16 overflow-hidden">
+        <h4 className="text-md text-gray-900 dark:text-gray-100 h-16 min-h-16 max-h-16 overflow-hidden">
           {description}
         </h4>
         <p className="text-gray-600 dark:text-gray-400">
