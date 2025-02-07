@@ -84,7 +84,7 @@ export default function PasswordRecovery() {
     });
     if (data) {
       console.log(data, error);
-      alert("Password updated successfully!");
+      toast("Password updated successfully!");
       router.push("/login");
     }
   }
@@ -93,9 +93,9 @@ export default function PasswordRecovery() {
     <div className="flex fixed z-50 w-full h-full top-0 flex-row">
       <LoginPageBoard></LoginPageBoard>
       <Toaster></Toaster>
-      <div className="items-center justify-center flex flex-col w-full lg:w-1/2 h-full bg-workout-bg">
+      <div className="items-center justify-center flex flex-col w-full lg:w-1/2 h-full bg-workout-bg p-4">
         {isVerified ? (
-          <div className="w-96 p-6 bg-white rounded-lg shadow-md">
+          <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-md">
             <h2 className="text-2xl font-bold mb-4">Reset Your Password</h2>
 
             {passwordError && (
@@ -115,7 +115,7 @@ export default function PasswordRecovery() {
                   type="password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                   minLength={6}
                   placeholder="Enter your new password"
@@ -134,7 +134,7 @@ export default function PasswordRecovery() {
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-md"
+                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                   minLength={6}
                   placeholder="Confirm your new password"
@@ -143,30 +143,33 @@ export default function PasswordRecovery() {
 
               <button
                 type="submit"
-                className="w-full p-2 bg-blue-500 text-white rounded-md"
+                className="w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
               >
                 Reset Password
               </button>
             </form>
           </div>
         ) : (
-          <div className="items-center justify-center flex flex-col w-full h-full bg-gray-800 bg-opacity-50 pt-10">
-            <div className=" border  rounded-2xl w-96 h-40 flex flex-col items-center  justify-start bg-gray-800 bg-opacity-25 text-white">
-              <h2 className="font-bold text-lg mt-10">
+          <div className="items-center justify-center flex flex-col w-full h-full  bg-opacity-50 pt-10">
+            <div className="border rounded-2xl w-full max-w-md h-40 flex flex-col items-center justify-start bg-gray-800 bg-opacity-25 text-white p-4">
+              <h2 className="font-bold text-lg mt-2">
                 Please provide your Email
               </h2>
 
-              <div className="flex flex-row mt-5 gap-2  ">
+              <div className="flex flex-row mt-5 gap-2 w-full">
                 <h2>Email: </h2>
-                <form onSubmit={handleEmailSend}>
+                <form
+                  onSubmit={handleEmailSend}
+                  className="flex flex-row gap-2 w-full"
+                >
                   <input
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     type="email"
-                    className="rounded-sm  border border-gray-400 text-black  pl-2 "
+                    className="flex-grow rounded-sm border border-gray-400 text-black pl-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   ></input>
                   <button
-                    className=" w-24 rouned-sm bg-white border border-gray-400 text-black"
+                    className="w-24 rounded-sm bg-white border border-gray-400 text-black hover:bg-gray-200 transition duration-300"
                     type="submit"
                   >
                     Send
