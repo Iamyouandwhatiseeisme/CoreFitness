@@ -18,11 +18,12 @@ export default function AccountSubscriptionInfo(props: SubscriptionInfoProps) {
         data: { user },
       } = await supabase.auth.getUser();
       if (user) {
-        const response = await fetch("api/subscriptionCancel", {
+        const response = await fetch("/api/subscriptionCancel", {
           headers: {
             email: user.email!,
           },
         });
+        console.log(response);
         if (response.status === 200) {
           const userConfirmed = window.confirm(
             "Are you sure you want to proceed?"
