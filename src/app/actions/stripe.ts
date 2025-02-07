@@ -8,37 +8,6 @@ import { CURRENCY } from "../../config";
 import { formatAmountForStripe } from "../utils/stripe/stripe-helpers";
 import { stripe } from "../../lib/stripe";
 import { Plan } from "../components/types";
-import { CartItem } from "../components/providers/CartProvider";
-
-export async function createCheckoutSessionForCart(cartItems: CartItem[]) {
-  // try {
-  // console.log("trying to fetch");
-  // const session: Stripe.Checkout.Session =
-  //   await stripe.checkout.sessions.create({
-  //     success_url:
-  //       "http://localhost:3000/orders/result?session_id={CHECKOUT_SESSION_ID}",
-  //     line_items: cartItems.map((item) => {
-  //       return {
-  //         quantity: item.quantity,
-  //         price: item.product.stripe_price_id,
-  //       };
-  //     }),
-  //     mode: "payment",
-  // metadata: {
-  //   cart_items: JSON.stringify(
-  //     cartItems.map((item) => ({
-  //       title: item.product.title,
-  //       product_id: item.product.id,
-  //       quantity: item.quantity,
-  //     }))
-  //       ),
-  //     },
-  //   });
-  // return {
-  //   client_secret: session.client_secret,
-  //   url: session.url,
-  // };
-}
 
 export async function createCheckoutSessionForSubscription(
   data: FormData,
@@ -49,7 +18,7 @@ export async function createCheckoutSessionForSubscription(
   ) as Stripe.Checkout.SessionCreateParams.UiMode;
 
   const origin: string = headers().get("origin") as string;
-  console.log(plan);
+  console.log(plan.priceId);
 
   const checkoutSession: Stripe.Checkout.Session =
     await stripe.checkout.sessions.create({
@@ -77,9 +46,9 @@ export async function createCheckoutSessionForSubscription(
   };
 }
 
-export async function createPaymentIntent(
-  data: FormData
-): Promise<{ client_secret: string }> {
+export async function createPaymentIntent(): Promise<{
+  client_secret: string;
+}> {
   const paymentIntent: Stripe.PaymentIntent =
     await stripe.paymentIntents.create({
       amount: formatAmountForStripe(100, CURRENCY),

@@ -4,7 +4,7 @@ import { createClient } from "../../utils/supabase/client";
 import React from "react";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
-import { SubscriptionInfo } from "src/app/components/types";
+import { SubscriptionInfo, SubscriptionStatus } from "src/app/components/types";
 import UploadImage from "src/app/components/UploadImage/UploadImage";
 import EditableInput from "src/app/components/EditableInput/EditableInput";
 import AccountSubscriptionInfo from "src/app/components/ProfileSubscriptionInfo/AccountSubscriptionInfo";
@@ -27,7 +27,6 @@ export default function Profile() {
   const {
     dictionary: { profile },
   } = useLocale();
-  console.log(profile);
   useEffect(() => {
     async function fetchUser() {
       const {
@@ -40,10 +39,11 @@ export default function Profile() {
             email: user?.email,
           },
         });
-        const subscriptionInfo = (await response.json()) as SubscriptionInfo;
+        const subscriptionInfo = await response.json();
+        console.log(subscriptionInfo, "status check");
         const photoUrl = user.user_metadata.profile_photo;
         const userInfoResponse = await fetch("/api/userInfo");
-        if (response) {
+        if (response.status === 200) {
           const userInfoResponseData = await userInfoResponse.json();
           const userDisplayName = userInfoResponseData.displayName;
           const userProfile: UserProfile = {
@@ -54,10 +54,15 @@ export default function Profile() {
           };
           setUser(userProfile);
         }
-        if (!response) {
+        if (response.status === 400) {
           const userProfile: UserProfile = {
             user: user,
-            subscription_info: subscriptionInfo,
+            subscription_info: {
+              status: SubscriptionStatus.Inactive,
+              currentPeriodEnd: 0,
+              currentPeriodStart: 0,
+              name: "",
+            },
             image: photoUrl,
             display_name: null,
           };

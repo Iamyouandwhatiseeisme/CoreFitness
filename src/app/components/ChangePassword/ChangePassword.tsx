@@ -17,7 +17,6 @@ import { useLocale } from "../providers/LanguageContext";
 
 export default function ChangePassword() {
   const [showPasswordFields, setShowPasswordFields] = useState<boolean>(false);
-  const [open, setOpen] = useState<boolean>(false);
   const [currentPassword, setCurrentPassword] = useState<string>("");
   const [userAuthenticated, setUserAuthenticated] = useState<boolean>(false);
   const [newPassword, setNewPassword] = useState<string>("");
@@ -98,7 +97,7 @@ export default function ChangePassword() {
       </DialogTrigger>
       <div
         className={`${
-          open &&
+          showPasswordFields &&
           "fixed inset-0 z-20 flex items-center justify-center bg-black bg-opacity-50 backdrop:blur-lg"
         }`}
         onClick={() => setShowPasswordFields(false)}
