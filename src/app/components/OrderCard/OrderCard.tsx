@@ -75,8 +75,8 @@ export function OrderCard(props: OrderCardProps) {
       </div>
 
       {isLoading ? (
-        <div className="flex justify-center items-center w-full h-full py-10">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-solid border-current border-r-transparent"></div>
+        <div className="flex justify-center items-center">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white"></div>
         </div>
       ) : products.length === 0 ? (
         <div className="p-5 text-center text-gray-500 dark:text-gray-400">

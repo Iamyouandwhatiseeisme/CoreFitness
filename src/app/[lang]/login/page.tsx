@@ -59,16 +59,16 @@ export default function LogIn() {
     }
   }
   return (
-    <div className="flex fixed z-50 w-full h-full top-0 flex-row">
+    <div className="flex fixed z-50 w-full h-full top-0 flex-col lg:flex-row">
       <LoginPageBoard></LoginPageBoard>
       <Toaster></Toaster>
 
       <div className="items-center justify-center flex flex-col w-full lg:w-1/2 h-full bg-workout-bg">
         <div className="items-center justify-center flex flex-col w-full h-full bg-gray-800 bg-opacity-50 pt-10">
-          <div className=" border  rounded-2xl w-96 h-1/2 flex flex-col items-center justify-center bg-white">
+          <div className="border rounded-2xl w-11/12 sm:w-96 h-auto flex flex-col items-center justify-center bg-white p-6">
             <form
               ref={formRef}
-              className="flex flex-col gap-3 w-80 text-black "
+              className="flex flex-col gap-3 w-full text-black"
               onSubmit={(e) => {
                 handleSubmit(e);
               }}
@@ -78,7 +78,7 @@ export default function LogIn() {
                   data-cy="email"
                   id="email"
                   name="email"
-                  className="text-black  rounded-lg border-solid border border-gray-200 w-full p-2 "
+                  className="text-black rounded-lg border-solid border border-gray-200 w-full p-2"
                   type="email"
                   placeholder="E-mail"
                   required
@@ -86,7 +86,7 @@ export default function LogIn() {
               </div>
               <div className="flex flex-row w-full justify-between">
                 <input
-                  className="text-black    rounded-lg border-solid border border-gray-200 w-full p-2 "
+                  className="text-black rounded-lg border-solid border border-gray-200 w-full p-2"
                   data-cy="password"
                   type="password"
                   id="password"
@@ -101,12 +101,12 @@ export default function LogIn() {
               {isSigningUp && (
                 <div className="flex flex-row w-full justify-between">
                   <input
-                    className="text-black    rounded-lg border-solid border border-gray-200 w-full p-2 "
+                    className="text-black rounded-lg border-solid border border-gray-200 w-full p-2"
                     data-cy="confirm-password"
                     type="password"
-                    id="password"
+                    id="confirm-password"
                     name="confirm-password"
-                    placeholder="Password"
+                    placeholder="Confirm Password"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     minLength={6}
@@ -122,13 +122,13 @@ export default function LogIn() {
               )}
 
               <div
-                className={`underline  ${
+                className={`underline ${
                   !isSigningUp ? "text-end" : "justify-between flex flex-row"
-                } `}
+                }`}
               >
                 {isSigningUp && (
                   <div
-                    className="underline cursor-pointer "
+                    className="underline cursor-pointer"
                     onClick={() => {
                       setIsSigningUp(false);
                     }}
@@ -160,8 +160,6 @@ export default function LogIn() {
                 <button
                   data-cy="signup-button"
                   onClick={() => setIsSigningUp(true)}
-                  // name="signup"
-                  // type="submit"
                   className="bg-green-700 rounded-2xl h-10 font-bold text-white"
                 >
                   Sign up
@@ -180,7 +178,7 @@ export default function LogIn() {
               )}
             </form>
             <button
-              className="flex flex-row h-10 w-80 rounded-2xl bg-gray-200 items-center justify-center  cursor-pointer mt-4"
+              className="flex flex-row h-10 w-full sm:w-80 rounded-2xl bg-gray-200 items-center justify-center cursor-pointer mt-4"
               onClick={() => signInWithGithub()}
             >
               <img

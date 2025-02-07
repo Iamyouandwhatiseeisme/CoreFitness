@@ -47,8 +47,8 @@ export const LocaleProvider = (props: LocaleProviderProps) => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center w-full h-full">
-        <div className="animate-spin rounded-full h-12 w-12 border-4 border-solid border-current border-r-transparent"></div>
+      <div className="flex justify-center items-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white"></div>
       </div>
     );
   }
