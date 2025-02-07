@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast, Toaster } from "sonner";
 import LoginPageBoard from "src/app/components/LoginPageBoard/LoginPageBoard";
+import { useLocale } from "src/app/components/providers/LanguageContext";
 import { createClient } from "src/app/utils/supabase/client";
 
 export default function PasswordRecovery() {
@@ -15,6 +16,9 @@ export default function PasswordRecovery() {
   const [isVerified, setIsverified] = useState<boolean>(false);
   const supabase = createClient();
   const router = useRouter();
+  const {
+    dictionary: { toast: toastDict },
+  } = useLocale();
 
   async function handleEmailSend(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -27,9 +31,9 @@ export default function PasswordRecovery() {
     if (response) {
       const responseData = await response.json();
       if (responseData.status === 200) {
-        toast("Please check your email address");
+        toast(toastDict.CheckEmail);
       } else {
-        toast("Something went wrong, try again later");
+        toast(toastDict.SomethingWrong);
       }
     }
   }

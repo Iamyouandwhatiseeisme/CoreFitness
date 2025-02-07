@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { EditableInputProps } from "../types";
 import { toast, Toaster } from "sonner";
+import { useLocale } from "../providers/LanguageContext";
 export default function EditableInput(props: EditableInputProps) {
+  const {
+    dictionary: { toast: toastDict },
+  } = useLocale();
   const [value, setValue] = useState<string>(props.value);
   const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
@@ -17,10 +21,10 @@ export default function EditableInput(props: EditableInputProps) {
     if (response.ok) {
       const responseData = await response.json();
       if (responseData.updateType === "email") {
-        toast(`Verification email sent to ${value}`);
+        toast(`${toastDict.VerifSent} ${value}`);
       }
       if (responseData.updateType === "name") {
-        toast(`Updated name`);
+        toast(toastDict.UpdatedName);
       }
     }
   }

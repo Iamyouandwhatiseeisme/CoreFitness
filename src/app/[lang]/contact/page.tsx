@@ -1,11 +1,15 @@
 "use client";
 import React, { useState } from "react";
 import { toast, Toaster } from "sonner";
+import { useLocale } from "src/app/components/providers/LanguageContext";
 
 export default function Contact() {
   const [email, setEmail] = useState<string>("");
   const [subject, setSubject] = useState<string>("");
   const [content, setContent] = useState<string>("");
+  const {
+    dictionary: { contact, toast: toastDict },
+  } = useLocale();
   async function handleEmail(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.target as HTMLFormElement);
@@ -17,7 +21,7 @@ export default function Contact() {
       if (response) {
         const responseData = await response.json();
         if (responseData.status === 200) {
-          toast("Email sent successfully!");
+          toast(toastDict.EmailSent);
           setEmail("");
           setSubject("");
           setContent("");
@@ -29,15 +33,15 @@ export default function Contact() {
     <div className="min-h-wrapper flex flex-row items-start justify-evenly pt-40">
       <Toaster></Toaster>
       <div className="flex flex-col w-96">
-        <div>Phone Number: +995 555 55 55 55</div>
-        <div>E-Mail: saabashidze@gmail.com</div>
-        <div>Address: Rustaveli ave 15</div>
+        <div>{contact.Phone}: +995 555 55 55 55</div>
+        <div>{contact.Email} : saabashidze@gmail.com</div>
+        <div>{contact.Address}</div>
       </div>
       <div className="flex flex-col h-120 w-150">
         <form onSubmit={handleEmail}>
           <div className="flex flex-col">
-            <h2>To send en email to us, please fill out the forms below</h2>
-            <label>Your email: </label>
+            <h2>{contact.ToSend}</h2>
+            <label>{contact.YourEmail}: </label>
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -46,7 +50,7 @@ export default function Contact() {
               className="w-96 p-2 border border-gray-300 rounded"
               required
             ></input>
-            <label>Subject: </label>
+            <label>{contact.Subject}: </label>
             <input
               name="subject"
               type="text"
@@ -56,7 +60,7 @@ export default function Contact() {
               className="w-96 p-2 border border-gray-300 rounded"
               required
             ></input>
-            <label>Content: </label>
+            <label>{contact.Subject}: </label>
             <div className="flex flex-row items-end gap-4">
               {" "}
               <textarea
@@ -70,7 +74,7 @@ export default function Contact() {
                 type="submit"
                 className="rouned border-black border bg-slate-200 w-40 hover:bg-white"
               >
-                Send
+                {contact.Send}
               </button>
             </div>
           </div>
