@@ -20,6 +20,8 @@ export interface Plan {
   reccurence: string;
   name: string;
   price: number;
+  type: string;
+  payLabel: string;
   priceId: string;
   payementFrequency: string;
   benefits: string[];

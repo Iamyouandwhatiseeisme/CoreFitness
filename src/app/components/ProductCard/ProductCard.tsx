@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Product } from "../types";
 import Link from "next/link";
+import { useLocale } from "../providers/LanguageContext";
 interface ProductCardtProps {
   product: Product;
   locale: string;
@@ -13,7 +14,12 @@ export default function ProductCard({
   addItemToCart,
 }: ProductCardtProps) {
   const [isHovered, setIsHovered] = useState(false);
+  const {
+    dictionary: { products },
+  } = useLocale();
   const title = locale === "ka" ? product.title_ka : product.title;
+  const description =
+    locale === "ka" ? product.description_ka : product.description;
   return (
     <div
       className={`flex flex-col items-center rounded-lg shadow-lg w-full sm:w-80 bg-white dark:bg-gray-800 overflow-hidden group duration-100 ease-in-out transition-transform transform hover:scale-105`}
@@ -45,14 +51,17 @@ export default function ProductCard({
         data-cy={`add-to-cart-button-${product.title}`}
         onClick={() => addItemToCart({ product: product, quantity: 1 })}
       >
-        Add To Cart
+        {products.AddToCart}
       </button>
       <div className="p-4 w-full text-center">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
           {title}
         </h3>
+        <h4 className="text-md text-gray-900 dark:text-gray-100">
+          {description}
+        </h4>
         <p className="text-gray-600 dark:text-gray-400">
-          Price: ${product.price}
+          {products.Price} : ${product.price}
         </p>
       </div>
     </div>

@@ -13,6 +13,7 @@ import { X } from "lucide-react";
 import { Button } from "@components/components/ui/button";
 import useDebounce from "src/app/hooks/useDebounce";
 import { toast, Toaster } from "sonner";
+import { useLocale } from "../providers/LanguageContext";
 
 export default function ChangePassword() {
   const [showPasswordFields, setShowPasswordFields] = useState<boolean>(false);
@@ -23,6 +24,9 @@ export default function ChangePassword() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordsMatch, setPasswordsMatch] = useState<boolean>(false);
   const debouncedValue = useDebounce(currentPassword, 2500);
+  const {
+    dictionary: { profile },
+  } = useLocale();
 
   useEffect(() => {
     async function checkAuthentication() {
@@ -85,7 +89,7 @@ export default function ChangePassword() {
               className="underline cursor-pointer w-40"
               onClick={() => setShowPasswordFields(!showPasswordFields)}
             >
-              Change Password
+              {profile.ChangePassword}
             </div>
           </div>
           <Toaster />
@@ -94,7 +98,7 @@ export default function ChangePassword() {
 
       <DialogContent className="sm:max-w-[580px] h-120 m-20 p-5 absolute top-0 right-96 bg-slate-900 rounded-2xl text-white  ">
         <DialogHeader className="flex flex-col items-start justify-start">
-          <DialogTitle>Change Password</DialogTitle>
+          <DialogTitle>{profile.ChangePassword}</DialogTitle>
           <DialogClose
             style={{
               position: "absolute",
@@ -153,7 +157,7 @@ export default function ChangePassword() {
               type="submit"
               className="rounded-2xl bg-slate-400 w-40 h-10"
             >
-              Update Password
+              {profile.ChangePassword}
             </Button>
           </DialogFooter>
         </form>

@@ -4,12 +4,48 @@ import { useRouter } from "next/navigation";
 import { User } from "@supabase/supabase-js";
 import { createClient } from "../../../utils/supabase/client";
 import { Plan } from "../../../components/types";
-import { plans, benefitDescriptions } from "src/app/constants/plans";
+import { plans } from "src/app/constants/plans";
+import { useLocale } from "src/app/components/providers/LanguageContext";
+import { DictionaryChapter } from "../../dictionaries";
 export default function ActivePage() {
   const [user, setUser] = useState<User | null>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [subscription, setSubscription] = useState<Plan | null>();
   const [showDialog, setShowDialog] = useState<boolean>(false);
+  const {
+    dictionary: { subscription: subscriptionDict, dialog },
+  } = useLocale();
+  const benefitDescriptions: Record<string, string> = {
+    "Access to gym": subscriptionDict.AccessToGym,
+    "Free group classes": subscriptionDict.FreeGroupClasses,
+    "1 personal training session per month": subscriptionDict["1Personal"],
+    "3 personal training sessions per month": subscriptionDict["2Personal"],
+    "5 personal training sessions per year": subscriptionDict["5Personal"],
+    "10 personal training sessions per year": subscriptionDict["10Personal"],
+    "Unlimited personal training sessions": subscriptionDict.UnlimitedPersonal,
+    "Access to pool": subscriptionDict.AccessToPool,
+    "Access to spa": subscriptionDict.AccessToSpa,
+  };
+
+  const benefitsChapter = subscriptionDict.benefits as unknown;
+  const dictionaryChaPter = benefitsChapter as DictionaryChapter;
+
+  const benefits: Record<string, string> = {
+    "Access to gym": dictionaryChaPter.AccessToGym,
+    "Free group classes": dictionaryChaPter.FreeGroupClasses,
+    "1 personal training session per month":
+      dictionaryChaPter.OnePersonalTraining,
+    "3 personal training sessions per month":
+      dictionaryChaPter.TwoPersonalTraining,
+    "5 personal training sessions per year":
+      dictionaryChaPter.FivePersonalTraining,
+    "10 personal training sessions per year":
+      dictionaryChaPter.TenPersonalTraining,
+    "Unlimited personal training sessions":
+      dictionaryChaPter.UnlimitedPersonalTraining,
+    "Access to pool": dictionaryChaPter.AccessToPool,
+    "Access to spa": dictionaryChaPter.AccessToSpa,
+  };
 
   const router = useRouter();
   useEffect(() => {
@@ -67,7 +103,9 @@ export default function ActivePage() {
           <ul className="space-y-4">
             {subscription?.benefits.map((benefit, index) => (
               <li key={index} className="flex justify-between items-center">
-                <span className="font-medium text-gray-700">{benefit}</span>
+                <span className="font-medium text-gray-700">
+                  {benefits[benefit]}
+                </span>
                 {benefitDescriptions[benefit] && (
                   <span className="text-sm text-gray-500 italic">
                     {benefitDescriptions[benefit]}
@@ -84,7 +122,7 @@ export default function ActivePage() {
                 setShowDialog(true);
               }}
             >
-              Delete
+              {dialog.Delete}
             </button>
             {showDialog && (
               <div
@@ -96,20 +134,20 @@ export default function ActivePage() {
                   className="bg-white dark:text-black text-black p-6 rounded-lg shadow-lg z-40"
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <p>Are you sure you want to cancel subscription?</p>
+                  <p>{dialog.AreYouSure}</p>
                   <div className="mt-4 flex justify-end">
                     <button
                       className="mr-2 px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
                       onClick={() => setShowDialog(false)}
                     >
-                      No
+                      {dialog.Cancel}
                     </button>
                     <button
                       data-cy="confirm-delete-button"
                       className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
                       onClick={handleCancel}
                     >
-                      Yes
+                      {dialog.Delete}
                     </button>
                   </div>
                 </div>
@@ -117,7 +155,7 @@ export default function ActivePage() {
             )}
           </div>
           <div className="mt-6 text-gray-600">
-            <p>For any inquiries, please contact us at:</p>
+            <p>{subscriptionDict.ContactUs}</p>
             <p className="font-bold">+1 (800) 123-4567</p>
             <p className="font-bold">support@coreFitness.com</p>
           </div>

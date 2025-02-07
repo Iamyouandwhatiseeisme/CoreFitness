@@ -3,8 +3,12 @@ import React from "react";
 import { SubscriptionInfoProps, SubscriptionStatus } from "../types";
 import { createClient } from "src/app/utils/supabase/client";
 import { useRouter } from "next/navigation";
+import { useLocale } from "../providers/LanguageContext";
 export default function AccountSubscriptionInfo(props: SubscriptionInfoProps) {
   const router = useRouter();
+  const {
+    dictionary: { profile },
+  } = useLocale();
   const subscriptionInfo = props.subscriptionInfo;
   async function handleSubscriptionButton() {
     if (subscriptionInfo.status === SubscriptionStatus.Active) {
@@ -36,8 +40,8 @@ export default function AccountSubscriptionInfo(props: SubscriptionInfoProps) {
     }
   }
   return (
-    <div className="flex flex-row gap-5  items-center justify-items-start">
-      <label className="w-10">Status:</label>
+    <div className="flex flex-row gap-10  items-center justify-items-start">
+      <label className="w-10">{profile.Status}:</label>
       <div className="pl-2 cursor-pointer dark:text-black  p-8  w-48 rounded-2xl h-10 bg-white flex flex-col items-center justify-center   ">
         <div> {subscriptionInfo.name}</div>
         <div>
@@ -59,12 +63,12 @@ export default function AccountSubscriptionInfo(props: SubscriptionInfoProps) {
       </div>
 
       <button
-        className="rounded-2xl border dark:text-black bg-white border-black h-10 w-20"
+        className="rounded-2xl border dark:text-black  bg-white border-black h-12 w-20"
         onClick={handleSubscriptionButton}
       >
         {subscriptionInfo?.status === SubscriptionStatus.Active
-          ? "Cancel"
-          : "Subscribe"}
+          ? profile.Cancel
+          : profile.Subscribe}
       </button>
     </div>
   );

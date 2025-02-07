@@ -1,29 +1,12 @@
 import { Plan } from "../components/types";
-export const benefitDescriptions: Record<string, string> = {
-  "Access to gym":
-    "Full access to all gym equipment and facilities. Open 24/7 for your convenience.",
-  "Free group classes":
-    "Join various fitness classes at no additional cost. Classes are available from 6 AM to 9 PM daily.",
-  "1 personal training session per month":
-    "Get a one-on-one session with a certified trainer each month. Sessions can be scheduled between 8 AM and 8 PM.",
-  "3 personal training sessions per month":
-    "Upgrade to three personal training sessions monthly. Sessions can be scheduled between 8 AM and 8 PM.",
-  "5 personal training sessions per year":
-    "Receive five training sessions spread throughout the year. Sessions can be scheduled between 8 AM and 8 PM.",
-  "10 personal training sessions per year":
-    "Enhance your fitness with ten yearly training sessions. Sessions can be scheduled between 8 AM and 8 PM.",
-  "Unlimited personal training sessions":
-    "Enjoy unlimited personal coaching for your best results. Sessions can be scheduled between 8 AM and 8 PM.",
-  "Access to pool":
-    "Use the swimming pool at any time during operating hours. Pool is open from 6 AM to 10 PM.",
-  "Access to spa":
-    "Relax with access to spa facilities, including sauna and massages. Spa is open from 9 AM to 9 PM.",
-};
 
 export const plans: Plan[] = [
   {
     reccurence: "Monthly",
     price: 100,
+    type: "Monthly",
+    payLabel: "Pay100",
+
     name: "Monthly Plan",
     priceId: process.env.PRICE_ID_MONTHLY!,
     payementFrequency: "Every Month",
@@ -36,6 +19,8 @@ export const plans: Plan[] = [
   {
     reccurence: "Yearly",
     price: 800,
+    payLabel: "Pay800",
+    type: "Yearly",
     name: "Yearly Plan",
     priceId: process.env.PRICE_ID_YEARLY!,
     payementFrequency: "Every Year",
@@ -49,6 +34,9 @@ export const plans: Plan[] = [
   {
     reccurence: "Premium Monthly",
     price: 150,
+    type: "PremiumMonthly",
+    payLabel: "Pay150",
+
     name: "Premium Monthly",
     priceId: process.env.PRICE_ID_MONTHLY_PREMIUM!,
     payementFrequency: "Every Month",
@@ -61,7 +49,10 @@ export const plans: Plan[] = [
   },
   {
     reccurence: "Premium Yearly",
+    type: "PremiumYearly",
     price: 1200,
+    payLabel: "Pay1200",
+
     name: "Premium Yearly",
     priceId: process.env.PRICE_ID_YEARLY_PREMIUM!,
     payementFrequency: "Every Year",
@@ -76,6 +67,9 @@ export const plans: Plan[] = [
   {
     reccurence: "Vip Monthly",
     name: "Vip Monthly",
+    type: "VipMonthly",
+    payLabel: "Pay200",
+
     price: 200,
     priceId: process.env.PRICE_ID_MONTHLY_VIP!,
     payementFrequency: "Every Month",
@@ -89,9 +83,12 @@ export const plans: Plan[] = [
   },
   {
     reccurence: "Vip Yearly",
+    type: "VipYearly",
+    payLabel: "Pay1350",
+
     price: 1350,
     name: "Vip Yearly",
-    priceId: process.env.PRICE_ID_EARYLY_VIP!,
+    priceId: process.env.PRICE_ID_YEARLY_VIP!,
     payementFrequency: "Every Year",
     benefits: [
       "Access to gym",

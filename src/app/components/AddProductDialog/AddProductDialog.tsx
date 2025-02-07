@@ -2,6 +2,7 @@ import { Input } from "@components/components/ui/input";
 import { Label } from "@components/components/ui/label";
 import React, { useState } from "react";
 import DialogFactory from "../DialogFactory/DialogFactory";
+import { useLocale } from "../providers/LanguageContext";
 
 interface AddProductDialogProps {
   refetchProducts: () => void;
@@ -13,29 +14,35 @@ export default function AddProductDialog(props: AddProductDialogProps) {
     description_ka?: string;
   }>({});
 
+  const {
+    dictionary: { products, blog },
+  } = useLocale();
+
   const handleGeorgianInput = (
     e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const input = e.target as HTMLInputElement | HTMLTextAreaElement;
     const field = input.name as "title_ka" | "description_ka";
     const value = input.value;
-    const isLanguageValid = /^[\u10A0-\u10FF\s]*$/.test(value);
-    console.log(field, value, isLanguageValid);
+    const isLanguageValid =
+      /^[\u10A0-\u10FF\s0-9!@#$%^&*()_+=[\]{};':"\\|,.<>/?-]*$/.test(value);
 
     setErrors((prev) => ({
       ...prev,
-      [field]: isLanguageValid ? undefined : "Only Georgian alphabet allowed",
+      [field]: isLanguageValid ? undefined : blog.ErrorMessage,
     }));
-    console.log(errors);
 
-    input.value = value.replace(/[^\u10A0-\u10FF\s]/g, "");
+    input.value = value.replace(
+      /[^\u10A0-\u10FF\s0-9!@#$%^&*()_+=[\]{};':"\\|,.<>/?-]/g,
+      ""
+    );
   };
   return (
     <DialogFactory
-      triggerText="Add Product"
-      dialogTitle="Add New Product"
-      submitButtonText="Create Product"
-      dialogDescription="Please enter product details"
+      triggerText={products.AddProduct}
+      dialogTitle={products.AddProduct}
+      submitButtonText={products.AddProduct}
+      dialogDescription={blog.PleaseEnter}
       refetch={props.refetchProducts}
       onSubmit={async (formData) => {
         return fetch("/api/createProduct", {
@@ -47,7 +54,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
       <div className="grid gap-4 py-4 pr-10">
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="name" className="text-right">
-            Title
+            {blog.TitleEn}
           </Label>
           <Input
             id="name"
@@ -59,7 +66,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
         </div>
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="name-georgian" className="text-right">
-            Title Georgian
+            {blog.TitleKa}
           </Label>
           <div className="col-span-3 space-y-1">
             <Input
@@ -77,7 +84,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
         </div>
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="description" className="text-right">
-            Description
+            {blog.DescriptionEn}
           </Label>
           <Input
             id="description"
@@ -89,7 +96,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
         </div>
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="description-georgian" className="text-right">
-            Description Georgian
+            {blog.DescriptionKa}
           </Label>
           <div className="col-span-3 space-y-1">
             <Input
@@ -107,7 +114,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
         </div>
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="price" className="text-right">
-            Price
+            {products.Price}
           </Label>
           <Input
             id="price"
@@ -120,7 +127,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
         </div>
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="category" className="text-right">
-            Category
+            {blog.Category}
           </Label>
           <Input
             id="category"
@@ -132,7 +139,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
         </div>
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="file" className="text-right">
-            Upload Photos
+            {products.UploadPhotos}
           </Label>
           <div className="col-span-3 space-y-1">
             <Input

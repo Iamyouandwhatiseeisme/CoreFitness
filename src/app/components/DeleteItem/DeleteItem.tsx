@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { useRouter } from "next/navigation";
+import { useLocale } from "../providers/LanguageContext";
 
 interface DeleteItemProps {
   id: string;
@@ -9,6 +10,9 @@ interface DeleteItemProps {
 
 export function DeleteItem(props: DeleteItemProps) {
   const [showDialog, setShowDialog] = React.useState(false);
+  const {
+    dictionary: { dialog },
+  } = useLocale();
 
   const router = useRouter();
   async function handleDelete() {
@@ -34,7 +38,7 @@ export function DeleteItem(props: DeleteItemProps) {
           setShowDialog(true);
         }}
       >
-        Delete
+        {dialog.Delete}
       </button>
       {showDialog && (
         <div
@@ -46,20 +50,20 @@ export function DeleteItem(props: DeleteItemProps) {
             className="bg-white p-6 rounded-lg shadow-lg z-40"
             onClick={(e) => e.stopPropagation()}
           >
-            <p>Are you sure you want to delete this item?</p>
+            <p>{dialog.AreYouSure}</p>
             <div className="mt-4 flex justify-end">
               <button
                 className="mr-2 px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
                 onClick={() => setShowDialog(false)}
               >
-                Cancel
+                {dialog.Cancel}
               </button>
               <button
                 data-cy="confirm-delete-button"
                 className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
                 onClick={handleDelete}
               >
-                Delete
+                {dialog.Delete}
               </button>
             </div>
           </div>
