@@ -26,7 +26,6 @@ const CartDialog = () => {
 
   async function handleChekout() {
     if (cartItems.length !== 0) {
-      console.log(cartItems.length, "cart");
       try {
         const response = await fetch("/api/checkout", {
           method: "POST",

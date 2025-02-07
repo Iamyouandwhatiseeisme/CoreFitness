@@ -40,7 +40,6 @@ export default function Profile() {
           },
         });
         const subscriptionInfo = await response.json();
-        console.log(subscriptionInfo, "status check");
         const photoUrl = user.user_metadata.profile_photo;
         const userInfoResponse = await fetch("/api/userInfo");
         if (response.status === 200) {

@@ -9,7 +9,6 @@ export async function POST(request: NextRequest) {
     const description = formData.get("description") as string;
     const category = formData.get("category") as string;
     const descriptionGeorgian = formData.get("description_ka") as string;
-    console.log(name, nameGeorgian);
 
     const supabase = await createClient();
 
@@ -25,7 +24,6 @@ export async function POST(request: NextRequest) {
         description_ka: descriptionGeorgian,
         user_id: user?.id,
       });
-      console.log(error);
       if (error) {
         throw error;
       }

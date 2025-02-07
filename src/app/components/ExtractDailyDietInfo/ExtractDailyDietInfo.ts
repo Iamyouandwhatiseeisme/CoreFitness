@@ -9,7 +9,6 @@ export default function extractDailyDietInfo(input: string): DailyDiet {
   );
 
   const calories = caloriesMatch ? caloriesMatch[1] : null;
-  console.log(calories);
 
   const proteinMatch = input.match(/\*\*Protein - (\d+(?:-\d+)?)%\*\*/);
   const fatMatch = input.match(/\*\*Fat - (\d+(?:-\d+)?)%\*\*/);

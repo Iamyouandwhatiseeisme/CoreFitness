@@ -24,13 +24,6 @@ export async function POST(request: NextRequest) {
       );
     }
     if (table === "products") {
-      console.log(
-        name,
-        nameGeorgian,
-        description,
-        category,
-        descriptionGeorgian
-      );
       const price = Number(formData.get("price"));
       const file1 = formData.get("file1") as File;
       const file2 = formData.get("file2") as File;
@@ -132,7 +125,6 @@ export async function POST(request: NextRequest) {
                       price: price,
                     })
                     .eq("id", id);
-                  console.log(data, error, "product");
                   if (data) {
                     return NextResponse.json(
                       { code: "Product updated" },
@@ -144,18 +136,15 @@ export async function POST(request: NextRequest) {
                     throw error;
                   }
                 } catch (error) {
-                  console.log(error);
                   return NextResponse.json({ error }, { status: 500 });
                 }
               }
             }
           } catch (error) {
-            console.log(error);
             return NextResponse.json({ error: error }, { status: 500 });
           }
         }
       } catch (error) {
-        console.log(error);
         return NextResponse.json({ error: error }, { status: 500 });
       }
       return NextResponse.json({ code: "Product updated" }, { status: 200 });
@@ -170,7 +159,6 @@ export async function POST(request: NextRequest) {
           description_ka: descriptionGeorgian,
         })
         .eq("id", id);
-      console.log(data, error);
       if (error) {
         return NextResponse.json({ error: error }, { status: 500 });
       }

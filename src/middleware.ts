@@ -57,7 +57,6 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url);
   }
   if (user && pathname === `/${locale}/login`) {
-    console.log("user trying to access login page");
     request.nextUrl.pathname = `/${locale}`;
     return NextResponse.redirect(request.nextUrl);
   }

@@ -57,7 +57,6 @@ export default function Blogs() {
         });
 
         if (blogsArray.length < BLOGS_PER_PAGE) {
-          console.log("No more blogs");
           setHasMore(false);
         }
       } catch (error) {

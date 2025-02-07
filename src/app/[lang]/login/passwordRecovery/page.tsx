@@ -39,7 +39,6 @@ export default function PasswordRecovery() {
   }
   useEffect(() => {
     supabase.auth.onAuthStateChange(async (event, session) => {
-      console.log(event, session);
       const urlParams = new URLSearchParams(window.location.search);
 
       const confirmationUrl = urlParams.get("confirmation_url");
@@ -50,14 +49,12 @@ export default function PasswordRecovery() {
         const token = confirmationParams.get("token");
         const email = confirmationParams.get("email");
         const type = confirmationParams.get("type") as EmailOtpType;
-        console.log(token, email, type);
         if (token && email && type) {
-          const { data, error } = await supabase.auth.verifyOtp({
+          const { data } = await supabase.auth.verifyOtp({
             token: token,
             email: email,
             type: type,
           });
-          console.log(data, error, "otp");
           if (data) {
             setIsverified(true);
           }
@@ -83,7 +80,6 @@ export default function PasswordRecovery() {
       password: newPassword,
     });
     if (data) {
-      console.log(data, error);
       toast("Password updated successfully!");
       router.push("/login");
     }

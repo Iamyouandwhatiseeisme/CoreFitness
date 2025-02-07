@@ -11,7 +11,6 @@ export async function GET(request: NextRequest) {
       const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${baseUrl}/login/passwordRecovery`,
       });
-      console.log(data, error);
       if (!error) {
         return NextResponse.json({ data: data, status: 200 });
       }

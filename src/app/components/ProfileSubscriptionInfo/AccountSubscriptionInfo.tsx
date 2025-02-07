@@ -10,7 +10,6 @@ export default function AccountSubscriptionInfo(props: SubscriptionInfoProps) {
     dictionary: { profile },
   } = useLocale();
   const { subscriptionInfo } = props;
-  console.log(subscriptionInfo, "check sub info");
   async function handleSubscriptionButton() {
     if (subscriptionInfo.status === SubscriptionStatus.Active) {
       const supabase = await createClient();
@@ -23,7 +22,6 @@ export default function AccountSubscriptionInfo(props: SubscriptionInfoProps) {
             email: user.email!,
           },
         });
-        console.log(response);
         if (response.status === 200) {
           const userConfirmed = window.confirm(
             "Are you sure you want to proceed?"
@@ -37,7 +35,6 @@ export default function AccountSubscriptionInfo(props: SubscriptionInfoProps) {
         }
       }
     }
-    console.log(subscriptionInfo.status);
     if (subscriptionInfo.status === SubscriptionStatus.Inactive) {
       router.push("/pricing");
     }

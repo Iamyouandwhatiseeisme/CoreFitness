@@ -84,25 +84,19 @@ export async function POST(request: NextRequest) {
                               images: [publicUrl1, publicUrl2],
                               user_id: user?.id,
                             });
-                          console.log(error, data);
                           if (error) {
                             throw error;
                           }
                         } catch (error) {
-                          console.log(error);
-
                           return NextResponse.json({ error }, { status: 500 });
                         }
                       }
                     }
                   } catch (error) {
-                    console.log(error);
-
                     return NextResponse.json({ error: error }, { status: 500 });
                   }
                 }
               } else {
-                console.log("error", error);
                 return NextResponse.json(
                   { error: "Images could not be inserted" },
                   { status: 500 }
