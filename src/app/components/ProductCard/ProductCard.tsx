@@ -61,7 +61,7 @@ export default function ProductCard({
           {description}
         </h4>
         <p className="text-gray-600 dark:text-gray-400">
-          {products.Price} : ${product.price}
+          {products.Price} : ${product.price / 100}
         </p>
       </div>
     </div>
