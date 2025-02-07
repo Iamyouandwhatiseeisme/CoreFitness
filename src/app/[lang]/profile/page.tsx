@@ -4,7 +4,7 @@ import { createClient } from "../../utils/supabase/client";
 import React from "react";
 import { User } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
-import { SubscriptionInfo } from "src/app/components/types";
+import { SubscriptionInfo, SubscriptionStatus } from "src/app/components/types";
 import UploadImage from "src/app/components/UploadImage/UploadImage";
 import EditableInput from "src/app/components/EditableInput/EditableInput";
 import AccountSubscriptionInfo from "src/app/components/ProfileSubscriptionInfo/AccountSubscriptionInfo";
@@ -27,7 +27,6 @@ export default function Profile() {
   const {
     dictionary: { profile },
   } = useLocale();
-  console.log(profile);
   useEffect(() => {
     async function fetchUser() {
       const {
@@ -40,10 +39,11 @@ export default function Profile() {
             email: user?.email,
           },
         });
-        const subscriptionInfo = (await response.json()) as SubscriptionInfo;
+        const subscriptionInfo = await response.json();
+        console.log(subscriptionInfo, "status check");
         const photoUrl = user.user_metadata.profile_photo;
         const userInfoResponse = await fetch("/api/userInfo");
-        if (response) {
+        if (response.status === 200) {
           const userInfoResponseData = await userInfoResponse.json();
           const userDisplayName = userInfoResponseData.displayName;
           const userProfile: UserProfile = {
@@ -54,10 +54,15 @@ export default function Profile() {
           };
           setUser(userProfile);
         }
-        if (!response) {
+        if (response.status === 400) {
           const userProfile: UserProfile = {
             user: user,
-            subscription_info: subscriptionInfo,
+            subscription_info: {
+              status: SubscriptionStatus.Inactive,
+              currentPeriodEnd: 0,
+              currentPeriodStart: 0,
+              name: "",
+            },
             image: photoUrl,
             display_name: null,
           };
@@ -84,30 +89,21 @@ export default function Profile() {
       }
     }
   }
-  if (loading) {
-    console.log(2);
-    return (
-      <div className="flex justify-center items-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white"></div>
-      </div>
-    );
-  }
 
   return (
-    <div className="min-h-wrapper flex   items-center w-full justify-center bg-gradient-to-tl from-blue-500/20 to-purple-600/20 dark:from-blue-900/40 dark:to-purple-900/40  ">
-      {user ? (
-        <div
-          className="mt-20 rounded-xl dark:text-white text-black border animated-border   
-          w-150 h-150 bg-gradient-to-tl from-blue-500/20 to-purple-600/20 
-          dark:from-blue-700/20 mb-20 dark:to-purple-700/20 flex flex-row 
-          justify-start items-start gap-20 "
-        >
-          <div className="w-96 flex flex-col z-40 items-center  gap-2 justify-center pl-24 ml-auto mr-auto">
+    <div className="min-h-wrapper flex items-center w-full justify-center bg-gradient-to-tl from-blue-500/20 to-purple-600/20 dark:from-blue-900/40 dark:to-purple-900/40">
+      {loading ? (
+        <div className="flex justify-center items-center min-h-wrapper">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white"></div>
+        </div>
+      ) : user ? (
+        <div className="mt-20 rounded-xl dark:text-white text-black border animated-border w-150 h-150 bg-gradient-to-tl from-blue-500/20 to-purple-600/20 dark:from-blue-700/20 mb-20 dark:to-purple-700/20 flex flex-row justify-start items-start gap-20">
+          <div className="w-96 flex flex-col z-40 items-center gap-2 justify-center pl-24 ml-auto mr-auto">
             <UploadImage image={user.image}></UploadImage>
             <h2>{profile.ClickOnImage}</h2>
           </div>
-          <ul className="flex m-10 p-10 z-40  flex-col items-start justify-start gap-5 border border-black rounded-2xl h-3/4 w-full">
-            <li className="w-full ">
+          <ul className="flex m-10 p-10 z-40 flex-col items-start justify-start gap-5 border border-black rounded-2xl h-3/4 w-full">
+            <li className="w-full">
               <EditableInput
                 label={profile.Email}
                 value={user.user.email!}

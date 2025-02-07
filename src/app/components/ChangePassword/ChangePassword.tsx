@@ -86,7 +86,7 @@ export default function ChangePassword() {
         <div className="flex flex-row gap-2 justify-start items-center">
           <div className="flex flex-col">
             <div
-              className="underline cursor-pointer w-40"
+              className="underline cursor-pointer w-[250px]"
               onClick={() => setShowPasswordFields(!showPasswordFields)}
             >
               {profile.ChangePassword}
@@ -95,73 +95,88 @@ export default function ChangePassword() {
           <Toaster />
         </div>
       </DialogTrigger>
-
-      <DialogContent className="sm:max-w-[580px] h-120 m-20 p-5 absolute top-0 right-96 bg-slate-900 rounded-2xl text-white  ">
-        <DialogHeader className="flex flex-col items-start justify-start">
-          <DialogTitle>{profile.ChangePassword}</DialogTitle>
-          <DialogClose
-            style={{
-              position: "absolute",
-              top: "16px",
-              right: "16px",
-            }}
-            onClick={() => setShowPasswordFields(false)}
-            className=" justify-end rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
-          >
-            <X className="h-4 w-4" />
-          </DialogClose>
-
-          <DialogDescription>
-            Your password must be at least 6 characters long
-            {error && <div className="text-red-600">{error}</div>}
-          </DialogDescription>
-        </DialogHeader>
-        <form onSubmit={handlePasswordChange}>
-          <div className="flex flex-col gap-5">
-            <input
-              type="password"
-              placeholder="Current Password"
-              value={currentPassword}
-              onChange={(e) => {
-                setError("Please wait...");
-                setCurrentPassword(e.target.value);
+      <div
+        className={`${
+          showPasswordFields &&
+          "fixed inset-0 z-20 flex items-center justify-center bg-black bg-opacity-50 backdrop:blur-lg"
+        }`}
+        onClick={() => setShowPasswordFields(false)}
+      >
+        <DialogContent
+          onClick={(e) => e.stopPropagation()}
+          className="fixed inset-0 w-[90vw] sm:w-[70vw] md:w-[50vw] lg:w-[40vw] ml-auto mr-auto mt-10 h-[60vh] min-h-[300px] min-w-[300px] max-w-none max-h-none bg-white dark:bg-gray-900 p-4 sm:p-6 md:p-10 backdrop-blur-2xl overflow-y-auto"
+        >
+          {" "}
+          <DialogHeader className="flex flex-col items-start justify-start">
+            <DialogTitle>{profile.ChangePassword}</DialogTitle>
+            <DialogClose
+              style={{
+                position: "absolute",
+                top: "16px",
+                right: "16px",
               }}
-              className="border rounded p-2 bg-slate-800 "
-            ></input>
-            <div className="flex flex-col gap-2">
-              <input
-                type="password"
-                placeholder="New Password"
-                value={newPassword}
-                disabled={!userAuthenticated}
-                onChange={(e) => setNewPassword(e.target.value)}
-                className={`border rounded p-2 ${
-                  userAuthenticated ? "bg-slate-800" : "bg-slate-900"
-                } `}
-              />
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                disabled={!userAuthenticated}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className={`border rounded p-2 ${
-                  userAuthenticated ? "bg-slate-800" : "bg-slate-900"
-                } `}
-              />
-            </div>
-          </div>
-          <DialogFooter className="flex flex-row items-center justify-center m-10">
-            <Button
-              disabled={!passwordsMatch}
-              type="submit"
-              className="rounded-2xl bg-slate-400 w-40 h-10"
+              onClick={() => setShowPasswordFields(false)}
+              className="justify-end rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
             >
-              {profile.ChangePassword}
-            </Button>
-          </DialogFooter>
-        </form>
-      </DialogContent>
+              <X className="h-4 w-4" />
+            </DialogClose>
+
+            <DialogDescription>
+              Your password must be at least 6 characters long
+              {error && <div className="text-red-600">{error}</div>}
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handlePasswordChange}>
+            <div className="flex flex-col gap-5 items-center justify-center">
+              <input
+                type="password"
+                placeholder="Current Password"
+                value={currentPassword}
+                onChange={(e) => {
+                  setError("Please wait...");
+                  setCurrentPassword(e.target.value);
+                }}
+                className="border rounded p-2 bg-white w-[250px]"
+              ></input>
+              <div className="flex flex-col gap-2">
+                <input
+                  type="password"
+                  placeholder="New Password"
+                  value={newPassword}
+                  disabled={!userAuthenticated}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  className={`border rounded p-2 w-[250px] ${
+                    userAuthenticated
+                      ? "bg-white dark:bg-white"
+                      : "bg-slate-900 dark:bg-gray-600"
+                  } `}
+                />
+                <input
+                  type="password"
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  disabled={!userAuthenticated}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className={`border rounded p-2 w-[250px] ${
+                    userAuthenticated
+                      ? "bg-white dark:bg-white"
+                      : "bg-slate-900 dark:bg-gray-600"
+                  } `}
+                />
+              </div>
+            </div>
+            <DialogFooter className="flex flex-row items-center justify-center m-4">
+              <Button
+                disabled={!passwordsMatch}
+                type="submit"
+                className="rounded-2xl bg-slate-400 dark:bg-gray-500 w-[250px] h-10"
+              >
+                {profile.ChangePassword}
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </div>
     </Dialog>
   );
 }

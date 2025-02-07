@@ -8,7 +8,7 @@ export const plans: Plan[] = [
     payLabel: "Pay100",
 
     name: "Monthly Plan",
-    priceId: process.env.PRICE_ID_MONTHLY!,
+    priceId: process.env.NEXT_PUBLIC_PRICE_ID_MONTHLY!,
     payementFrequency: "Every Month",
     benefits: [
       "Access to gym",
@@ -22,7 +22,7 @@ export const plans: Plan[] = [
     payLabel: "Pay800",
     type: "Yearly",
     name: "Yearly Plan",
-    priceId: process.env.PRICE_ID_YEARLY!,
+    priceId: process.env.NEXT_PUBLIC_PRICE_ID_YEARLY!,
     payementFrequency: "Every Year",
     benefits: [
       "Access to gym",
@@ -38,7 +38,7 @@ export const plans: Plan[] = [
     payLabel: "Pay150",
 
     name: "Premium Monthly",
-    priceId: process.env.PRICE_ID_MONTHLY_PREMIUM!,
+    priceId: process.env.NEXT_PUBLIC_PRICE_ID_MONTHLY_PREMIUM!,
     payementFrequency: "Every Month",
     benefits: [
       "Access to gym",
@@ -54,7 +54,7 @@ export const plans: Plan[] = [
     payLabel: "Pay1200",
 
     name: "Premium Yearly",
-    priceId: process.env.PRICE_ID_YEARLY_PREMIUM!,
+    priceId: process.env.NEXT_PUBLIC_PRICE_ID_YEARLY_PREMIUM!,
     payementFrequency: "Every Year",
     benefits: [
       "Access to gym",
@@ -71,7 +71,7 @@ export const plans: Plan[] = [
     payLabel: "Pay200",
 
     price: 200,
-    priceId: process.env.PRICE_ID_MONTHLY_VIP!,
+    priceId: process.env.NEXT_PUBLIC_PRICE_ID_MONTHLY_VIP!,
     payementFrequency: "Every Month",
     benefits: [
       "Access to gym",
@@ -88,7 +88,7 @@ export const plans: Plan[] = [
 
     price: 1350,
     name: "Vip Yearly",
-    priceId: process.env.PRICE_ID_YEARLY_VIP!,
+    priceId: process.env.NEXT_PUBLIC_PRICE_ID_YEARLY_VIP!,
     payementFrequency: "Every Year",
     benefits: [
       "Access to gym",
