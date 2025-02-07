@@ -135,15 +135,18 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
             required
           />
         </div>
-        <div className="grid grid-cols-4 items-center gap-4">
-          <Label htmlFor="description-georgian" className="text-right">
+        <div className="grid grid-cols-4 items-start gap-4">
+          <Label htmlFor="description-georgian" className="text-right mt-2">
             {blog.DescriptionKa}
           </Label>
           <div className="col-span-3 space-y-1">
-            <Input
+            <textarea
               id="description-georgian"
               name="description_ka"
-              className="col-span-3"
+              className="w-full min-w-[500px] h-32 px-3 py-2 border rounded-md text-sm 
+               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring 
+               focus-visible:ring-offset-2 resize-none dark:bg-slate-700 dark:border-slate-600 
+               dark:text-white dark:focus-visible:ring-slate-400"
               onInput={handleInput}
               value={georgianDescription}
               onChange={(e) => setGeorgianDescription(e.target.value)}
@@ -154,52 +157,52 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
             )}
           </div>
         </div>
-        <div className="grid grid-cols-4 items-center gap-4">
-          <Label htmlFor="price" className="text-right">
-            {products.Price}
-          </Label>
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="price" className="text-right">
+          {products.Price}
+        </Label>
+        <Input
+          type="number"
+          id="price"
+          name="price"
+          value={price}
+          maxLength={9}
+          onChange={(e) => setPrice(Number(e.target.value))}
+          className="col-span-3"
+          required
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="category" className="text-right">
+          {blog.Category}
+        </Label>
+        <Input
+          id="category"
+          name="category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="col-span-3"
+          required
+        />
+      </div>
+      <div>
+        <Label htmlFor="file" className="text-right">
+          {products.UploadPhotos}
+        </Label>
+        <div className="col-span-3 space-y-1">
           <Input
-            type="number"
-            id="price"
-            name="price"
-            value={price}
-            maxLength={9}
-            onChange={(e) => setPrice(Number(e.target.value))}
-            className="col-span-3"
-            required
+            id="file1"
+            type="file"
+            name="file1"
+            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
           />
-        </div>
-        <div className="grid grid-cols-4 items-center gap-4">
-          <Label htmlFor="category" className="text-right">
-            {blog.Category}
-          </Label>
           <Input
-            id="category"
-            name="category"
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="col-span-3"
-            required
+            id="file2"
+            type="file"
+            name="file2"
+            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
           />
-        </div>
-        <div>
-          <Label htmlFor="file" className="text-right">
-            {products.UploadPhotos}
-          </Label>
-          <div className="col-span-3 space-y-1">
-            <Input
-              id="file1"
-              type="file"
-              name="file1"
-              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
-            />
-            <Input
-              id="file2"
-              type="file"
-              name="file2"
-              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
-            />
-          </div>
         </div>
       </div>
     </DialogFactory>

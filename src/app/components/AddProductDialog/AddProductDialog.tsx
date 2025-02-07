@@ -82,27 +82,33 @@ export default function AddProductDialog(props: AddProductDialogProps) {
             )}
           </div>
         </div>
-        <div className="grid grid-cols-4 items-center gap-4">
-          <Label htmlFor="description" className="text-right">
+        <div className="grid grid-cols-4 items-start gap-4">
+          <Label htmlFor="description" className="text-right mt-2">
             {blog.DescriptionEn}
           </Label>
-          <Input
+          <textarea
             id="description"
             name="description"
-            className="col-span-3"
+            className="col-span-3 w-full min-w-[500px] h-32 px-3 py-2 border rounded-md text-sm 
+             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring 
+             focus-visible:ring-offset-2 resize-none dark:bg-slate-700 dark:border-slate-600 
+             dark:text-white dark:focus-visible:ring-slate-400"
             data-cy="description-input-field"
             required
           />
         </div>
-        <div className="grid grid-cols-4 items-center gap-4">
-          <Label htmlFor="description-georgian" className="text-right">
+        <div className="grid grid-cols-4 items-start gap-4">
+          <Label htmlFor="description-georgian" className="text-right mt-2">
             {blog.DescriptionKa}
           </Label>
           <div className="col-span-3 space-y-1">
-            <Input
+            <textarea
               id="description-georgian"
               name="description_ka"
-              className="col-span-3"
+              className="w-full min-w-[500px] h-32 px-3 py-2 border rounded-md text-sm 
+               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring 
+               focus-visible:ring-offset-2 resize-none dark:bg-slate-700 dark:border-slate-600 
+               dark:text-white dark:focus-visible:ring-slate-400"
               onInput={handleGeorgianInput}
               data-cy="description-georgian-input-field"
               required
@@ -112,53 +118,53 @@ export default function AddProductDialog(props: AddProductDialogProps) {
             )}
           </div>
         </div>
-        <div className="grid grid-cols-4 items-center gap-4">
-          <Label htmlFor="price" className="text-right">
-            {products.Price}
-          </Label>
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4 mr-10">
+        <Label htmlFor="price" className="text-right">
+          {products.Price}
+        </Label>
+        <Input
+          id="price"
+          name="price"
+          type="number"
+          className="col-span-3"
+          data-cy="price-input-field"
+          required
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4 mr-10">
+        <Label htmlFor="category" className="text-right">
+          {blog.Category}
+        </Label>
+        <Input
+          id="category"
+          name="category"
+          className="col-span-3"
+          data-cy="category-input-field"
+          required
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4 mr-10">
+        <Label htmlFor="file" className="text-right">
+          {products.UploadPhotos}
+        </Label>
+        <div className="col-span-3 space-y-1">
           <Input
-            id="price"
-            name="price"
-            type="number"
+            id="file1"
+            type="file"
+            name="file1"
             className="col-span-3"
-            data-cy="price-input-field"
+            data-cy="photo-browse-field-1"
             required
           />
-        </div>
-        <div className="grid grid-cols-4 items-center gap-4">
-          <Label htmlFor="category" className="text-right">
-            {blog.Category}
-          </Label>
           <Input
-            id="category"
-            name="category"
+            id="file2"
+            type="file"
+            name="file2"
             className="col-span-3"
-            data-cy="category-input-field"
+            data-cy="photo-browse-field-2"
             required
           />
-        </div>
-        <div className="grid grid-cols-4 items-center gap-4">
-          <Label htmlFor="file" className="text-right">
-            {products.UploadPhotos}
-          </Label>
-          <div className="col-span-3 space-y-1">
-            <Input
-              id="file1"
-              type="file"
-              name="file1"
-              className="col-span-3"
-              data-cy="photo-browse-field-1"
-              required
-            />
-            <Input
-              id="file2"
-              type="file"
-              name="file2"
-              className="col-span-3"
-              data-cy="photo-browse-field-2"
-              required
-            />
-          </div>
         </div>
       </div>
     </DialogFactory>
