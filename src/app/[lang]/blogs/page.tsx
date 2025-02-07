@@ -15,7 +15,10 @@ export default function Blogs() {
   const [isLoading, setIsLoading] = useState(true);
 
   const [isUpdating, setIsUpdating] = useState(false);
-  const { locale } = useLocale();
+  const {
+    locale,
+    dictionary: { blog },
+  } = useLocale();
   async function refetchBlogs() {
     const end = page * BLOGS_PER_PAGE - 1;
 
@@ -116,12 +119,8 @@ export default function Blogs() {
             {blogs.length === 0 && !isLoading && (
               <div className="flex flex-col items-center justify-center w-full h-full">
                 <h2 className="text-gray-700 dark:text-gray-200 font-sans font-bold text-2xl mb-4">
-                  Could not find anything...
+                  {blog.NoBlogs}
                 </h2>
-                <p className="text-gray-500 dark:text-gray-400 text-lg">
-                  Try adjusting your search or filter to find what you&apos;re
-                  looking for.
-                </p>
               </div>
             )}
             {!isLoading &&

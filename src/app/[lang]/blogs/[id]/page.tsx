@@ -6,6 +6,7 @@ import { createClient } from "src/app/utils/supabase/server";
 import { Toaster } from "sonner";
 import { DeleteItem } from "src/app/components/DeleteItem/DeleteItem";
 import EditBlogDIalog from "src/app/components/EditBlogDialog/EditBlogDIalog";
+// import { useLocale } from "src/app/components/providers/LanguageContext";
 
 interface BlogDetailsProps {
   params: {
@@ -20,11 +21,20 @@ export default async function BlogDetails(props: BlogDetailsProps) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
+  // const {
+  //   dictionary: { blog: blogDictionary },
+  // } = useLocale();
 
   const { data, error } = await supabase
     .from("blogs")
     .select()
     .eq("id", id)
+    .single();
+
+  const { data: dictionaryData } = await supabase
+    .from("dictionary")
+    .select()
+    .eq("locale", props.params.lang)
     .single();
 
   if (error) {
@@ -35,8 +45,10 @@ export default async function BlogDetails(props: BlogDetailsProps) {
     );
   }
 
-  if (data) {
+  if (data && dictionaryData) {
     const blog: Blog = data;
+    const blogDictionary = dictionaryData.dictionary.blog;
+
     const formattedDate = new Date(blog.created_at).toLocaleDateString();
 
     return (
@@ -62,7 +74,7 @@ export default async function BlogDetails(props: BlogDetailsProps) {
 
               <div className="flex items-center mb-8">
                 <span className="text-sm text-gray-600 dark:text-gray-300">
-                  Posted by {user?.email}
+                  {blogDictionary.PostedBy}: {user?.email}
                 </span>
               </div>
 

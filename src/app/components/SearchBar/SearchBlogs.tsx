@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import useDebounce from "src/app/hooks/useDebounce";
 import React from "react";
 import { Blog } from "../types";
+import { useLocale } from "../providers/LanguageContext";
 
 interface SearchBarProps {
   searchItemType: string;
@@ -15,6 +16,9 @@ export default function SearchBlogs(props: SearchBarProps) {
   const searchItemType = props.searchItemType;
   const [searchValue, setSearchValue] = useState<string>("");
   const debouncedValue = useDebounce(searchValue, 500);
+  const {
+    dictionary: { blog },
+  } = useLocale();
   const router = useRouter();
   useEffect(() => {
     async function fetchSearchedValue() {
@@ -50,7 +54,7 @@ export default function SearchBlogs(props: SearchBarProps) {
         onChange={(e) => {
           setSearchValue(e.target.value);
         }}
-        placeholder={`Search ${searchItemType}`}
+        placeholder={blog.PlaceHolder}
         title="search"
       />
     </div>

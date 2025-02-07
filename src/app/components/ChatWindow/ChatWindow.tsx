@@ -15,7 +15,9 @@ import TypeWriter from "../TypeWriter/TypeWriter";
 import { UserInfo } from "../types";
 
 export default function ChatWindow() {
-  const { chatWindow } = useLocale();
+  const {
+    dictionary: { chatWindow },
+  } = useLocale();
 
   const [userInfo, setUserInfo] = useState<UserInfo>({
     muscleGoal: chatWindow.Lose,
@@ -78,8 +80,8 @@ export default function ChatWindow() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 rounded-xl">
       <div className="container mx-auto px-4 py-8">
         <div className="flex flex-col items-center gap-6">
-          <h1 className="text-4xl font-bold text-center text-gray-800 dark:text-gray-100  bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Try our AI assistant to create a diet plan
+          <h1 className="text-3xl p-4 font-bold text-center text-gray-800 dark:text-gray-100  bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            {chatWindow.Header}
           </h1>
 
           <div className="w-full max-w-6xl  bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 transition-all duration-300">

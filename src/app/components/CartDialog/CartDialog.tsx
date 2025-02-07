@@ -10,6 +10,7 @@ import { CartItem, useCart } from "../providers/CartProvider";
 import { Button } from "@components/components/ui/button";
 import React, { useState } from "react";
 import { PiShoppingCart } from "react-icons/pi";
+import { useLocale } from "../providers/LanguageContext";
 
 const CartDialog = () => {
   const { cartItems, removeItemFromCart, clearCart, updateItemQuantity } =
@@ -19,6 +20,9 @@ const CartDialog = () => {
   const totalPrice = cartItems.reduce((total, item) => {
     return total + (item.product.price * item.quantity) / 100;
   }, 0);
+  const {
+    dictionary: { cart },
+  } = useLocale();
 
   async function handleChekout() {
     if (cartItems.length !== 0) {
@@ -62,7 +66,9 @@ const CartDialog = () => {
           className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-colors shadow-lg"
         >
           <PiShoppingCart className="w-5 h-5" />
-          <span>View Cart ({cartItems.length})</span>
+          <span>
+            {cart.ViewCart}({cartItems.length})
+          </span>
         </button>
       </DialogTrigger>
       <div
@@ -79,7 +85,7 @@ const CartDialog = () => {
           <div className="w-full h-full max-w-none max-h-none bg-white rounded-none md:rounded-xl shadow-2xl flex flex-col overflow-hidden">
             <div className="flex items-center justify-between p-6 border-b">
               <DialogTitle className="text-2xl font-bold">
-                Your Shopping Cart
+                {cart.YourCart}
               </DialogTitle>
               <DialogClose
                 className="rounded-full p-2 hover:bg-gray-100 transition-colors"
@@ -158,7 +164,7 @@ const CartDialog = () => {
                         {error}
                       </div>
                     ) : (
-                      "Your cart is empty. Start adding some products!"
+                      cart.EmptyCart
                     )}
                   </div>
                 )}
@@ -169,7 +175,7 @@ const CartDialog = () => {
               <div className="border-t p-6">
                 <div className="flex justify-between items-center mb-4">
                   <div className="text-lg font-semibold">
-                    Total:{totalPrice} $
+                    {cart.Total}:{totalPrice} $
                   </div>
                   <div className="text-xl font-bold">
                     ${totalPrice.toFixed(2)}
@@ -181,13 +187,13 @@ const CartDialog = () => {
                     onClick={clearCart}
                     className="hover:bg-red-50 hover:text-red-600"
                   >
-                    Clear Cart
+                    {cart.ClearCart}
                   </Button>
                   <Button
                     onClick={handleChekout}
                     className="bg-green-600 hover:bg-green-700 px-8 py-4"
                   >
-                    Checkout Now
+                    {cart.Checkout}
                   </Button>
                 </div>
               </div>
