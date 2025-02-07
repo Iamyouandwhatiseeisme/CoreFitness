@@ -57,7 +57,7 @@ export default function ProductCard({
         <h3 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
           {title}
         </h3>
-        <h4 className="text-md text-gray-900 dark:text-gray-100">
+        <h4 className="text-md text-gray-900 dark:text-gray-100 h-16 overflow-hidden">
           {description}
         </h4>
         <p className="text-gray-600 dark:text-gray-400">
