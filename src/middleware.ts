@@ -52,6 +52,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
   if (!user && !publicPaths.includes(pathname)) {
+    console.log(request);
     const url = request.nextUrl.clone();
     url.pathname = `/${locale}/login`;
     return NextResponse.redirect(url);

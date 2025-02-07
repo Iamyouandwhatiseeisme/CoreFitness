@@ -4,12 +4,13 @@ import { createClient } from "src/app/utils/supabase/server";
 
 export async function GET(request: NextRequest) {
   const email = request.headers.get("email");
+  const locale = request.headers.get("locale");
   const supabase = await createClient();
   const baseUrl = getBaseUrl();
   try {
     if (email) {
       const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${baseUrl}/login/passwordRecovery`,
+        redirectTo: `${baseUrl}/${locale}/login/passwordRecovery`,
       });
       if (!error) {
         return NextResponse.json({ data: data, status: 200 });

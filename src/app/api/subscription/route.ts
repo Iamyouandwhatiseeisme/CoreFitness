@@ -66,7 +66,7 @@ export async function GET(request: NextRequest) {
       }
       return NextResponse.json({}, { status: 400 });
     } catch (error) {
-      return NextResponse.json({ error: error }, { status: 500 });
+      return NextResponse.json({ error: error }, { status: 400 });
     }
   }
 }

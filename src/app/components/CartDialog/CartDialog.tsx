@@ -190,6 +190,7 @@ const CartDialog = () => {
                   </Button>
                   <Button
                     onClick={handleChekout}
+                    data-cy="buy-button"
                     className="bg-green-600 hover:bg-green-700 px-8 py-4"
                   >
                     {cart.Checkout}
