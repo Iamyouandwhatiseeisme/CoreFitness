@@ -27,7 +27,7 @@ export default function Header(props: HeaderProps) {
     "hover:border-[#5A5B5C] hover:border w-40 gap-2 transition-all duration-300 transform hover:scale-110 hover:shadow-xl dark:hover:bg-[#4E4F50] hover:rounded-3xl  font-normal dark:text-[#E4E6EB] p-5 text-start cursor-pointer flex flex-row items-center justify-start";
   if (!props.currentUser) return null;
   return (
-    <>
+    <div className="sm:flex hidden">
       <div
         className={`fixed items-center   flex justify-center left-0 top-1/2 transform -translate-y-1/2 w-20 h-16 bg-transparent  cursor-pointer z-20  ${
           !isHovered ? "transform translate-x-0" : "transform -translate-x-full"
@@ -96,6 +96,6 @@ export default function Header(props: HeaderProps) {
           </nav>
         </div>
       </header>
-    </>
+    </div>
   );
 }

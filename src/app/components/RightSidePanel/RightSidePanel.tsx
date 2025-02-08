@@ -24,7 +24,7 @@ export default function RightSidePanel(props: RightSidePanelProps) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <>
+    <div className="sm:flex hidden">
       <div
         className={`fixed right-0 top-1/2 transform -translate-y-1/2 w-20 h-16 bg-transparent cursor-pointer z-20 ${
           !isHovered ? "transform translate-x-0" : "transform translate-x-full"
@@ -58,6 +58,6 @@ export default function RightSidePanel(props: RightSidePanelProps) {
           </div>
         </div>
       </aside>
-    </>
+    </div>
   );
 }
