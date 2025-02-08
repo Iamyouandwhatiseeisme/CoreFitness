@@ -29,8 +29,10 @@ export default function Header(props: HeaderProps) {
   return (
     <div className="sm:flex hidden">
       <div
-        className={`fixed items-center   flex justify-center left-0 top-1/2 transform -translate-y-1/2 w-20 h-16 bg-transparent  cursor-pointer z-20  ${
-          !isHovered ? "transform translate-x-0" : "transform -translate-x-full"
+        className={`fixed items-center sm:flex hidden   justify-center left-0 top-1/2 transform -translate-y-1/2 w-20 h-16 bg-transparent  cursor-pointer z-20  ${
+          !isHovered
+            ? "transform translate-x-0"
+            : "transform -translate-x-full "
         }`}
         data-cy="header"
         onMouseEnter={() => setIsHovered(true)}
