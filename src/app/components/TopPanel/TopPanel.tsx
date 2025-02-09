@@ -7,6 +7,7 @@ import {
   PiCreditCard,
   PiNewspaper,
   PiShoppingBagOpen,
+  PiShoppingCart,
   PiUserCircle,
 } from "react-icons/pi";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -14,9 +15,8 @@ import { useLocale } from "../providers/LanguageContext";
 import { User } from "@supabase/supabase-js";
 import Link from "next/link";
 import LocaleChange from "../LanguageChange/LanguageChange";
-import useTheme from "src/app/hooks/useTheme";
-import DropDown from "../DropDown/DropDown";
 import MobileThemeChange from "../MobileThemeChange/MobileThemeChange";
+import { useCart } from "../providers/CartProvider";
 
 interface TopPanelProps {
   currentUser: User | null;
@@ -24,6 +24,10 @@ interface TopPanelProps {
 
 export default function TopPanel({ currentUser }: TopPanelProps) {
   const { locale } = useLocale();
+  const { cartItems } = useCart();
+  const {
+    dictionary: { cart },
+  } = useLocale();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const listItemStyle: string =
     "rounded p-1 border border-black dark:border-gray-200";
@@ -85,6 +89,12 @@ export default function TopPanel({ currentUser }: TopPanelProps) {
               <li className={`${listItemStyle}`}>
                 <PiCreditCard></PiCreditCard>
               </li>
+            </Link>
+            <Link href={`/${locale}/cart`}>
+              <button className="flex items-center">
+                <PiShoppingCart className="w-4 h-4" />
+                <span>({cartItems.length})</span>
+              </button>
             </Link>
           </ul>
         </nav>
