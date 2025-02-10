@@ -50,7 +50,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="container mx-auto p-4 sm:p-6">
+    <div className="container min-h-wrapper mx-auto p-4 sm:p-6">
       <h1 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">
         {cart.YourCart}
       </h1>

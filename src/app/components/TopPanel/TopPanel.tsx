@@ -25,9 +25,6 @@ interface TopPanelProps {
 export default function TopPanel({ currentUser }: TopPanelProps) {
   const { locale } = useLocale();
   const { cartItems } = useCart();
-  const {
-    dictionary: { cart },
-  } = useLocale();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const listItemStyle: string =
     "rounded p-1 border border-black dark:border-gray-200";
