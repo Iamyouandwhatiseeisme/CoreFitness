@@ -17,6 +17,7 @@ import Link from "next/link";
 import LocaleChange from "../LanguageChange/LanguageChange";
 import MobileThemeChange from "../MobileThemeChange/MobileThemeChange";
 import { useCart } from "../providers/CartProvider";
+import AuthenticationButton from "../logoutButton/LoggoutButton";
 
 interface TopPanelProps {
   currentUser: User | null;
@@ -44,6 +45,12 @@ export default function TopPanel({ currentUser }: TopPanelProps) {
         </Link>
         <LocaleChange></LocaleChange>
         <MobileThemeChange></MobileThemeChange>
+        <Link href={`/${locale}/cart`}>
+          <button className="flex items-center">
+            <PiShoppingCart className="w-4 h-4" />
+            <span>({cartItems.length})</span>
+          </button>
+        </Link>
         <RxHamburgerMenu onClick={() => setIsOpen(!isOpen)}></RxHamburgerMenu>
       </div>
       <div
@@ -87,16 +94,17 @@ export default function TopPanel({ currentUser }: TopPanelProps) {
                 <PiCreditCard></PiCreditCard>
               </li>
             </Link>
-            <Link href={`/${locale}/cart`}>
-              <button className="flex items-center">
-                <PiShoppingCart className="w-4 h-4" />
-                <span>({cartItems.length})</span>
-              </button>
-            </Link>
+            <li>
+              <AuthenticationButton
+                locale={locale}
+                href={`/${locale}/login`}
+                type="logout"
+                buttonText={"Logout"}
+              />
+            </li>
           </ul>
         </nav>
       </div>
-      {/* </div> */}
     </div>
   );
 }
