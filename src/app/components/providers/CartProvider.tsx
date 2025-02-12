@@ -27,18 +27,24 @@ interface CartProviderProps {
 }
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    if (typeof window !== "undefined") {
-      const savedCart = localStorage.getItem("cartItems");
-      return savedCart ? JSON.parse(savedCart) : [];
-    }
-    return [];
-  });
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    async function fetchCart() {
+      const response = await fetch("/api/cart");
+      const cartData = await response.json();
+      setCartItems([...cartData]);
     }
+    fetchCart();
+  }, []);
+  useEffect(() => {
+    async function updateCart() {
+      const response = await fetch("/api/cart/updateCart", {
+        method: "POST",
+        body: JSON.stringify(cartItems),
+      });
+    }
+    updateCart();
   }, [cartItems]);
   const addItemToCart = (item: CartItem) => {
     setCartItems((prevItems) => {
@@ -52,6 +58,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
             : cartItem
         );
       }
+
       return [...prevItems, item];
     });
   };
