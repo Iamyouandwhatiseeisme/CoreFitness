@@ -54,7 +54,7 @@ label {
     padding: 4px;
     background: linear-gradient(45deg, #3b82f6, #9333ea, #3b82f6);
     background-size: 200% 200%;
-    animation: borderAnimation 2s infinite eas;
+    animation: borderAnimation 3ms infinite eas;
     opacity: 0.4;
     -webkit-mask: linear-gradient(white 0 0) content-box,
       linear-gradient(white 0 0);

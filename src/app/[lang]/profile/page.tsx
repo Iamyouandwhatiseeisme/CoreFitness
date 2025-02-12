@@ -93,13 +93,13 @@ export default function Profile() {
           <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white"></div>
         </div>
       ) : user ? (
-        <div className="mt-10 w-full max-w-4xl bg-gradient-to-tl  from-blue-500/20 to-purple-600/20 dark:from-blue-700/20 dark:to-purple-700/20 rounded-xl border animated-border p-6 flex flex-col md:flex-row gap-10">
+        <div className="mt-10 w-full shadow-sm shadow-black max-w-4xl bg-gradient-to-tl  from-blue-500/20 to-purple-600/20 dark:from-blue-700/20 dark:to-purple-700/20 rounded-xl p-6 flex flex-col md:flex-row gap-10">
           <div className="flex flex-col items-center gap-2 w-full md:w-1/3">
             <UploadImage image={user.image} />
             <h2 className="text-center">{profile.ClickOnImage}</h2>
           </div>
 
-          <ul className="flex flex-col w-full md:w-2/3 gap-5 pt-4 pr-4 border border-black rounded-2xl">
+          <ul className="flex flex-col w-full md:w-2/3 gap-5 pt-4 pr-4 border border-gray-200/20 shadow-sm shadow-black rounded-2xl">
             <li className="w-full ">
               <EditableInput
                 label={profile.Email}
