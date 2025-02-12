@@ -11,7 +11,7 @@ export default function DeleteUser({ handleDelete }: DeleteUserProps) {
   } = useLocale();
   const [showDialog, setShowDialog] = useState<boolean>(false);
   return (
-    <div>
+    <div className="flex flex-row items-center justify-center">
       <button
         data-cy="delete-button"
         className="rounded-lg h-10 w-40 bg-red-500 text-white dark:bg-red-700 transform  hover:scale-105 dark:text-gray-200 hover:bg-red-600 dark:hover:bg-red-800 active:bg-red-700 dark:active:bg-red-900 focus:outline-none focus:ring-2 focus:ring-red-400 transition duration-200 ease-in-out"
