@@ -24,7 +24,6 @@ export async function POST(request: NextRequest) {
         url: session.url,
       });
     } catch (error) {
-      console.log(error);
       return NextResponse.json({ error: error }, { status: 500 });
     }
   }

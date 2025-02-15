@@ -9,7 +9,6 @@ export async function POST(request: NextRequest) {
     product_id: item.product.id,
     quantity: item.quantity,
   }));
-  console.log(products);
   const {
     data: { user },
   } = await supabase.auth.getUser();
@@ -19,7 +18,6 @@ export async function POST(request: NextRequest) {
       .from("cart")
       .update({ products: [...products] })
       .eq("user_id", user.id);
-    console.log(data, error);
     return NextResponse.json([], { status: 200 });
   } else {
     return NextResponse.json({ error: "no user" }, { status: 500 });

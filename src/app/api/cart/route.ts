@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
 import { createClient } from "../../utils/supabase/server";
-import { Product } from "src/app/components/types";
-import { CartItem } from "src/app/components/providers/CartProvider";
 
 export async function GET() {
   const supabase = await createClient();
@@ -23,7 +21,6 @@ export async function GET() {
       if (data) {
         const products = data.products;
         if (products !== null) {
-          console.log(products);
           const productDetails = await Promise.all(
             products.map(
               async (product: { product_id: number; quantity: number }) => {
@@ -45,7 +42,6 @@ export async function GET() {
 
       return NextResponse.json(data, { status: 200 });
     } catch (error) {
-      console.log(error);
       return NextResponse.json({ error: error }, { status: 400 });
     }
   } else {

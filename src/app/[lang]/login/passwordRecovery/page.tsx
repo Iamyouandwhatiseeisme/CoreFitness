@@ -42,7 +42,6 @@ export default function PasswordRecovery() {
   useEffect(() => {
     supabase.auth.onAuthStateChange(async (event, session) => {
       const urlParams = new URLSearchParams(window.location.search);
-      console.log(event);
 
       const confirmationUrl = urlParams.get("confirmation_url");
       if (confirmationUrl) {
