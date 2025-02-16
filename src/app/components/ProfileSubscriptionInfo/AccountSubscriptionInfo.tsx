@@ -40,9 +40,9 @@ export default function AccountSubscriptionInfo(props: SubscriptionInfoProps) {
     }
   }
   return (
-    <div className="flex flex-row gap-10  items-center justify-items-start">
-      <label className="w-10">{profile.Status}:</label>
-      <div className="pl-2 cursor-pointer dark:text-black  p-8  w-48 rounded-2xl h-10 bg-white flex flex-col items-center justify-center   ">
+    <div className="flex flex-row  items-center justify-center  gap-5 m-auto p-4  ">
+      {/* <label className="">{profile.Status}:</label> */}
+      <div className=" cursor-pointer text-sm dark:text-black shadow-sm shadow-black    w-48 rounded-2xl h-10 bg-white flex flex-col items-center justify-center   ">
         <div> {subscriptionInfo.name}</div>
         <div>
           {subscriptionInfo?.status === SubscriptionStatus.Active
@@ -63,7 +63,7 @@ export default function AccountSubscriptionInfo(props: SubscriptionInfoProps) {
       </div>
 
       <button
-        className="rounded-2xl border dark:text-black  bg-white border-black h-12 w-20"
+        className="rounded-2xl border dark:text-black bg-white border-black h-12 w-20 shadow-sm shadow-black transition-transform transform hover:scale-105 hover:bg-gray-200"
         onClick={handleSubscriptionButton}
       >
         {subscriptionInfo?.status === SubscriptionStatus.Active

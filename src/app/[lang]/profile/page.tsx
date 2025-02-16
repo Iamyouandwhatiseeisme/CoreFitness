@@ -27,6 +27,7 @@ export default function Profile() {
   const {
     dictionary: { profile },
   } = useLocale();
+
   useEffect(() => {
     async function fetchUser() {
       const {
@@ -40,26 +41,22 @@ export default function Profile() {
           },
         });
         const subscriptionInfo = await response.json();
-        console.log(subscriptionInfo);
 
         const photoUrl = user.user_metadata.profile_photo;
         const userInfoResponse = await fetch("/api/userInfo");
+
         if (response.status === 200) {
-          console.log(response.status);
           const userInfoResponseData = await userInfoResponse.json();
           const userDisplayName = userInfoResponseData.displayName;
-          const userProfile: UserProfile = {
-            user: user,
+          setUser({
+            user,
             subscription_info: subscriptionInfo,
             image: photoUrl,
             display_name: userDisplayName,
-          };
-          setLoading(false);
-          setUser(userProfile);
+          });
         } else {
-          console.log("else");
-          const userProfile: UserProfile = {
-            user: user,
+          setUser({
+            user,
             subscription_info: {
               status: SubscriptionStatus.Inactive,
               currentPeriodEnd: 0,
@@ -68,45 +65,42 @@ export default function Profile() {
             },
             image: photoUrl,
             display_name: null,
-          };
-
-          setUser(userProfile);
-          setLoading(false);
+          });
         }
+        setLoading(false);
       }
     }
     if (!user) {
       fetchUser();
     }
   }, []);
+
   async function handleUserDeletion() {
     const response = await fetch("/api/deleteUser");
     if (response.ok) {
       const responseData = await response.json();
       if (responseData.user === null) {
         const { error } = await supabase.auth.signOut();
-        if (error === null) {
-          router.push("/login");
-        }
+        if (!error) router.push("/login");
       }
     }
   }
-  console.log(loading);
 
   return (
-    <div className="min-h-wrapper flex items-center w-full justify-center bg-gradient-to-tl from-blue-500/20 to-purple-600/20 dark:from-blue-900/40 dark:to-purple-900/40">
+    <div className="min-h-screen w-full flex items-center justify-center px-4 py-10 bg-gradient-to-tl from-blue-500/20 to-purple-600/20 dark:from-blue-900/40 dark:to-purple-900/40">
       {loading ? (
-        <div className="flex justify-center items-center min-h-wrapper">
+        <div className="flex justify-center items-center h-screen">
           <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white"></div>
         </div>
       ) : user ? (
-        <div className="mt-20 rounded-xl dark:text-white text-black border animated-border w-150 h-150 bg-gradient-to-tl from-blue-500/20 to-purple-600/20 dark:from-blue-700/20 mb-20 dark:to-purple-700/20 flex flex-row justify-start items-start gap-20">
-          <div className="w-96 flex flex-col z-40 items-center gap-2 justify-center pl-24 ml-auto mr-auto">
-            <UploadImage image={user.image}></UploadImage>
-            <h2>{profile.ClickOnImage}</h2>
+        <div className="mt-10 w-full shadow-sm shadow-black max-w-4xl bg-gradient-to-tl  from-blue-500/20 to-purple-600/20 dark:from-blue-700/20 dark:to-purple-700/20 rounded-xl p-6 flex flex-col md:flex-row gap-10">
+          <div className="flex flex-col items-center gap-2 w-full md:w-1/3">
+            <UploadImage image={user.image} />
+            <h2 className="text-center">{profile.ClickOnImage}</h2>
           </div>
-          <ul className="flex m-10 p-10 z-40 flex-col items-start justify-start gap-5 border border-black rounded-2xl h-3/4 w-full">
-            <li className="w-full">
+
+          <ul className="flex flex-col w-full md:w-2/3 gap-5 pt-4 pr-4 border border-gray-200/20 shadow-sm shadow-black rounded-2xl">
+            <li className="w-full ">
               <EditableInput
                 label={profile.Email}
                 value={user.user.email!}
@@ -117,33 +111,30 @@ export default function Profile() {
             <li className="w-full">
               <EditableInput
                 label={profile.Name}
-                value={!user.display_name ? "Display name" : user.display_name}
+                value={user.display_name ?? "Display name"}
                 apiEndpoint="/api/updateUser/updateName"
                 updateButtonText={profile.Update}
               />
             </li>
             <hr className="border-gray-300 w-full" />
             {user.subscription_info && (
-              <>
-                <li className="w-full">
-                  <AccountSubscriptionInfo
-                    subscriptionInfo={user.subscription_info}
-                  />
-                </li>
-                <hr className="border-gray-300 w-full" />
-              </>
+              <li className="w-full">
+                <AccountSubscriptionInfo
+                  subscriptionInfo={user.subscription_info}
+                />
+              </li>
             )}
-            <li className="w-full">
-              <ChangePassword></ChangePassword>
+            <hr className="border-gray-300 w-full" />
+
+            <li className="w-full flex flex-col md:flex-row md:items-center md:justify-center gap-5">
+              <ChangePassword />
+              <DeleteUser handleDelete={handleUserDeletion} />
             </li>
             <hr className="border-gray-300 w-full" />
-            <li className="w-full">
-              <DeleteUser handleDelete={handleUserDeletion}></DeleteUser>
-            </li>
           </ul>
         </div>
       ) : (
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center h-screen">
           <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white"></div>
         </div>
       )}

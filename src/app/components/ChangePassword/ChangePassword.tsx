@@ -83,14 +83,12 @@ export default function ChangePassword() {
   return (
     <Dialog open={showPasswordFields} onOpenChange={setShowPasswordFields}>
       <DialogTrigger asChild>
-        <div className="flex flex-row gap-2 justify-start items-center">
-          <div className="flex flex-col">
-            <div
-              className="underline cursor-pointer w-[250px]"
-              onClick={() => setShowPasswordFields(!showPasswordFields)}
-            >
-              {profile.ChangePassword}
-            </div>
+        <div className="flex flex-row gap-2 m-auto  justify-center items-center">
+          <div
+            className="underline cursor-pointer w-[250px] transition-transform transform hover:scale-105 text-center"
+            onClick={() => setShowPasswordFields(!showPasswordFields)}
+          >
+            {profile.ChangePassword}
           </div>
           <Toaster />
         </div>
