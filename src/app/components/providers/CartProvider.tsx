@@ -41,7 +41,6 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
       if (user) {
         const response = await fetch("/api/cart");
         const cartData = await response.json();
-        console.log(cartData);
         setCartItems([...cartData]);
       }
     }

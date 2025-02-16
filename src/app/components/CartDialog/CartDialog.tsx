@@ -79,9 +79,10 @@ const CartDialog = () => {
       >
         <DialogContent
           onClick={(e) => e.stopPropagation()}
-          className="fixed inset-0 w-[90vw] ml-auto mr-auto mt-10  h-[80vh] max-w-none max-h-none bg-white dark:bg-gray-900 p-10 backdrop-blur-2xl "
+          className={`fixed inset-0 w-[90vw] ml-auto mr-auto mt-10 h-[80vh] max-w-none max-h-none p-10 backdrop-blur-2xl 
+            dark:bg-gray-900 dark:text-white bg-white`}
         >
-          <div className="w-full h-full max-w-none max-h-none bg-white rounded-none md:rounded-xl shadow-2xl flex flex-col overflow-hidden">
+          <div className="w-full h-full max-w-none max-h-none rounded-none md:rounded-xl shadow-2xl flex flex-col overflow-hidden">
             <div className="flex items-center justify-between p-6 border-b">
               <DialogTitle className="text-2xl font-bold">
                 {cart.YourCart}
@@ -100,7 +101,7 @@ const CartDialog = () => {
                   cartItems.map((item: CartItem) => (
                     <li
                       key={item.product.id}
-                      className="flex items-center gap-4 p-4 bg-gray-50 rounded-lg"
+                      className="flex items-center gap-4 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg"
                     >
                       <img
                         src={item.product.images?.[0] || "/placeholder.jpg"}
@@ -114,7 +115,7 @@ const CartDialog = () => {
                         </p>
                       </div>
                       <div className="flex items-center gap-3">
-                        <div className="flex items-center gap-2 bg-white rounded-full px-3 py-1 shadow-sm">
+                        <div className="flex items-center gap-2 bg-white dark:bg-gray-700 rounded-full px-3 py-1 shadow-sm">
                           <Button
                             variant="ghost"
                             size="sm"
@@ -149,7 +150,7 @@ const CartDialog = () => {
                           variant="ghost"
                           size="sm"
                           onClick={() => removeItemFromCart(item.product.id)}
-                          className="text-red-500 hover:bg-red-50 rounded-full"
+                          className="text-red-500 hover:bg-red-50 dark:hover:bg-red-900 rounded-full"
                         >
                           <X className="w-4 h-4" />
                         </Button>
@@ -159,7 +160,7 @@ const CartDialog = () => {
                 ) : (
                   <div className="text-center text-gray-500 py-8">
                     {error ? (
-                      <div className="text-red-500 bg-red-50 px-4 py-2 rounded-lg">
+                      <div className="text-red-500 bg-red-50 dark:bg-red-900 px-4 py-2 rounded-lg">
                         {error}
                       </div>
                     ) : (
@@ -184,7 +185,7 @@ const CartDialog = () => {
                   <Button
                     variant="outline"
                     onClick={clearCart}
-                    className="hover:bg-red-50 hover:text-red-600"
+                    className="hover:bg-red-50 dark:hover:bg-red-900 hover:text-red-600"
                   >
                     {cart.ClearCart}
                   </Button>
