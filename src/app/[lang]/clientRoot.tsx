@@ -9,6 +9,7 @@ import { Dictionary } from "./dictionaries";
 import { User } from "@supabase/supabase-js";
 import { ThemeProvider } from "../hooks/themeProvider";
 import RightSidePanel from "../components/RightSidePanel/RightSidePanel";
+import TopPanel from "../components/TopPanel/TopPanel";
 
 export default function ClientRoot({
   children,
@@ -41,17 +42,11 @@ export default function ClientRoot({
       enableSystem
       disableTransitionOnChange
     >
-      <LocaleProvider
-        lang={lang}
-        // dictChat={dict.chatWindow}
-        // informationBoard={dict.informationBoard}
-      >
+      <LocaleProvider lang={lang}>
         <CartProvider>
-          <div className="bg-gradient-to-br  from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800   flex flex-row justify-between">
-            <Header
-              currentUser={user}
-              // dict={dict.header}
-            />
+          <div className="bg-gradient-to-br  from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800   flex flex-col sm:flex-row justify-between">
+            <TopPanel currentUser={user}></TopPanel>
+            <Header currentUser={user} />
             <main
               className={`${
                 user === null

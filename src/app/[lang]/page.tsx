@@ -30,12 +30,7 @@ function Welcome() {
     fetchUser();
   }, []);
 
-  // useEffect(() => {
-  //   fetch("/api/homePageCharity")
-  //     .then((res) => res.json())
-  //     .then((data) => setHomePageCharity(data))
-  //     .catch((error) => console.error(error));
-  // }, []);
+  
 
   return (
     <div className="bg-gradient-to-br from-gray-100 to-blue-100 dark:from-gray-900 dark:to-gray-800 text-white gap-4  flex flex-col  w-full   ">

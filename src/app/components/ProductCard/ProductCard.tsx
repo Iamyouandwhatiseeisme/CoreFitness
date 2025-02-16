@@ -49,7 +49,7 @@ export default function ProductCard({
         </Link>
       </div>
       <button
-        className="w-full py-2 bg-gray-600/40  text-black border-b-0 hover:bg-blue-700 hover:text-white dark:bg-blue-500 dark:hover:bg-blue-600 transition-colors duration-300 opacity-0 group-hover:opacity-100"
+        className="w-full py-2 bg-gray-600/40 text-black border-b-0 sm:hover:bg-blue-700 hover:text-white dark:bg-blue-500 dark:hover:bg-blue-600 transition-colors duration-300 group-hover:opacity-100 sm:opacity-0 sm:group-hover:opacity-100 touch-none:!hover:bg-gray-600/40 touch-none:!hover:text-black"
         data-cy={`add-to-cart-button-${product.title}`}
         onClick={() => {
           addItemToCart({ product: product, quantity: 1 });
