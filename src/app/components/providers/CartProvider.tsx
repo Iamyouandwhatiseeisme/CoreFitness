@@ -7,6 +7,8 @@ import React, {
   useEffect,
 } from "react";
 import { Product } from "../types";
+import { createClient } from "src/app/utils/supabase/client";
+import { useRef } from "react";
 
 export interface CartItem {
   product: Product;
@@ -27,17 +29,34 @@ interface CartProviderProps {
 }
 
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    if (typeof window !== "undefined") {
-      const savedCart = localStorage.getItem("cartItems");
-      return savedCart ? JSON.parse(savedCart) : [];
-    }
-    return [];
-  });
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    async function fetchCart() {
+      const supabase = createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (user) {
+        const response = await fetch("/api/cart");
+        const cartData = await response.json();
+        console.log(cartData);
+        setCartItems([...cartData]);
+      }
+    }
+    fetchCart();
+    setMounted(true);
+  }, []);
+  useEffect(() => {
+    async function updateCart() {
+      const response = await fetch("/api/cart/updateCart", {
+        method: "POST",
+        body: JSON.stringify(cartItems),
+      });
+    }
+    if (mounted) {
+      updateCart();
     }
   }, [cartItems]);
   const addItemToCart = (item: CartItem) => {
@@ -52,6 +71,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
             : cartItem
         );
       }
+
       return [...prevItems, item];
     });
   };
