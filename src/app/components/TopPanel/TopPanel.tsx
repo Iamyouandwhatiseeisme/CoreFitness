@@ -39,19 +39,23 @@ export default function TopPanel({ currentUser }: TopPanelProps) {
       <div className="justify-between items-center w-full flex flex-row  p-2">
         <Link
           href={`/${locale}`}
-          className="p-2 w-10 h-10 bg-transparent cursor-pointer items-center"
+          className="p-2  w-10 h-10 bg-transparent cursor-pointer items-center"
         >
           <img src={Logo.src} alt="logo"></img>
         </Link>
-        <LocaleChange></LocaleChange>
         <MobileThemeChange></MobileThemeChange>
+
+        <LocaleChange></LocaleChange>
         <Link href={`/${locale}/cart`}>
-          <button className="flex items-center">
+          <button className="flex items-center pr-0">
             <PiShoppingCart className="w-4 h-4" />
             <span>({cartItems.length})</span>
           </button>
         </Link>
-        <RxHamburgerMenu onClick={() => setIsOpen(!isOpen)}></RxHamburgerMenu>
+        <RxHamburgerMenu
+          onClick={() => setIsOpen(!isOpen)}
+          className="p-0 mr-6"
+        ></RxHamburgerMenu>
       </div>
       <div
         className={`overflow-hidden transition-all duration-300 ease-in-out ${
