@@ -73,7 +73,7 @@ export default function Profile() {
     if (!user) {
       fetchUser();
     }
-  }, []);
+  }, [supabase.auth, user]);
 
   async function handleUserDeletion() {
     const response = await fetch("/api/deleteUser");

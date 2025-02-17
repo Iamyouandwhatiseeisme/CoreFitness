@@ -35,7 +35,6 @@ export function OrderCard(props: OrderCardProps) {
       if (response.ok) {
         const responseData = await response.json();
         const responseArray = [...responseData[0]];
-        console.log(responseData);
 
         responseArray.forEach((item: Product, index: number) => {
           const isProductInArray = tempProducts.some(
@@ -89,7 +88,6 @@ export function OrderCard(props: OrderCardProps) {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-5">
           {products.map((productItem, index) => {
-            console.log(productItem.product.title);
             const { product, quantity } = productItem;
             return (
               <div
