@@ -1,15 +1,7 @@
-import React, { useState } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Logo from "../../../../public/images/Header Logo.webp";
-
-import {
-  PiBarbell,
-  PiClipboardText,
-  PiCreditCard,
-  PiNewspaper,
-  PiShoppingBagOpen,
-  PiShoppingCart,
-  PiUserCircle,
-} from "react-icons/pi";
+import { PiShoppingCart } from "react-icons/pi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useLocale } from "../providers/LanguageContext";
 import { User } from "@supabase/supabase-js";
@@ -18,6 +10,9 @@ import LocaleChange from "../LanguageChange/LanguageChange";
 import MobileThemeChange from "../MobileThemeChange/MobileThemeChange";
 import { useCart } from "../providers/CartProvider";
 import AuthenticationButton from "../logoutButton/LoggoutButton";
+import { usePathname } from "next/navigation";
+import { IconType } from "react-icons";
+import { TopPanelNavigationItems } from "src/app/constants/navigationItems";
 
 interface TopPanelProps {
   currentUser: User | null;
@@ -25,11 +20,22 @@ interface TopPanelProps {
 
 export default function TopPanel({ currentUser }: TopPanelProps) {
   const { locale } = useLocale();
+  const [currentPath, setCurrentPath] = useState<string>("");
+  const pathname = usePathname();
   const { cartItems } = useCart();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const listItemStyle: string =
     "rounded p-1 border border-black dark:border-gray-200";
+  useEffect(() => {
+    const newPath =
+      pathname
+        .replace(/^\/(en-US|ka)/, "")
+        .split("/")
+        .filter(Boolean)[0] || "/";
+    setCurrentPath(newPath);
+  }, [pathname]);
   if (!currentUser) return null;
+
   return (
     <div
       className={`${
@@ -39,19 +45,23 @@ export default function TopPanel({ currentUser }: TopPanelProps) {
       <div className="justify-between items-center w-full flex flex-row  p-2">
         <Link
           href={`/${locale}`}
-          className="p-2 w-10 h-10 bg-transparent cursor-pointer items-center"
+          className="p-2  w-10 h-10 bg-transparent cursor-pointer items-center"
         >
           <img src={Logo.src} alt="logo"></img>
         </Link>
-        <LocaleChange></LocaleChange>
         <MobileThemeChange></MobileThemeChange>
+
+        <LocaleChange></LocaleChange>
         <Link href={`/${locale}/cart`}>
-          <button className="flex items-center">
+          <button className="flex items-center pr-0">
             <PiShoppingCart className="w-4 h-4" />
             <span>({cartItems.length})</span>
           </button>
         </Link>
-        <RxHamburgerMenu onClick={() => setIsOpen(!isOpen)}></RxHamburgerMenu>
+        <RxHamburgerMenu
+          onClick={() => setIsOpen(!isOpen)}
+          className="p-0 mr-6"
+        ></RxHamburgerMenu>
       </div>
       <div
         className={`overflow-hidden transition-all duration-300 ease-in-out ${
@@ -60,40 +70,28 @@ export default function TopPanel({ currentUser }: TopPanelProps) {
       >
         <nav className="rounded-3xl flex-row dark:border-header-hover-dark h-20 items-start justify-start p-2">
           <ul
-            className={`gap-5 flex list-none flex-row transition-opacity duration-500 ease-in-out ${
+            className={`gap-4 flex list-none flex-row transition-opacity duration-500 ease-in-out ${
               isOpen ? "opacity-100 delay-300" : "opacity-0"
             }`}
           >
-            <Link href={`/${locale}/equipment`}>
-              <li className={listItemStyle}>
-                <PiBarbell></PiBarbell>
-              </li>
-            </Link>
-            <Link href={`/${locale}/blogs`}>
-              <li className={listItemStyle}>
-                <PiNewspaper></PiNewspaper>
-              </li>
-            </Link>
-            <Link href={`/${locale}/orders`} data-cy="orders-button">
-              <li className={listItemStyle}>
-                <PiClipboardText></PiClipboardText>
-              </li>
-            </Link>
-            <Link href={`/${locale}/products`} data-cy="products-page-button">
-              <li className={listItemStyle}>
-                <PiShoppingBagOpen></PiShoppingBagOpen>
-              </li>
-            </Link>
-            <Link href={`/${locale}/profile`} data-cy="profile-button">
-              <li className={`${listItemStyle} `}>
-                <PiUserCircle></PiUserCircle>
-              </li>
-            </Link>
-            <Link href={`/${locale}/pricing`}>
-              <li className={`${listItemStyle}`}>
-                <PiCreditCard></PiCreditCard>
-              </li>
-            </Link>
+            {TopPanelNavigationItems.map((navigationItem) => {
+              return (
+                <Link
+                  key={navigationItem.title}
+                  href={`/${locale}/${navigationItem.title}`}
+                >
+                  <li
+                    className={`${listItemStyle} ${
+                      currentPath === navigationItem.title
+                        ? "scale-150 dark:bg-gray-200/40 bg-gray-200"
+                        : ""
+                    }`}
+                  >
+                    <navigationItem.icon></navigationItem.icon>
+                  </li>
+                </Link>
+              );
+            })}
             <li>
               <AuthenticationButton
                 locale={locale}
@@ -107,4 +105,9 @@ export default function TopPanel({ currentUser }: TopPanelProps) {
       </div>
     </div>
   );
+}
+
+export interface TopPanelNavigation {
+  title: string;
+  icon: IconType;
 }

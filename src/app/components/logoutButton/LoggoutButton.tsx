@@ -20,7 +20,7 @@ export default function AuthenticationButton(props: AuthenticationButtonProps) {
         onClick={() => {
           signOut();
         }}
-        className="sm:w-14 sm:h-14 w-8 h-8 items-center ml-6 sm:ml-0 justify-center flex sm:mt-2 text-black dark:text-white bg-white/20 border-[#5A5B5C]   shadow-sm shadow-blue-400/20 dark:shadow-yellow-400/20 dark:hover:bg-[#4E4F50]  hover:bg-white/40 hover:scale-105 transition-all duration-300  rounded-md cursor-pointer"
+        className="sm:w-14 sm:h-14 w-8 h-8 items-center ml-2 sm:ml-0 justify-center flex sm:mt-2 text-black dark:text-white bg-white/20 border-[#5A5B5C]   shadow-sm shadow-blue-400/20 dark:shadow-yellow-400/20 dark:hover:bg-[#4E4F50]  hover:bg-white/40 hover:scale-105 transition-all duration-300  rounded-md cursor-pointer"
       >
         <CiLogout className="w-10 h-10"></CiLogout>
       </button>

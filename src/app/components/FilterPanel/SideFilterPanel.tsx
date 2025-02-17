@@ -73,15 +73,15 @@ export default function FilterPael(props: SideFilterPanelPorps) {
   }
 
   return (
-    <div className="flex flex-row w-full min-h-24  overflow-y-auto bg-white/30 dark:bg-black/20   items-center justify-center gap-4 shadow-lg p-4">
+    <div className="flex flex-col sm:flex-row w-full min-h-24 mt-24 sm:mt-0  overflow-y-auto bg-white/30 dark:bg-black/20   items-center justify-center gap-4 shadow-lg p-4">
       <h2 className="font-bold text-lg text-gray-900 dark:text-gray-100 w-40 ">
         {products.SelectFilters} :
       </h2>
-      <div className="flex flex-wrap">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {categories.map((category) => (
           <div
             key={category}
-            className="border  border-opacity-30 border-b-2 border-r-2 shadow-sm dark:shadow-white/10 shadow-black/10 rounded-lg hover:bg-gray-200/40 border-gray-400 dark:border-gray-700 m-2 p-2 w-full sm:w-1/2 md:w-1/3 lg:w-48 transition-transform transform hover:scale-105 hover:shadow-lg"
+            className="border border-opacity-30 border-b-2 border-r-2 shadow-sm dark:shadow-white/10 shadow-black/10 rounded-lg hover:bg-gray-200/40 border-gray-400 dark:border-gray-700 p-2 transition-transform transform hover:scale-105 hover:shadow-lg"
           >
             <div className="flex items-center">
               <input

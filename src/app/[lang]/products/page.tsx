@@ -156,24 +156,26 @@ export default function Products() {
 
   return (
     <div
-      className="w-full  min-h-wrapper bg-gradient-to-tl from-blue-500/20 to-purple-600/20 dark:from-blue-900/40 dark:to-purple-900/40  "
+      className="w-full min-h-wrapper bg-gradient-to-tl mt-24 sm:mt-0 from-blue-500/20 to-purple-600/20 dark:from-blue-900/40 dark:to-purple-900/40"
       data-cy="products-loaded"
     >
       <div className="relative flex flex-col items-center">
-        <div className="h-24 w-full flex flex-row items-center justify-center gap-2 bg-slate-200/20 bg-opacity-50 dark:bg-slate-800 dark:bg-opacity-50 shadow-sm shadow-black/80">
-          <ul className="flex flex-row items-center gap-2 h-20 justify-center">
-            <li className="border-r border-l h-full justify-center items-center flex flex-col   p-4">
-              <AddProductDialog
-                refetchProducts={refetchProducts}
-              ></AddProductDialog>
-            </li>
-            <li className="border-r h-full justify-center items-center flex flex-col  p-4">
-              <SearchBar
-                searchItemType="products"
-                setProducts={setProducts}
-                refetchProducts={refetchProducts}
-              />
-            </li>
+        <div className="h-24 w-full flex flex-row items-center justify-center gap-2 bg-slate-200/20 bg-opacity-50 dark:bg-slate-800 dark:bg-opacity-50 sm:shadow-sm shadow-black/80">
+          <ul className="flex sm:flex-row flex-col items-center gap-2 h-20 mt-20 sm:mt-0  justify-center">
+            <div className="flex-row flex items-center justify-center ">
+              <li className="sm:border-r sm:border-l h-full justify-center items-center flex flex-col p-4">
+                <AddProductDialog
+                  refetchProducts={refetchProducts}
+                ></AddProductDialog>
+              </li>
+              <li className="sm:border-r h-full justify-center items-center flex flex-col p-4">
+                <SearchBar
+                  searchItemType="products"
+                  setProducts={setProducts}
+                  refetchProducts={refetchProducts}
+                />
+              </li>
+            </div>
             <li className="p-4 h-full border-r justify-center items-center flex flex-col">
               <SortButton
                 selectedCategories={selectedCategories}
@@ -193,8 +195,8 @@ export default function Products() {
           sortBy={sortBy}
         ></FilterPanel>
 
-        <div className="flex flex-row justify-center">
-          <div className="p-5 ml-4 grid w-full sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[min(4vw,4rem)]">
+        <div className="flex flex-row justify-center w-full">
+          <div className="p-5 sm:ml-4 grid w-full sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[min(4vw,4rem)]">
             {products.length === 0 && !isLoading && (
               <div className="flex flex-col items-center justify-center w-full h-full">
                 <h2 className="text-gray-700 dark:text-gray-200 font-sans font-bold text-2xl mb-4">
