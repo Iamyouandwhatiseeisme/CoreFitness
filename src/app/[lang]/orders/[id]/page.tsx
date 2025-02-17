@@ -57,7 +57,7 @@ export default function OrdersPage(props: OrderPageProps) {
     });
 
   return (
-    <div className="min-h-wrapper bg-gray-50 h-full w-full dark:bg-gray-900 p-8">
+    <div className="min-h-wrapper bg-gray-50 h-full w-full mt-20 sm:mt-0 dark:bg-gray-900 p-8">
       {isLoading ? (
         <div className="flex justify-center items-center">
           <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white"></div>

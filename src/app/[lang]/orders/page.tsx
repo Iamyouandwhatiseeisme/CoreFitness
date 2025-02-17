@@ -47,7 +47,7 @@ export default function Orders() {
           </Link>
         </div>
       ) : (
-        <div className="">
+        <div className="mt-20 sm:mt-0">
           {orders.map((order) => {
             return (
               <Link

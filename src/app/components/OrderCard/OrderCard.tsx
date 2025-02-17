@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import { Order, OrderProducts, Product } from "../types";
 import React from "react";
@@ -21,6 +22,7 @@ export function OrderCard(props: OrderCardProps) {
   useEffect(() => {
     async function fetchOrders() {
       const tempProducts: Array<{ product: Product; quantity: number }> = [];
+
       const response = await fetch("/api/products/orderProducts", {
         method: "GET",
         headers: {
@@ -29,9 +31,11 @@ export function OrderCard(props: OrderCardProps) {
           ),
         },
       });
+
       if (response.ok) {
         const responseData = await response.json();
         const responseArray = [...responseData[0]];
+        console.log(responseData);
 
         responseArray.forEach((item: Product, index: number) => {
           const isProductInArray = tempProducts.some(
@@ -54,7 +58,7 @@ export function OrderCard(props: OrderCardProps) {
   }, [productsToFetch]);
 
   return (
-    <div className="bg-white ml-40 mr-40 pl-10 pr-10 pt-10 dark:bg-gray-800 h-auto rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+    <div className="bg-white m-auto  p-4 ml-10 mr-10 sm:ml-40 sm:mr-40 sm:pl-10 sm:pr-10  pt-10 dark:bg-gray-800 h-auto rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
       <div className="w-full border-b border-gray-200 dark:border-gray-700 p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center">
         <div className="text-lg font-semibold text-gray-900 dark:text-gray-100">
           {order.Order}: #{props.order.id}
@@ -85,6 +89,7 @@ export function OrderCard(props: OrderCardProps) {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-5">
           {products.map((productItem, index) => {
+            console.log(productItem.product.title);
             const { product, quantity } = productItem;
             return (
               <div
@@ -94,7 +99,7 @@ export function OrderCard(props: OrderCardProps) {
                 <img
                   src={product.images[0]}
                   alt={product.title}
-                  className="w-40 h-40 object-cover mb-4 rounded-md"
+                  className="w-40 h-40 object-cover mb-4 rounded-md hidden sm:flex"
                 />
                 <h3 className="text-xl font-semibold text-center text-gray-900 dark:text-gray-100">
                   {product.title}
