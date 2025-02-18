@@ -32,7 +32,7 @@ export default function Contact() {
   return (
     <div className="min-h-wrapper flex sm:flex-row flex-col items-start pt-20 gap-5 sm:justify-evenly sm:pt-40">
       <Toaster></Toaster>
-      <div className="flex flex-col w-96 sm:pl-40 shadow-sm shadow-black/20 dark:shadow-white rounded">
+      <div className="flex flex-col sm:w-96 sm:pl-40 shadow-sm shadow-black/20 dark:shadow-white rounded">
         <div>{contact.Phone}: +995 555 55 55 55</div>
         <div>{contact.Email} : saabashidze@gmail.com</div>
         <div>{contact.Address}</div>
@@ -40,14 +40,14 @@ export default function Contact() {
       <div className="flex flex-col  sm:h-120 sm:w-150">
         <form onSubmit={handleEmail}>
           <div className="flex flex-col">
-            <h2>{contact.ToSend}</h2>
+            <h2 className="break-words">{contact.ToSend}</h2>
             <label>{contact.YourEmail}: </label>
             <input
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               name="from"
               type="email"
-              className="w-96 p-2 border shadow-sm shadow-black/20 dark:shadow-white  border-gray-300 rounded"
+              className="sm:w-96 p-2 border shadow-sm shadow-black/20 dark:shadow-white  border-gray-300 rounded"
               required
             ></input>
             <label>{contact.Subject}: </label>
@@ -57,7 +57,7 @@ export default function Contact() {
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
               minLength={5}
-              className="w-96 p-2 border shadow-sm shadow-black/20 dark:shadow-white  border-gray-300 rounded"
+              className="sm:w-96 p-2 border shadow-sm shadow-black/20 dark:shadow-white  border-gray-300 rounded"
               required
             ></input>
             <label>{contact.Content}: </label>
