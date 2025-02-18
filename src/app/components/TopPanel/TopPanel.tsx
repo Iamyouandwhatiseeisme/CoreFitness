@@ -79,6 +79,7 @@ export default function TopPanel({ currentUser }: TopPanelProps) {
                 <Link
                   key={navigationItem.title}
                   href={`/${locale}/${navigationItem.title}`}
+                  onClick={() => setIsOpen(!isOpen)}
                 >
                   <li
                     className={`${listItemStyle} ${
