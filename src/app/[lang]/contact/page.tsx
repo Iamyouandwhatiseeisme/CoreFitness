@@ -30,14 +30,14 @@ export default function Contact() {
     }
   }
   return (
-    <div className="min-h-wrapper flex flex-row items-start justify-evenly pt-40">
+    <div className="min-h-wrapper flex sm:flex-row flex-col items-start justify-evenly pt-40">
       <Toaster></Toaster>
-      <div className="flex flex-col w-96">
+      <div className="flex flex-col w-96 sm:pl-40">
         <div>{contact.Phone}: +995 555 55 55 55</div>
         <div>{contact.Email} : saabashidze@gmail.com</div>
         <div>{contact.Address}</div>
       </div>
-      <div className="flex flex-col h-120 w-150">
+      <div className="flex flex-col  sm:h-120 sm:w-150">
         <form onSubmit={handleEmail}>
           <div className="flex flex-col">
             <h2>{contact.ToSend}</h2>
@@ -60,7 +60,7 @@ export default function Contact() {
               className="w-96 p-2 border border-gray-300 rounded"
               required
             ></input>
-            <label>{contact.Subject}: </label>
+            <label>{contact.Content}: </label>
             <div className="flex flex-row items-end gap-4">
               {" "}
               <textarea
@@ -72,7 +72,7 @@ export default function Contact() {
               ></textarea>{" "}
               <button
                 type="submit"
-                className="rouned border-black border bg-slate-200 w-40 hover:bg-white"
+                className="rouned border-black border text-black bg-slate-200 w-40 hover:bg-white"
               >
                 {contact.Send}
               </button>
