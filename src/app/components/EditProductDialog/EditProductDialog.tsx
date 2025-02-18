@@ -122,19 +122,6 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
             )}
           </div>
         </div>
-        <div className="grid grid-cols-4 items-center gap-4">
-          <Label htmlFor="description" className="text-right">
-            {blog.DescriptionEn}
-          </Label>
-          <Input
-            id="description"
-            name="description"
-            className="col-span-3"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          />
-        </div>
         <div className="grid grid-cols-4 items-start gap-4">
           <Label htmlFor="description-georgian" className="text-right mt-2">
             {blog.DescriptionKa}
@@ -143,7 +130,7 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
             <textarea
               id="description-georgian"
               name="description_ka"
-              className="w-full min-w-[500px] h-32 px-3 py-2 border rounded-md text-sm 
+              className="w-full sm:min-w-[500px] h-32 px-3 py-2 border rounded-md text-sm 
                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring 
                focus-visible:ring-offset-2 resize-none dark:bg-slate-700 dark:border-slate-600 
                dark:text-white dark:focus-visible:ring-slate-400"
@@ -155,6 +142,24 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
             {errors.description_ka && (
               <p className="text-xs text-red-500">{errors.description_ka}</p>
             )}
+          </div>
+        </div>
+        <div className="grid grid-cols-4 items-start gap-4">
+          <Label htmlFor="description-georgian" className="text-right mt-2">
+            {blog.Description}
+          </Label>
+          <div className="col-span-3 space-y-1">
+            <textarea
+              id="description"
+              name="description"
+              className="w-full sm:min-w-[500px] h-32 px-3 py-2 border rounded-md text-sm 
+               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring 
+               focus-visible:ring-offset-2 resize-none dark:bg-slate-700 dark:border-slate-600 
+               dark:text-white dark:focus-visible:ring-slate-400"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+            />
           </div>
         </div>
       </div>

@@ -89,7 +89,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
           <textarea
             id="description"
             name="description"
-            className="col-span-3 w-full min-w-[500px] h-32 px-3 py-2 border rounded-md text-sm 
+            className="col-span-3 w-full sm:min-w-[500px] h-32 px-3 py-2 border rounded-md text-sm 
              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring 
              focus-visible:ring-offset-2 resize-none dark:bg-slate-700 dark:border-slate-600 
              dark:text-white dark:focus-visible:ring-slate-400"
@@ -105,7 +105,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
             <textarea
               id="description-georgian"
               name="description_ka"
-              className="w-full min-w-[500px] h-32 px-3 py-2 border rounded-md text-sm 
+              className="w-full sm:min-w-[500px] h-32 px-3 py-2 border rounded-md text-sm 
                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring 
                focus-visible:ring-offset-2 resize-none dark:bg-slate-700 dark:border-slate-600 
                dark:text-white dark:focus-visible:ring-slate-400"
