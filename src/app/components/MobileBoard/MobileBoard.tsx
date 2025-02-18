@@ -5,7 +5,7 @@ export default function MobileBoard() {
   const { informationBoardItems } = useInformationBoardItems();
 
   return (
-    <div className="flex sm:hidden flex-col z-50 mt-20 justify-start items-center w-3/4 m-auto  p-4 bg-black/40 rounded-lg shadow-lg">
+    <div className="flex xl:hidden flex-col z-50 mt-20 justify-start items-center w-3/4 m-auto  p-4 bg-black/40 rounded-lg shadow-lg">
       {informationBoardItems.map((item) => {
         return (
           <div
