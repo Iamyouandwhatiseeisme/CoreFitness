@@ -52,8 +52,8 @@ export default async function BlogDetails(props: BlogDetailsProps) {
     const formattedDate = new Date(blog.created_at).toLocaleDateString();
 
     return (
-      <div className="flex mt-10 sm:mt-0 sm:flex-row flex-col items-start justify-between gap-10 sm:gap-20 dark:bg-gray-900">
-        <div className="text-gray-600 hidden sm:flex hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 transition-colors">
+      <div className="flex mt-10 sm:mt-0 md:flex-row flex-col items-start justify-between gap-10 sm:gap-20 dark:bg-gray-900">
+        <div className="text-gray-600 hidden sm:flex hover:text-gray-800 max-w-12 mr-8 dark:text-gray-400 dark:hover:text-gray-200 transition-colors">
           <ReturnBackButton destination={`${props.params.lang}/blogs`} />
         </div>
         <div className="min-h-screen w-full bg-gray-50 dark:bg-gray-900 py-4 sm:py-12 px-4 sm:px-6 lg:px-8 ">
@@ -91,7 +91,7 @@ export default async function BlogDetails(props: BlogDetailsProps) {
           <Toaster position="top-right" richColors theme="system" />
         </div>
         {user && user.id === blog.user_id && (
-          <div className="flex flex-row sm:flex-col w-full sm:w-40 items-center justify-center mt-4 gap-4">
+          <div className="flex flex-row sm:flex-col w-full sm:w-40 items-center justify-center sm:pr-20 sm:pt-20 gap-4">
             <EditBlogDIalog blog={blog} />
             <DeleteItem id={id} table="blogs" />
           </div>
