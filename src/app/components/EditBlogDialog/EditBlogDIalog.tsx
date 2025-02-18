@@ -114,7 +114,7 @@ export default function EditBlogDIalog(props: EditBlogDIalogProps) {
 
       <div className="space-y-4">
         <div className="grid grid-cols-4 items-start gap-4">
-          <Label htmlFor="description" className="text-right mt-2">
+          <Label htmlFor="description" className="text-right mt-2 break-words">
             {blogDictionary.DescriptionEn}
           </Label>
           <textarea
@@ -132,7 +132,10 @@ export default function EditBlogDIalog(props: EditBlogDIalogProps) {
         </div>
 
         <div className="grid grid-cols-4 items-start gap-4">
-          <Label htmlFor="description_ka" className="text-right mt-2">
+          <Label
+            htmlFor="description_ka"
+            className="text-right mt-2 break-words"
+          >
             {blogDictionary.DescriptionKa}
           </Label>
           <div className="col-span-3 space-y-1">
