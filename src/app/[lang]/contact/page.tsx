@@ -30,7 +30,7 @@ export default function Contact() {
     }
   }
   return (
-    <div className="min-h-wrapper flex sm:flex-row flex-col items-start justify-evenly pt-40">
+    <div className="min-h-wrapper flex sm:flex-row flex-col items-start pt-20 gap-5 sm:justify-evenly sm:pt-40">
       <Toaster></Toaster>
       <div className="flex flex-col w-96 sm:pl-40">
         <div>{contact.Phone}: +995 555 55 55 55</div>
