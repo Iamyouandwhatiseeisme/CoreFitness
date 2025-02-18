@@ -26,7 +26,7 @@ export default function EquipmentPage() {
   }, []);
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-tl from-blue-500/20 to-purple-600/20 dark:from-blue-900/40 dark:to-purple-900/40">
+    <div className="w-full mt-20 min-h-screen bg-gradient-to-tl from-blue-500/20 to-purple-600/20 dark:from-blue-900/40 dark:to-purple-900/40">
       {isLoading ? (
         <div className="flex justify-center items-center">
           <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white"></div>
@@ -39,14 +39,14 @@ export default function EquipmentPage() {
             return (
               <div
                 key={item.id}
-                className="w-full h-auto bg-white flex flex-col md:flex-row items-start justify-between border border-gray-500 rounded-2xl"
+                className="w-full h-auto bg-white/20 flex flex-col md:flex-row items-start justify-between border border-gray-500 rounded-2xl"
               >
                 <img
-                  className="w-full md:w-1/2 bg-white h-64 md:h-full rounded-tl-2xl rounded-tr-2xl md:rounded-tr-none md:rounded-bl-2xl rounded-br-3xl border border-gray-200 object-contain"
+                  className="w-full md:w-1/2 bg-white h-64 md:h-full rounded-tl-2xl rounded-tr-2xl md:rounded-tr-none md:rounded-bl-2xl  border border-gray-200 object-contain"
                   src={item.img.img}
                   alt={`${item.id}1`}
                 ></img>
-                <div className="w-full flex flex-col items-center mt-4 md:mt-10 border-b-2 border-gray-200">
+                <div className="w-full flex flex-col items-center mt-4 md:mt-10  border-gray-200">
                   <h1 className="font-bold text-2xl underline border-b-2 border-gray-200">
                     {item.title}
                   </h1>
