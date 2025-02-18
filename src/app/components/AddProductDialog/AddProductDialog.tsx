@@ -83,7 +83,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
           </div>
         </div>
         <div className="grid grid-cols-4 items-start gap-4">
-          <Label htmlFor="description" className="text-right mt-2">
+          <Label htmlFor="description" className="text-right mt-2 break-words">
             {blog.DescriptionEn}
           </Label>
           <textarea
@@ -98,7 +98,10 @@ export default function AddProductDialog(props: AddProductDialogProps) {
           />
         </div>
         <div className="grid grid-cols-4 items-start gap-4">
-          <Label htmlFor="description-georgian" className="text-right mt-2">
+          <Label
+            htmlFor="description-georgian"
+            className="text-right mt-2 break-words"
+          >
             {blog.DescriptionKa}
           </Label>
           <div className="col-span-3 space-y-1">
