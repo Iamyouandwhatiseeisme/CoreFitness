@@ -8,7 +8,7 @@ import LoginPageBoard from "src/app/components/LoginPageBoard/LoginPageBoard";
 import { useLocale } from "src/app/components/providers/LanguageContext";
 import { createClient } from "src/app/utils/supabase/client";
 
-export default function PasswordRecovery() {
+export default function PtrueasswordRecovery() {
   const [email, setEmail] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -40,29 +40,25 @@ export default function PasswordRecovery() {
     }
   }
   useEffect(() => {
-    supabase.auth.onAuthStateChange(async (event, session) => {
+    async function checkVerified() {
       const urlParams = new URLSearchParams(window.location.search);
 
-      const confirmationUrl = urlParams.get("confirmation_url");
-      if (confirmationUrl) {
-        const confirmationParams = new URLSearchParams(
-          new URL(decodeURIComponent(confirmationUrl)).search
-        );
-        const token = confirmationParams.get("token");
-        const email = confirmationParams.get("email");
-        const type = confirmationParams.get("type") as EmailOtpType;
-        if (token && email && type) {
-          const { data } = await supabase.auth.verifyOtp({
-            token: token,
-            email: email,
-            type: type,
-          });
-          if (data) {
-            setIsverified(true);
-          }
+      const token_hash = urlParams.get("token_hash");
+      const type = urlParams.get("type") as EmailOtpType;
+      console.log(token_hash, type);
+      if (type && token_hash) {
+        const { data } = await supabase.auth.verifyOtp({
+          token_hash: token_hash,
+          type: type,
+        });
+        if (data.session) {
+          setIsverified(true);
         }
       }
-    });
+    }
+
+    checkVerified();
+    // });
   }, []);
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
