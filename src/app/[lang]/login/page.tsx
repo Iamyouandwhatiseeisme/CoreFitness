@@ -258,7 +258,12 @@ export default function LogIn() {
               className="flex flex-row h-10 w-full sm:w-80 rounded-2xl bg-gray-200 items-center justify-center cursor-pointer mt-4 transform transition-transform duration-300 hover:scale-105 hover:bg-gray-300"
               onClick={() => signInWithGoogle()}
             >
-              
+              <img
+                className="h-10 w-10"
+                src="https://www.svgrepo.com/show/355037/google.svg"
+                alt="Google"
+              ></img>
+
               <div>Sign in with google</div>
             </button>
           </div>
