@@ -160,7 +160,7 @@ export default function PtrueasswordRecovery() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     type="email"
-                    className="flex-grow rounded-sm border border-gray-400 text-black pl-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-grow rounded-sm bg-white  border border-gray-400 text-black pl-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   ></input>
                   <button
                     className="w-24 rounded-sm bg-white border border-gray-400 text-black hover:bg-gray-200 transition duration-300"
