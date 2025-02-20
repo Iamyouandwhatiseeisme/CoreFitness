@@ -1,6 +1,6 @@
 "use client";
 import { useRef, useState } from "react";
-import { login, signup, signInWithGithub } from "./actions";
+import { login, signup, signInWithGithub, signInWithGoogle } from "./actions";
 import { useLocale } from "../../components/providers/LanguageContext";
 import LoginPageBoard from "../../components/LoginPageBoard/LoginPageBoard";
 import React from "react";
@@ -253,6 +253,13 @@ export default function LogIn() {
                 src="/images/github-mark.svg"
               ></img>
               <div>Sign in with GitHub</div>
+            </button>
+            <button
+              className="flex flex-row h-10 w-full sm:w-80 rounded-2xl bg-gray-200 items-center justify-center cursor-pointer mt-4 transform transition-transform duration-300 hover:scale-105 hover:bg-gray-300"
+              onClick={() => signInWithGoogle()}
+            >
+              
+              <div>Sign in with google</div>
             </button>
           </div>
         </div>
