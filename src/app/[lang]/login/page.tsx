@@ -244,7 +244,7 @@ export default function LogIn() {
               )}
             </form>
             <button
-              className="flex flex-row h-10 w-full sm:w-80 rounded-2xl bg-gray-200 items-center justify-center cursor-pointer mt-4 transform transition-transform duration-300 hover:scale-105 hover:bg-gray-300"
+              className="flex flex-row text-black h-10 w-full sm:w-80 rounded-2xl bg-gray-200 items-center justify-center cursor-pointer mt-4 transform transition-transform duration-300 hover:scale-105 hover:bg-gray-300"
               onClick={() => signInWithGithub()}
             >
               <img
@@ -255,7 +255,7 @@ export default function LogIn() {
               <div>Sign in with GitHub</div>
             </button>
             <button
-              className="flex flex-row h-10 w-full sm:w-80 rounded-2xl bg-gray-200 items-center justify-center cursor-pointer mt-4 transform transition-transform duration-300 hover:scale-105 hover:bg-gray-300"
+              className="flex flex-row text-black  h-10 w-full sm:w-80 rounded-2xl bg-gray-200 items-center justify-center cursor-pointer mt-4 transform transition-transform duration-300 hover:scale-105 hover:bg-gray-300"
               onClick={() => signInWithGoogle()}
             >
               <img
