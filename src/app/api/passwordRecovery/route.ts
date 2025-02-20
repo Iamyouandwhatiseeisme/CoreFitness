@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
   try {
     if (email) {
       const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${baseUrl}/${locale}/login/passwordRecovery`,
+        redirectTo: `${baseUrl}/${locale}`,
       });
       if (!error) {
         return NextResponse.json({ data: data, status: 200 });
