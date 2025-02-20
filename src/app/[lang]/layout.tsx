@@ -21,6 +21,8 @@ export default async function RootLayout(props: LayoutProps) {
   const dict = await getDictionary(props.params.lang);
   const supabase = await createClient();
 
+  console.log(process.env.NEXT_PUBLIC_VERCEl_ENV, process.env.VERCEL_URL);
+
   const {
     data: { user },
   } = await supabase.auth.getUser();
