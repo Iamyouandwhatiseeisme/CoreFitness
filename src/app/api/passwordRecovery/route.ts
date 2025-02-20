@@ -7,6 +7,7 @@ export async function GET(request: NextRequest) {
   const locale = request.headers.get("locale");
   const supabase = await createClient();
   const baseUrl = getBaseUrl();
+  console.log(baseUrl);
   try {
     if (email) {
       const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
