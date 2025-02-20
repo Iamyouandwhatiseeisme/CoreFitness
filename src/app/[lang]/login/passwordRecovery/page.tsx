@@ -8,7 +8,7 @@ import LoginPageBoard from "src/app/components/LoginPageBoard/LoginPageBoard";
 import { useLocale } from "src/app/components/providers/LanguageContext";
 import { createClient } from "src/app/utils/supabase/client";
 
-export default function PasswordRecovery() {
+export default function PtrueasswordRecovery() {
   const [email, setEmail] = useState<string>("");
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
@@ -40,29 +40,25 @@ export default function PasswordRecovery() {
     }
   }
   useEffect(() => {
-    supabase.auth.onAuthStateChange(async (event, session) => {
+    async function checkVerified() {
       const urlParams = new URLSearchParams(window.location.search);
 
-      const confirmationUrl = urlParams.get("confirmation_url");
-      if (confirmationUrl) {
-        const confirmationParams = new URLSearchParams(
-          new URL(decodeURIComponent(confirmationUrl)).search
-        );
-        const token = confirmationParams.get("token");
-        const email = confirmationParams.get("email");
-        const type = confirmationParams.get("type") as EmailOtpType;
-        if (token && email && type) {
-          const { data } = await supabase.auth.verifyOtp({
-            token: token,
-            email: email,
-            type: type,
-          });
-          if (data) {
-            setIsverified(true);
-          }
+      const token_hash = urlParams.get("token_hash");
+      const type = urlParams.get("type") as EmailOtpType;
+      console.log(token_hash, type);
+      if (type && token_hash) {
+        const { data } = await supabase.auth.verifyOtp({
+          token_hash: token_hash,
+          type: type,
+        });
+        if (data.session) {
+          setIsverified(true);
         }
       }
-    });
+    }
+
+    checkVerified();
+    // });
   }, []);
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -113,7 +109,7 @@ export default function PasswordRecovery() {
                   type="password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full p-2 border bg-white text-black border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                   minLength={6}
                   placeholder="Enter your new password"
@@ -164,7 +160,7 @@ export default function PasswordRecovery() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     type="email"
-                    className="flex-grow rounded-sm border border-gray-400 text-black pl-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="flex-grow rounded-sm bg-white  border border-gray-400 text-black pl-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   ></input>
                   <button
                     className="w-24 rounded-sm bg-white border border-gray-400 text-black hover:bg-gray-200 transition duration-300"
