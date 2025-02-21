@@ -35,6 +35,9 @@ export default function LogIn() {
     if (actionType === "login") {
       setIsLoggingIn(true);
       result = await login(formData, locale);
+      if (result) {
+        setIsLoggingIn(false);
+      }
     } else if (actionType === "signup") {
       if (password !== confirmPassword) {
         setPasswordError("Passwords do not match");
@@ -170,6 +173,8 @@ export default function LogIn() {
                     className="underline cursor-pointer"
                     onClick={() => {
                       setisOnSignup(false);
+                      setPasswordError("");
+                      setError("");
                     }}
                   >
                     Log In
@@ -225,7 +230,11 @@ export default function LogIn() {
               {!isOnSignup && (
                 <button
                   data-cy="signup-button"
-                  onClick={() => setisOnSignup(true)}
+                  onClick={() => {
+                    setisOnSignup(true);
+                    setPasswordError("");
+                    setError("");
+                  }}
                   className="bg-green-700 rounded-2xl h-10 font-bold text-white transform transition-transform duration-300 hover:scale-105 hover:bg-green-800"
                 >
                   Sign up
