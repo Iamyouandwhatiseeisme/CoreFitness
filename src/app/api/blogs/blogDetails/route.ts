@@ -6,7 +6,7 @@ export async function GET(request: NextRequest) {
   const blogId = request.headers.get("id");
 
   try {
-    const { data, error } = await supabase.from("blogs").select().eq("id", 2);
+    const { data } = await supabase.from("blogs").select().eq("id", blogId);
     return NextResponse.json(data, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 500 });

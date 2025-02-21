@@ -9,7 +9,7 @@ export async function GET() {
 
   try {
     if (user) {
-      const { data, error } = await supabase.auth.admin.deleteUser(user.id);
+      const { data } = await supabase.auth.admin.deleteUser(user.id);
       if (data) {
         return NextResponse.json(data, { status: 200 });
       }

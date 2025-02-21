@@ -8,7 +8,6 @@ import React, {
 } from "react";
 import { Product } from "../types";
 import { createClient } from "src/app/utils/supabase/client";
-import { useRef } from "react";
 
 export interface CartItem {
   product: Product;
@@ -49,7 +48,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   }, []);
   useEffect(() => {
     async function updateCart() {
-      const response = await fetch("/api/cart/updateCart", {
+      await fetch("/api/cart/updateCart", {
         method: "POST",
         body: JSON.stringify(cartItems),
       });
@@ -57,7 +56,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     if (mounted) {
       updateCart();
     }
-  }, [cartItems]);
+  }, [cartItems, mounted]);
   const addItemToCart = (item: CartItem) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find(

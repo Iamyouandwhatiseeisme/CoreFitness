@@ -13,12 +13,12 @@ interface SearchBarProps {
 }
 
 export default function SearchBlogs(props: SearchBarProps) {
-  const searchItemType = props.searchItemType;
   const [searchValue, setSearchValue] = useState<string>("");
   const debouncedValue = useDebounce(searchValue, 500);
   const {
     dictionary: { blog },
   } = useLocale();
+  const { setBlogs, refetchBlogs, searchItemType } = props;
   const router = useRouter();
   useEffect(() => {
     async function fetchSearchedValue() {
@@ -32,18 +32,18 @@ export default function SearchBlogs(props: SearchBarProps) {
         });
         const responseData = (await response.json()) as Blog[];
         if (responseData.length === 0) {
-          props.setBlogs([]);
+          setBlogs([]);
         } else {
-          props.setBlogs(responseData);
+          setBlogs(responseData);
         }
-        props.setBlogs(responseData);
+        setBlogs(responseData);
       }
       if (debouncedValue === "") {
-        props.refetchBlogs();
+        refetchBlogs();
       }
     }
     fetchSearchedValue();
-  }, [debouncedValue, router]);
+  }, [debouncedValue, router, setBlogs, refetchBlogs, searchItemType]);
 
   return (
     <div className="flex items-center border border-solid border-gray-300 rounded-lg p-2 bg-white shadow-md dark:bg-gray-700 dark:border-gray-600">

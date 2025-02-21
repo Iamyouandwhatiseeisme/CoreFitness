@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   if (user) {
-    const { data, error } = await supabase
+    await supabase
       .from("cart")
       .update({ products: [...products] })
       .eq("user_id", user.id);

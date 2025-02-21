@@ -5,6 +5,7 @@ import Stripe from "stripe";
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
+
     const name = formData.get("name") as string;
     const nameGeorgian = formData.get("title_ka") as string;
     const description = formData.get("description") as string;
@@ -23,10 +24,10 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
+
     try {
-      const stripeProduct = await stripe.products.create({
-        name: name,
-      });
+      const stripeProduct = await stripe.products.create({ name });
+
       if (stripeProduct) {
         try {
           const stripePrice = await stripe.prices.create({
@@ -34,23 +35,26 @@ export async function POST(request: NextRequest) {
             unit_amount: price,
             currency: "usd",
           });
+
           if (stripePrice) {
             const file1Name = `${Date.now()}-${file1.name}`;
-            const file2Name = `${Date.now()}-${file2.name}`;
+            const file2Name = `${Date.now()}-${file2.name}(1)`;
 
             try {
-              const { data, error } = await supabase.storage
+              const { data } = await supabase.storage
                 .from("product-images")
                 .upload(file1Name, file1, {
                   cacheControl: "3600",
                   upsert: false,
                 });
+
               if (data) {
                 const {
                   data: { publicUrl: publicUrl1 },
                 } = supabase.storage
                   .from("product-images")
                   .getPublicUrl(file1Name);
+
                 if (publicUrl1) {
                   try {
                     const { data } = await supabase.storage
@@ -59,18 +63,21 @@ export async function POST(request: NextRequest) {
                         cacheControl: "3600",
                         upsert: false,
                       });
+
                     if (data) {
                       const {
                         data: { publicUrl: publicUrl2 },
                       } = supabase.storage
                         .from("product-images")
                         .getPublicUrl(file2Name);
+
                       if (publicUrl2) {
                         try {
                           const {
                             data: { user },
                           } = await supabase.auth.getUser();
-                          const { data, error } = await supabase
+
+                          const { error } = await supabase
                             .from("products")
                             .insert({
                               title: name,
@@ -84,6 +91,7 @@ export async function POST(request: NextRequest) {
                               images: [publicUrl1, publicUrl2],
                               user_id: user?.id,
                             });
+
                           if (error) {
                             throw error;
                           }
@@ -116,10 +124,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({}, { status: 200 });
   } catch (error) {
-    console.error("Error parsing request:", error);
-    return NextResponse.json(
-      { error: "Failed to process request" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: error }, { status: 500 });
   }
 }
