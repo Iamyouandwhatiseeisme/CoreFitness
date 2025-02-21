@@ -48,12 +48,6 @@ export async function GET(request: NextRequest) {
           }
         }
       } else {
-        const inactiveSubscription: SubscriptionInfo = {
-          status: SubscriptionStatus.Inactive,
-          currentPeriodStart: 0,
-          currentPeriodEnd: 0,
-          name: "",
-        };
         return NextResponse.json(
           {
             status: SubscriptionStatus.Inactive,

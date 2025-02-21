@@ -78,7 +78,7 @@ export default function ChangePassword() {
       setError("");
       setPasswordsMatch(true);
     }
-  }, [confirmPassword]);
+  }, [confirmPassword, newPassword]);
 
   return (
     <Dialog open={showPasswordFields} onOpenChange={setShowPasswordFields}>

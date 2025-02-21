@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Blog } from "../../components/types";
 import { Toaster } from "sonner";
 import { useLocale } from "src/app/components/providers/LanguageContext";
@@ -19,7 +19,7 @@ export default function Blogs() {
     locale,
     dictionary: { blog },
   } = useLocale();
-  async function refetchBlogs() {
+  const refetchBlogs = useCallback(async (): Promise<void> => {
     const end = page * BLOGS_PER_PAGE - 1;
 
     const response = await fetch("/api/blogs", {
@@ -31,7 +31,7 @@ export default function Blogs() {
 
     const blogsArray = await response.json();
     setBlogs(blogsArray);
-  }
+  }, [page]);
 
   useEffect(() => {
     const fetchBlogs = async () => {

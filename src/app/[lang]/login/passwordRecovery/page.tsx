@@ -57,8 +57,7 @@ export default function PtrueasswordRecovery() {
     }
 
     checkVerified();
-    // });
-  }, []);
+  }, [supabase.auth]);
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setPasswordError("");
@@ -73,7 +72,7 @@ export default function PtrueasswordRecovery() {
       return;
     }
 
-    const { data, error } = await supabase.auth.updateUser({
+    const { data } = await supabase.auth.updateUser({
       password: newPassword,
     });
     if (data) {

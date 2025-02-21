@@ -43,7 +43,7 @@ export const LocaleProvider = (props: LocaleProviderProps) => {
       setLoading(false);
     }
     fetchDictionary();
-  }, [locale, pathname, props.lang]);
+  }, [locale, pathname, props.lang, supabase]);
 
   if (loading) {
     return (

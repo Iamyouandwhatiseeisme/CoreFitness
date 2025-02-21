@@ -51,7 +51,7 @@ export default function FilterPanel(props: SideFilterPanelPorps) {
       props.setSelectedCategories(selectedCategories);
       props.refetchProducts();
     }
-  }, [selectedCategories]);
+  }, [selectedCategories, props]);
 
   async function handleCategoryChange(category: string) {
     setSelectedCategories((prevSelected) => {

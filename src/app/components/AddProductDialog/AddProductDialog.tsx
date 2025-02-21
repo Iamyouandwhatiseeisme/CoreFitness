@@ -6,6 +6,7 @@ import { useLocale } from "../providers/LanguageContext";
 
 interface AddProductDialogProps {
   refetchProducts: () => void;
+  setRefetchCategories: (refetch: boolean) => void;
 }
 
 export default function AddProductDialog(props: AddProductDialogProps) {
@@ -41,6 +42,7 @@ export default function AddProductDialog(props: AddProductDialogProps) {
     <DialogFactory
       triggerText={products.AddProduct}
       dialogTitle={products.AddProduct}
+      setRefetchCategories={props.setRefetchCategories}
       submitButtonText={products.AddProduct}
       dialogDescription={blog.PleaseEnter}
       refetch={props.refetchProducts}

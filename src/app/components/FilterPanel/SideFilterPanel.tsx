@@ -7,6 +7,7 @@ export interface SideFilterPanelPorps {
   setItems: (items: Product[]) => void;
   refetchProducts: () => void;
   sortBy: SortOption;
+  refetchCategories: boolean;
 }
 
 export default function FilterPael(props: SideFilterPanelPorps) {
@@ -17,6 +18,13 @@ export default function FilterPael(props: SideFilterPanelPorps) {
   const {
     dictionary: { products },
   } = useLocale();
+  const {
+    setItems,
+    setSelectedCategories: setSelectedCategoriesProps,
+    refetchProducts,
+    sortBy,
+    refetchCategories,
+  } = props;
 
   useEffect(() => {
     async function fetchCategories() {
@@ -32,22 +40,22 @@ export default function FilterPael(props: SideFilterPanelPorps) {
       }
     }
     fetchCategories();
-  }, []);
+  }, [refetchCategories]);
   useEffect(() => {
     async function fetchProducts() {
-      props.setSelectedCategories(selectedCategories);
+      setSelectedCategoriesProps(selectedCategories);
       const response = await fetch("/api/filter/category", {
         headers: {
           categories: JSON.stringify(Array.from(selectedCategories)),
           tableName: "products",
-          columnName: props.sortBy.value,
-          orderBy: props.sortBy.order === "Ascending" ? "true" : "false",
+          columnName: sortBy.value,
+          orderBy: sortBy.order === "Ascending" ? "true" : "false",
         },
       });
       if (response.ok) {
         const responseData = await response.json();
         if (responseData.status === 200) {
-          props.setItems(responseData.data);
+          setItems(responseData.data);
         }
       }
     }
@@ -55,10 +63,16 @@ export default function FilterPael(props: SideFilterPanelPorps) {
       fetchProducts();
     }
     if (selectedCategories.size === 0) {
-      props.setSelectedCategories(selectedCategories);
-      props.refetchProducts();
+      setSelectedCategoriesProps(selectedCategories);
+      refetchProducts();
     }
-  }, [selectedCategories]);
+  }, [
+    selectedCategories,
+    setSelectedCategoriesProps,
+    setItems,
+    refetchProducts,
+    sortBy,
+  ]);
 
   async function handleCategoryChange(category: string) {
     setSelectedCategories((prevSelected) => {

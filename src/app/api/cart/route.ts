@@ -9,7 +9,7 @@ export async function GET() {
 
   if (user) {
     try {
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from("cart")
         .select()
         .eq("user_id", user.id)

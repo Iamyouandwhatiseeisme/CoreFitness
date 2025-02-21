@@ -116,7 +116,7 @@ export default function OrdersPage(props: OrderPageProps) {
                       <img
                         key={idx}
                         src={image}
-                        alt={`${product.title} - Image ${idx + 1}`}
+                        alt={`${product.title} -  ${idx + 1}`}
                         className={`object-cover ${idx === 0 ? "" : "hidden"}`}
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />

@@ -16,7 +16,7 @@ export default function SearchBar(props: SearchBarProps) {
   const {
     dictionary: { products },
   } = useLocale();
-  const searchItemType = props.searchItemType;
+  const { searchItemType, refetchProducts, setProducts } = props;
   const [searchValue, setSearchValue] = useState<string>("");
   const debouncedValue = useDebounce(searchValue, 500);
   const router = useRouter();
@@ -31,17 +31,17 @@ export default function SearchBar(props: SearchBarProps) {
         });
         const responseData = (await response.json()) as Product[];
         if (responseData.length === 0) {
-          props.setProducts([]);
+          setProducts([]);
         } else {
-          props.setProducts(responseData);
+          setProducts(responseData);
         }
       }
       if (debouncedValue === "") {
-        props.refetchProducts();
+        refetchProducts();
       }
     }
     fetchSearchedValue();
-  }, [debouncedValue, router]);
+  }, [debouncedValue, router, refetchProducts, searchItemType, setProducts]);
 
   return (
     <div className="flex items-center border border-solid border-gray-300 rounded-lg p-2 bg-white shadow-md dark:bg-gray-700 dark:border-gray-600">

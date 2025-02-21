@@ -1,5 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
+import React from "react";
 
 import { useEffect } from "react";
 
@@ -14,7 +15,7 @@ export default function ResultPage({
     setTimeout(() => {
       router.push("/");
     }, 5000);
-  }, []);
+  }, [router]);
 
   return (
     <div className="min-h-wrapper ">
