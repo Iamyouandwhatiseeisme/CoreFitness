@@ -45,7 +45,6 @@ export default function PtrueasswordRecovery() {
 
       const token_hash = urlParams.get("token_hash");
       const type = urlParams.get("type") as EmailOtpType;
-      console.log(token_hash, type);
       if (type && token_hash) {
         const { data } = await supabase.auth.verifyOtp({
           token_hash: token_hash,

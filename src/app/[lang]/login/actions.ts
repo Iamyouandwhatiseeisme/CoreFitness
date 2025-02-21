@@ -74,7 +74,6 @@ export async function signInWithGoogle() {
       redirectTo: `${baseUrl}/auth/callback`,
     },
   });
-  console.log(data, error);
   if (error) {
     return { error: error.code };
   }
