@@ -21,6 +21,7 @@ interface DialogFactoryProps {
   dialogDescription: string;
   children: React.ReactNode;
   onSubmit: (formData: FormData) => Promise<Response>;
+  setRefetchCategories?: (refetch: boolean) => void;
   refetch: () => void;
 }
 
@@ -36,7 +37,12 @@ export default function DialogFactory(props: DialogFactoryProps) {
       const response = await props.onSubmit(formData);
       if (response.ok) {
         toast.success(`${props.dialogTitle} has been added`);
+        if (props.setRefetchCategories) {
+          props.setRefetchCategories(true);
+        }
+
         props.refetch();
+
         setOpen(false);
       }
     } finally {

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useCallback } from "react";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { useEffect, useState } from "react";
 import { Product, SortOption } from "../../components/types";
@@ -42,6 +42,7 @@ const PRODUCTS_PER_PAGE = 10;
 export default function Products() {
   const [products, setProducts] = useState<Product[]>([]);
   const [page, setPage] = useState<number>(1);
+  const [refetchCategories, setRefetchCategories] = useState<boolean>(false);
   const [sortBy, setSortBy] = useState<SortOption>(sortOptions[0]);
   const {
     dictionary: { products: productsDicionary },
@@ -84,7 +85,7 @@ export default function Products() {
 
   const { addItemToCart } = useCart();
   const { locale } = useLocale();
-  async function refetchProducts() {
+  const refetchProducts = useCallback(async (): Promise<void> => {
     const end = page * PRODUCTS_PER_PAGE - 1;
 
     const response = await fetch("/api/products", {
@@ -97,8 +98,9 @@ export default function Products() {
     });
 
     const productsArray = await response.json();
+    setRefetchCategories(false);
     setProducts(productsArray);
-  }
+  }, [page, sortBy]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -137,7 +139,7 @@ export default function Products() {
     };
 
     fetchProducts();
-  }, [page]);
+  }, [page, sortBy.value, sortBy.order]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -166,6 +168,7 @@ export default function Products() {
               <li className="sm:border-r sm:border-l h-full justify-center items-center flex flex-col p-4">
                 <AddProductDialog
                   refetchProducts={refetchProducts}
+                  setRefetchCategories={setRefetchCategories}
                 ></AddProductDialog>
               </li>
               <li className="sm:border-r h-full justify-center items-center flex flex-col p-4">
@@ -189,6 +192,7 @@ export default function Products() {
           <Toaster richColors position="top-right"></Toaster>
         </div>
         <FilterPanel
+          refetchCategories={refetchCategories}
           refetchProducts={refetchProducts}
           setItems={setProducts}
           setSelectedCategories={setSelectedCategories}
