@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
     if (searchTable && searchValue) {
       const encodedSearchValue = decodeURIComponent(searchValue);
 
-      const { data, error } = await supabase
+      const { data } = await supabase
         .from(searchTable)
         .select("*")
         .or(
