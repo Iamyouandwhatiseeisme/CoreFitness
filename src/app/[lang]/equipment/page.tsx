@@ -39,18 +39,20 @@ export default function EquipmentPage() {
             return (
               <div
                 key={item.id}
-                className="w-full h-auto bg-white/20 flex flex-col md:flex-row items-start justify-between border border-gray-500 rounded-2xl"
+                className="w-full h-auto bg-white/20 dark:bg-gray-900/30 flex flex-col md:flex-row items-start justify-between border border-gray-500 dark:border-gray-600 rounded-2xl transition-colors duration-300"
               >
                 <img
-                  className="w-full md:w-1/2 bg-white h-64 md:h-full rounded-tl-2xl rounded-tr-2xl md:rounded-tr-none md:rounded-bl-2xl  border border-gray-200 object-contain"
+                  className="w-full max-w-[520px] min-w-[300px] max-h-[520px] p-20 min-h-[300px] md:w-1/2 bg-gray-100 dark:bg-gray-800 h-64 md:h-full rounded-tl-2xl rounded-tr-2xl md:rounded-tr-none md:rounded-bl-2xl border border-gray-200 dark:border-gray-700 object-contain "
                   src={item.img.img}
                   alt={`${item.id}1`}
-                ></img>
-                <div className="w-full flex flex-col items-center mt-4 md:mt-10  border-gray-200">
-                  <h1 className="font-bold text-2xl underline border-b-2 border-gray-200">
+                />
+                <div className="w-full flex flex-col items-center mt-4 md:mt-10 border-gray-200 dark:border-gray-700">
+                  <h1 className="font-bold text-2xl underline border-b-2 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
                     {item.title}
                   </h1>
-                  <p className="m-4 md:m-10 text-lg">{description}</p>
+                  <p className="m-4 md:m-10 text-lg text-gray-800 dark:text-gray-300">
+                    {description}
+                  </p>
                 </div>
               </div>
             );
