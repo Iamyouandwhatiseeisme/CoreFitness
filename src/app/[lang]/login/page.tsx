@@ -233,6 +233,7 @@ export default function LogIn() {
                   onClick={() => {
                     setisOnSignup(true);
                     setPasswordError("");
+                    setPassword("");
                     setError("");
                   }}
                   className="bg-green-700 rounded-2xl h-10 font-bold text-white transform transition-transform duration-300 hover:scale-105 hover:bg-green-800"
