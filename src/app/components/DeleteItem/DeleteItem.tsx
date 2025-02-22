@@ -43,7 +43,7 @@ export function DeleteItem(props: DeleteItemProps) {
       {showDialog && (
         <div
           data-cy="delete-dialog"
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+          className="fixed inset-0 text-black flex items-center justify-center bg-black bg-opacity-50"
           onClick={() => setShowDialog(false)}
         >
           <div
