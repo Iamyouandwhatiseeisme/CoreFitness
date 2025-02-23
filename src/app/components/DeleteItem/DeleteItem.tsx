@@ -25,7 +25,7 @@ export function DeleteItem(props: DeleteItemProps) {
     });
     if (response) {
       if (response.status === 200) {
-        router.push("/products");
+        router.push(`/${props.table}`);
       }
     }
   }
