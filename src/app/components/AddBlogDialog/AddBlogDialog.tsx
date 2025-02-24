@@ -12,10 +12,33 @@ export default function AddBlogDialog(props: ProductDialogProps) {
   const [errors, setErrors] = useState<{
     title_ka?: string;
     description_ka?: string;
+    description?: string;
+    title?: string;
   }>({});
   const {
     dictionary: { blog },
   } = useLocale();
+
+  const handleEnglishInput = (
+    e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const input = e.target as HTMLTextAreaElement;
+    const value = input.value;
+    const field = input.name as "title" | "description";
+
+    const isLanguageValid =
+      /^[a-zA-Z\s0-9!@#$%^&*()_+=[\]{};':"\\|,.<>/?-]*$/.test(value);
+
+    setErrors((prev) => ({
+      ...prev,
+      [field]: isLanguageValid ? undefined : blog.ErrorMessageEn,
+    }));
+
+    input.value = value.replace(
+      /[^a-zA-Z\s0-9!@#$%^&*()_+=[\]{};':"\\|,.<>/?-]/g,
+      ""
+    );
+  };
 
   const handleGeorgianInput = (
     e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -57,13 +80,19 @@ export default function AddBlogDialog(props: ProductDialogProps) {
             <Label htmlFor="title" className="text-right">
               {blog.TitleEn}
             </Label>
-            <Input
-              id="title"
-              name="title"
-              className="col-span-3"
-              required
-              data-cy="blog-title-input"
-            />
+            <div className="col-span-3 space-y-1">
+              <Input
+                id="title"
+                name="title"
+                className="col-span-3"
+                onInput={handleEnglishInput}
+                required
+                data-cy="blog-title-input"
+              />
+              {errors.title && (
+                <p className="text-xs text-red-500">{errors.title}</p>
+              )}
+            </div>
           </div>
 
           <div className="grid grid-cols-4 items-center gap-4">
@@ -94,16 +123,22 @@ export default function AddBlogDialog(props: ProductDialogProps) {
             >
               {blog.DescriptionEn}
             </Label>
-            <textarea
-              id="description"
-              name="description"
-              className="col-span-3 w-full sm:min-w-[500px] h-32 px-3 py-2 border rounded-md text-sm 
-             focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring 
-             focus-visible:ring-offset-2 resize-none dark:bg-slate-700 dark:border-slate-600 
-             dark:text-white dark:focus-visible:ring-slate-400"
-              required
-              data-cy="blog-description-input"
-            />
+            <div className="col-span-3 space-y-1">
+              <textarea
+                id="description"
+                name="description"
+                className="w-full sm:min-w-[500px] h-32 px-3 py-2 border rounded-md text-sm 
+               focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring 
+               focus-visible:ring-offset-2 resize-none dark:bg-slate-700 dark:border-slate-600 
+               dark:text-white dark:focus-visible:ring-slate-400"
+                onInput={handleEnglishInput}
+                required
+                data-cy="blog-description-input"
+              />
+              {errors.description && (
+                <p className="text-xs text-red-500">{errors.description}</p>
+              )}
+            </div>
           </div>
 
           <div className="grid grid-cols-4 items-start gap-4">
