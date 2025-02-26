@@ -6,7 +6,6 @@ import { createClient } from "src/app/utils/supabase/server";
 import { Toaster } from "sonner";
 import { DeleteItem } from "src/app/components/DeleteItem/DeleteItem";
 import EditBlogDIalog from "src/app/components/EditBlogDialog/EditBlogDIalog";
-// import { useLocale } from "src/app/components/providers/LanguageContext";
 
 interface BlogDetailsProps {
   params: {
@@ -21,9 +20,6 @@ export default async function BlogDetails(props: BlogDetailsProps) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  // const {
-  //   dictionary: { blog: blogDictionary },
-  // } = useLocale();
 
   const { data, error } = await supabase
     .from("blogs")
