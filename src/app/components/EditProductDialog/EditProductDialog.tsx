@@ -34,6 +34,8 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
   const [errors, setErrors] = useState<{
     title_ka?: string;
     description_ka?: string;
+    title?: string;
+    description?: string;
   }>({});
   const [description, setDescription] = useState<string>(product.description);
   const [georgianDescription, setGeorgianDescription] = useState<string>(
@@ -45,6 +47,26 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
   const {
     dictionary: { blog, products },
   } = useLocale();
+  const handleEnglishInput = (
+    e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const input = e.target as HTMLTextAreaElement;
+    const value = input.value;
+    const field = input.name as "name" | "description";
+
+    const isLanguageValid =
+      /^[a-zA-Z\s0-9!@#$%^&*()_+=[\]{};':"\\|,.<>/?-]*$/.test(value);
+
+    setErrors((prev) => ({
+      ...prev,
+      [field]: isLanguageValid ? undefined : blog.ErrorMessageEn,
+    }));
+
+    input.value = value.replace(
+      /[^a-zA-Z\s0-9!@#$%^&*()_+=[\]{};':"\\|,.<>/?-]/g,
+      ""
+    );
+  };
 
   const handleInput = (
     e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -92,16 +114,22 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
           <Label htmlFor="name" className="text-right">
             {blog.TitleEn}
           </Label>
-          <Input
-            id="name"
-            name="title"
-            className="col-span-3"
-            value={title}
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
-            required
-          />
+          <div className="col-span-3 space-y-1">
+            <Input
+              id="name"
+              name="title"
+              onInput={handleEnglishInput}
+              className="col-span-3"
+              value={title}
+              onChange={(e) => {
+                setTitle(e.target.value);
+              }}
+              required
+            />
+            {errors.title && (
+              <p className="text-xs text-red-500">{errors.title}</p>
+            )}
+          </div>
         </div>
         <div className="grid grid-cols-4 items-center gap-4">
           <Label htmlFor="name-georgian" className="text-right">
@@ -152,12 +180,13 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
             htmlFor="description-georgian"
             className="text-right mt-2 break-words"
           >
-            {blog.Description}
+            {blog.DescriptionEn}
           </Label>
           <div className="col-span-3 space-y-1">
             <textarea
               id="description"
               name="description"
+              onInput={handleEnglishInput}
               className="w-full sm:min-w-[500px] h-32 px-3 py-2 border rounded-md text-sm 
                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring 
                focus-visible:ring-offset-2 resize-none dark:bg-slate-700 dark:border-slate-600 
@@ -166,6 +195,9 @@ export default function EditProductDIalog(props: EditProductDIalogProps) {
               onChange={(e) => setDescription(e.target.value)}
               required
             />
+            {errors.description && (
+              <p className="text-xs text-red-500">{errors.description}</p>
+            )}
           </div>
         </div>
       </div>
