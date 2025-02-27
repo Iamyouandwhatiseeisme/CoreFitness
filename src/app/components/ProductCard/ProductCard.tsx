@@ -2,18 +2,17 @@ import React, { useState } from "react";
 import { Product } from "../types";
 import Link from "next/link";
 import { useLocale } from "../providers/LanguageContext";
+import { toast } from "sonner";
 interface ProductCardtProps {
   product: Product;
   locale: string;
   addItemToCart: (product: { product: Product; quantity: number }) => void;
-  toasterTrigger: (output: string) => void;
 }
 
 export default function ProductCard({
   product,
   locale,
   addItemToCart,
-  toasterTrigger,
 }: ProductCardtProps) {
   const [isHovered, setIsHovered] = useState(false);
   const {
@@ -53,7 +52,9 @@ export default function ProductCard({
         data-cy={`add-to-cart-button-${product.title}`}
         onClick={() => {
           addItemToCart({ product: product, quantity: 1 });
-          toasterTrigger(cart.Added);
+          toast.success(cart.Added, {
+            description: `${product.title}\n ${product.title_ka}`,
+          });
         }}
       >
         {products.AddToCart}

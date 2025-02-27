@@ -4,7 +4,6 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import { useEffect, useState } from "react";
 import { Product, SortOption } from "../../components/types";
 import AddProductDialog from "src/app/components/AddProductDialog/AddProductDialog";
-import { toast, Toaster } from "sonner";
 import { useCart } from "src/app/components/providers/CartProvider";
 import { useLocale } from "src/app/components/providers/LanguageContext";
 import SortButton from "src/app/components/SortButton/SortButton";
@@ -189,7 +188,6 @@ export default function Products() {
               ></SortButton>
             </li>
           </ul>
-          <Toaster richColors position="top-right"></Toaster>
         </div>
         <FilterPanel
           refetchCategories={refetchCategories}
@@ -215,7 +213,6 @@ export default function Products() {
             {!isLoading &&
               products.map((product) => (
                 <ProductCard
-                  toasterTrigger={toast}
                   key={product.id}
                   product={product}
                   locale={locale}
