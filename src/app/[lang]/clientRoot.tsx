@@ -55,7 +55,7 @@ export default function ClientRoot({
                   ? ""
                   : `flex flex-col items-center justify-start m-auto 
                 bg-white/80 dark:bg-slate-900/90 backdrop-blur-lg
-                rounded-2xl shadow-2xl shadow-slate-200/50 dark:shadow-slate-950/30
+                 shadow-2xl shadow-slate-200/50 dark:shadow-slate-950/30
                 border border-white/20 dark:border-slate-800
                 transition-all duration-300 ease-out
                 max-w-[calc(100%-100  px)] w-full
