@@ -83,10 +83,9 @@ export function Description(props: DescriptionProps) {
         }
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [item.id]);
 
   return (
     <div>
