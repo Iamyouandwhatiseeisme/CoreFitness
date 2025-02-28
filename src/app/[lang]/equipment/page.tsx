@@ -37,8 +37,6 @@ export default function EquipmentPage() {
       ) : (
         <div className="flex flex-col w-full ">
           {equipment.map((item) => {
-            const description =
-              locale === "ka" ? item.description_ka : item.description;
             return (
               <div
                 key={item.id}
@@ -83,7 +81,6 @@ export function Description(props: DescriptionProps) {
         } else {
           setIsVisible(false);
         }
-        console.log("scrolled");
       }
     };
 
