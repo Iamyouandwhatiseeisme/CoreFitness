@@ -65,6 +65,7 @@ export default function ClientRoot({
             >
               {" "}
               {children}
+              <Toaster richColors></Toaster>
               <Footer />
             </main>
             <RightSidePanel
@@ -72,7 +73,6 @@ export default function ClientRoot({
               dict={dict.header}
             ></RightSidePanel>
           </div>
-          <Toaster richColors></Toaster>
         </CartProvider>
       </LocaleProvider>
     </ThemeProvider>
