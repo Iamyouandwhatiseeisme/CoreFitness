@@ -1,13 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import Description from "src/app/components/Description/Description";
 import { useLocale } from "src/app/components/providers/LanguageContext";
 
-interface Equipment {
+export interface Equipment {
   id: number;
   img: {
     img: string;
   };
   title: string;
+  title_ka: string;
   description: string;
   description_ka: string;
 }
@@ -16,6 +18,7 @@ export default function EquipmentPage() {
   const [equipment, setEquipment] = useState<Equipment[]>([]);
   const { locale } = useLocale();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+
   useEffect(() => {
     fetch("/api/equipment")
       .then((res) => res.json())
@@ -26,33 +29,29 @@ export default function EquipmentPage() {
   }, []);
 
   return (
-    <div className="w-full mt-20 min-h-screen bg-gradient-to-tl from-blue-500/20 to-purple-600/20 dark:from-blue-900/40 dark:to-purple-900/40">
+    <div className="w-full min-h-screen  ">
       {isLoading ? (
         <div className="flex justify-center items-center">
           <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-white"></div>
         </div>
       ) : (
-        <div className="flex flex-col gap-10 w-full p-4 md:p-10">
+        <div className="flex flex-col w-full ">
           {equipment.map((item) => {
-            const description =
-              locale === "ka" ? item.description_ka : item.description;
             return (
               <div
                 key={item.id}
-                className="w-full h-auto bg-white/20 dark:bg-gray-900/30 flex flex-col md:flex-row items-start justify-between border border-gray-500 dark:border-gray-600 rounded-2xl transition-colors duration-300"
+                className="w-full h-auto lex flex-col md:flex-row items-start justify-between border "
               >
-                <img
-                  className="w-full max-w-[520px] min-w-[300px] max-h-[520px] p-20 min-h-[300px] md:w-1/2 bg-gray-100 dark:bg-gray-800 h-64 md:h-full rounded-tl-2xl rounded-tr-2xl md:rounded-tr-none md:rounded-bl-2xl border border-gray-200 dark:border-gray-700 object-contain "
-                  src={item.img.img}
-                  alt={`${item.id}1`}
-                />
-                <div className="w-full flex flex-col items-center mt-4 md:mt-10 border-gray-200 dark:border-gray-700">
-                  <h1 className="font-bold text-2xl underline border-b-2 border-gray-200 dark:border-gray-700 text-gray-900 dark:text-gray-100">
-                    {item.title}
-                  </h1>
-                  <p className="m-4 md:m-10 text-lg text-gray-800 dark:text-gray-300">
-                    {description}
-                  </p>
+                <div className=" relative bg-gradient-to-r from-slate-50/50 to-gray-300/50 dark:from-gray-900/40 dark:via-gray-800/80 dark:to-gray-700/70 z-20  min-h-screen">
+                  <img
+                    className="w-full bg-fixed border-gray-200 dark:border-gray-700 object-cover z-10 "
+                    src={item.img.img}
+                    key={item.id}
+                    alt={`${item.id}1`}
+                  />
+                  <Description locale={locale} item={item}></Description>
+
+                  <div className="absolute inset-0 bg-black/80 z-20"></div>
                 </div>
               </div>
             );
