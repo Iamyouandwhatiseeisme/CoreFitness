@@ -41,19 +41,17 @@ export default function EquipmentPage() {
               return (
                 <div
                   key={item.id}
-                  className="w-full h-auto lex flex-col md:flex-row items-start justify-between border "
+                  className=" text-white relative bg-gradient-to-r from-slate-50/50 to-gray-300/50 dark:from-gray-900/40 dark:via-gray-800/80 dark:to-gray-700/70 z-20  min-h-screen"
                 >
-                  <div className=" relative bg-gradient-to-r from-slate-50/50 to-gray-300/50 dark:from-gray-900/40 dark:via-gray-800/80 dark:to-gray-700/70 z-20  min-h-screen">
-                    <img
-                      className="w-full bg-fixed border-gray-200 dark:border-gray-700 object-cover z-10 "
-                      src={item.img.img}
-                      key={item.id}
-                      alt={`${item.id}1`}
-                    />
-                    <Description locale={locale} item={item}></Description>
+                  <img
+                    className="w-full bg-fixed border-gray-200 dark:border-gray-700 object-cover z-10 "
+                    src={item.img.img}
+                    key={item.id}
+                    alt={`${item.id}1`}
+                  />
+                  <Description locale={locale} item={item}></Description>
 
-                    <div className="absolute inset-0 bg-black/80 z-20"></div>
-                  </div>
+                  <div className="absolute inset-0 bg-black/80 z-20"></div>
                 </div>
               );
             })}
