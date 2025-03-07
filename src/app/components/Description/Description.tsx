@@ -30,7 +30,7 @@ export default function Description(props: DescriptionProps) {
   return (
     <div>
       <motion.div
-        className="absolute right-0 text-xl font-thin top-72 z-40 w-1/2 h-1/2"
+        className="absolute right-0 text-xs sm:text-xl font-thin top-72 z-40 w-1/2 h-1/2"
         id={`description-${item.id}`}
         initial={{ opacity: 0, y: 80 }}
         animate={isVisible ? { opacity: 1, y: 0 } : {}}
@@ -39,7 +39,7 @@ export default function Description(props: DescriptionProps) {
         {locale === "ka" ? item.description_ka : item.description}
       </motion.div>
       <motion.div
-        className="absolute right-0 text-xl font-thin top-40 z-40 w-1/2 h-1/2"
+        className="absolute right-0 text-xs sm:text-xl font-thin top-40 z-40 w-1/2 h-1/2"
         id={`description-${item.id}`}
         initial={{ opacity: 0, x: 40 }}
         animate={isVisible ? { opacity: 1, x: 0 } : {}}

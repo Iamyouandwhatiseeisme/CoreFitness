@@ -1,5 +1,5 @@
 import {
-  PiBarbell,
+  // PiBarbell,
   PiClipboardText,
   PiCreditCard,
   PiNewspaper,
@@ -10,7 +10,7 @@ import {
 import { TopPanelNavigation } from "../components/TopPanel/TopPanel";
 
 export const TopPanelNavigationItems: TopPanelNavigation[] = [
-  { title: "equipment", icon: PiBarbell },
+  // { title: "equipment", icon: PiBarbell },
   { title: "blogs", icon: PiNewspaper },
   { title: "orders", icon: PiClipboardText },
   { title: "products", icon: PiShoppingBagOpen },

@@ -79,17 +79,15 @@ export default function Header(props: HeaderProps) {
                   <PiShoppingBagOpen></PiShoppingBagOpen>
                 </li>
               </Link>
-              <li className={`${listItemStyle} hidden l:flex`}>
-                {header.Locations}
-              </li>
+              {/* <li className={`${listItemStyle} `}>{header.Locations}</li> */}
               <Link href={`/${locale}/profile`} data-cy="profile-button">
-                <li className={`${listItemStyle} hidden xl:flex`}>
+                <li className={`${listItemStyle} `}>
                   {header.Profile}
                   <PiUserCircle></PiUserCircle>
                 </li>
               </Link>
               <Link href={`/${locale}/pricing`}>
-                <li className={`${listItemStyle} hidden xl:flex`}>
+                <li className={`${listItemStyle} `}>
                   {header.Subscribe}
                   <PiCreditCard></PiCreditCard>
                 </li>
