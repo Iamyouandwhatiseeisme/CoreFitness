@@ -1,6 +1,7 @@
 "use client";
 
 import { EmailOtpType } from "@supabase/supabase-js";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import { toast, Toaster } from "sonner";
@@ -14,6 +15,7 @@ export default function PtrueasswordRecovery() {
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [passwordError, setPasswordError] = useState<string>("");
   const [isVerified, setIsverified] = useState<boolean>(false);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
   const supabase = createClient();
   const router = useRouter();
   const {
@@ -83,7 +85,10 @@ export default function PtrueasswordRecovery() {
 
   return (
     <div className="flex fixed z-50 w-full h-full top-0 flex-row">
-      <LoginPageBoard></LoginPageBoard>
+      <LoginPageBoard
+        isHovered={isHovered}
+        setIsHoverd={setIsHovered}
+      ></LoginPageBoard>
       <Toaster></Toaster>
       <div className="items-center justify-center flex flex-col w-full lg:w-1/2 h-full bg-workout-bg p-4">
         {isVerified ? (
@@ -161,12 +166,20 @@ export default function PtrueasswordRecovery() {
                     className="flex-grow rounded-sm bg-white  border border-gray-400 text-black pl-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   ></input>
                   <button
-                    className="w-24 rounded-sm bg-white border border-gray-400 text-black hover:bg-gray-200 transition duration-300"
+                    className="w-24 rounded-sm bg-blue-400 border border-gray-400 hover:bg-blue-500 text-black  transition duration-300 hover:scale-105"
                     type="submit"
                   >
                     Send
                   </button>
                 </form>
+              </div>
+              <div className="items-start w-full justify-end h-80  flex flex-col ">
+                <Link
+                  href="/login"
+                  className="cursor-pointer underline text-black hover:text-blue-600"
+                >
+                  Go Back
+                </Link>
               </div>
             </div>
           </div>
