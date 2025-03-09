@@ -183,7 +183,7 @@ export default function LogIn() {
 
                 <Link
                   href={`/login/passwordRecovery`}
-                  className="cursor-pointer"
+                  className="cursor-pointer hover:text-blue-600 "
                 >
                   Forgot password
                 </Link>
