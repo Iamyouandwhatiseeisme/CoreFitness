@@ -45,9 +45,11 @@ export default function ClientRoot({
     >
       <LocaleProvider lang={lang}>
         <CartProvider>
+          <Toaster richColors></Toaster>
           <div className="bg-gradient-to-br  from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800   flex flex-col sm:flex-row justify-between">
             <TopPanel currentUser={user}></TopPanel>
             <Header currentUser={user} />
+
             <main
               className={`${
                 user === null
@@ -65,7 +67,6 @@ export default function ClientRoot({
             >
               {" "}
               {children}
-              <Toaster richColors></Toaster>
               <Footer />
             </main>
             <RightSidePanel
