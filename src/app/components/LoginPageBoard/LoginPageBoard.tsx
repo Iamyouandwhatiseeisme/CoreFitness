@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function LoginPageBoard() {
-  const [isHovered, setIsHoverd] = useState<boolean>(false);
+interface LoginPageBoardProps {
+  isHovered: boolean;
+  setIsHoverd: (isHovered: boolean) => void;
+}
+export default function LoginPageBoard(props: LoginPageBoardProps) {
+  // const [isHovered, setIsHoverd] = useState<boolean>(false);
+  const isHovered = props.isHovered;
+  const setIsHoverd = props.setIsHoverd;
   return (
     <div
       className="bg-gym-background w-1/2 z-10 relative transition-all duration-400 hover:w-60wv group hidden lg:flex "
